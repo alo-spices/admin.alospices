@@ -1,0 +1,163 @@
+<div class="employee-details-popup">
+
+    <!-- Header -->
+
+    <div class="popup-header">
+
+        <div class="employee-header-info">
+
+            <img [src]="
+          data?.profileImage ||
+          'assets/images/no-image.png'
+        " class="profile-image" alt="Employee">
+
+            <div>
+
+                <h3>
+                    {{
+                    data?.fullName ||
+                    (
+                    (data?.firstName || '') +
+                    ' ' +
+                    (data?.lastName || '')
+                    )
+                    }}
+                </h3>
+
+                <p>
+                    {{ data?.employeeCode || '-' }}
+                </p>
+
+            </div>
+
+        </div>
+
+        <button mat-icon-button (click)="close()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- Details -->
+
+    <div class="details-body">
+
+        <div class="detail-grid">
+
+            <!-- Employee Code -->
+
+            <div class="detail-item">
+
+                <label>Employee Code</label>
+
+                <span>
+                    {{ data?.employeeCode || '-' }}
+                </span>
+
+            </div>
+
+
+            <!-- Role -->
+
+            <div class="detail-item">
+
+                <label>Role</label>
+
+                <span>
+                    {{ data?.role || '-' }}
+                </span>
+
+            </div>
+
+
+            <!-- Mobile -->
+
+            <div class="detail-item">
+
+                <label>Mobile</label>
+
+                <span>
+                    {{ data?.mobile || '-' }}
+                </span>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="detail-item">
+
+                <label>Email</label>
+
+                <span>
+                    {{ data?.email || '-' }}
+                </span>
+
+            </div>
+
+
+            <!-- Area -->
+
+            <div class="detail-item">
+
+                <label>Area</label>
+
+                <span>
+                    {{ data?.area?.areaName || '-' }}
+                </span>
+
+            </div>
+
+
+            <!-- Route -->
+
+            <div class="detail-item">
+
+                <label>Route</label>
+
+                <span>
+                    {{ data?.route?.routeName || '-' }}
+                </span>
+
+            </div>
+
+
+            <!-- Status -->
+
+            <div class="detail-item">
+
+                <label>Status</label>
+
+                <span class="status-badge" [ngClass]="
+            data?.status === 'Active'
+              ? 'active'
+              : 'inactive'
+          ">
+
+                    {{ data?.status || '-' }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <div class="popup-footer">
+
+        <button type="button" class="close-btn" (click)="close()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

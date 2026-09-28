@@ -1,0 +1,399 @@
+<div class="transfer-view-dialog">
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <div class="dialog-header">
+
+        <div>
+
+            <div class="header-title">
+                Stock Transfer Details
+            </div>
+
+            <div class="header-subtitle">
+                Transfer information and item details
+            </div>
+
+        </div>
+
+        <button type="button" class="close-btn" (click)="close()">
+
+            <i class="fas fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         LOADING
+    =========================================== -->
+
+    <div class="loading-container" *ngIf="loading">
+
+        <div class="spinner"></div>
+
+        <span>
+            Loading transfer details...
+        </span>
+
+    </div>
+
+
+    <!-- ==========================================
+         CONTENT
+    =========================================== -->
+
+    <div class="dialog-content" *ngIf="!loading && transfer">
+
+
+        <!-- ======================================
+             TRANSFER SUMMARY
+        ======================================= -->
+
+        <div class="section">
+
+            <div class="section-title">
+
+                <i class="fas fa-file-invoice"></i>
+
+                Transfer Information
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div class="info-item">
+
+                    <span class="label">
+                        Transfer No
+                    </span>
+
+                    <span class="value highlight">
+                        {{ transfer.transferNo || '-' }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="label">
+                        Transfer Date
+                    </span>
+
+                    <span class="value">
+                        {{
+                        transfer.transferDate
+                        | date:'dd MMM yyyy'
+                        }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="label">
+                        Source Warehouse
+                    </span>
+
+                    <span class="value">
+
+                        {{
+                        transfer.sourceWarehouse
+                        ?.warehouseName || '-'
+                        }}
+
+                        <small *ngIf="
+                                transfer.sourceWarehouse
+                                    ?.warehouseCode
+                            ">
+
+                            ({{
+                            transfer.sourceWarehouse
+                            ?.warehouseCode
+                            }})
+
+                        </small>
+
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="label">
+                        Destination Type
+                    </span>
+
+                    <span class="value">
+                        {{ transfer.destinationType || '-' }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="label">
+                        Destination
+                    </span>
+
+                    <span class="value">
+                        {{ getDestinationName() }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="label">
+                        Status
+                    </span>
+
+                    <span class="status-badge" [ngClass]="
+                            getStatusClass(
+                                transfer.status
+                            )
+                        ">
+
+                        {{ transfer.status }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             ITEMS
+        ======================================= -->
+
+        <div class="section">
+
+            <div class="section-title">
+
+                <i class="fas fa-boxes-stacked"></i>
+
+                Transfer Items
+
+                <span class="item-count">
+
+                    {{ transfer.items?.length || 0 }}
+
+                    Items
+
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table class="items-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                SKU
+                            </th>
+
+                            <th>
+                                Batch No
+                            </th>
+
+                            <th>
+                                Pack Size
+                            </th>
+
+                            <th>
+                                Weight
+                            </th>
+
+                            <th>
+                                Quantity
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr *ngFor="
+                                let item of transfer.items;
+                                let i = index
+                            ">
+
+                            <td>
+                                {{ i + 1 }}
+                            </td>
+
+
+                            <td>
+
+                                <div class="product-name">
+
+                                    {{
+                                    item.product
+                                    ?.productName || '-'
+                                    }}
+
+                                </div>
+
+                                <small *ngIf="
+                                        item.product
+                                            ?.productCode
+                                    ">
+
+                                    {{
+                                    item.product
+                                    ?.productCode
+                                    }}
+
+                                </small>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="sku">
+                                    {{ item.skuCode || '-' }}
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                {{ item.batchNo || '-' }}
+                            </td>
+
+
+                            <td>
+                                {{ item.packSize || '-' }}
+                            </td>
+
+
+                            <td>
+                                {{ item.weightInGrams || 0 }} g
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    {{ item.quantity || 0 }}
+                                </strong>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr *ngIf="
+                                !transfer.items ||
+                                transfer.items.length === 0
+                            ">
+
+                            <td colspan="7" class="empty-row">
+
+                                No items found
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                    <tfoot *ngIf="
+                            transfer.items?.length
+                        ">
+
+                        <tr>
+
+                            <td colspan="6" class="total-label">
+
+                                Total Quantity
+
+                            </td>
+
+                            <td class="total-value">
+
+                                {{ getTotalQuantity() }}
+
+                            </td>
+
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             REMARKS
+        ======================================= -->
+
+        <div class="remarks-section" *ngIf="transfer.remarks">
+
+            <div class="section-title">
+
+                <i class="fas fa-comment-alt"></i>
+
+                Remarks
+
+            </div>
+
+            <div class="remarks">
+
+                {{ transfer.remarks }}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <div class="dialog-footer">
+
+        <button type="button" class="close-button" (click)="close()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

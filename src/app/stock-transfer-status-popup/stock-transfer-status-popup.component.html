@@ -1,0 +1,266 @@
+<div class="status-popup-card">
+
+    <!-- ==========================================
+       HEADER
+  =========================================== -->
+
+    <div class="status-popup-header">
+
+        <div class="status-icon">
+
+            <i class="fa fa-exchange-alt"></i>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Update Stock Transfer
+            </h3>
+
+            <p>
+                Change stock transfer status
+            </p>
+
+        </div>
+
+
+        <button type="button" class="close-btn" (click)="cancel()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+       TRANSFER NUMBER
+  =========================================== -->
+
+    <div class="current-status">
+
+        <span>
+            Transfer Number
+        </span>
+
+        <strong>
+            {{ data?.transferNo || '-' }}
+        </strong>
+
+    </div>
+
+
+    <!-- ==========================================
+       SOURCE
+  =========================================== -->
+
+    <div class="current-status">
+
+        <span>
+            Source Warehouse
+        </span>
+
+        <strong>
+            {{ data?.sourceWarehouse?.warehouseName || '-' }}
+        </strong>
+
+    </div>
+
+
+    <!-- ==========================================
+       DESTINATION
+  =========================================== -->
+
+    <div class="current-status">
+
+        <span>
+            Destination
+        </span>
+
+        <strong>
+
+            {{
+            data?.destination?.fullName ||
+            data?.destination?.shopName ||
+            data?.destination?.partyName ||
+            '-'
+            }}
+
+        </strong>
+
+    </div>
+
+
+    <!-- ==========================================
+       CURRENT STATUS
+  =========================================== -->
+
+    <div class="current-status">
+
+        <span>
+            Current Status
+        </span>
+
+        <span class="status-badge" [ngClass]="
+        (data?.status || '').toLowerCase()
+      ">
+
+            {{ data?.status || '-' }}
+
+        </span>
+
+    </div>
+
+
+    <!-- ==========================================
+       NEW STATUS
+  =========================================== -->
+
+    <div class="status-select-section" *ngIf="!isLocked() && !isInTransit()">
+
+        <label>
+            New Status
+            <span class="required">*</span>
+        </label>
+
+
+        <select class="form-select" [(ngModel)]="selectedStatus">
+
+            <option value="" disabled>
+
+                Select Status
+
+            </option>
+
+
+            <option *ngFor="let status of statusList" [value]="status">
+
+                {{ status }}
+
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- ==========================================
+       LOCKED MESSAGE
+  =========================================== -->
+
+    <div class="status-info locked" *ngIf="isLocked()">
+
+        <i class="fa fa-lock"></i>
+
+        <span>
+
+            This stock transfer is
+            <strong>
+                {{ data?.status }}
+            </strong>
+            and cannot be modified.
+
+        </span>
+
+    </div>
+    <!-- ==========================================
+     IN TRANSIT MESSAGE
+=========================================== -->
+
+    <div class="status-info receive-info" *ngIf="isInTransit()">
+
+        <i class="fa fa-truck"></i>
+
+        <span>
+
+            This stock transfer is currently
+            <strong>InTransit</strong>.
+
+            Once you receive the stock,
+            click <strong>Receive Stock</strong>.
+
+        </span>
+
+    </div>
+
+    <!-- ==========================================
+       INFO
+  =========================================== -->
+
+    <div class="status-info" *ngIf="!isLocked()&&!isInTransit()">
+
+        <i class="fa fa-info-circle"></i>
+
+        <span>
+
+            Select the new status for this
+            stock transfer and click Update Status.
+
+        </span>
+
+    </div>
+
+
+    <!-- ==========================================
+       CONFIRMATION
+  =========================================== -->
+
+    <div class="approval-confirmation" *ngIf="!isLocked() &&!isInTransit()">
+
+        <i class="fa fa-shield-alt"></i>
+
+        <span>
+
+            Are you sure you want to change the
+            stock transfer status?
+
+        </span>
+
+    </div>
+
+
+    <!-- ==========================================
+       FOOTER
+  =========================================== -->
+
+    <div class="popup-footer">
+
+        <button type="button" class="cancel-btn" (click)="cancel()">
+
+            Cancel
+
+        </button>
+
+
+        <!-- =====================================
+         INTRANSIT → RECEIVE
+    ====================================== -->
+
+        <button *ngIf="data?.status === 'InTransit'" type="button" class="receive-btn" (click)="updateStatus()">
+
+            <i class="fa fa-check-circle me-2"></i>
+
+            Receive Stock
+
+        </button>
+
+
+        <!-- =====================================
+         OTHER STATUSES
+    ====================================== -->
+
+        <button *ngIf="
+            data?.status !== 'InTransit' &&
+            data?.status !== 'Received' &&
+            data?.status !== 'Cancelled'
+        " type="button" class="update-btn" (click)="updateStatus()">
+
+            Update Status
+
+        </button>
+
+    </div>
+
+</div>

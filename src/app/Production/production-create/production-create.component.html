@@ -1,0 +1,914 @@
+<div class="container-fluid production-container">
+
+    <div class="production-card">
+
+        <form [formGroup]="productionForm" (ngSubmit)="createProduction()">
+
+            <!-- ====================================================== -->
+            <!-- HEADER -->
+            <!-- ====================================================== -->
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+
+                        <i class="fa fa-industry me-2"></i>
+
+                        Create Production
+
+                    </h3>
+
+                    <p>
+
+                        Create Finished Goods from Available Raw Materials
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ====================================================== -->
+            <!-- PRODUCTION INFORMATION -->
+            <!-- ====================================================== -->
+
+            <div class="card-section">
+
+                <div class="section-title">
+
+                    <i class="fa fa-file-text me-2"></i>
+
+                    Production Information
+
+                </div>
+
+
+                <div class="row">
+
+
+                    <!-- Production No -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Production No
+
+                        </label>
+
+                        <input type="text" class="form-control" formControlName="productionNo" readonly>
+
+                    </div>
+
+
+                    <!-- Production Date -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Production Date
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+                        <input type="date" class="form-control" formControlName="productionDate">
+
+                    </div>
+
+
+                    <!-- Warehouse -->
+
+                    <div class="col-lg-6 col-md-12 mb-3">
+
+                        <label class="form-label">
+
+                            Warehouse
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+                        <select class="form-select" formControlName="warehouse"
+                            (change)="onWarehouseChange($any($event.target).value)">
+
+                            <option value="">
+
+                                Select Warehouse
+
+                            </option>
+
+
+                            <option *ngFor="let warehouse of warehouseList" [value]="warehouse._id">
+
+                                {{ warehouse.warehouseName }}
+
+                                <span *ngIf="warehouse.warehouseCode">
+                                    ({{ warehouse.warehouseCode }})
+                                </span>
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ====================================================== -->
+            <!-- RAW MATERIAL CONSUMPTION -->
+            <!-- ====================================================== -->
+
+            <div class="card-section mt-4">
+
+                <div class="section-title">
+
+                    <i class="fa fa-cubes me-2"></i>
+
+                    Raw Material Consumption
+
+                </div>
+
+
+                <div class="row">
+
+
+                    <!-- Raw Material -->
+
+                    <div class="col-lg-6 mb-3">
+
+                        <label class="form-label">
+
+                            Raw Material
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+
+                        <select class="form-select" formControlName="rawMaterial"
+                            (change)="onRawMaterialChange($any($event.target).value)">
+
+                            <option value="">
+
+                                Select Raw Material
+
+                            </option>
+
+
+                            <option *ngFor="let item of rawMaterialList" [value]="item._id">
+
+                                {{ item.rawMaterialName }}
+
+                                ({{ item.rawMaterialCode }})
+
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Stock Receive -->
+
+                    <div class="col-lg-6 mb-3">
+
+                        <label class="form-label">
+
+                            Stock Receive / Batch / Available Stock
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+
+                        <select class="form-select" formControlName="stockReceive"
+                            (change)="onStockReceiveChange($any($event.target).value)">
+
+                            <option value="">
+
+                                Select Stock Receive
+
+                            </option>
+
+
+                            <option *ngFor="let item of stockReceiveList" [value]="item._id">
+
+                                {{ item.receiveNo }}
+
+                                |
+
+                                {{ item.batchNo }}
+
+                                |
+
+                                {{ item.availableWeightKg }}
+
+                                KG
+
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Supplier -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Supplier
+
+                        </label>
+
+
+                        <input type="text" class="form-control" formControlName="supplierName" readonly>
+
+                    </div>
+
+
+
+                    <!-- Invoice -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Invoice No
+
+                        </label>
+
+
+                        <input type="text" class="form-control" formControlName="invoiceNo" readonly>
+
+                    </div>
+
+
+
+                    <!-- Batch -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Batch No
+
+                        </label>
+
+
+                        <input type="text" class="form-control" formControlName="batchNo" readonly>
+
+                    </div>
+
+
+
+                    <!-- Available Weight -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Available Weight (KG)
+
+                        </label>
+
+
+                        <input type="number" class="form-control" formControlName="availableWeightKg" readonly>
+
+                    </div>
+
+
+
+                    <!-- Weight Used -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Weight Used (KG)
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+
+                        <input type="number" class="form-control" formControlName="rawWeightUsedKg" min="0" step="0.001"
+                            placeholder="Enter weight used" (input)="onWeightUsedChange()">
+
+
+                        <small class="text-danger" *ngIf="
+                                productionForm.get('rawWeightUsedKg')?.hasError('maxStock')
+                            ">
+
+                            Weight cannot exceed available stock.
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- Remaining Stock -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Remaining Stock (KG)
+
+                        </label>
+
+
+                        <input type="number" class="form-control" [value]="getRemainingWeight()" readonly>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ====================================================== -->
+            <!-- CREATE NEW VARIANT -->
+            <!-- ====================================================== -->
+
+            <div class="card-section mt-4">
+
+                <div class="section-title">
+
+                    <i class="fa fa-cubes me-2"></i>
+
+                    Create Production Variant
+
+                </div>
+
+
+                <div class="row">
+
+
+                    <!-- Variant Name -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Variant Name
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+
+                        <input type="text" class="form-control" formControlName="variantName"
+                            placeholder="Example: Pepper 10g">
+
+                    </div>
+
+
+
+                    <!-- SKU Code -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            SKU Code
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+
+                        <input type="text" class="form-control" formControlName="skuCode"
+                            placeholder="Example: PEP-10G">
+
+                    </div>
+
+                    <!-- Finished Goods Batch -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Finished Goods Batch No
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+                        <input type="text" class="form-control" formControlName="finishedGoodsBatchNo"
+                            placeholder="Example: FG-PEP100-001">
+
+                    </div>
+
+                    <!-- Pack Size -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Pack Size
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+
+                        <input type="text" class="form-control" formControlName="packSize" placeholder="Example: 10g">
+
+                    </div>
+
+
+
+                    <!-- Weight In Grams -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Weight / Pack (Grams)
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+
+                        <input type="number" class="form-control" formControlName="weightInGrams" min="0" step="0.001"
+                            placeholder="Example: 10" (input)="calculateCurrentVariantWeight()">
+
+                    </div>
+
+
+
+                    <!-- Packs Produced -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Packs Produced
+
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+
+                        <input type="number" class="form-control" formControlName="packsProduced" min="1"
+                            placeholder="Example: 2000" (input)="onPacksProducedChange()">
+
+                    </div>
+
+
+
+                    <!-- Rejected Packs -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Rejected Packs
+
+                        </label>
+
+
+                        <input type="number" class="form-control" formControlName="rejectedPacks" min="0"
+                            placeholder="Example: 0">
+
+                    </div>
+
+
+
+                    <!-- Produced Weight -->
+
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Produced Weight (KG)
+
+                        </label>
+
+
+                        <input type="number" class="form-control" formControlName="totalProducedWeightKg" readonly>
+
+                    </div>
+
+
+
+                    <!-- Add Variant -->
+
+                    <div class="col-lg-8 col-md-6 mb-3 d-flex align-items-end justify-content-end">
+
+                        <button type="button" class="btn btn-success" (click)="addVariant()">
+
+                            <i class="fa fa-plus me-2"></i>
+
+                            Add Variant
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ====================================================== -->
+            <!-- PRODUCTION VARIANTS TABLE -->
+            <!-- ====================================================== -->
+
+            <div class="card-section mt-4">
+
+                <div class="section-title">
+
+                    <i class="fa fa-list me-2"></i>
+
+                    Production Variants
+
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover align-middle">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th>
+                                    #
+                                </th>
+
+                                <th>
+                                    Variant
+                                </th>
+
+                                <th>
+                                    SKU
+                                </th>
+
+                                <th>
+                                    Pack Size
+                                </th>
+
+                                <th>
+                                    Weight (g)
+                                </th>
+
+                                <th>
+                                    Packs
+                                </th>
+
+                                <th>
+                                    Produced (KG)
+                                </th>
+
+                                <th>
+                                    Rejected
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            <!-- No Data -->
+
+                            <tr *ngIf="
+                                    productionItems.length === 0
+                                ">
+
+                                <td colspan="9" class="text-center text-muted py-4">
+
+                                    <i class="fa fa-inbox fa-2x mb-2 d-block"></i>
+
+                                    No Variants Added
+
+                                </td>
+
+                            </tr>
+
+
+
+                            <!-- Variants -->
+
+                            <tr *ngFor="
+                                    let item of productionItems;
+                                    let i = index;
+                                    trackBy: trackById
+                                ">
+
+                                <td>
+
+                                    {{ i + 1 }}
+
+                                </td>
+
+
+                                <td>
+
+                                    <strong>
+                                        {{ item.variantName }}
+                                    </strong>
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ item.skuCode }}
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ item.packSize }}
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ item.weightInGrams }}
+
+                                    g
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ item.packsProduced }}
+
+                                </td>
+
+
+                                <td>
+
+                                    <strong>
+                                        {{ item.totalWeightUsedKg }}
+                                    </strong>
+
+                                    KG
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ item.rejectedPacks }}
+
+                                </td>
+
+
+                                <td>
+
+                                    <button type="button" class="btn btn-danger btn-sm" title="Remove Variant"
+                                        (click)="removeVariant(i)">
+
+                                        <i class="fa fa-trash"></i>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ====================================================== -->
+            <!-- PRODUCTION SUMMARY -->
+            <!-- ====================================================== -->
+
+            <div class="card-section mt-4">
+
+                <div class="section-title">
+
+                    <i class="fa fa-bar-chart me-2"></i>
+
+                    Production Summary
+
+                </div>
+
+
+                <div class="row">
+
+
+                    <!-- Raw Weight -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <div class="summary-card">
+
+                            <h6>
+
+                                Raw Weight Used
+
+                            </h6>
+
+
+                            <h3>
+
+                                {{ summary.rawWeight }}
+
+                                KG
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Produced Weight -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <div class="summary-card success">
+
+                            <h6>
+
+                                Produced Weight
+
+                            </h6>
+
+
+                            <h3>
+
+                                {{ summary.producedWeight }}
+
+                                KG
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Waste -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <div class="summary-card warning">
+
+                            <h6>
+
+                                Waste
+
+                            </h6>
+
+
+                            <h3>
+
+                                {{ summary.waste }}
+
+                                KG
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Remaining -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <div class="summary-card primary">
+
+                            <h6>
+
+                                Remaining
+
+                            </h6>
+
+
+                            <h3>
+
+                                {{ summary.remaining }}
+
+                                KG
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ====================================================== -->
+            <!-- REMARKS -->
+            <!-- ====================================================== -->
+
+            <div class="card-section mt-4">
+
+                <div class="section-title">
+
+                    <i class="fa fa-comment me-2"></i>
+
+                    Remarks
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <textarea rows="4" class="form-control" placeholder="Enter Remarks"
+                            formControlName="remarks"></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ====================================================== -->
+            <!-- BUTTONS -->
+            <!-- ====================================================== -->
+
+            <div class="button-group mt-4">
+
+                <button type="submit" class="btn btn-primary">
+
+                    <i class="fa fa-save me-2"></i>
+
+                    Save Production
+
+                </button>
+
+
+                <button type="button" class="btn-back" routerLink="/admin/production">
+
+                    Back
+
+                </button>
+
+
+                <button type="button" class="btn btn-secondary" (click)="resetForm()">
+
+                    <i class="fa fa-refresh me-2"></i>
+
+                    Reset
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>

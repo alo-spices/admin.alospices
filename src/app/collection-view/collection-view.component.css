@@ -1,0 +1,566 @@
+/* =========================================
+   COLLECTION VIEW DIALOG
+========================================= */
+
+.collection-dialog {
+    width: 100%;
+    max-height: 90vh;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.dialog-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dialog-label h2 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+    color: #222;
+}
+
+.dialog-label p {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.close-btn {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: #f1f1f1;
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+.close-btn:hover {
+    background: #e53935;
+    color: #ffffff;
+    transform: rotate(90deg);
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+.dialog-body {
+    padding: 20px;
+    overflow-y: auto;
+    background: #f8f9fb;
+}
+
+.dialog-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dialog-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dialog-body::-webkit-scrollbar-thumb {
+    background: #cfcfcf;
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   SECTION CARD
+========================================= */
+
+.section-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 16px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+}
+
+.section-title i {
+    color: #d39e00;
+    font-size: 15px;
+}
+
+
+/* =========================================
+   DETAILS GRID
+========================================= */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 20px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-item .label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.detail-item .value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    word-break: break-word;
+}
+
+.detail-item .value strong {
+    font-weight: 700;
+}
+
+
+/* =========================================
+   PAYMENT / STATUS BADGES
+========================================= */
+
+.payment-badge,
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-width: 70px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* Payment */
+
+.payment-cash {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.payment-upi {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.payment-card {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.payment-bank {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.payment-cheque {
+    background: #fce4ec;
+    color: #c2185b;
+}
+
+.payment-default {
+    background: #eeeeee;
+    color: #555;
+}
+
+
+/* Status */
+
+.status-verified {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-pending {
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+.status-rejected {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.status-cancelled {
+    background: #eeeeee;
+    color: #616161;
+}
+
+.status-default {
+    background: #eeeeee;
+    color: #555;
+}
+
+
+/* =========================================
+   ADDRESS BOX
+========================================= */
+
+.address-box {
+    margin-top: 14px;
+    padding: 14px;
+    background: #f8f9fa;
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+}
+
+.address-box .address-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+}
+
+.address-box .address-title i {
+    color: #d39e00;
+}
+
+.address-box p {
+    margin: 0;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   EMPLOYEE / SALESMAN HEADER
+========================================= */
+
+.employee-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.employee-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid #eeeeee;
+}
+
+.employee-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.employee-avatar i {
+    font-size: 22px;
+    color: #999;
+}
+
+.employee-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.employee-info h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+}
+
+.employee-info span {
+    font-size: 12px;
+    color: #888;
+}
+
+
+/* =========================================
+   COLLECTION AMOUNT
+========================================= */
+
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.amount-item {
+    padding: 15px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    border: 1px solid #eeeeee;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.amount-item .label {
+    font-size: 11px;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.amount-item .value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+}
+
+.amount-item.grand-total {
+    background: #fff8e1;
+    border-color: #ffe082;
+}
+
+.amount-item.grand-total .value {
+    color: #d18b00;
+}
+
+.amount-item.payment-paid {
+    background: #e8f5e9;
+    border-color: #c8e6c9;
+}
+
+.amount-item.payment-paid .value {
+    color: #2e7d32;
+}
+
+.amount-item.balance {
+    background: #ffebee;
+    border-color: #ffcdd2;
+}
+
+.amount-item.balance .value {
+    color: #c62828;
+}
+
+
+/* =========================================
+   PAYMENT PROOF
+========================================= */
+
+.payment-proof {
+    margin-top: 15px;
+    padding: 14px;
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.payment-proof .proof-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.payment-proof img {
+    max-width: 220px;
+    max-height: 180px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+
+/* =========================================
+   REMARKS
+========================================= */
+
+.remarks-box {
+    padding: 14px;
+    background: #f8f9fa;
+    border-left: 4px solid #d39e00;
+    border-radius: 6px;
+}
+
+.remarks-box p {
+    margin: 0;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   ID / SYSTEM INFORMATION
+========================================= */
+
+.id-text {
+    font-family: monospace;
+    font-size: 12px !important;
+    color: #777 !important;
+    word-break: break-all;
+}
+
+
+/* =========================================
+   DIALOG FOOTER
+========================================= */
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 14px 20px;
+    background: #ffffff;
+    border-top: 1px solid #e8e8e8;
+}
+
+.btn-back {
+    min-width: 100px;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #333;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-back:hover {
+    background: #111;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .dialog-header {
+        padding: 15px;
+    }
+
+    .dialog-label h2 {
+        font-size: 18px;
+    }
+
+    .dialog-body {
+        padding: 14px;
+    }
+
+    .section-card {
+        padding: 14px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .amount-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .employee-header {
+        align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .dialog-header {
+        padding: 12px;
+    }
+
+    .dialog-label h2 {
+        font-size: 16px;
+    }
+
+    .dialog-label p {
+        font-size: 11px;
+    }
+
+    .dialog-body {
+        padding: 10px;
+    }
+
+    .section-card {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .section-title {
+        font-size: 14px;
+    }
+
+    .detail-item .value {
+        font-size: 13px;
+    }
+
+    .amount-item .value {
+        font-size: 16px;
+    }
+
+    .employee-avatar {
+        width: 45px;
+        height: 45px;
+    }
+
+    .dialog-footer {
+        padding: 12px;
+    }
+
+    .btn-back {
+        width: 100%;
+    }
+}

@@ -1,0 +1,621 @@
+<div class="category-container">
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Production Monitoring List
+            </h2>
+
+            <p>
+                View all production records
+            </p>
+
+        </div>
+
+        <!-- <div class="button-section">
+
+            <button routerLink="/admin/create-production">
+
+                <i class="fa fa-plus me-2"></i>
+
+                Add Production
+
+            </button>
+
+        </div> -->
+
+    </div>
+    <!-- ========================================== -->
+    <!-- Warehouse Selection -->
+    <!-- ========================================== -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Select Warehouse
+            </mat-label>
+
+            <mat-select [(value)]="selectedWarehouseId" (selectionChange)="
+                onWarehouseChange($event.value)
+            ">
+
+                <mat-option *ngFor="
+                    let warehouse
+                    of warehouseList
+                " [value]="warehouse._id">
+
+                    {{ warehouse.warehouseName }}
+
+                    -
+
+                    {{ warehouse.warehouseCode }}
+
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Selected Warehouse Information -->
+    <!-- ========================================== -->
+
+    <div class="warehouse-info-card" *ngIf="selectedWarehouse">
+
+        <div class="warehouse-details">
+
+            <div class="warehouse-icon">
+
+                <i class="fa fa-warehouse"></i>
+
+            </div>
+
+
+            <div class="warehouse-content">
+
+                <h4>
+
+                    {{ selectedWarehouse.warehouseName }}
+
+                </h4>
+
+
+                <p>
+
+                    <span>
+
+                        {{ selectedWarehouse.warehouseCode }}
+
+                    </span>
+
+
+                    <span *ngIf="selectedWarehouse.city">
+
+                        • {{ selectedWarehouse.city }}
+
+                    </span>
+
+
+                    <span *ngIf="selectedWarehouse.state">
+
+                        • {{ selectedWarehouse.state }}
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- Search -->
+    <!-- ========================================== -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Search Production
+            </mat-label>
+
+            <input matInput placeholder="Search by Production No / Warehouse / Raw Material / SKU"
+                (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Production Table -->
+    <!-- ========================================== -->
+
+    <div class="table-row">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <!-- ====================================== -->
+            <!-- S.No -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+                <td mat-cell *matCellDef="
+                        let element;
+                        let i = index
+                    ">
+
+                    {{
+                    (paginator?.pageIndex || 0)
+                    *
+                    (paginator?.pageSize || 5)
+                    +
+                    i +
+                    1
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Production -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="production">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Production
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+                            {{ element.productionNo }}
+                        </h6>
+
+                        <small>
+
+                            {{
+                            element.productionDate
+                            | date:'dd-MM-yyyy'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Warehouse -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="warehouse">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Warehouse
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{
+                            element.warehouse?.warehouseName
+                            || '-'
+                            }}
+
+                        </h6>
+
+                        <small>
+
+                            {{
+                            element.warehouse?.warehouseCode
+                            || '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Raw Material -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="rawMaterial">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Raw Material
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info" *ngIf="
+                            element.rawMaterials?.length
+                        ">
+
+                        <div *ngFor="
+                                let material
+                                of element.rawMaterials
+                            " class="material-item">
+
+                            <h6>
+
+                                {{
+                                material.rawMaterial
+                                ?.rawMaterialName
+                                || '-'
+                                }}
+
+                            </h6>
+
+                            <small>
+
+                                {{
+                                material.rawMaterial
+                                ?.rawMaterialCode
+                                || '-'
+                                }}
+
+                                <span *ngIf="material.batchNo">
+
+                                    •
+                                    {{ material.batchNo }}
+
+                                </span>
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <span *ngIf="
+                            !element.rawMaterials?.length
+                        ">
+
+                        -
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Raw Weight Used -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="rawWeight">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Raw Used
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <strong>
+
+                        {{
+                        element.rawWeightUsedKg
+                        || 0
+                        }}
+                        KG
+
+                    </strong>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Production Items -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="productionItems">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Production Items
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="production-items-cell" *ngIf="
+                            element.productionItems?.length
+                        ">
+
+                        <div class="production-item" *ngFor="
+                                let item
+                                of element.productionItems
+                            ">
+
+                            <div>
+
+                                <strong>
+                                    {{ item.skuCode }}
+                                </strong>
+
+                                <small>
+
+                                    {{ item.packSize }}
+
+                                    •
+
+                                    {{ item.packsProduced }}
+                                    Packs
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span *ngIf="
+                            !element.productionItems?.length
+                        ">
+
+                        -
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Produced Weight -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="producedWeight">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Produced
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <strong>
+
+                        {{
+                        element.totalProducedWeightKg
+                        || 0
+                        }}
+
+                        KG
+
+                    </strong>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Waste -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="waste">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Waste
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="waste-value">
+
+                        {{
+                        element.wasteKg
+                        || 0
+                        }}
+
+                        KG
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Status -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="status">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Status
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="
+                            getStatusClass(
+                                element.status
+                            )
+                        ">
+
+                        {{ element.status }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Remarks -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="remarks">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Remarks
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="remarks-text" [title]="element.remarks">
+
+                        {{
+                        element.remarks
+                        || '-'
+                        }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Actions -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Actions
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="action-buttons">
+
+                        <!-- View -->
+
+                        <button mat-icon-button class="view-btn" (click)="viewProduction(element)" matTooltip="View">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+
+                        <!-- Edit -->
+
+                        <!-- <button mat-icon-button class="edit-btn" (click)="editProduction(element)" matTooltip="Edit">
+
+                            <i class="fa fa-pencil"></i>
+
+                        </button> -->
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Header -->
+            <!-- ====================================== -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
+
+            </tr>
+
+
+            <!-- ====================================== -->
+            <!-- Rows -->
+            <!-- ====================================== -->
+
+            <tr mat-row *matRowDef="
+                    let row;
+                    columns: displayedColumns;
+                ">
+
+            </tr>
+
+
+            <!-- ====================================== -->
+            <!-- No Data -->
+            <!-- ====================================== -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell text-center" colspan="11">
+
+                    No Production Records Found
+
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <!-- ========================================== -->
+        <!-- Paginator -->
+        <!-- ========================================== -->
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons>
+
+        </mat-paginator>
+
+    </div>
+
+</div>

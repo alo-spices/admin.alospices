@@ -1,0 +1,130 @@
+<div class="status-popup-card">
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="status-popup-header">
+
+        <div class="status-icon">
+
+            <i class="fa fa-user-shield"></i>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Change User Status
+            </h3>
+
+            <p>
+                Select the new account status
+            </p>
+
+        </div>
+
+
+        <button type="button" class="close-btn" (click)="cancel()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Current Status -->
+    <!-- ========================================== -->
+
+    <div class="current-status">
+
+        <span>
+            Current Status
+        </span>
+
+        <span class="status-badge" [ngClass]="getStatusClass(currentStatus)">
+
+            {{ currentStatus }}
+
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Select Status -->
+    <!-- ========================================== -->
+
+    <div class="form-group">
+
+        <label>
+            Select Status
+        </label>
+
+        <select [(ngModel)]="selectedStatus">
+
+            <option value="" disabled>
+
+                Please Select Status
+
+            </option>
+
+            <option *ngFor="let status of statusList" [value]="status">
+
+                {{ status }}
+
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Info -->
+    <!-- ========================================== -->
+
+    <div class="status-info">
+
+        <i class="fa fa-info-circle"></i>
+
+        <span>
+
+            Changing the status will immediately
+            update this user's account status.
+
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Footer -->
+    <!-- ========================================== -->
+
+    <div class="popup-footer">
+
+        <button type="button" class="btn-cancel" (click)="cancel()">
+
+            Cancel
+
+        </button>
+
+
+        <button type="button" class="btn-update" [disabled]="
+                !selectedStatus ||
+                selectedStatus === currentStatus
+            " (click)="update()">
+
+            <i class="fa fa-check me-2"></i>
+
+            Update Status
+
+        </button>
+
+    </div>
+
+</div>

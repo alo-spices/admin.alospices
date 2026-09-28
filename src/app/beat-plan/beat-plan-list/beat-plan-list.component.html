@@ -1,0 +1,460 @@
+<div class="page-container">
+
+    <!-- ================= TOP ROW ================= -->
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                <i class="fas fa-route"></i>
+                Beat Plans
+            </h2>
+
+            <p>
+                Manage salesman beat plans and shop visits
+            </p>
+
+        </div>
+
+
+        <div class="button-section">
+
+            <button type="button" class="add-btn" routerLink="/admin/beat-plan-add">
+
+                <i class="fas fa-plus"></i>
+                Add Sales Man Beat Plan
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SEARCH ROW ================= -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>Search Beat Plan</mat-label>
+
+            <input matInput placeholder="Search by Beat Name / Area / Route / Salesman / Day"
+                (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ================= TABLE ROW ================= -->
+
+    <div class="table-row">
+
+        <div class="table-responsive">
+
+            <table mat-table [dataSource]="dataSource" matSort>
+
+
+                <!-- S.NO -->
+                <ng-container matColumnDef="sno">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        S.No
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element; let i = index">
+
+                        {{ i + 1 }}
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- BEAT NAME -->
+                <ng-container matColumnDef="beatName">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Beat Name
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <div class="primary-text">
+
+                            {{ element.beatName || '-' }}
+
+                        </div>
+
+                        <div class="secondary-text" *ngIf="element.description">
+
+                            {{ element.description }}
+
+                        </div>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- AREA -->
+                <ng-container matColumnDef="area">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Area
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <div class="primary-text" *ngIf="element.area">
+
+                            {{ element.area.areaName || '-' }}
+
+                        </div>
+
+                        <div class="secondary-text" *ngIf="element.area?.areaCode">
+
+                            {{ element.area.areaCode }}
+
+                        </div>
+
+                        <span *ngIf="!element.area">
+
+                            -
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ROUTE -->
+                <ng-container matColumnDef="route">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Route
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <ng-container *ngIf="element.route; else noRoute">
+
+                            <div class="primary-text">
+
+                                {{ element.route.routeName || '-' }}
+
+                            </div>
+
+                            <div class="secondary-text" *ngIf="element.route.routeCode">
+
+                                {{ element.route.routeCode }}
+
+                            </div>
+
+                        </ng-container>
+
+                        <ng-template #noRoute>
+
+                            <span class="text-muted">
+                                No Route
+                            </span>
+
+                        </ng-template>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- SALESMAN -->
+                <ng-container matColumnDef="salesman">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Salesman
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <div class="employee-info" *ngIf="element.salesman">
+
+                            <div class="employee-avatar">
+
+                                {{
+                                element.salesman.fullName
+                                ? element.salesman.fullName.charAt(0).toUpperCase()
+                                : 'S'
+                                }}
+
+                            </div>
+
+                            <div>
+
+                                <div class="primary-text">
+
+                                    {{ element.salesman.fullName || '-' }}
+
+                                </div>
+
+                                <div class="secondary-text" *ngIf="element.salesman.employeeCode">
+
+                                    {{ element.salesman.employeeCode }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <span *ngIf="!element.salesman">
+                            -
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- DAY -->
+                <ng-container matColumnDef="day">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Day
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="day-badge">
+
+                            <i class="far fa-calendar-alt"></i>
+
+                            {{ element.day || '-' }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- SHOPS -->
+                <ng-container matColumnDef="shops">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Shops
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="shop-count">
+
+                            <i class="fas fa-store"></i>
+
+                            {{ element.shops?.length || 0 }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- STARTED -->
+                <!-- <ng-container matColumnDef="isStarted">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Started
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="status-badge" [ngClass]="
+                element.isStarted
+                  ? 'status-success'
+                  : 'status-pending'
+              ">
+
+                            {{ element.isStarted ? 'Started' : 'Not Started' }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container> -->
+
+
+                <!-- COMPLETED -->
+                <!-- <ng-container matColumnDef="isCompleted">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Completed
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="status-badge" [ngClass]="
+                element.isCompleted
+                  ? 'status-success'
+                  : 'status-pending'
+              ">
+
+                            {{ element.isCompleted ? 'Completed' : 'Pending' }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container> -->
+
+
+                <!-- STATUS -->
+                <ng-container matColumnDef="status">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Status
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="status-badge" [ngClass]="{
+                'status-success': element.status === 'Active',
+                'status-danger': element.status !== 'Active'
+              }">
+
+                            {{ element.status || '-' }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- CREATED DATE -->
+                <ng-container matColumnDef="createdAt">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Created Date
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        {{
+                        element.createdAt
+                        ? (element.createdAt | date:'dd-MM-yyyy')
+                        : '-'
+                        }}
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ACTIONS -->
+                <ng-container matColumnDef="actions">
+
+                    <th mat-header-cell *matHeaderCellDef class="action-header">
+
+                        Actions
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element" class="action-cell">
+
+
+                        <!-- VIEW -->
+                        <button type="button" class="action-btn view-btn" title="View" (click)="viewBeatPlan(element)">
+
+                            <i class="fas fa-eye"></i>
+
+                        </button>
+
+
+                        <!-- EDIT -->
+                        <button type="button" class="action-btn edit-btn" title="Edit" (click)="editBeatPlan(element)">
+
+                            <i class="fas fa-edit"></i>
+
+                        </button>
+
+
+                        <!-- DELETE -->
+                        <button type="button" class="action-btn delete-btn" title="Delete"
+                            (click)="deleteBeatPlan(element)">
+
+                            <i class="fas fa-trash"></i>
+
+                        </button>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- HEADER -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                </tr>
+
+
+                <!-- ROW -->
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+
+
+                <!-- NO DATA -->
+                <tr class="mat-row" *matNoDataRow>
+
+                    <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumns.length">
+
+                        <div class="no-data">
+
+                            <i class="fas fa-route"></i>
+
+                            <h4>No Beat Plans Found</h4>
+
+                            <p>
+                                No beat plans match your search.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <!-- ================= PAGINATOR ================= -->
+
+        <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons>
+        </mat-paginator>
+
+    </div>
+
+</div>

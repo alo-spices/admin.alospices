@@ -1,0 +1,889 @@
+<div class="product-view-container">
+
+  <!-- ===================================================== -->
+  <!-- HEADER -->
+  <!-- ===================================================== -->
+
+  <div class="view-header">
+
+    <div class="header-left">
+
+      <div class="header-icon">
+        <i class="fas fa-box-open"></i>
+      </div>
+
+      <div>
+        <h2>Product Details</h2>
+
+        <p>
+          Complete product information and variants
+        </p>
+      </div>
+
+    </div>
+
+    <div class="header-right">
+
+      <span
+        class="status-badge"
+        [ngClass]="
+          data.status === 'Active'
+            ? 'active'
+            : 'inactive'
+        ">
+
+        <i
+          class="fas"
+          [ngClass]="
+            data.status === 'Active'
+              ? 'fa-check-circle'
+              : 'fa-times-circle'
+          ">
+        </i>
+
+        {{ data.status }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- BASIC INFORMATION -->
+  <!-- ===================================================== -->
+
+  <div class="view-section">
+
+    <div class="section-header">
+
+      <div class="section-icon">
+        <i class="fas fa-info-circle"></i>
+      </div>
+
+      <div>
+        <h3>Basic Information</h3>
+
+        <p>
+          Product identification and general details
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <!-- Product Name -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-box me-2"></i>
+          Product Name
+        </span>
+
+        <p>
+          {{ data.productName || '-' }}
+        </p>
+
+      </div>
+
+
+      <!-- Product Code -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-barcode me-2"></i>
+          Product Code
+        </span>
+
+        <p class="code-value">
+          {{ data.productCode || '-' }}
+        </p>
+
+      </div>
+
+
+      <!-- Brand -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-building me-2"></i>
+          Brand
+        </span>
+
+        <p>
+          {{ data.brand?.brandName || '-' }}
+        </p>
+
+      </div>
+
+
+      <!-- Brand Code -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-tag me-2"></i>
+          Brand Code
+        </span>
+
+        <p>
+          {{ data.brand?.brandCode || '-' }}
+        </p>
+
+      </div>
+
+
+      <!-- Category -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-layer-group me-2"></i>
+          Category
+        </span>
+
+        <p>
+          {{ data.category?.categoryName || '-' }}
+        </p>
+
+      </div>
+
+
+      <!-- Category Code -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-code"></i>
+          Category Code
+        </span>
+
+        <p>
+          {{ data.category?.categoryCode || '-' }}
+        </p>
+
+      </div>
+
+
+      <!-- HSN -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-file-invoice"></i>
+          HSN Code
+        </span>
+
+        <p>
+          {{ data.hsnCode || '-' }}
+        </p>
+
+      </div>
+
+
+      <!-- GST -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-percent"></i>
+          GST
+        </span>
+
+        <p>
+          {{ data.gstPercentage ?? 0 }}%
+        </p>
+
+      </div>
+
+
+      <!-- Product Type -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-layer-group"></i>
+          Product Type
+        </span>
+
+        <p>
+          {{ data.productType || '-' }}
+        </p>
+
+      </div>
+
+
+      <!-- Display Order -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-sort-numeric-up"></i>
+          Display Order
+        </span>
+
+        <p>
+          {{ data.displayOrder ?? 0 }}
+        </p>
+
+      </div>
+
+
+      <!-- Featured -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-star"></i>
+          Featured Product
+        </span>
+
+        <p>
+
+          <span
+            class="mini-badge"
+            [ngClass]="
+              data.featuredProduct
+                ? 'yes'
+                : 'no'
+            ">
+
+            <i
+              class="fas"
+              [ngClass]="
+                data.featuredProduct
+                  ? 'fa-star'
+                  : 'fa-minus-circle'
+              ">
+            </i>
+
+            {{
+              data.featuredProduct
+                ? 'Featured'
+                : 'Not Featured'
+            }}
+
+          </span>
+
+        </p>
+
+      </div>
+
+
+      <!-- Created -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-calendar-plus"></i>
+          Created At
+        </span>
+
+        <p>
+          {{ data.createdAt | date:'dd MMM yyyy, hh:mm a' }}
+        </p>
+
+      </div>
+
+
+      <!-- Updated -->
+
+      <div class="detail-item">
+
+        <span>
+          <i class="fas fa-calendar-check"></i>
+          Last Updated
+        </span>
+
+        <p>
+          {{ data.updatedAt | date:'dd MMM yyyy, hh:mm a' }}
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- DESCRIPTIONS -->
+  <!-- ===================================================== -->
+
+  <div class="view-section">
+
+    <div class="section-header">
+
+      <div class="section-icon">
+        <i class="fas fa-align-left"></i>
+      </div>
+
+      <div>
+        <h3>Product Description</h3>
+
+        <p>
+          Product description and additional information
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="description-grid">
+
+      <!-- Short Description -->
+
+      <div class="description-box">
+
+        <div class="description-title">
+
+          <i class="fas fa-align-left"></i>
+
+          <span>
+            Short Description
+          </span>
+
+        </div>
+
+        <p>
+
+          {{
+            data.shortDescription
+              || 'No short description available.'
+          }}
+
+        </p>
+
+      </div>
+
+
+      <!-- Description -->
+
+      <div class="description-box">
+
+        <div class="description-title">
+
+          <i class="fas fa-file-alt"></i>
+
+          <span>
+            Description
+          </span>
+
+        </div>
+
+        <p>
+
+          {{
+            data.description
+              || 'No description available.'
+          }}
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- PRODUCT STATUS -->
+  <!-- ===================================================== -->
+
+  <div class="view-section">
+
+    <div class="section-header">
+
+      <div class="section-icon">
+        <i class="fas fa-toggle-on"></i>
+      </div>
+
+      <div>
+        <h3>Product Status</h3>
+
+        <p>
+          Current product availability information
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="status-summary">
+
+      <!-- Status -->
+
+      <div class="status-box">
+
+        <div class="status-box-icon">
+
+          <i
+            class="fas"
+            [ngClass]="
+              data.status === 'Active'
+                ? 'fa-check-circle'
+                : 'fa-times-circle'
+            ">
+          </i>
+
+        </div>
+
+        <div>
+
+          <span>
+            Product Status
+          </span>
+
+          <strong
+            [ngClass]="
+              data.status === 'Active'
+                ? 'active-text'
+                : 'inactive-text'
+            ">
+
+            {{ data.status }}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- Deleted -->
+
+      <!-- <div class="status-box">
+
+        <div class="status-box-icon">
+
+          <i class="fas fa-trash-alt"></i>
+
+        </div>
+
+        <div>
+
+          <span>
+            Deleted
+          </span>
+
+          <strong>
+
+            {{
+              data.isDeleted
+                ? 'Yes'
+                : 'No'
+            }}
+
+          </strong>
+
+        </div>
+
+      </div> -->
+
+
+      <!-- Variants Count -->
+
+      <div class="status-box">
+
+        <div class="status-box-icon">
+
+          <i class="fas fa-boxes"></i>
+
+        </div>
+
+        <div>
+
+          <span>
+            Total Variants
+          </span>
+
+          <strong>
+
+            {{ data.variants?.length || 0 }}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- PRODUCT VARIANTS -->
+  <!-- ===================================================== -->
+
+  <div class="view-section">
+
+    <div class="section-header">
+
+      <div class="section-icon">
+        <i class="fas fa-boxes"></i>
+      </div>
+
+      <div>
+
+        <h3>Product Variants</h3>
+
+        <p>
+          Variant-wise pricing, stock and packaging details
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- No Variants -->
+
+    <div
+      *ngIf="
+        !data.variants ||
+        data.variants.length === 0
+      "
+      class="empty-state">
+
+      <i class="fas fa-box-open"></i>
+
+      <h4>No Variants Available</h4>
+
+      <p>
+        No variants have been added to this product.
+      </p>
+
+    </div>
+
+
+    <!-- Variant Cards -->
+
+    <div
+      *ngFor="
+        let variant of data.variants;
+        let i = index
+      "
+      class="variant-card">
+
+
+      <!-- Variant Header -->
+
+      <div class="variant-header">
+
+        <div class="variant-title">
+
+          <div class="variant-number">
+
+            {{ i + 1 }}
+
+          </div>
+
+          <div>
+
+            <h4>
+              {{ variant.packSize || 'Variant' }}
+            </h4>
+
+            <span>
+              SKU: {{ variant.skuCode || '-' }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <span
+            class="variant-status"
+            [ngClass]="
+              variant.status === 'Active'
+                ? 'active'
+                : 'inactive'
+            ">
+
+            <i
+              class="fas"
+              [ngClass]="
+                variant.status === 'Active'
+                  ? 'fa-check-circle'
+                  : 'fa-times-circle'
+              ">
+            </i>
+
+            {{ variant.status }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Variant Details -->
+
+      <div class="variant-grid">
+
+
+        <!-- Pack Size -->
+
+        <div class="detail-item">
+
+          <span>
+            <i class="fas fa-box"></i>
+            Pack Size
+          </span>
+
+          <p>
+            {{ variant.packSize || '-' }}
+          </p>
+
+        </div>
+
+
+        <!-- SKU -->
+
+        <div class="detail-item">
+
+          <span>
+            <i class="fas fa-barcode"></i>
+            SKU Code
+          </span>
+
+          <p class="code-value">
+            {{ variant.skuCode || '-' }}
+          </p>
+
+        </div>
+
+
+        <!-- Weight -->
+
+        <div class="detail-item">
+
+          <span>
+            <i class="fas fa-weight-hanging"></i>
+            Weight
+          </span>
+
+          <p>
+            {{ variant.weightInGrams ?? 0 }} g
+          </p>
+
+        </div>
+
+
+        <!-- Stock -->
+
+        <div class="detail-item">
+
+          <span>
+            <i class="fas fa-cubes"></i>
+            Current Stock
+          </span>
+
+          <p class="stock-value">
+
+            {{ variant.stock ?? 0 }}
+
+            <small>
+              Packs
+            </small>
+
+          </p>
+
+        </div>
+
+
+        <!-- MRP -->
+
+        <div class="detail-item">
+
+          <span>
+            <i class="fas fa-rupee-sign"></i>
+            MRP
+          </span>
+
+          <p>
+            ₹{{ variant.mrp ?? 0 }}
+          </p>
+
+        </div>
+
+
+        <!-- GST -->
+
+        <div class="detail-item">
+
+          <span>
+            <i class="fas fa-percent"></i>
+            GST
+          </span>
+
+          <p>
+            {{ variant.gstPercentage ?? 0 }}%
+          </p>
+
+        </div>
+
+
+        <!-- Variant Status -->
+
+        <div class="detail-item">
+
+          <span>
+            <i class="fas fa-toggle-on"></i>
+            Status
+          </span>
+
+          <p>
+
+            <span
+              class="mini-badge"
+              [ngClass]="
+                variant.status === 'Active'
+                  ? 'yes'
+                  : 'no'
+              ">
+
+              {{ variant.status }}
+
+            </span>
+
+          </p>
+
+        </div>
+
+
+        <!-- Variant ID -->
+
+        <!-- <div class="detail-item">
+
+          <span>
+            <i class="fas fa-fingerprint"></i>
+            Variant ID
+          </span>
+
+          <p class="small-id">
+
+            {{ variant._id || '-' }}
+
+          </p>
+
+        </div> -->
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- VARIANT IMAGES -->
+      <!-- ================================================= -->
+
+      <div
+        class="variant-media"
+        *ngIf="
+          variant.image ||
+          (
+            variant.gallery &&
+            variant.gallery.length > 0
+          )
+        ">
+
+
+        <!-- Main Image -->
+
+        <div
+          class="variant-main-image"
+          *ngIf="variant.image">
+
+          <div class="media-title">
+
+            <i class="fas fa-image"></i>
+
+            Variant Image
+
+          </div>
+
+          <div class="image-wrapper">
+
+            <img
+              [src]="variant.image"
+              [alt]="variant.packSize">
+
+          </div>
+
+        </div>
+
+
+        <!-- Gallery -->
+
+        <div
+          class="variant-gallery"
+          *ngIf="
+            variant.gallery &&
+            variant.gallery.length > 0
+          ">
+
+          <div class="media-title">
+
+            <i class="fas fa-images"></i>
+
+            Gallery
+
+          </div>
+
+          <div class="gallery-grid">
+
+            <div
+              class="gallery-image"
+              *ngFor="
+                let image of variant.gallery
+              ">
+
+              <img
+                [src]="image"
+                alt="Variant Gallery">
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- CLOSE BUTTON -->
+  <!-- ===================================================== -->
+
+  <div class="view-footer">
+
+    <button
+      mat-button
+      [mat-dialog-close]="false"
+      class="btn-back">
+
+      <i class="fas fa-times me-2"></i>
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

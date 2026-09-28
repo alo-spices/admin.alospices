@@ -1,0 +1,286 @@
+<div class="category-container">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <!-- ========================================== -->
+            <!-- Title -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>
+                        Update Area
+                    </h2>
+
+                    <p>
+                        Update a new sales area
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Form Card -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="category-card">
+
+                    <form [formGroup]="areaForm" (ngSubmit)="onSubmit()">
+
+
+                        <div class="category-grid">
+
+
+                            <!-- ====================================== -->
+                            <!-- Form Area -->
+                            <!-- ====================================== -->
+
+                            <div class="form-area">
+
+
+                                <!-- ================================= -->
+                                <!-- AREA INFORMATION -->
+                                <!-- ================================= -->
+
+                                <div class="section-title full-width">
+
+                                    <h4>
+                                        Area Information
+                                    </h4>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Area Name -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Area Name
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <input type="text" formControlName="areaName" placeholder="Enter area name">
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Area Code -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Area Code
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <input type="text" formControlName="areaCode" placeholder="Enter area code">
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- City -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        City
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <input type="text" formControlName="city" placeholder="Enter city">
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- District -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        District
+                                    </label>
+
+
+                                    <input type="text" formControlName="district" placeholder="Enter district">
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- State -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        State
+                                    </label>
+
+
+                                    <input type="text" formControlName="state" placeholder="Enter state">
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Pincode -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Pincode
+                                    </label>
+
+
+                                    <input type="text" formControlName="pincode" maxlength="6"
+                                        placeholder="Enter pincode">
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Description -->
+                                <!-- ================================= -->
+
+                                <div class="form-group full-width">
+
+                                    <label>
+                                        Description
+                                    </label>
+
+
+                                    <textarea rows="4" formControlName="description"
+                                        placeholder="Enter area description">
+                                    </textarea>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- ====================================== -->
+                            <!-- Preview Area -->
+                            <!-- ====================================== -->
+
+                            <div class="preview-area">
+
+
+
+                                <!-- ================================= -->
+                                <!-- Info -->
+                                <!-- ================================= -->
+
+                                <div class="role-info">
+
+                                    <span>
+                                        Area Management
+                                    </span>
+
+                                    <strong>
+                                        Sales Area
+                                    </strong>
+
+                                    <small>
+
+                                        This area can later be assigned
+                                        to Sales Managers and Salesmen.
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- ====================================== -->
+                        <!-- Buttons -->
+                        <!-- ====================================== -->
+
+                        <div class="button-group">
+
+                            <button type="submit" class="btn-create" [disabled]="isLoading">
+
+                                <span *ngIf="!isLoading">
+
+                                    <i class="fa fa-save me-2"></i>
+
+                                    Update Area
+
+                                </span>
+
+
+                                <span *ngIf="isLoading">
+
+                                    <i class="fa fa-spinner fa-spin me-2">
+                                    </i>
+
+                                    Creating...
+
+                                </span>
+
+                            </button>
+
+
+                            <button type="button" class="btn-back" (click)="goBack()">
+
+                                <i class="fa fa-arrow-left me-2"></i>
+
+                                Back
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

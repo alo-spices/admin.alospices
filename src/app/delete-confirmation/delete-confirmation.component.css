@@ -1,0 +1,57 @@
+.dialog-title {
+  margin: 0;
+  padding: 20px 24px 10px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.dialog-content {
+  padding: 10px 24px 20px !important;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 24px 20px !important;
+  margin: 0;
+}
+
+/* CANCEL */
+.btn-back {
+  min-width: 100px;
+  height: 40px;
+  border: 1px solid #640101 !important;
+  border-radius: 5px;
+  color: #640101 !important;
+  background: #fff !important;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* DELETE */
+.btn-create {
+  min-width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  background: #640101 !important;
+  color: #fff !important;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: none !important;
+}
+
+.btn-back:hover {
+  background: #f8eeee !important;
+}
+
+.btn-create:hover {
+  background: #4d0000 !important;
+}

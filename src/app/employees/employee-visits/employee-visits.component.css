@@ -1,0 +1,534 @@
+/* =========================================
+   PAGE
+========================================= */
+
+.visits-page {
+
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 30px;
+
+    background: #fffaf2;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.close-btn {
+
+    position: absolute;
+
+    top: 24px;
+    right: 30px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #fff0df;
+
+    color: #8b5a20;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: all 0.2s ease;
+
+}
+
+.close-btn:hover {
+
+    background: #8b5a20;
+
+    color: white;
+
+    transform: rotate(90deg);
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.page-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 24px 70px 24px 25px;
+
+    margin-bottom: 25px;
+
+    background: white;
+
+    border: 1px solid #eadbc5;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 15px rgba(100, 65, 25, 0.08);
+
+}
+
+.header-left {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+.header-left h2 {
+
+    margin: 0;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: #4d3218;
+
+}
+
+.header-left p {
+
+    margin: 6px 0 0;
+
+    color: #8a7359;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================
+   VISIT COUNT
+========================================= */
+
+.visit-count {
+
+    min-width: 130px;
+
+    padding: 14px 22px;
+
+    text-align: center;
+
+    border-radius: 12px;
+
+    background: #fff7e8;
+
+    border: 1px solid #eadbc5;
+
+}
+
+.visit-count span {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: #8a7359;
+
+    margin-bottom: 5px;
+
+}
+
+.visit-count strong {
+
+    font-size: 25px;
+
+    color: #8b5a20;
+
+}
+
+
+/* =========================================
+   TABLE WRAPPER
+========================================= */
+
+.visits-table-wrapper {
+
+    width: 100%;
+
+    max-height: 550px;
+
+    overflow-y: auto;
+
+    overflow-x: auto;
+
+    background: white;
+
+    border: 1px solid #eadbc5;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 15px rgba(100, 65, 25, 0.07);
+
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+.visits-table-wrapper table {
+
+    width: 100%;
+
+    min-width: 1000px;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.visits-table-wrapper thead th {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 2;
+
+    padding: 15px 16px;
+
+    text-align: left;
+
+    background: #fff3df;
+
+    color: #65421f;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    border-bottom: 1px solid #eadbc5;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+.visits-table-wrapper tbody td {
+
+    padding: 15px 16px;
+
+    color: #5d5144;
+
+    font-size: 13px;
+
+    border-bottom: 1px solid #f1e7d8;
+
+    white-space: nowrap;
+
+}
+
+.visits-table-wrapper tbody tr {
+
+    transition: background 0.2s ease;
+
+}
+
+.visits-table-wrapper tbody tr:hover {
+
+    background: #fffaf3;
+
+}
+
+.visits-table-wrapper tbody tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+
+/* =========================================
+   PARTY TYPE
+========================================= */
+
+.party-type {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: #f7eee1;
+
+    color: #795126;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.visit-status {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+/* COMPLETED */
+
+.visit-status.completed {
+
+    background: #e7f6ec;
+
+    color: #218443;
+
+}
+
+
+/* STARTED */
+
+.visit-status.started {
+
+    background: #fff1d8;
+
+    color: #a96700;
+
+}
+
+
+/* PENDING */
+
+.visit-status.pending {
+
+    background: #e9f1ff;
+
+    color: #3867a8;
+
+}
+
+
+/* CANCELLED */
+
+.visit-status.cancelled {
+
+    background: #fde8e8;
+
+    color: #c0392b;
+
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading-box {
+
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #8a7359;
+
+}
+
+.loading-box .spinner-border {
+
+    width: 35px;
+
+    height: 35px;
+
+    margin-bottom: 12px;
+
+}
+
+
+/* =========================================
+   NO DATA
+========================================= */
+
+.no-data {
+
+    min-height: 350px;
+
+    background: white;
+
+    border: 1px solid #eadbc5;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+.no-data i {
+
+    font-size: 42px;
+
+    color: #c6a77b;
+
+    margin-bottom: 15px;
+
+}
+
+.no-data h4 {
+
+    margin: 0 0 6px;
+
+    color: #4d3218;
+
+    font-size: 18px;
+
+}
+
+.no-data p {
+
+    margin: 0;
+
+    color: #8a7359;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.visits-table-wrapper {
+
+    scrollbar-width: thin;
+
+    scrollbar-color: #b58a58 #fff7e8;
+
+}
+
+.visits-table-wrapper::-webkit-scrollbar {
+
+    width: 7px;
+    height: 7px;
+
+}
+
+.visits-table-wrapper::-webkit-scrollbar-track {
+
+    background: #fff7e8;
+
+}
+
+.visits-table-wrapper::-webkit-scrollbar-thumb {
+
+    background: #b58a58;
+
+    border-radius: 10px;
+
+}
+
+.visits-table-wrapper::-webkit-scrollbar-thumb:hover {
+
+    background: #8b5a20;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .visits-page {
+
+        padding: 15px;
+
+    }
+
+    .page-header {
+
+        padding: 20px;
+
+        padding-right: 60px;
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+    .visit-count {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+    }
+
+    .close-btn {
+
+        right: 15px;
+
+        top: 15px;
+
+    }
+
+}

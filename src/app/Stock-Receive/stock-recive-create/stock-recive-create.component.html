@@ -1,0 +1,467 @@
+<div class="container-fluid category-container">
+
+    <div class="category-card">
+
+        <!-- Header -->
+
+        <div class="card-header">
+
+            <h3>
+
+                Create Stock Receive
+
+            </h3>
+
+            <p>
+
+                Receive Raw Materials from Supplier
+
+            </p>
+
+        </div>
+
+        <!-- Form -->
+
+        <form
+
+            [formGroup]="stockReceiveForm"
+
+            (ngSubmit)="createStockReceive()">
+
+            <div class="row">
+
+                <!-- ==========================
+                     Receive No
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Receive Number
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <input
+
+                        type="text"
+
+                        class="form-control"
+
+                        formControlName="receiveNo"
+
+                        placeholder="Enter Receive Number">
+
+                </div>
+
+                <!-- ==========================
+                     Supplier
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Supplier
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <select
+
+                        class="form-select"
+
+                        formControlName="supplier">
+
+                        <option value="">
+
+                            Select Supplier
+
+                        </option>
+
+                        <option
+
+                            *ngFor="let supplier of supplierList"
+
+                            [value]="supplier._id">
+
+                            {{supplier.supplierName}}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- ==========================
+                     Warehouse
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Warehouse
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <select
+
+                        class="form-select"
+
+                        formControlName="warehouse">
+
+                        <option value="">
+
+                            Select Warehouse
+
+                        </option>
+
+                        <option
+
+                            *ngFor="let warehouse of warehouseList"
+
+                            [value]="warehouse._id">
+
+                            {{warehouse.warehouseName}}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- ==========================
+                     Invoice Number
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Invoice Number
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <input
+
+                        type="text"
+
+                        class="form-control"
+
+                        formControlName="invoiceNo"
+
+                        placeholder="Enter Invoice Number">
+
+                </div>
+
+                <!-- ==========================
+                     Invoice Date
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Invoice Date
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <input
+
+                        type="date"
+
+                        class="form-control"
+
+                        formControlName="invoiceDate">
+
+                </div>
+
+            </div>
+            <!-- ==========================================
+     Raw Material Details
+========================================== -->
+
+<div class="mt-4">
+
+    <h5 class="section-title">
+
+        Raw Material Details
+
+    </h5>
+
+</div>
+
+<div
+
+    formArrayName="items"
+
+    *ngFor="let item of items.controls; let i=index"
+
+    class="item-card">
+
+    <div
+
+        [formGroupName]="i"
+
+        class="row">
+
+        <!-- ==========================
+             Raw Material
+        =========================== -->
+
+        <div class="col-md-4 mb-3">
+
+            <label>
+
+                Raw Material
+
+                <span class="text-danger">*</span>
+
+            </label>
+
+            <select
+
+                class="form-select"
+
+                formControlName="rawMaterial">
+
+                <option value="">
+
+                    Select Raw Material
+
+                </option>
+
+                <option
+
+                    *ngFor="let raw of rawMaterialList"
+
+                    [value]="raw._id">
+
+                    {{raw.rawMaterialName}}
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- ==========================
+             Batch No
+        =========================== -->
+
+        <div class="col-md-2 mb-3">
+
+            <label>
+
+                Batch No
+
+            </label>
+
+            <input
+
+                type="text"
+
+                class="form-control"
+
+                formControlName="batchNo"
+
+                placeholder="Batch">
+
+        </div>
+
+        <!-- ==========================
+             No Of Bags
+        =========================== -->
+
+        <div class="col-md-2 mb-3">
+
+            <label>
+
+                No Of Bags
+
+            </label>
+
+            <input
+
+                type="number"
+
+                class="form-control"
+
+                formControlName="noOfBags"
+
+                placeholder="0">
+
+        </div>
+
+        <!-- ==========================
+             Bag Weight
+        =========================== -->
+
+        <div class="col-md-2 mb-3">
+
+            <label>
+
+                Bag Weight (KG)
+
+            </label>
+
+            <input
+
+                type="number"
+
+                class="form-control"
+
+                formControlName="bagWeightKg"
+
+                placeholder="0">
+
+        </div>
+
+        <!-- ==========================
+             Rate
+        =========================== -->
+
+        <div class="col-md-2 mb-3">
+
+            <label>
+
+                Rate / KG
+
+            </label>
+
+            <input
+
+                type="number"
+
+                class="form-control"
+
+                formControlName="rate"
+
+                placeholder="0">
+
+        </div>
+
+    </div>
+    <div class="text-end mb-3">
+
+    <button
+
+        type="button"
+
+        class="btn-remove"
+
+        *ngIf="items.length>1"
+
+        (click)="removeItem(i)">
+
+        <i class="fa fa-trash me-2"></i>
+
+        Remove
+
+    </button>
+
+</div>
+
+<hr>
+
+</div>
+<div class="mb-4">
+
+    <button
+
+        type="button"
+
+        class="btn-add"
+
+        (click)="addItem()">
+
+        <i class="fa fa-plus me-2"></i>
+
+        Add Raw Material
+
+    </button>
+
+</div>
+<!-- ==========================================
+     Remarks
+========================================== -->
+
+<div class="row">
+
+    <div class="col-md-12 mb-4">
+
+        <label>
+
+            Remarks
+
+        </label>
+
+        <textarea
+
+            class="form-control"
+
+            rows="4"
+
+            formControlName="remarks"
+
+            placeholder="Enter Remarks">
+
+        </textarea>
+
+    </div>
+
+</div>
+<!-- ==========================================
+     Buttons
+========================================== -->
+
+<div class="button-group">
+
+    <button
+
+        type="submit"
+
+        class="btn-save"
+
+        [disabled]="loading">
+
+        <i class="fa fa-save me-2"></i>
+
+        Save Stock Receive
+
+    </button>
+    
+              <button type="button" class="btn-back" (click)="goBack()">Back</button>
+          
+
+    <button
+
+        type="button"
+
+        class="btn-reset"
+
+        (click)="resetForm()">
+
+        <i class="fa fa-refresh me-2"></i>
+
+        Reset
+
+    </button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>

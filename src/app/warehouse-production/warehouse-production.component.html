@@ -1,0 +1,345 @@
+<div class="container-fluid py-4 px-4">
+  <!-- ================================================= -->
+  <!-- PAGE HEADER -->
+  <!-- ================================================= -->
+  <div class="page-header mb-5">
+    <div class="header-content">
+      <div>
+        <h2 class="fw-bold mb-1">
+          <i class="fas fa-buildings me-2"></i>
+          List of Warehouse
+        </h2>
+        <p class="text-secondary mb-0 small">
+          Select a warehouse to view production details
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================= -->
+  <!-- WAREHOUSE CARDS -->
+  <!-- ================================================= -->
+  <div class="row g-4 mb-5">
+    <div class="col-xl-4 col-lg-4 col-md-6" *ngFor="let warehouse of warehouses">
+      <div class="warehouse-card" [class.active]="selectedWarehouse?._id === warehouse._id"
+        (click)="selectWarehouse(warehouse)">
+        <div class="warehouse-card-body">
+          <div class="warehouse-icon-wrapper">
+            <i class="fas fa-warehouse"></i>
+          </div>
+
+          <div class="warehouse-info">
+            <h5 class="warehouse-name mb-1">
+              {{ warehouse.warehouseName }}
+            </h5>
+            <p class="warehouse-code mb-0">
+              {{ warehouse.warehouseCode }}
+            </p>
+          </div>
+
+          <div class="production-stat">
+            <span class="production-count">
+              {{ getProductionCount(warehouse._id) }}
+            </span>
+            <small class="production-label">
+              Productions
+            </small>
+          </div>
+        </div>
+
+        <div class="card-accent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================= -->
+  <!-- SELECTED WAREHOUSE -->
+  <!-- ================================================= -->
+  <div class="selected-section mt-5" *ngIf="selectedWarehouse">
+    <!-- HEADER -->
+    <div class="section-header-wrapper mb-4">
+      <div class="section-header">
+        <div>
+          <div class="selected-badge mb-2">
+            <i class="bi bi-check-circle-fill me-1"></i>
+            Selected Warehouse
+          </div>
+          <h4 class="fw-bold mb-1">
+            {{ selectedWarehouse.warehouseName }}
+          </h4>
+          <p class="text-secondary mb-0 small">
+            Warehouse Code:
+            <strong>
+              {{ selectedWarehouse.warehouseCode }}
+            </strong>
+          </p>
+        </div>
+
+        <button type="button" class="btn btn-clear" (click)="clearSelection()">
+          <i class="bi bi-x-lg me-1"></i>
+          Clear Selection
+        </button>
+      </div>
+    </div>
+
+    <!-- ================================================= -->
+    <!-- SUMMARY CARDS -->
+    <!-- ================================================= -->
+    <div class="row g-4 mb-4">
+      <!-- TOTAL PRODUCTIONS -->
+      <div class="col-md-4">
+        <div class="summary-card summary-primary">
+          <div class="summary-card-body">
+            <div class="summary-icon-wrapper">
+              <i class="fas fa-cube"></i>
+            </div>
+            <div class="summary-content">
+              <span class="summary-label">
+                Total Productions
+              </span>
+              <h3 class="summary-value mb-0">
+                {{ productions.length }}
+              </h3>
+            </div>
+          </div>
+          <div class="summary-accent"></div>
+        </div>
+      </div>
+
+      <!-- RAW WEIGHT -->
+      <div class="col-md-4">
+        <div class="summary-card summary-warning">
+          <div class="summary-card-body">
+            <div class="summary-icon-wrapper">
+              <i class="fas fa-download"></i>
+            </div>
+            <div class="summary-content">
+              <span class="summary-label">
+                Raw Material Used
+              </span>
+              <h3 class="summary-value mb-0">
+                {{ getTotalRawWeight() | number:'1.0-3' }}
+                <span class="summary-unit">KG</span>
+              </h3>
+            </div>
+          </div>
+          <div class="summary-accent"></div>
+        </div>
+      </div>
+
+      <!-- FINISHED WEIGHT -->
+      <div class="col-md-4">
+        <div class="summary-card summary-success">
+          <div class="summary-card-body">
+            <div class="summary-icon-wrapper">
+              <i class="fas fa-arrow-up"></i>
+            </div>
+            <div class="summary-content">
+              <span class="summary-label">
+                Finished Production
+              </span>
+              <h3 class="summary-value mb-0">
+                {{ getTotalProducedWeight() | number:'1.0-3' }}
+                <span class="summary-unit">KG</span>
+              </h3>
+            </div>
+          </div>
+          <div class="summary-accent"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================= -->
+    <!-- LOADING -->
+    <!-- ================================================= -->
+    <div class="text-center py-5" *ngIf="productionLoading">
+      <div class="loading-wrapper">
+        <div class="spinner-custom"></div>
+        <p class="text-secondary mt-3 mb-0">
+          Loading productions...
+        </p>
+      </div>
+    </div>
+
+    <!-- ================================================= -->
+    <!-- NO DATA -->
+    <!-- ================================================= -->
+    <div class="no-data-wrapper mt-4" *ngIf="!productionLoading && productions.length === 0">
+      <div class="no-data-content">
+        <div class="no-data-icon">
+          <i class="bi bi-inbox"></i>
+        </div>
+        <h5 class="fw-semibold mb-2">
+          No Productions Found
+        </h5>
+        <p class="text-secondary mb-0 small">
+          No production records are available for this warehouse.
+        </p>
+      </div>
+    </div>
+
+    <!-- ================================================= -->
+    <!-- PRODUCTION DATA TABLE -->
+    <!-- ================================================= -->
+    <div class="table-wrapper mt-4" *ngIf="!productionLoading && productions.length > 0">
+      <div class="table-header mb-3">
+        <h5 class="fw-semibold mb-0">
+          <i class="bi bi-table me-2"></i>
+          Production Records
+        </h5>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table production-table align-middle">
+          <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th>Production No</th>
+              <th>Production Date</th>
+              <th>Using Weight</th>
+              <th>Raw Material</th>
+              <!-- <th>Produced Weight</th> -->
+              <th>Waste</th>
+              <!-- <th>Status</th> -->
+              <th>Variants</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="
+                let production of productions;
+                let i = index
+              ">
+              <!-- NUMBER -->
+              <td class="text-center">
+                <span class="row-number">
+                  {{ i + 1 }}
+                </span>
+              </td>
+
+              <!-- PRODUCTION NO -->
+              <td>
+                <strong class="production-number">
+                  {{ production.productionNo }}
+                </strong>
+              </td>
+
+              <!-- DATE -->
+              <td>
+                <span class="production-date">
+                  {{ production.productionDate | date:'dd-MM-yyyy' }}
+                </span>
+              </td>
+
+              <!-- RAW WEIGHT -->
+              <td>
+                <span class="weight-value weight-raw">
+                  {{ production.rawWeightUsedKg | number:'1.0-3' }}
+                  <small>KG</small>
+                </span>
+              </td>
+
+              <td>
+
+                <div *ngFor="let raw of production.rawMaterials" class="raw-material-info">
+
+                  <strong>
+                    {{ raw.rawMaterial?.rawMaterialName || '-' }}
+                  </strong>
+
+                  <small *ngIf="raw.rawMaterial?.rawMaterialCode" class="d-block text-muted">
+                    <!-- {{ raw.rawMaterial.rawMaterialCode }} -->
+                  </small>
+
+                </div>
+
+              </td>
+
+              <!-- PRODUCED WEIGHT -->
+              <!-- <td>
+                <span class="weight-value weight-produced">
+                  {{ production.totalProducedWeightKg | number:'1.0-3' }}
+                  <small>KG</small>
+                </span>
+              </td> -->
+
+              <!-- WASTE -->
+              <td>
+                <span class="weight-value weight-waste">
+                  {{ production.wasteKg | number:'1.0-3' }}
+                  <small>KG</small>
+                </span>
+              </td>
+
+              <!-- STATUS -->
+              <!-- <td>
+                <span
+                  class="status-badge"
+                  [ngClass]="{
+                    'status-completed': production.status === 'Completed',
+                    'status-pending': production.status === 'Pending',
+                    'status-cancelled': production.status === 'Cancelled'
+                  }"
+                >
+                  <i class="bi bi-circle-fill me-1 small"></i>
+                  {{ production.status }}
+                </span>
+              </td> -->
+
+              <!-- VARIANTS -->
+              <!-- VARIANTS COLUMN -->
+              <td>
+                <div class="variant-tooltip-wrapper" *ngIf="production.productionItems?.length"
+                  [attr.title]="getVariantTooltip(production.productionItems)">
+                  <span class="variant-icon-wrap">
+                    <i class="fas fa-boxes-stacked variant-icon"></i>
+                  </span>
+
+                  <span class="variant-count">
+                    {{ production.productionItems.length }}
+                  </span>
+                </div>
+
+                <span class="text-secondary small" *ngIf="!production.productionItems?.length">
+                  -
+                </span>
+              </td>
+              <!-- ACTIONS -->
+              <td class="text-center">
+                <button type="button" class="view-btn" (click)="viewProduction(production)" title="View Production">
+                  <i class="fa fa-eye"></i>
+
+                </button>
+              </td>
+
+              <!-- <td>
+                <div
+                  class="variant-list"
+                  *ngIf="production.productionItems?.length"
+                >
+                  <span
+                    class="variant-badge"
+                    *ngFor="
+                      let item of production.productionItems
+                    "
+                  >
+                    {{ item.packSize }}
+                    <span class="variant-sep">-</span>
+                    {{ item.packsProduced }} Packs
+                  </span>
+                </div>
+                <span
+                  class="text-secondary small"
+                  *ngIf="!production.productionItems?.length"
+                >
+                  -
+                </span>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

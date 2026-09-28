@@ -1,0 +1,576 @@
+<div class="category-container">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- ========================================== -->
+            <!-- Header -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>
+                        Production Instruction Details
+                    </h2>
+
+                    <p>
+                        View complete production instruction details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Loading -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12" *ngIf="isLoading">
+
+                <div class="loading-card">
+
+                    <i class="fa fa-spinner fa-spin"></i>
+
+                    <span>
+                        Loading production instruction...
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Details -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12" *ngIf="!isLoading && instruction">
+
+
+                <!-- ====================================== -->
+                <!-- Basic Information -->
+                <!-- ====================================== -->
+
+                <div class="view-card">
+
+                    <div class="view-card-header">
+
+                        <div>
+
+                            <h4>
+                                Basic Information
+                            </h4>
+
+                            <p>
+                                Production instruction details
+                            </p>
+
+                        </div>
+
+
+                        <span class="status-badge" [ngClass]="
+                getStatusClass(
+                  instruction.status
+                )
+              ">
+
+                            {{ instruction.status }}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="details-grid">
+
+
+                        <!-- Instruction Number -->
+
+                        <div class="detail-item">
+
+                            <span>
+                                Instruction Number
+                            </span>
+
+                            <strong>
+
+                                {{ instruction.instructionNo }}
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Instruction Date -->
+
+                        <div class="detail-item">
+
+                            <span>
+                                Instruction Date
+                            </span>
+
+                            <strong>
+
+                                {{
+                                instruction.instructionDate
+                                | date:'dd-MM-yyyy'
+                                }}
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Warehouse -->
+
+                        <div class="detail-item">
+
+                            <span>
+                                Warehouse
+                            </span>
+
+                            <strong>
+
+                                {{
+                                instruction.warehouse
+                                ?.warehouseName
+                                || '-'
+                                }}
+
+                            </strong>
+
+                            <small>
+
+                                {{
+                                instruction.warehouse
+                                ?.warehouseCode
+                                || '-'
+                                }}
+
+                            </small>
+
+                        </div>
+
+
+                        <!-- Total Target -->
+
+                        <div class="detail-item">
+
+                            <span>
+                                Total Required Weight
+                            </span>
+
+                            <strong>
+
+                                {{
+                                instruction.totalTargetWeightKg
+                                || 0
+                                }}
+
+                                KG
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Accepted At -->
+
+                        <div class="detail-item">
+
+                            <span>
+                                Accepted At
+                            </span>
+
+                            <strong>
+
+                                {{
+                                instruction.acceptedAt
+                                ? (
+                                instruction.acceptedAt
+                                | date:'dd-MM-yyyy hh:mm a'
+                                )
+                                : '-'
+                                }}
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Created At -->
+
+                        <div class="detail-item">
+
+                            <span>
+                                Created At
+                            </span>
+
+                            <strong>
+
+                                {{
+                                instruction.createdAt
+                                | date:'dd-MM-yyyy hh:mm a'
+                                }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================== -->
+                <!-- Production Items -->
+                <!-- ====================================== -->
+
+                <div class="view-card">
+
+                    <div class="view-card-header">
+
+                        <div>
+
+                            <h4>
+                                Production Requirements
+                            </h4>
+
+                            <p>
+                                Raw material and production details
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="items-container">
+
+
+                        <div class="instruction-item" *ngFor="
+                let item
+                of instruction.items;
+                let i = index
+              ">
+
+
+                            <!-- Item Header -->
+
+                            <div class="item-header">
+
+                                <h5>
+
+                                    Item {{ i + 1 }}
+
+                                </h5>
+
+                            </div>
+
+
+                            <!-- Item Details -->
+
+                            <div class="details-grid">
+
+
+                                <!-- Raw Material -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        Raw Material
+                                    </span>
+
+                                    <strong>
+
+                                        {{
+                                        item.rawMaterial
+                                        ?.rawMaterialName
+                                        || '-'
+                                        }}
+
+                                    </strong>
+
+                                    <small>
+
+                                        {{
+                                        item.rawMaterial
+                                        ?.rawMaterialCode
+                                        || '-'
+                                        }}
+
+                                    </small>
+
+                                </div>
+
+
+                                <!-- Stock Receive -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        Stock Receive
+                                    </span>
+
+                                    <strong>
+
+                                        {{
+                                        item.stockReceive
+                                        ?.receiveNo
+                                        || '-'
+                                        }}
+
+                                    </strong>
+
+                                    <small>
+
+                                        Supplier:
+                                        {{
+                                        item.stockReceive
+                                        ?.supplier
+                                        || '-'
+                                        }}
+
+                                    </small>
+
+                                </div>
+
+
+                                <!-- Batch -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        Batch Number
+                                    </span>
+
+                                    <strong>
+
+                                        {{ item.batchNo }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <!-- Variant -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        Variant
+                                    </span>
+
+                                    <strong>
+
+                                        {{ item.variantName }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <!-- SKU -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        SKU Code
+                                    </span>
+
+                                    <strong>
+
+                                        {{ item.skuCode }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <!-- Pack Size -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        Pack Size
+                                    </span>
+
+                                    <strong>
+
+                                        {{ item.packSize }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <!-- Weight -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        Weight Per Pack
+                                    </span>
+
+                                    <strong>
+
+                                        {{ item.weightInGrams }}
+                                        Grams
+
+                                    </strong>
+
+                                </div>
+
+
+                                <!-- Target Packs -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        Target Packs
+                                    </span>
+
+                                    <strong>
+
+                                        {{ item.targetPacks }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <!-- Target Weight -->
+
+                                <div class="detail-item">
+
+                                    <span>
+                                        Required Weight
+                                    </span>
+
+                                    <strong>
+
+                                        {{
+                                        item.targetWeightKg
+                                        || 0
+                                        }}
+
+                                        KG
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================== -->
+                <!-- Remarks -->
+                <!-- ====================================== -->
+
+                <div class="view-card">
+
+                    <div class="view-card-header">
+
+                        <h4>
+                            Remarks
+                        </h4>
+
+                    </div>
+
+
+                    <div class="remarks-box">
+
+                        {{
+                        instruction.remarks
+                        || 'No Remarks'
+                        }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================== -->
+                <!-- Footer Buttons -->
+                <!-- ====================================== -->
+
+                <div class="button-group">
+
+
+                    <!-- Accept -->
+
+                    <button type="button" class="btn-create" *ngIf="
+              instruction.status === 'Pending'
+            " (click)="
+              acceptProductionInstruction()
+            ">
+
+                        <i class="fa fa-check me-2"></i>
+
+                        Accept
+
+                    </button>
+
+
+                    <!-- Back -->
+
+                    <button type="button" class="btn-back" (click)="goBack()">
+
+                        <i class="fa fa-arrow-left me-2"></i>
+
+                        Back
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- No Data -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12" *ngIf="
+          !isLoading &&
+          !instruction
+        ">
+
+                <div class="empty-state">
+
+                    <i class="fa fa-file-circle-xmark"></i>
+
+                    <h4>
+                        Production Instruction Not Found
+                    </h4>
+
+                    <p>
+                        Unable to load the requested instruction.
+                    </p>
+
+                    <button type="button" class="btn-back" (click)="goBack()">
+
+                        Back
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

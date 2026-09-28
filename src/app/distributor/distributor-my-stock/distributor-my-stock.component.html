@@ -1,0 +1,320 @@
+<div class="stock-container">
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>
+                My Stock
+            </h2>
+
+            <p>
+                View your available distributor stock
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         SEARCH
+    =========================================== -->
+
+    <div class="table-toolbar">
+
+        <mat-form-field appearance="outline" class="search-field">
+
+            <mat-label>
+                Search Stock
+            </mat-label>
+
+            <input matInput placeholder="Search product, SKU, batch..." (keyup)="applyFilter($event)" />
+
+            <mat-icon matSuffix>
+                search
+            </mat-icon>
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ==========================================
+         TABLE
+    =========================================== -->
+
+    <div class="table-wrapper">
+
+        <table mat-table [dataSource]="dataSource" matSort class="stock-table">
+
+
+            <!-- ======================================
+                 S.NO
+            ======================================= -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+                <td mat-cell *matCellDef="
+                        let element;
+                        let i = index
+                    ">
+
+                    {{
+                    paginator
+                    ? paginator.pageIndex *
+                    paginator.pageSize +
+                    i + 1
+                    : i + 1
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+                 PRODUCT
+            ======================================= -->
+
+            <ng-container matColumnDef="product">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Product
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="product-info">
+
+                        <strong>
+
+                            {{
+                            element.product
+                            ?.productName ||
+                            element.productName ||
+                            '-'
+                            }}
+
+                        </strong>
+
+                        <small *ngIf="
+                                element.product
+                                    ?.productCode ||
+                                element.productCode
+                            ">
+
+                            {{
+                            element.product
+                            ?.productCode ||
+                            element.productCode
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+                 SKU
+            ======================================= -->
+
+            <ng-container matColumnDef="skuCode">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    SKU
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="sku-badge">
+
+                        {{
+                        element.skuCode ||
+                        element.variant?.skuCode ||
+                        '-'
+                        }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+                 BATCH
+            ======================================= -->
+
+            <ng-container matColumnDef="batchNo">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Batch No
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.batchNo ||
+                    '-'
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+                 PACK SIZE
+            ======================================= -->
+
+            <ng-container matColumnDef="packSize">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Pack Size
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.packSize ||
+                    element.variant?.packSize ||
+                    '-'
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+                 WEIGHT
+            ======================================= -->
+
+            <ng-container matColumnDef="weight">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Weight
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.weightInGrams ||
+                    element.variant?.weightInGrams ||
+                    0
+                    }}
+                    g
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+                 QUANTITY
+            ======================================= -->
+
+            <ng-container matColumnDef="quantity">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Quantity
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="quantity-badge">
+
+                        {{
+                        element.quantity ||
+                        element.stock ||
+                        0
+                        }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+                 TABLE HEADER / ROW
+            ======================================= -->
+
+            <tr mat-header-row *matHeaderRowDef="
+                    displayedColumns
+                ">
+
+            </tr>
+
+
+            <tr mat-row *matRowDef="
+                    let row;
+                    columns: displayedColumns
+                ">
+
+            </tr>
+
+
+            <!-- ======================================
+                 NO DATA
+            ======================================= -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell no-data" [attr.colspan]="
+                        displayedColumns.length
+                    ">
+
+                    No stock found
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- ==========================================
+         PAGINATOR
+    =========================================== -->
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[
+            5,
+            10,
+            20,
+            50
+        ]" showFirstLastButtons>
+
+    </mat-paginator>
+
+</div>

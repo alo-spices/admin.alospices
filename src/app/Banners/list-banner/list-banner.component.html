@@ -1,0 +1,245 @@
+<div class="category-container">
+
+  <!-- Top Row -->
+  <div class="top-row">
+
+    <!-- Title Section -->
+    <div class="title-section">
+      <h2>Banner Management</h2>
+      <p>Manage all banners here</p>
+    </div>
+
+    <!-- Button Section -->
+    <div class="button-section">
+      <button routerLink="/admin/create-banner">
+        Add Banner
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Search Row -->
+  <div class="search-row">
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Search Banner
+      </mat-label>
+
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Enter banner title">
+
+    </mat-form-field>
+  </div>
+
+  <!-- Table Row -->
+  <div class="table-row">
+
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="mat-elevation-z8">
+
+      <!-- S.No -->
+      <ng-container matColumnDef="sno">
+        <th mat-header-cell *matHeaderCellDef>
+          S.No
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element;
+            let i = index
+          ">
+          {{ i + 1 }}
+        </td>
+      </ng-container>
+
+      <!-- Title -->
+      <ng-container matColumnDef="title">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header>
+          Banner Title
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+          {{ element.title }}
+        </td>
+      </ng-container>
+
+      <!-- Image -->
+      <ng-container matColumnDef="image">
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          Image
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+
+          <img
+            [src]="element.image"
+            alt="banner-image"
+            width="60"
+            height="60">
+
+        </td>
+      </ng-container>
+
+      <!-- Description -->
+      <ng-container
+        matColumnDef="description">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          Description
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+          {{ element.description }}
+        </td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container
+        matColumnDef="actions">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          Actions
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+
+          <div class="action-buttons">
+
+            <!-- View -->
+            <button
+              mat-icon-button
+              class="view-btn"
+              (click)="viewBanner(element)">
+
+              <i
+                class="fa fa-eye"
+                aria-hidden="true">
+              </i>
+
+            </button>
+
+            <!-- Edit -->
+            <button
+              mat-icon-button
+              class="edit-btn"
+              (click)="editBanner(element)">
+
+              <i
+                class="fa fa-pencil"
+                aria-hidden="true">
+              </i>
+
+            </button>
+
+            <!-- Delete -->
+            <button
+              mat-icon-button
+              class="delete-btn"
+              (click)="deleteBanner(element)">
+
+              <i
+                class="fa fa-trash"
+                aria-hidden="true">
+              </i>
+
+            </button>
+
+          </div>
+
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="
+          displayedColumns
+        ">
+      </tr>
+
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns:
+          displayedColumns;
+        ">
+      </tr>
+
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="
+        [5,10,20,50]
+      "
+      showFirstLastButtons>
+    </mat-paginator>
+
+  </div>
+
+</div>
+
+<!-- View Banner Details -->
+<div
+  class="view-card"
+  *ngIf="selectedBanner">
+
+  <h3>
+    Banner Details
+  </h3>
+
+  <div class="details-grid">
+
+    <p>
+      <strong>Title:</strong>
+      {{ selectedBanner.title }}
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      {{ selectedBanner.description }}
+    </p>
+
+    <p>
+      <strong>Created At:</strong>
+      {{ selectedBanner.createdAt }}
+    </p>
+
+  </div>
+
+  <div class="image-preview">
+
+    <img
+      [src]="selectedBanner.image"
+      alt="banner-image"
+      width="120"
+      height="120">
+
+  </div>
+
+</div>

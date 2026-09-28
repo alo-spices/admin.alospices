@@ -1,0 +1,812 @@
+/* ==========================================
+   USER VIEW DETAILS
+   ========================================== */
+
+.category-container {
+    width: 100%;
+    min-height: 100vh;
+
+    background:
+        linear-gradient(180deg,
+            var(--bg-color) 0%,
+            #f4ece6 100%);
+
+    padding: 28px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Top Header
+   ========================================== */
+
+.top-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.title-section {
+    min-width: 0;
+}
+
+.title-section h2 {
+    margin: 0;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: var(--primary-color);
+
+    letter-spacing: 0.3px;
+}
+
+.title-section h2::after {
+    content: "";
+
+    display: block;
+
+    width: 70px;
+
+    height: 3px;
+
+    margin-top: 8px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(90deg,
+            var(--primary-color),
+            var(--primary-light));
+}
+
+.title-section p {
+    margin: 8px 0 0;
+
+    font-size: 13px;
+
+    color: var(--text-secondary);
+}
+
+
+/* ==========================================
+   Header Button
+   ========================================== */
+
+.button-section button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-width: 100px;
+
+    padding: 10px 16px;
+
+    border:
+        1px solid var(--secondary-dark);
+
+    border-radius: 9px;
+
+    background:
+        var(--secondary-color);
+
+    color:
+        var(--primary-dark);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        all 0.2s ease;
+}
+
+.button-section button:hover {
+    background: #ead7c7;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ==========================================
+   Loading Card
+   ========================================== */
+
+.loading-card {
+    min-height: 220px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    background:
+        var(--card-bg);
+
+    border:
+        1px solid rgba(166, 61, 34, 0.08);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 26px rgba(43, 43, 43, 0.07);
+
+    color:
+        var(--text-secondary);
+
+    font-size: 14px;
+}
+
+.loading-card i {
+    color:
+        var(--primary-color);
+
+    font-size: 18px;
+}
+
+
+/* ==========================================
+   Profile Card
+   ========================================== */
+
+.profile-card {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 24px;
+
+    margin-bottom: 20px;
+
+    background:
+        var(--card-bg);
+
+    border:
+        1px solid rgba(166, 61, 34, 0.08);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 28px rgba(43, 43, 43, 0.07);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Profile Image
+   ========================================== */
+
+.profile-image-wrapper {
+    width: 105px;
+
+    height: 105px;
+
+    min-width: 105px;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(166, 61, 34, 0.14);
+
+    background:
+        linear-gradient(180deg,
+            #fff,
+            #f8f2ee);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.profile-image-wrapper img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.profile-placeholder {
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color:
+        rgba(166, 61, 34, 0.35);
+
+    font-size: 38px;
+}
+
+
+/* ==========================================
+   Profile Summary
+   ========================================== */
+
+.profile-summary {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.profile-name-row {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.profile-name-row h2 {
+    margin: 0;
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    color:
+        var(--primary-color);
+
+    word-break: break-word;
+}
+
+
+/* ==========================================
+   Employee Code
+   ========================================== */
+
+.employee-code {
+    margin: 8px 0 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.employee-code i {
+    color:
+        var(--primary-color);
+}
+
+
+/* ==========================================
+   Role Badge
+   ========================================== */
+
+.role-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(166, 61, 34, 0.08);
+
+    color:
+        var(--primary-color);
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.role-badge i {
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   Main View Card
+   ========================================== */
+
+.view-card {
+    width: 100%;
+
+    background:
+        var(--card-bg);
+
+    border:
+        1px solid rgba(166, 61, 34, 0.08);
+
+    border-radius: 15px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 8px 24px rgba(43, 43, 43, 0.06);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Card Header
+   ========================================== */
+
+.view-card-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 15px;
+
+    margin-bottom: 18px;
+
+    border-bottom:
+        1px solid #eee4de;
+}
+
+.view-card-header h4 {
+    margin: 0;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    color:
+        var(--primary-color);
+}
+
+.view-card-header p {
+    margin: 4px 0 0;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   Details Grid
+   ========================================== */
+
+.details-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px 16px;
+}
+
+
+/* ==========================================
+   Detail Item
+   ========================================== */
+
+.detail-item {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 14px 15px;
+
+    background:
+        #fbfaf9;
+
+    border:
+        1px solid #eee4de;
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+.detail-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.detail-item span {
+    font-size: 11px;
+
+    color:
+        #8b7770;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+.detail-item strong {
+    color:
+        var(--text-primary);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    word-break: break-word;
+}
+
+.detail-item small {
+    color:
+        var(--text-secondary);
+
+    font-size: 10px;
+
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   Status Badge
+   ========================================== */
+
+.status-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: fit-content;
+
+    min-width: 72px;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.status-badge.active {
+    background:
+        #ecfdf5;
+
+    color:
+        #15803d;
+}
+
+.status-badge.pending {
+    background:
+        #fff7ed;
+
+    color:
+        #c2410c;
+}
+
+.status-badge.blocked {
+    background:
+        #fef2f2;
+
+    color:
+        #dc2626;
+}
+
+.status-badge.inactive {
+    background:
+        #f3f4f6;
+
+    color:
+        #6b7280;
+}
+
+
+/* ==========================================
+   Empty State
+   ========================================== */
+
+.empty-state {
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background:
+        var(--card-bg);
+
+    border:
+        1px solid rgba(166, 61, 34, 0.08);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 10px 26px rgba(43, 43, 43, 0.07);
+
+    box-sizing: border-box;
+}
+
+.empty-state>i {
+    margin-bottom: 15px;
+
+    font-size: 42px;
+
+    color:
+        #b7aaa3;
+}
+
+.empty-state h4 {
+    margin: 0 0 7px;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    color:
+        var(--text-primary);
+}
+
+.empty-state p {
+    margin: 0 0 18px;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   Bottom Button Group
+   ========================================== */
+
+.button-group {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 8px;
+}
+
+.btn-back {
+    min-width: 105px;
+
+    padding: 10px 17px;
+
+    border:
+        1px solid var(--secondary-dark);
+
+    border-radius: 9px;
+
+    background:
+        var(--secondary-color);
+
+    color:
+        var(--primary-dark);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        all 0.2s ease;
+}
+
+.btn-back:hover {
+    background:
+        #ead7c7;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ==========================================
+   Tablet
+   ========================================== */
+
+@media (max-width: 991px) {
+
+    .details-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .profile-card {
+        align-items: flex-start;
+    }
+
+}
+
+
+/* ==========================================
+   Mobile
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .category-container {
+        padding:
+            20px 14px;
+    }
+
+    .top-row {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 12px;
+    }
+
+    .button-section button {
+        width: 100%;
+    }
+
+    .profile-card {
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        padding: 20px;
+    }
+
+    .profile-summary {
+        width: 100%;
+    }
+
+    .profile-name-row {
+        justify-content: center;
+    }
+
+    .employee-code {
+        justify-content: center;
+    }
+
+    .details-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .view-card {
+        padding: 17px;
+    }
+
+    .view-card-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .button-group {
+        justify-content: stretch;
+    }
+
+    .btn-back {
+        width: 100%;
+    }
+
+}
+
+
+/* ==========================================
+   Small Mobile
+   ========================================== */
+
+@media (max-width: 480px) {
+
+    .category-container {
+        padding:
+            14px 10px;
+    }
+
+    .title-section h2 {
+        font-size:
+            22px;
+    }
+
+    .title-section p {
+        font-size:
+            12px;
+    }
+
+    .profile-card {
+        padding:
+            16px;
+    }
+
+    .profile-image-wrapper {
+        width: 88px;
+
+        height: 88px;
+
+        min-width: 88px;
+
+        border-radius: 14px;
+    }
+
+    .profile-name-row h2 {
+        font-size:
+            19px;
+    }
+
+    .view-card {
+        padding:
+            14px;
+    }
+
+    .detail-item {
+        padding:
+            12px;
+    }
+
+    .detail-item strong {
+        font-size:
+            12px;
+    }
+
+}

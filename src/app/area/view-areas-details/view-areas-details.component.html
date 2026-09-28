@@ -1,0 +1,531 @@
+<div class="category-container">
+
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Area Details
+            </h2>
+
+            <p>
+                View complete sales area information
+            </p>
+
+        </div>
+
+
+        <div class="button-section">
+
+            <button type="button" (click)="goBack()">
+
+                <i class="fa fa-arrow-left"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Loading -->
+    <!-- ========================================== -->
+
+    <div class="loading-card" *ngIf="isLoading">
+
+        <i class="fa fa-spinner fa-spin"></i>
+
+        <span>
+            Loading area details...
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Main Content -->
+    <!-- ========================================== -->
+
+    <div *ngIf="
+            !isLoading &&
+            area
+        ">
+
+
+        <!-- ====================================== -->
+        <!-- Area Header Card -->
+        <!-- ====================================== -->
+
+        <div class="area-header-card">
+
+
+            <div class="area-main-icon">
+
+                <i class="fa fa-map-marker-alt"></i>
+
+            </div>
+
+
+            <div class="area-header-content">
+
+                <div class="area-title-row">
+
+                    <h2>
+                        {{ area.areaName || '-' }}
+                    </h2>
+
+
+                    <span class="status-badge" [ngClass]="
+                            area.status === 'Active'
+                                ? 'active'
+                                : 'inactive'
+                        ">
+
+                        {{ area.status || 'Inactive' }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="area-code">
+
+                    <i class="fa fa-barcode"></i>
+
+                    {{ area.areaCode || '-' }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Area Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Area Information
+                    </h4>
+
+                    <p>
+                        Basic details of this sales area
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Area Name -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Area Name
+                    </span>
+
+                    <strong>
+                        {{ area.areaName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Area Code -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Area Code
+                    </span>
+
+                    <strong>
+                        {{ area.areaCode || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- City -->
+
+                <div class="detail-item">
+
+                    <span>
+                        City
+                    </span>
+
+                    <strong>
+                        {{ area.city || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- District -->
+
+                <div class="detail-item">
+
+                    <span>
+                        District
+                    </span>
+
+                    <strong>
+                        {{ area.district || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- State -->
+
+                <div class="detail-item">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong>
+                        {{ area.state || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Pincode -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Pincode
+                    </span>
+
+                    <strong>
+                        {{ area.pincode || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="detail-item full-width">
+
+                    <span>
+                        Description
+                    </span>
+
+                    <strong>
+                        {{ area.description || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Sales Assignment -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Sales Assignment
+                    </h4>
+
+                    <p>
+                        Sales manager and salesman assignment
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Sales Manager -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Sales Manager
+                    </span>
+
+
+                    <ng-container *ngIf="area.salesManager">
+
+                        <strong>
+
+                            {{
+                            area.salesManager.fullName
+                            || '-'
+                            }}
+
+                        </strong>
+
+                        <small>
+
+                            {{
+                            area.salesManager.role
+                            || 'Sales Manager'
+                            }}
+
+                        </small>
+
+                    </ng-container>
+
+
+                    <span class="not-assigned" *ngIf="!area.salesManager">
+
+                        Not Assigned
+
+                    </span>
+
+                </div>
+
+
+                <!-- Salesmen Count -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Total Salesmen
+                    </span>
+
+                    <strong>
+
+                        {{
+                        area.salesmen?.length
+                        || 0
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Salesmen -->
+
+                <div class="detail-item full-width" *ngIf="
+                        area.salesmen?.length
+                    ">
+
+                    <span>
+                        Assigned Salesmen
+                    </span>
+
+
+                    <div class="salesmen-list">
+
+                        <div class="salesman-chip" *ngFor="
+                                let salesman
+                                of area.salesmen
+                            ">
+
+                            <i class="fa fa-user"></i>
+
+                            <span>
+
+                                {{
+                                salesman.fullName
+                                || '-'
+                                }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- No Salesmen -->
+
+                <div class="detail-item full-width" *ngIf="
+                        !area.salesmen?.length
+                    ">
+
+                    <span>
+                        Assigned Salesmen
+                    </span>
+
+                    <strong class="not-assigned">
+                        No Salesmen Assigned
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- System Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        System Information
+                    </h4>
+
+                    <p>
+                        Area record information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Status -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong>
+                        {{ area.status || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Created -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Created At
+                    </span>
+
+                    <strong>
+
+                        {{
+                        area.createdAt
+                        ? (
+                        area.createdAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Updated -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Last Updated
+                    </span>
+
+                    <strong>
+
+                        {{
+                        area.updatedAt
+                        ? (
+                        area.updatedAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Bottom Back -->
+        <!-- ====================================== -->
+
+        <div class="button-group">
+
+            <button type="button" class="btn-back" (click)="goBack()">
+
+                <i class="fa fa-arrow-left me-2"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- No Data -->
+    <!-- ========================================== -->
+
+    <div class="empty-state" *ngIf="
+            !isLoading &&
+            !area
+        ">
+
+        <i class="fa fa-map-marker-alt"></i>
+
+        <h4>
+            Area Not Found
+        </h4>
+
+        <p>
+            Unable to load area details.
+        </p>
+
+
+        <button type="button" class="btn-back" (click)="goBack()">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>

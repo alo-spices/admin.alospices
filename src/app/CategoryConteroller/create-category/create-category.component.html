@@ -1,0 +1,79 @@
+<div class="category-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-section">
+          <h2>Create Category</h2>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="category-card">
+          <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+            <div class="category-grid">
+              <div class="form-area">
+                <div class="form-group">
+                  <label>Category Name</label>
+                  <input type="text" formControlName="categoryName" placeholder="Enter category name">
+                </div>
+
+                <div class="form-group">
+                  <label>Category Code</label>
+                  <input type="text" formControlName="categoryCode" placeholder="Enter category code">
+                </div>
+
+                <div class="form-group">
+                  <label>Brand</label>
+                  <select formControlName="brand">
+                    <option value="">Select Brand</option>
+                    <option *ngFor="let item of brandList" [value]="item._id">
+                      {{ item.brandName }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label>Description</label>
+                  <textarea rows="4" formControlName="description" placeholder="Enter description"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Display Order</label>
+                  <input type="number" formControlName="displayOrder" placeholder="Enter display order">
+                </div>
+
+                <div class="form-group">
+                  <label>Status</label>
+                  <select formControlName="status">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label>Category Image</label>
+                  <input type="file" (change)="onFileChange($event)">
+                </div>
+              </div>
+
+              <div class="preview-area">
+                <div class="preview-box">
+                  <img *ngIf="imagePreview" [src]="imagePreview" alt="Preview">
+                  <div *ngIf="!imagePreview" class="preview-empty">
+                    <i class="fa fa-image"></i>
+                    <p>Image Preview</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="button-group">
+              <button type="submit" class="btn-create">Save</button>
+              <button type="button" class="btn-back" (click)="goBack()">Back</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

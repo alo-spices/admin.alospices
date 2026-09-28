@@ -1,0 +1,356 @@
+<div class="container-fluid supplier-container">
+
+  <div class="supplier-card">
+
+    <!-- Header -->
+
+    <div class="card-header">
+
+      <h3>Create Supplier</h3>
+
+      <p>Add new supplier details</p>
+
+    </div>
+
+    <!-- Form -->
+
+    <form
+      [formGroup]="supplierForm"
+      (ngSubmit)="createSupplier()">
+
+      <div class="row">
+
+        <!-- Supplier Name -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Supplier Name <span>*</span></label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="supplierName"
+            placeholder="Enter Supplier Name">
+
+        </div>
+
+        <!-- Supplier Code -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Supplier Code <span>*</span></label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="supplierCode"
+            placeholder="Enter Supplier Code">
+
+        </div>
+
+        <!-- Contact Person -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Contact Person</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="contactPerson"
+            placeholder="Enter Contact Person">
+
+        </div>
+
+        <!-- Mobile -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Mobile Number <span>*</span></label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="mobileNumber"
+            placeholder="Enter Mobile Number">
+
+        </div>
+
+        <!-- Alternate Mobile -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Alternate Mobile</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="alternateMobileNumber"
+            placeholder="Enter Alternate Mobile">
+
+        </div>
+
+        <!-- Email -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Email</label>
+
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="Enter Email">
+
+        </div>
+
+        <!-- Address -->
+
+        <div class="col-12 mb-3">
+
+          <label>Address</label>
+
+          <textarea
+            rows="3"
+            class="form-control"
+            formControlName="address"
+            placeholder="Enter Address"></textarea>
+
+        </div>
+
+        <!-- City -->
+
+        <div class="col-lg-4 mb-3">
+
+          <label>City</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="city"
+            placeholder="City">
+
+        </div>
+
+        <!-- District -->
+
+        <div class="col-lg-4 mb-3">
+
+          <label>District</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="district"
+            placeholder="District">
+
+        </div>
+
+        <!-- State -->
+
+        <div class="col-lg-4 mb-3">
+
+          <label>State</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="state"
+            placeholder="State">
+
+        </div>
+
+        <!-- Country -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Country</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="country"
+            placeholder="Country">
+
+        </div>
+
+        <!-- Pincode -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Pincode</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="pincode"
+            placeholder="Pincode">
+
+        </div>
+
+        <!-- GST -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>GST Number</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="gstNumber"
+            placeholder="GST Number">
+
+        </div>
+
+        <!-- PAN -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>PAN Number</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="panNumber"
+            placeholder="PAN Number">
+
+        </div>
+
+        <!-- Payment Terms -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Payment Terms</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="paymentTerms"
+            placeholder="Payment Terms">
+
+        </div>
+
+        <!-- Opening Balance -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Opening Balance</label>
+
+          <input
+            type="number"
+            class="form-control"
+            formControlName="openingBalance"
+            placeholder="Opening Balance">
+
+        </div>
+
+        <!-- Account Holder -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Account Holder Name</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="accountHolderName"
+            placeholder="Account Holder Name">
+
+        </div>
+
+        <!-- Bank -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Bank Name</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="bankName"
+            placeholder="Bank Name">
+
+        </div>
+
+        <!-- Account Number -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Account Number</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="accountNumber"
+            placeholder="Account Number">
+
+        </div>
+
+        <!-- IFSC -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>IFSC Code</label>
+
+          <input
+            type="text"
+            class="form-control"
+            formControlName="ifscCode"
+            placeholder="IFSC Code">
+
+        </div>
+
+        <!-- Status -->
+
+        <div class="col-lg-6 mb-3">
+
+          <label>Status</label>
+
+          <select
+            class="form-select"
+            formControlName="status">
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <!-- Buttons -->
+
+      <div class="button-group">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          routerLink="/admin/supplier-list">
+
+          Cancel
+
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary">
+
+          <i class="fa fa-save me-2"></i>
+
+          Save Supplier
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

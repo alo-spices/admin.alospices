@@ -1,0 +1,605 @@
+/* =========================================
+   ADMIN GUIDE PAGE
+========================================= */
+
+.admin-guide-page {
+    padding: 25px;
+    background: #f5f7fb;
+    min-height: 100vh;
+    color: #263238;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.guide-header {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.12);
+}
+
+.guide-header h1 {
+    margin: 0 0 10px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.guide-header p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #e2e8f0;
+    max-width: 900px;
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.guide-section {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.guide-section h2 {
+    margin: 0 0 20px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.guide-section h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.guide-section p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #64748b;
+    margin: 6px 0;
+}
+
+
+/* =========================================
+   BUSINESS FLOW
+========================================= */
+
+.business-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 10px 5px 15px;
+}
+
+.flow-step {
+    min-width: 145px;
+    background: #f8fafc;
+    border: 1px solid #dbe3ec;
+    border-radius: 12px;
+    padding: 17px 14px;
+    text-align: center;
+    position: relative;
+    transition: all 0.25s ease;
+}
+
+.flow-step:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.08);
+    border-color: #94a3b8;
+}
+
+.flow-step strong {
+    display: block;
+    font-size: 14px;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.flow-step span {
+    display: block;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #64748b;
+}
+
+.flow-step::after {
+    content: "→";
+    position: absolute;
+    right: -19px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.flow-step:last-child::after {
+    display: none;
+}
+
+
+/* =========================================
+   GUIDE CARDS
+========================================= */
+
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.guide-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+    padding: 20px;
+    transition: all 0.25s ease;
+}
+
+.guide-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+    border-color: #cbd5e1;
+}
+
+.guide-card h3 {
+    color: #1e293b;
+}
+
+.guide-card p {
+    margin-bottom: 10px;
+}
+
+.guide-card ul {
+    margin: 10px 0 0;
+    padding-left: 20px;
+}
+
+.guide-card li {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+
+/* =========================================
+   NUMBER / STEP CARDS
+========================================= */
+
+.step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.step-number {
+    min-width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #1e293b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h3 {
+    margin-bottom: 5px;
+}
+
+
+/* =========================================
+   INFO BOX
+========================================= */
+
+.info-box {
+    background: #f1f5f9;
+    border-left: 4px solid #475569;
+    padding: 16px 18px;
+    border-radius: 8px;
+    margin-top: 18px;
+}
+
+.info-box strong {
+    display: block;
+    color: #1e293b;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.info-box p {
+    margin: 0;
+}
+
+
+/* =========================================
+   IMPORTANT NOTE
+========================================= */
+
+.important-note {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-left: 5px solid #f97316;
+    border-radius: 10px;
+    padding: 17px 20px;
+    margin-top: 18px;
+}
+
+.important-note strong {
+    display: block;
+    color: #9a3412;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.important-note p {
+    margin: 0;
+    color: #7c2d12;
+}
+
+
+/* =========================================
+   SUCCESS BOX
+========================================= */
+
+.success-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 5px solid #22c55e;
+    border-radius: 10px;
+    padding: 17px 20px;
+    margin-top: 18px;
+}
+
+.success-box strong {
+    display: block;
+    color: #166534;
+    margin-bottom: 6px;
+}
+
+.success-box p {
+    color: #166534;
+    margin: 0;
+}
+
+
+/* =========================================
+   WARNING BOX
+========================================= */
+
+.warning-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 5px solid #eab308;
+    border-radius: 10px;
+    padding: 17px 20px;
+    margin-top: 18px;
+}
+
+.warning-box strong {
+    display: block;
+    color: #854d0e;
+    margin-bottom: 6px;
+}
+
+.warning-box p {
+    color: #713f12;
+    margin: 0;
+}
+
+
+/* =========================================
+   FLOW LINE
+========================================= */
+
+.flow-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.flow-box {
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    padding: 11px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.flow-arrow {
+    font-size: 18px;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+
+/* =========================================
+   TWO COLUMN CONTENT
+========================================= */
+
+.guide-two-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+
+/* =========================================
+   LIST STYLE
+========================================= */
+
+.guide-list {
+    margin: 10px 0 0;
+    padding-left: 20px;
+}
+
+.guide-list li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+.guide-list li::marker {
+    color: #64748b;
+}
+
+
+/* =========================================
+   LABEL / BADGE
+========================================= */
+
+.guide-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #e2e8f0;
+    color: #334155;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================
+   MODULE TITLE
+========================================= */
+
+.module-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.module-title .module-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.module-title h2 {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+.guide-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+}
+
+.guide-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+.guide-table th {
+    background: #f8fafc;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    padding: 13px 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.guide-table td {
+    padding: 13px 15px;
+    font-size: 13px;
+    color: #64748b;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+}
+
+.guide-table tr:last-child td {
+    border-bottom: none;
+}
+
+.guide-table tr:hover td {
+    background: #f8fafc;
+}
+
+
+/* =========================================
+   FINAL SUMMARY
+========================================= */
+
+.final-summary {
+    background: linear-gradient(135deg, #f8fafc, #eef2f7);
+    border: 1px solid #dbe3ec;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.final-summary h2 {
+    margin: 0 0 15px;
+    color: #1e293b;
+}
+
+.final-summary p {
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.final-flow {
+    margin-top: 20px;
+    padding: 18px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 2;
+    color: #334155;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .guide-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .admin-guide-page {
+        padding: 18px;
+    }
+
+    .guide-two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .guide-section {
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .guide-header {
+        padding: 22px;
+    }
+
+    .guide-header h1 {
+        font-size: 24px;
+    }
+
+    .guide-header p {
+        font-size: 13px;
+    }
+
+    .guide-section h2 {
+        font-size: 19px;
+    }
+
+    .guide-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .business-flow {
+        justify-content: flex-start;
+    }
+
+    .flow-step {
+        min-width: 135px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .admin-guide-page {
+        padding: 12px;
+    }
+
+    .guide-header {
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .guide-section {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .guide-card {
+        padding: 16px;
+    }
+
+    .step-item {
+        padding: 13px;
+    }
+
+    .step-number {
+        min-width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+}

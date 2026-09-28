@@ -1,0 +1,279 @@
+<div class="category-container">
+
+    <!-- Header -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>Order Management</h2>
+
+            <p>Manage all orders placed by your sales employees</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Search Orders
+            </mat-label>
+
+            <input matInput placeholder="Search by Order Number / Customer Type / Status" (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- Table -->
+
+    <div class="table-row">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <!-- S.No -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+                <td mat-cell *matCellDef="let element; let i=index">
+
+                    {{ i + 1 }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- Order Number -->
+
+            <ng-container matColumnDef="orderNumber">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Order Number
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+                            {{ element.orderNumber }}
+                        </h6>
+
+                        <small>
+                            {{ element.partyType }}
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- Party -->
+
+            <ng-container matColumnDef="party">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Party
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{ element.party.shopName }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- Grand Total -->
+
+            <ng-container matColumnDef="grandTotal">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Grand Total
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <strong>
+                        ₹{{ element.grandTotal || 0 }}
+                    </strong>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- Order Status -->
+
+            <ng-container matColumnDef="orderStatus">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Order Status
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="
+              element.orderStatus == 'Pending'
+                ? 'inactive'
+                : 'active'
+            ">
+
+                        {{ element.orderStatus }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- Payment Status -->
+
+            <ng-container matColumnDef="paymentStatus">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Payment Status
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="
+              element.paymentStatus == 'Paid'
+                ? 'active'
+                : 'inactive'
+            ">
+
+                        {{ element.paymentStatus }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- Order Date -->
+
+            <ng-container matColumnDef="orderDate">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Order Date
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{ element.orderDate | date:'dd MMM yyyy' }}
+
+                    <small class="d-block text-muted">
+
+                        {{ element.orderDate | date:'hh:mm a' }}
+
+                    </small>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- Actions -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Actions
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="action-buttons">
+
+                        <!-- View -->
+
+                        <button mat-icon-button class="view-btn" (click)="viewOrder(element)">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- Header -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
+
+            </tr>
+
+
+            <!-- Rows -->
+
+            <tr mat-row *matRowDef="
+          let row;
+          columns: displayedColumns;
+        ">
+
+            </tr>
+
+
+            <!-- No Data -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length">
+
+                    No Orders Found
+
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <!-- Paginator -->
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons>
+
+        </mat-paginator>
+
+    </div>
+
+</div>

@@ -1,0 +1,476 @@
+<div class="supplier-container">
+
+    <!-- Header -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>
+
+                Supplier Details
+
+            </h2>
+
+            <p>
+
+                View complete supplier information
+
+            </p>
+
+        </div>
+
+        <button
+            class="back-btn"
+            (click)="close()">
+
+            <i class="fa fa-times me-2"></i>
+
+            Close
+
+        </button>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="supplier-card">
+
+        <!-- Top -->
+
+        <div class="card-top">
+
+            <div class="supplier-icon">
+
+                <i class="fa fa-user-tie"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    {{supplier.supplierName}}
+
+                </h3>
+
+                <p>
+
+                    {{supplier.supplierCode}}
+
+                </p>
+
+            </div>
+
+            <span
+                class="status-badge"
+                [ngClass]="supplier.status=='Active' ? 'active':'inactive'">
+
+                {{supplier.status}}
+
+            </span>
+
+        </div>
+
+        <hr>
+
+        <!-- ========================= -->
+        <!-- BASIC INFORMATION -->
+        <!-- ========================= -->
+
+        <h5 class="section-title">
+
+            Basic Information
+
+        </h5>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Supplier Code
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.supplierCode}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Supplier Name
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.supplierName}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Contact Person
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.contactPerson || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Mobile Number
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.mobileNumber}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Alternate Mobile
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.alternateMobileNumber || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Email Address
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.email || '-'}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- ========================= -->
+        <!-- ADDRESS -->
+        <!-- ========================= -->
+
+        <h5 class="section-title">
+
+            Address Information
+
+        </h5>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    City
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.city || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    District
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.district || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    State
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.state || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Country
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.country || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Pincode
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.pincode || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-12">
+
+                <label>
+
+                    Address
+
+                </label>
+
+                <div class="view-box address-box">
+
+                    {{supplier.address || '-'}}
+
+                </div>
+
+            </div>
+
+        </div>
+                <hr>
+
+        <!-- ========================= -->
+        <!-- TAX INFORMATION -->
+        <!-- ========================= -->
+
+        <h5 class="section-title">
+
+            Tax Information
+
+        </h5>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 mb-4">
+
+                <label>
+
+                    GST Number
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.gstNumber || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 mb-4">
+
+                <label>
+
+                    PAN Number
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.panNumber || '-'}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- ========================= -->
+        <!-- PAYMENT INFORMATION -->
+        <!-- ========================= -->
+
+        <h5 class="section-title">
+
+            Payment Information
+
+        </h5>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 mb-4">
+
+                <label>
+
+                    Payment Terms
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.paymentTerms || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 mb-4">
+
+                <label>
+
+                    Opening Balance
+
+                </label>
+
+                <div class="view-box">
+
+                    ₹ {{supplier.openingBalance || 0}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- ========================= -->
+        <!-- BANK INFORMATION -->
+        <!-- ========================= -->
+
+        <h5 class="section-title">
+
+            Bank Information
+
+        </h5>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Account Holder
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.accountHolderName || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Bank Name
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.bankName || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    IFSC Code
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.ifscCode || '-'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-12">
+
+                <label>
+
+                    Account Number
+
+                </label>
+
+                <div class="view-box">
+
+                    {{supplier.accountNumber || '-'}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

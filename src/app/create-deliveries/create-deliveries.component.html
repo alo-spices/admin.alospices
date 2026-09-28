@@ -1,0 +1,316 @@
+<div class="category-container">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>Create Delivery</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+
+                <div class="category-card">
+
+                    <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
+
+                        <div class="category-grid">
+
+
+                            <div class="form-area">
+
+
+                                <!-- ================================= -->
+                                <!-- ORDER -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>Order</label>
+
+                                    <select formControlName="order" (change)="onOrderChange()">
+
+                                        <option value="">
+                                            Select Order
+                                        </option>
+
+                                        <option *ngFor="let item of orderList" [value]="item._id">
+
+                                            {{
+                                            item.orderNumber ||
+                                            item.orderNo ||
+                                            item._id
+                                            }}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- PARTY -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>Party</label>
+
+                                    <select formControlName="party">
+
+                                        <option value="">
+                                            Select Party
+                                        </option>
+
+                                        <option *ngFor="let item of partyList" [value]="item._id">
+
+                                            {{
+                                            item.partyName ||
+                                            item.shopName ||
+                                            item.fullName
+                                            }}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- SOURCE TYPE -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>Source Type</label>
+
+                                    <select formControlName="sourceType" (change)="onSourceTypeChange()">
+
+                                        <option value="">
+                                            Select Source Type
+                                        </option>
+
+                                        <option value="WAREHOUSE">
+                                            Warehouse
+                                        </option>
+
+                                        <option value="DISTRIBUTOR">
+                                            Distributor
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- WAREHOUSE -->
+                                <!-- ================================= -->
+
+                                <div class="form-group" *ngIf="
+                    deliveryForm.get('sourceType')?.value === 'WAREHOUSE'
+                  ">
+
+                                    <label>Source Warehouse</label>
+
+                                    <select formControlName="sourceWarehouse">
+
+                                        <option value="">
+                                            Select Warehouse
+                                        </option>
+
+                                        <option *ngFor="let item of warehouseList" [value]="item._id">
+
+                                            {{
+                                            item.warehouseName
+                                            }}
+
+                                            <ng-container *ngIf="item.warehouseCode">
+
+                                                -
+                                                {{ item.warehouseCode }}
+
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- DISTRIBUTOR -->
+                                <!-- ================================= -->
+
+                                <div class="form-group" *ngIf="
+                    deliveryForm.get('sourceType')?.value === 'DISTRIBUTOR'
+                  ">
+
+                                    <label>Source Distributor</label>
+
+                                    <select formControlName="sourceDistributor">
+
+                                        <option value="">
+                                            Select Distributor
+                                        </option>
+
+                                        <option *ngFor="let item of distributorList" [value]="item._id">
+
+                                            {{ item.fullName }}
+
+                                            <ng-container *ngIf="item.employeeCode">
+
+                                                -
+                                                {{ item.employeeCode }}
+
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- ================================= -->
+                            <!-- PREVIEW AREA -->
+                            <!-- ================================= -->
+
+                            <div class="preview-area">
+
+                                <div class="preview-box">
+
+
+                                    <div *ngIf="selectedOrder" class="preview-empty">
+
+                                        <i class="fa fa-truck"></i>
+
+                                        <p>
+
+                                            {{
+                                            selectedOrder.orderNumber ||
+                                            selectedOrder.orderNo ||
+                                            'Order'
+                                            }}
+
+                                        </p>
+
+
+                                        <small>
+
+                                            Party:
+
+                                            {{
+                                            selectedParty?.partyName ||
+                                            selectedParty?.shopName ||
+                                            selectedParty?.fullName ||
+                                            '-'
+                                            }}
+
+                                            <br>
+
+
+                                            Source:
+
+                                            {{
+                                            deliveryForm.get('sourceType')?.value ||
+                                            '-'
+                                            }}
+
+                                            <br>
+
+
+                                            <ng-container *ngIf="
+                          deliveryForm.get('sourceType')?.value === 'WAREHOUSE'
+                        ">
+
+                                                {{
+                                                selectedWarehouse?.warehouseName ||
+                                                '-'
+                                                }}
+
+                                            </ng-container>
+
+
+                                            <ng-container *ngIf="
+                          deliveryForm.get('sourceType')?.value === 'DISTRIBUTOR'
+                        ">
+
+                                                {{
+                                                selectedDistributor?.fullName ||
+                                                selectedDistributor?.shopName ||
+                                                '-'
+                                                }}
+
+                                            </ng-container>
+
+                                        </small>
+
+                                    </div>
+
+
+                                    <div *ngIf="!selectedOrder" class="preview-empty">
+
+                                        <i class="fa fa-truck"></i>
+
+                                        <p>
+                                            Delivery Preview
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- ================================= -->
+                        <!-- BUTTONS -->
+                        <!-- ================================= -->
+
+                        <div class="button-group">
+
+                            <button type="submit" class="btn-create" [disabled]="isLoading">
+
+                                {{
+                                isLoading
+                                ? 'Creating...'
+                                : 'Create'
+                                }}
+
+                            </button>
+
+
+                            <button type="button" class="btn-back" (click)="goBack()" [disabled]="isLoading">
+
+                                Back
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

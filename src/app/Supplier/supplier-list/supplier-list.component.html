@@ -1,0 +1,264 @@
+<div class="supplier-container">
+
+  <!-- Header -->
+  <div class="top-row">
+
+    <div class="title-section">
+      <h2>Supplier Management</h2>
+      <p>Manage all suppliers here</p>
+    </div>
+
+    <div class="button-section">
+      <button routerLink="/admin/supplier-create">
+        <i class="fa fa-plus me-2"></i>
+        Add Supplier
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Search -->
+  <div class="search-row">
+
+    <mat-form-field appearance="outline" class="w-100">
+
+      <mat-label>Search Supplier</mat-label>
+
+      <input
+        matInput
+        placeholder="Search by Supplier Name / Code / Mobile"
+        (keyup)="applyFilter($event)">
+
+    </mat-form-field>
+
+  </div>
+
+  <!-- Table -->
+
+  <div class="table-row">
+
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort>
+
+      <!-- S.No -->
+
+      <ng-container matColumnDef="sno">
+
+        <th mat-header-cell *matHeaderCellDef>
+          S.No
+        </th>
+
+        <td mat-cell *matCellDef="let element; let i=index">
+          {{ i + 1 }}
+        </td>
+
+      </ng-container>
+
+      <!-- Supplier -->
+
+      <ng-container matColumnDef="supplier">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header>
+
+          Supplier
+
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+
+          <div class="supplier-info">
+
+            <h6>{{element.supplierName}}</h6>
+
+            <small>{{element.supplierCode}}</small>
+
+          </div>
+
+        </td>
+
+      </ng-container>
+
+      <!-- Contact Person -->
+
+      <ng-container matColumnDef="contactPerson">
+
+        <th mat-header-cell *matHeaderCellDef>
+          Contact Person
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+
+          {{element.contactPerson || '-'}}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Mobile -->
+
+      <ng-container matColumnDef="mobile">
+
+        <th mat-header-cell *matHeaderCellDef>
+          Mobile
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+
+          {{element.mobileNumber}}
+
+        </td>
+
+      </ng-container>
+
+      <!-- City -->
+
+      <ng-container matColumnDef="city">
+
+        <th mat-header-cell *matHeaderCellDef>
+          City
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+
+          {{element.city || '-'}}
+
+        </td>
+
+      </ng-container>
+
+      <!-- GST -->
+
+      <ng-container matColumnDef="gst">
+
+        <th mat-header-cell *matHeaderCellDef>
+          GST No
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+
+          {{element.gstNumber || '-'}}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Status -->
+
+      <ng-container matColumnDef="status">
+
+        <th mat-header-cell *matHeaderCellDef>
+          Status
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+
+          <span
+            class="status-badge"
+            [ngClass]="element.status=='Active' ? 'active' : 'inactive'">
+
+            {{element.status}}
+
+          </span>
+
+        </td>
+
+      </ng-container>
+
+      <!-- Actions -->
+
+      <ng-container matColumnDef="actions">
+
+        <th mat-header-cell *matHeaderCellDef>
+          Actions
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+
+          <div class="action-buttons">
+
+            <!-- View -->
+
+            <button
+              mat-icon-button
+              class="view-btn"
+              (click)="viewSupplier(element)">
+
+              <i class="fa fa-eye"></i>
+
+            </button>
+
+            <!-- Edit -->
+
+            <button
+              mat-icon-button
+              class="edit-btn"
+              (click)="editSupplier(element)">
+
+              <i class="fa fa-pencil"></i>
+
+            </button>
+
+            <!-- Delete -->
+
+            <button
+              mat-icon-button
+              class="delete-btn"
+              (click)="deleteSupplier(element)">
+
+              <i class="fa fa-trash"></i>
+
+            </button>
+
+          </div>
+
+        </td>
+
+      </ng-container>
+
+      <!-- Header -->
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns">
+      </tr>
+
+      <!-- Rows -->
+
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+
+      <!-- No Data -->
+
+      <tr
+        class="mat-row"
+        *matNoDataRow>
+
+        <td
+          class="mat-cell text-center"
+          colspan="8">
+
+          No Suppliers Found
+
+        </td>
+
+      </tr>
+
+    </table>
+
+    <mat-paginator
+      [pageSize]="5"
+      [pageSizeOptions]="[5,10,20,50]"
+      showFirstLastButtons>
+
+    </mat-paginator>
+
+  </div>
+
+</div>

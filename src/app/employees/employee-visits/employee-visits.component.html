@@ -1,0 +1,318 @@
+<div class="visits-page">
+
+    <!-- =====================================
+         CLOSE BUTTON
+    ====================================== -->
+
+    <button
+        type="button"
+        class="close-btn"
+        (click)="goBack()">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <!-- =====================================
+         PAGE HEADER
+    ====================================== -->
+
+    <div class="page-header">
+
+        <div class="header-left">
+
+            <div>
+
+                <h2>
+                    Employee Visits
+                </h2>
+
+                <p *ngIf="employee">
+
+                    {{ employee?.fullName }}
+
+                    -
+
+                    {{ employee?.employeeCode }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOTAL VISITS -->
+
+        <div class="visit-count">
+
+            <span>
+                Total Visits
+            </span>
+
+            <strong>
+                {{ visits.length }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         LOADING
+    ====================================== -->
+
+    <div
+        class="loading-box"
+        *ngIf="isLoading">
+
+        <div class="spinner-border"></div>
+
+        <p>
+            Loading visits...
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         VISITS TABLE
+    ====================================== -->
+
+    <div
+        class="visits-table-wrapper"
+        *ngIf="
+            !isLoading &&
+            visits.length > 0
+        ">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+
+                    <th>
+                        Visit Date
+                    </th>
+
+                    <th>
+                        Party
+                    </th>
+
+                    <th>
+                        Party Type
+                    </th>
+
+                    <th>
+                        Start Time
+                    </th>
+
+                    <th>
+                        End Time
+                    </th>
+
+                    <th>
+                        Duration
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr
+                    *ngFor="
+                        let visit
+                        of visits;
+                        let i = index
+                    ">
+
+                    <!-- NUMBER -->
+
+                    <td>
+
+                        {{ i + 1 }}
+
+                    </td>
+
+
+                    <!-- DATE -->
+
+                    <td>
+
+                        {{
+                            visit.visitDate
+                            ? (
+                                visit.visitDate
+                                | date:'dd MMM yyyy'
+                            )
+                            : '-'
+                        }}
+
+                    </td>
+
+
+                    <!-- PARTY -->
+
+                    <td>
+
+                        <strong>
+
+                            {{
+                                visit.party?.partyName
+                                ||
+                                visit.party?.name
+                                ||
+                                visit.partyName
+                                ||
+                                '-'
+                            }}
+
+                        </strong>
+
+                    </td>
+
+
+                    <!-- PARTY TYPE -->
+
+                    <td>
+
+                        <span class="party-type">
+
+                            {{
+                                visit.partyType
+                                || '-'
+                            }}
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- START -->
+
+                    <td>
+
+                        {{
+                            visit.startTime
+                            ? (
+                                visit.startTime
+                                | date:'hh:mm a'
+                            )
+                            : '-'
+                        }}
+
+                    </td>
+
+
+                    <!-- END -->
+
+                    <td>
+
+                        {{
+                            visit.endTime
+                            ? (
+                                visit.endTime
+                                | date:'hh:mm a'
+                            )
+                            : '-'
+                        }}
+
+                    </td>
+
+
+                    <!-- DURATION -->
+
+                    <td>
+
+                        {{
+                            visit.durationMinutes
+                            || 0
+                        }}
+
+                        min
+
+                    </td>
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        <span
+                            class="visit-status"
+                            [ngClass]="{
+
+                                'completed':
+                                visit.status
+                                === 'Completed',
+
+                                'started':
+                                visit.status
+                                === 'Started',
+
+                                'pending':
+                                visit.status
+                                === 'Pending',
+
+                                'cancelled':
+                                visit.status
+                                === 'Cancelled'
+
+                            }">
+
+                            {{
+                                visit.status
+                                || '-'
+                            }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================
+         NO DATA
+    ====================================== -->
+
+    <div
+        class="no-data"
+        *ngIf="
+            !isLoading &&
+            visits.length === 0
+        ">
+
+        <i class="fa-regular fa-calendar-xmark"></i>
+
+        <h4>
+            No Visits Found
+        </h4>
+
+        <p>
+            This employee has no visit records.
+        </p>
+
+    </div>
+
+</div>

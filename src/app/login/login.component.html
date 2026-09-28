@@ -1,0 +1,255 @@
+<!-- login.component.html -->
+
+<div class="login-page">
+
+  <div class="container">
+    <div class="row g-0">
+
+      <!-- ==========================================
+           LEFT BRANDING SECTION
+      =========================================== -->
+
+      <div class="col-lg-5 col-xl-5 branding-section">
+
+        <div class="branding-overlay"></div>
+
+        <div class="branding-content">
+
+          <div class="logo-card">
+            <img src="../../assets/Images/alo.png" alt="TinSpices Logo">
+          </div>
+
+          <p class="brand-subtitle">
+            ADMIN MANAGEMENT SYSTEM
+          </p>
+
+          <div class="divider"></div>
+
+          <p class="description">
+            Smart Sales Tracking, Live GPS Monitoring,
+            Retailer Management, Order Processing &
+            Delivery Automation Platform.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==========================================
+           RIGHT LOGIN SECTION
+      =========================================== -->
+
+      <div class="col-12 col-lg-7 col-xl-7 login-section">
+
+        <div class="login-wrapper">
+
+
+          <!-- ======================================
+               MOBILE LOGO
+          ======================================= -->
+
+          <div class="mobile-logo">
+
+            <img src="../../assets/Images/alo.png" alt="TinSpices Logo">
+
+            <h1>
+              ALO SPICES
+            </h1>
+
+          </div>
+
+
+          <!-- ======================================
+               WELCOME
+          ======================================= -->
+
+          <div class="welcome-content text-center">
+
+            <h2>
+              Welcome Back
+            </h2>
+
+            <span>
+              Login to manage orders, sales teams,
+              payments, live tracking & deliveries.
+            </span>
+
+          </div>
+
+
+          <!-- ======================================
+               LOGIN CARD
+          ======================================= -->
+
+          <div class="login-card">
+
+
+            <!-- Login Role -->
+
+            <div class="form-group">
+
+              <label>
+                Login As
+              </label>
+
+              <div class="input-group">
+
+                <select [(ngModel)]="loginData.role" class="form-control-custom">
+
+                  <option value="" disabled>
+                    Select Role
+                  </option>
+
+                  <option value="Admin">
+                    Admin
+                  </option>
+
+                  <!-- <option value="SubAdmin">
+                    Sub Admin
+                  </option> -->
+
+                  <option value="WarehouseManager">
+                    Warehouse Manager
+                  </option>
+
+                  <option value="Distributor">
+                    Distributor
+                  </option>
+
+                </select>
+
+                <i class="ri-user-settings-line"></i>
+
+              </div>
+
+            </div>
+
+
+            <!-- Mobile -->
+
+            <div class="form-group">
+
+              <label>
+                Mobile Number
+              </label>
+
+              <div class="input-group">
+
+                <input type="tel" [(ngModel)]="loginData.mobile" placeholder="Enter your mobile number" maxlength="10"
+                  (input)="validateMobileInput($event)" class="form-control-custom">
+
+                <i class="ri-smartphone-line"></i>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>Password</label>
+
+              <div class="input-group password-input-group">
+
+                <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="loginData.password"
+                  placeholder="Enter your password" class="form-control-custom">
+
+                <button type="button" class="password-toggle" (click)="togglePassword()"
+                  [attr.title]="showPassword ? 'Hide Password' : 'Show Password'">
+
+                  <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'">
+                  </i>
+
+                </button>
+
+              </div>
+
+            </div>
+            <!-- Options -->
+
+            <div class="row align-items-center options-row">
+
+              <div class="col-6">
+
+                <label class="remember-me">
+
+                  <input type="checkbox" [(ngModel)]="rememberMe">
+
+                  <span>
+                    Remember Me
+                  </span>
+
+                </label>
+
+              </div>
+
+              <div class="col-6 text-end">
+
+                <button type="button" class="forgot-btn">
+                  Forgot Password?
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- Login Button -->
+
+            <button type="button" class="login-btn" [disabled]="isLoading" (click)="onSubmit()">
+
+              <span *ngIf="!isLoading">
+                Login To Dashboard
+              </span>
+
+              <span *ngIf="isLoading">
+
+                <i class="fa fa-spinner fa-spin me-2"></i>
+
+                Logging In...
+
+              </span>
+
+            </button>
+
+
+            <!-- Divider -->
+
+            <div class="card-divider">
+
+              <div class="line"></div>
+
+              <span>
+                Alo Spices FMCG
+              </span>
+
+              <div class="line"></div>
+
+            </div>
+
+
+            <!-- Footer -->
+
+            <!-- <p class="login-footer">
+              Secure Distribution Management Platform
+              with Real-Time Sales Monitoring.
+            </p> -->
+
+          </div>
+
+
+          <!-- Copyright -->
+
+          <p class="copyright">
+            © 2025 AloSpices. All Rights Reserved.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

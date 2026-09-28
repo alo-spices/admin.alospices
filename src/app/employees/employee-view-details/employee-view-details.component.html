@@ -1,0 +1,507 @@
+<div class="attendance-dialog">
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <div class="dialog-header">
+
+        <div>
+
+            <h2>
+                Employee Attendance
+            </h2>
+
+            <p>
+                Complete attendance details
+            </p>
+
+        </div>
+
+        <button type="button" class="close-btn" (click)="goBack()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================
+         EMPLOYEE INFO
+    ====================================== -->
+    <!-- =====================================
+     EMPLOYEE INFO
+====================================== -->
+
+    <div class="employee-card">
+
+        <!-- LEFT SIDE -->
+        <div class="employee-left">
+
+            <!-- Profile Image -->
+            <div class="employee-avatar">
+
+                <img *ngIf="employee?.profileImage" [src]="employee.profileImage"
+                    [alt]="employee?.fullName || 'Employee'" class="employee-profile-image">
+
+                <!-- Fallback Initial -->
+                <span *ngIf="!employee?.profileImage">
+                    {{ employee?.firstName?.charAt(0) }}
+                </span>
+
+            </div>
+
+
+            <!-- Employee Name + Code -->
+            <div class="employee-info">
+
+                <h3>
+                    {{ employee?.fullName }}
+                </h3>
+
+                <span>
+                    {{ employee?.employeeCode }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="employee-right">
+
+            <div class="employee-detail">
+
+                <!-- <label>Role</label> -->
+
+                <span class="role-badge">
+                    {{ employee?.role }}
+                </span>
+                <span class="mobile-text">
+                    {{ employee?.mobile }}
+                </span>
+
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+     SUMMARY
+====================================== -->
+
+    <div class="summary-grid" *ngIf="summary">
+
+        <!-- =====================================
+         TOTAL WORKING DAYS
+    ====================================== -->
+
+        <div class="summary-box" (click)="viewEmployeeAttendance()">
+
+            <span>
+                Total Working Days
+            </span>
+
+            <strong>
+                {{ summary?.totalWorkingDays || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- =====================================
+         PRESENT
+    ====================================== -->
+
+        <div class="summary-box">
+
+            <span>
+                Present
+            </span>
+
+            <strong>
+                {{ summary?.present || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- =====================================
+         ABSENT
+    ====================================== -->
+
+        <div class="summary-box">
+
+            <span>
+                Absent
+            </span>
+
+            <strong>
+                {{ summary?.absent || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- =====================================
+         HALF DAYS
+    ====================================== -->
+
+        <div class="summary-box">
+
+            <span>
+                Half Days
+            </span>
+
+            <strong>
+                {{ summary?.halfDay || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- =====================================
+         TOTAL ORDERS
+    ====================================== -->
+
+        <!-- Total Orders -->
+        <div class="summary-box clickable-box" (click)="viewEmployeeOrders()">
+
+            <span>
+                Total Orders
+            </span>
+
+            <strong>
+                {{ summary?.totalOrders || 0 }}
+            </strong>
+
+            <small>
+                Click to view orders
+            </small>
+
+        </div>
+
+
+        <!-- =====================================
+         TOTAL VISITS
+    ====================================== -->
+
+        <!-- Total Visits -->
+        <div class="summary-box clickable-box" (click)="viewEmployeeVisits()">
+
+            <span>
+                Total Visits
+            </span>
+
+            <strong>
+                {{ summary?.totalVisits || 0 }}
+            </strong>
+
+            <small>
+                Click to view visits
+            </small>
+
+        </div>
+
+
+        <!-- =====================================
+         TOTAL COLLECTIONS
+    ====================================== -->
+
+        <div class="summary-box">
+
+            <span>
+                Total Collections
+            </span>
+
+            <strong>
+                ₹{{ summary?.totalCollections || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- =====================================
+         TOTAL WORKING MINUTES
+    ====================================== -->
+
+        <div class="summary-box">
+
+            <span>
+                Working Time
+            </span>
+
+            <strong>
+                {{ summary?.totalWorkingMinutes || 0 }}
+                min
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         LOADING
+    ====================================== -->
+
+    <div class="loading-box" *ngIf="isLoading">
+
+        <div class="spinner-border"></div>
+
+        <p>
+            Loading attendance...
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         ATTENDANCE TABLE
+    ====================================== -->
+
+    <div class="attendance-table-wrapper" *ngIf="
+            !isLoading &&
+            attendanceList.length > 0
+        ">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Check In
+                    </th>
+                    <th>
+                        Check In Selfie
+                    </th>
+
+                    <th>
+                        Check Out
+                    </th>
+                    <th>
+                        Check Out Selfie
+                    </th>
+
+
+                    <th>
+                        Working
+                    </th>
+
+                    <th>
+                        Visits
+                    </th>
+
+                    <th>
+                        Orders
+                    </th>
+
+                    <th>
+                        Attendance
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr *ngFor="
+                        let attendance
+                        of attendanceList
+                    ">
+
+                    <td>
+                        {{
+                        attendance.attendanceDate
+                        | date:'dd MMM yyyy'
+                        }}
+                    </td>
+
+
+                    <td>
+
+                        {{
+                        attendance.checkInTime
+                        ? (
+                        attendance.checkInTime
+                        | date:'hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </td>
+                    <td>
+
+                        <img *ngIf="attendance.checkInSelfie" [src]="attendance.checkInSelfie" class="attendance-selfie"
+                            alt="Check In Selfie">
+
+                        <span *ngIf="!attendance.checkInSelfie">
+
+                            -
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        {{
+                        attendance.checkOutTime
+                        ? (
+                        attendance.checkOutTime
+                        | date:'hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </td>
+                    <td>
+
+                        <img *ngIf="attendance.checkOutSelfie" [src]="attendance.checkOutSelfie"
+                            class="attendance-selfie" alt="Check Out Selfie">
+
+                        <span *ngIf="!attendance.checkOutSelfie">
+
+                            -
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        {{
+                        attendance.totalWorkingMinutes
+                        || 0
+                        }}
+                        min
+
+                    </td>
+
+
+                    <td>
+                        {{ attendance.totalVisits || 0 }}
+                    </td>
+
+
+                    <td>
+                        {{ attendance.totalOrders || 0 }}
+                    </td>
+
+
+                    <td>
+
+                        <span class="attendance-badge" [ngClass]="{
+
+                                'present':
+                                attendance.attendanceStatus
+                                === 'Present',
+
+                                'absent':
+                                attendance.attendanceStatus
+                                === 'Absent',
+
+                                'half-day':
+                                attendance.attendanceStatus
+                                === 'Half Day'
+
+                            }">
+
+                            {{
+                            attendance.attendanceStatus
+                            }}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="status-badge" [ngClass]="{
+
+                                'checked-in':
+                                attendance.status
+                                === 'CheckedIn',
+
+                                'checked-out':
+                                attendance.status
+                                === 'CheckedOut'
+
+                            }">
+
+                            {{
+                            attendance.status
+                            }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================
+         NO DATA
+    ====================================== -->
+
+    <div class="no-data" *ngIf="
+            !isLoading &&
+            attendanceList.length === 0
+        ">
+
+        <i class="fa-regular fa-calendar-xmark"></i>
+
+        <h4>
+            No Attendance Found
+        </h4>
+
+        <p>
+            This employee has no attendance records.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <div class="dialog-footer">
+
+        <button type="button" class="close-action" (click)="goBack()">
+
+            CLOSE
+
+        </button>
+
+    </div>
+
+</div>

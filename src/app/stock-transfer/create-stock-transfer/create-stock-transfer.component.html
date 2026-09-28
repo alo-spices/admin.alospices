@@ -1,0 +1,521 @@
+<div class="stock-transfer-page">
+
+    <!-- ==========================================
+       PAGE HEADER
+  =========================================== -->
+    <div class="top-row">
+        <div class="title-section">
+
+            <h2>
+                <i class="fas fa-exchange-alt me-2"></i>
+                Create Stock Transfer
+            </h2>
+
+            <p>
+                Transfer stock from warehouse to distributor,
+                retailer or wholesaler
+            </p>
+
+        </div>
+
+        <div class="button-section">
+            <button type="button" class="btn btn-secondary me-2" routerLink="/admin/all-stock-transfer">
+
+                <i class="fas fa-arrow-left me-2"></i>
+
+                Back
+
+            </button>
+        </div>
+    </div>
+
+
+
+    <!-- ==========================================
+       FORM
+  =========================================== -->
+
+    <form [formGroup]="transferForm" (ngSubmit)="createStockTransfer()">
+
+        <!-- ========================================
+         TRANSFER DETAILS
+    ========================================= -->
+
+        <div class="glass-card">
+
+            <div class="card-title">
+
+                <i class="fas fa-file-invoice"></i>
+
+                <span>
+                    Transfer Details
+                </span>
+
+            </div>
+
+
+            <div class="row g-3">
+
+
+                <!-- Transfer Number -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <label>
+                        Transfer Number
+                        <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="transferNo" placeholder="Transfer number"
+                        readonly>
+
+                    <small class="text-danger" *ngIf="
+              transferForm.get('transferNo')?.touched &&
+              transferForm.get('transferNo')?.invalid
+            ">
+                        Transfer Number is required
+                    </small>
+
+                </div>
+
+
+
+                <!-- Transfer Date -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <label>
+                        Transfer Date
+                        <span class="required">*</span>
+                    </label>
+
+                    <input type="date" class="form-control" formControlName="transferDate">
+
+                </div>
+
+
+
+                <!-- Source Warehouse -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <label>
+                        Source Warehouse
+                        <span class="required">*</span>
+                    </label>
+
+                    <select class="form-select" formControlName="sourceWarehouse">
+
+                        <option value="">
+                            Select Source Warehouse
+                        </option>
+
+                        <option *ngFor="let warehouse of warehouseList" [value]="warehouse._id">
+
+                            {{ warehouse.warehouseCode }}
+                            -
+                            {{ warehouse.warehouseName }}
+
+                        </option>
+
+                    </select>
+
+
+                    <small class="text-danger" *ngIf="
+              transferForm.get('sourceWarehouse')?.touched &&
+              transferForm.get('sourceWarehouse')?.invalid
+            ">
+                        Source Warehouse is required
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+         DESTINATION
+    =========================================== -->
+
+        <div class="glass-card">
+
+            <div class="card-title">
+
+                <i class="fas fa-map-marker-alt"></i>
+
+                <span>
+                    Destination
+                </span>
+
+            </div>
+
+
+            <div class="row g-3">
+
+
+                <!-- Destination Type -->
+
+                <div class="col-lg-4 col-md-6">
+
+                    <label>
+                        Destination Type
+                        <span class="required">*</span>
+                    </label>
+
+                    <select class="form-select" formControlName="destinationType" (change)="onDestinationTypeChange()">
+
+                        <option value="">
+                            Select Destination Type
+                        </option>
+
+                        <option value="Distributor">
+                            Distributor
+                        </option>
+
+                        <option value="Retailer">
+                            Retailer
+                        </option>
+
+                        <option value="Wholesaler">
+                            Wholesaler
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Destination -->
+
+                <div class="col-lg-8 col-md-6">
+
+                    <label>
+                        Destination
+                        <span class="required">*</span>
+                    </label>
+
+                    <select class="form-select" formControlName="destination">
+
+                        <option value="">
+                            Select Destination
+                        </option>
+
+                        <option *ngFor="let destination of destinationList" [value]="destination._id">
+
+                            {{ getDestinationName(destination) }}
+
+                        </option>
+
+                    </select>
+
+
+                    <small class="text-danger" *ngIf="
+              transferForm.get('destination')?.touched &&
+              transferForm.get('destination')?.invalid
+            ">
+                        Destination is required
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+         STOCK ITEMS
+    =========================================== -->
+
+        <div class="glass-card">
+
+            <div class="card-title d-flex justify-content-between">
+
+                <div>
+
+                    <i class="fas fa-boxes"></i>
+
+                    <span>
+                        Stock Items
+                    </span>
+
+                </div>
+
+
+                <button type="button" class="addvarients" (click)="addItem()">
+
+                    <i class="fas fa-plus me-1"></i>
+
+                    Add Item
+
+                </button>
+
+            </div>
+
+
+
+            <!-- ITEMS -->
+
+            <div formArrayName="items" class="items-container">
+
+
+                <div class="item-row" *ngFor="
+            let item of items.controls;
+            let i = index
+          " [formGroupName]="i">
+
+
+                    <!-- Item Header -->
+
+                    <div class="item-header">
+
+                        <span>
+                            Item {{ i + 1 }}
+                        </span>
+
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn btn-danger mt-2" *ngIf="items.length > 1"
+                                (click)="removeItem(i)">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row g-3">
+
+
+                        <!-- Product -->
+
+                        <div class="col-lg-4 col-md-6">
+
+                            <label>
+                                Product
+                                <span class="required">*</span>
+                            </label>
+
+                            <select class="form-select" formControlName="product" (change)="onProductChange(i)">
+
+                                <option value="">
+                                    Select Product
+                                </option>
+
+                                <option *ngFor="let product of productList" [value]="product._id">
+
+                                    {{ product.productCode }}
+                                    -
+                                    {{ product.productName }}
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- Variant -->
+
+                        <div class="col-lg-4 col-md-6">
+
+                            <label>
+                                Variant
+                                <span class="required">*</span>
+                            </label>
+
+                            <select class="form-select" formControlName="variantId" (change)="onVariantChange(i)">
+
+                                <option value="">
+                                    Select Variant
+                                </option>
+
+                                <option *ngFor="
+                    let variant
+                    of getVariants(i)
+                  " [value]="variant._id">
+
+                                    {{ variant.packSize }}
+                                    -
+                                    {{ variant.skuCode }}
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- SKU -->
+
+                        <div class="col-lg-4 col-md-6">
+
+                            <label>
+                                SKU Code
+                            </label>
+
+                            <input type="text" class="form-control" formControlName="skuCode" readonly
+                                placeholder="SKU Code">
+
+                        </div>
+
+
+
+                        <!-- Batch Number -->
+
+                        <div class="col-lg-4 col-md-6">
+
+                            <label>
+                                Batch Number
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="text" class="form-control" formControlName="batchNo"
+                                placeholder="Enter batch number">
+
+                        </div>
+
+
+
+                        <!-- Quantity -->
+
+                        <div class="col-lg-4 col-md-6">
+
+                            <label>
+                                Quantity
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number" min="1" class="form-control" formControlName="quantity"
+                                placeholder="Enter quantity">
+
+                        </div>
+
+
+
+                        <!-- Pack Size -->
+
+                        <div class="col-lg-4 col-md-6">
+
+                            <label>
+                                Pack Size
+                            </label>
+
+                            <input type="text" class="form-control" [value]="getSelectedVariant(i)?.packSize || ''"
+                                readonly>
+
+                        </div>
+
+
+
+                        <!-- Weight -->
+
+                        <div class="col-lg-4 col-md-6">
+
+                            <label>
+                                Weight / Unit
+                            </label>
+
+                            <input type="text" class="form-control" [value]="
+                  getSelectedVariant(i)?.weightInGrams || 0
+                " readonly>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+         REMARKS
+    =========================================== -->
+
+        <div class="glass-card">
+
+            <div class="card-title">
+
+                <i class="fas fa-comment-alt"></i>
+
+                <span>
+                    Remarks
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <label>
+                        Remarks
+                    </label>
+
+                    <textarea class="form-control" rows="4" formControlName="remarks"
+                        placeholder="Enter remarks..."></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+         ACTION BUTTONS
+    =========================================== -->
+
+        <!-- Buttons -->
+        <div class="text-end mt-4">
+
+            <button type="button" class="btn btn-secondary me-2" routerLink="/admin/all-stock-transfer">
+
+                <i class="fas fa-times me-2"></i>
+
+                Cancel
+
+            </button>
+
+
+            <button type="submit" class="btn btn-success" [disabled]="isLoading">
+
+                <span *ngIf="!isLoading">
+
+                    <i class="fas fa-exchange-alt me-2"></i>
+
+                    Create Stock Transfer
+
+                </span>
+
+
+                <span *ngIf="isLoading">
+
+                    <i class="fas fa-spinner fa-spin me-2"></i>
+
+                    Creating...
+
+                </span>
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>

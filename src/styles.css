@@ -1,0 +1,235 @@
+/* ========== */
+:root {
+
+    --primary-color: #A63D22;
+    --primary-dark: #8F2E24;
+    --primary-light: #8C2E00;
+
+    /* Secondary */
+    --secondary-color: #D8C49A;
+    --secondary-dark: #D8C2B1;
+
+    /* Backgrounds */
+    --bg-color: #F8F5F2;
+    --card-bg: #FFFFFF;
+    --sidebar-bg: #1E1A17;
+    /* Text Colors */
+    --text-primary: #2B2B2B;
+    --text-secondary: #6B6B6B;
+    --text-light: #F5F5F5;
+
+    /* Borders */
+    --border-color: #E4D8CF;
+
+    /* Status Colors */
+    --success-color: #2E7D32;
+    --warning-color: #ED6C02;
+    --danger-color: #D32F2F;
+    --info-color: gray;
+
+    /* Hover Effects */
+    --hover-color: #8F341C;
+
+    /* Shadows */
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+
+}
+
+/* google-fonts */
+body,
+button,
+input,
+textarea,
+select,
+span,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+li,
+td,
+th {
+
+    /* font-family: "SUSE Mono", sans-serif !important; */
+
+    /* font-family: "Lexend Mega", sans-serif !important; */
+    font-family: "Prosto One", sans-serif !important;
+    /* font-family: "Ysabeau Office", sans-serif !important; */
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ================================
+   Save Button
+================================ */
+
+.btn-success {
+
+    background: var(--primary-dark);
+
+    border: none;
+
+    color: #fff;
+
+    padding: 12px 26px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    letter-spacing: .5px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    transition: all .3s ease;
+
+    box-shadow: 0 6px 15px rgba(126, 45, 23, 0.25);
+
+}
+
+.btn-success:hover {
+
+    background: var(--primary-light);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(196, 90, 58, 0.35);
+
+}
+
+.btn-success:active {
+
+    transform: scale(.98);
+
+}
+
+.btn-success:focus {
+
+    outline: none;
+
+    box-shadow: 0 0 0 4px rgba(196, 90, 58, .25);
+
+}
+
+.btn-success i {
+
+    font-size: 16px;
+
+}
+
+.status-badge {
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+.active {
+
+    background: #e8f7ec;
+
+    color: #198754;
+
+}
+
+.inactive {
+
+    background: #fdeaea;
+
+    color: #dc3545;
+
+}
+
+/* ===========================
+   Actions
+=========================== */
+
+.action-buttons {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+.view-btn {
+
+    color: var(--info-color);
+
+}
+
+.edit-btn {
+
+    color: #f59e0b;
+
+}
+
+.delete-btn {
+
+    color: #dc2626;
+
+}
+
+.action-buttons button {
+
+    transition: .3s;
+
+}
+
+.action-buttons button:hover {
+
+    transform: scale(1.1);
+
+}
+
+.common-popup-dialog {
+
+    padding: 0 !important;
+
+}
+
+
+.common-popup-dialog .mat-mdc-dialog-container {
+
+    padding: 0 !important;
+
+}
+
+
+.common-popup-dialog .mdc-dialog__surface {
+
+    padding: 0 !important;
+
+    background: transparent !important;
+
+    box-shadow: none !important;
+
+    border-radius: 10px !important;
+
+    overflow: visible !important;
+
+}

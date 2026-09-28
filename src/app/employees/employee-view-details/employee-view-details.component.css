@@ -1,0 +1,971 @@
+/* ==========================================
+   ROYAL ATTENDANCE DIALOG
+========================================== */
+
+
+.attendance-dialog {
+    width: 100%;
+    overflow: hidden;
+
+    color: #252525;
+    font-family:
+        Inter,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(145deg, #ffffff 0%, #fffdfb 100%);
+
+    border: 1px solid rgba(154, 112, 58, 0.22);
+    border-radius: 18px;
+
+    box-shadow:
+        0 24px 70px rgba(45, 21, 8, 0.18),
+        0 4px 18px rgba(92, 42, 12, 0.08);
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.dialog-header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 92px;
+    padding: 22px 28px;
+
+    background:
+        linear-gradient(120deg,
+            #350000 0%,
+            #650b0b 48%,
+            #891c16 100%);
+
+    border-bottom: 1px solid rgba(215, 169, 86, 0.5);
+}
+
+.dialog-header::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+    opacity: 0.25;
+
+    background-image:
+        radial-gradient(circle at 85% 20%,
+            rgba(255, 213, 126, 0.75) 0 1px,
+            transparent 1.5px),
+        radial-gradient(circle at 70% 75%,
+            rgba(255, 213, 126, 0.45) 0 1px,
+            transparent 1.5px);
+
+    background-size: 28px 28px, 35px 35px;
+}
+
+.dialog-header>div,
+.close-btn {
+    position: relative;
+    z-index: 1;
+}
+
+.dialog-header h2 {
+    margin: 0;
+
+    color: #fffaf0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.dialog-header p {
+    margin: 7px 0 0;
+
+    color: rgba(255, 239, 206, 0.78);
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
+
+/* ==========================================
+   CLOSE BUTTON
+========================================== */
+
+.close-btn {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 221, 143, 0.42);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffe4ac;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.close-btn:hover {
+    background: #f1c56e;
+    color: #4a0505;
+    transform: rotate(90deg);
+}
+
+.close-btn i {
+    font-size: 14px;
+}
+
+/* ==========================================
+   EMPLOYEE CARD
+========================================== */
+
+/* =====================================
+   EMPLOYEE CARD
+===================================== */
+
+.employee-card {
+
+    margin: 0 28px 22px;
+
+    padding: 22px 28px;
+
+    min-height: 120px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    background: linear-gradient(135deg,
+            #fffaf2,
+            #fffdf9);
+
+    border: 1px solid #eadbc5;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 18px rgba(139, 90, 32, 0.08);
+
+}
+
+
+/* =====================================
+   LEFT SIDE
+===================================== */
+
+.employee-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    min-width: 0;
+}
+
+
+/* =====================================
+   PROFILE
+===================================== */
+
+.employee-avatar {
+
+    width: 92px;
+
+    height: 92px;
+
+    min-width: 92px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f4e1c2;
+
+    border: 3px solid #f0d5a8;
+
+    box-shadow:
+        0 4px 12px rgba(139, 90, 32, 0.12);
+
+    color: #8b5a20;
+
+    font-size: 34px;
+
+    font-weight: 700;
+}
+
+
+.employee-profile-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =====================================
+   EMPLOYEE INFO
+===================================== */
+
+.employee-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.employee-info h3 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #32190b;
+}
+
+
+.employee-info>span {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #8b5a20;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =====================================
+   RIGHT SIDE
+===================================== */
+
+.employee-right {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 55px;
+
+    margin-left: auto;
+
+    padding-right: 10px;
+}
+
+
+/* =====================================
+   DETAIL
+===================================== */
+
+.employee-detail {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 8px;
+
+    min-width: 140px;
+}
+
+
+.employee-detail label {
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #9a7b5b;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* =====================================
+   ROLE
+===================================== */
+
+.role-badge {
+
+    padding: 8px 15px;
+
+    border-radius: 20px;
+
+    border: 1px solid #efc56f;
+
+    background: #fff8e8;
+
+    color: #8b5a20;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+.mobile-text {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #32190b;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 700px) {
+
+    .employee-card {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+    .employee-right {
+
+        margin-left: 0;
+
+        justify-content: space-between;
+
+        gap: 20px;
+
+        padding-top: 15px;
+
+        border-top: 1px solid #eadbc5;
+
+    }
+
+    .employee-detail {
+
+        align-items: flex-start;
+
+    }
+
+}
+
+/* ==========================================
+   ATTENDANCE SELFIE
+========================================== */
+
+.attendance-selfie {
+    width: 45px;
+    height: 45px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    border: 1px solid #eadbc5;
+
+    display: block;
+}
+
+
+/* ==========================================
+   PROFILE IMAGE
+========================================== */
+
+.employee-profile-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* ==========================================
+   EMPLOYEE DETAILS
+========================================== */
+
+.employee-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.employee-info h3 {
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    color: #3f2a16;
+}
+
+
+.employee-info span {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #8b5a20;
+}
+
+
+.employee-info small {
+    font-size: 12px;
+
+    color: #777;
+}
+
+.employee-info h3 {
+    margin: 0;
+
+    color: #3f1712;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.employee-info span {
+    margin-top: 4px;
+
+    color: #85715e;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+}
+
+.employee-info small {
+    width: max-content;
+    margin-top: 6px;
+    padding: 4px 9px;
+
+    color: #8a5a19;
+    background: #fff4d9;
+
+    border: 1px solid #f0d391;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* ==========================================
+   SUMMARY GRID
+========================================== */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+
+    padding: 0 24px 22px;
+}
+
+/* ==========================================
+   SUMMARY BOX
+========================================== */
+
+.summary-box {
+    position: relative;
+    min-height: 78px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 14px 16px 14px 19px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+    border: 1px solid #eee1ce;
+    border-radius: 12px;
+
+    box-shadow: 0 5px 15px rgba(80, 42, 12, 0.04);
+    transition: 0.25s ease;
+}
+
+.summary-box::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 4px;
+    background: linear-gradient(#8a1712, #d49a3a);
+}
+
+.summary-box:hover {
+    border-color: #d2a354;
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 22px rgba(113, 67, 23, 0.12);
+}
+
+.summary-box span {
+    margin-bottom: 7px;
+
+    color: #917c67;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.summary-box strong {
+    color: #56100c;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+/* ==========================================
+   ATTENDANCE TABLE
+========================================== */
+
+.attendance-table-wrapper {
+    width: auto;
+    height: 350px;
+    max-height: 350px;
+    overflow-y: auto;
+
+    margin: 0 24px;
+
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+
+    border: 1px solid #eadbc5;
+    border-radius: 13px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #8b5a20 #fff7e8;
+}
+
+
+.attendance-table-wrapper table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+
+/* ==========================================
+   TABLE HEADER
+========================================== */
+
+.attendance-table-wrapper thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    height: 48px;
+    padding: 0 14px;
+
+    color: var(--primary-color);
+    /* background:
+        linear-gradient(90deg, #4b0505, #70100d); */
+
+    border-bottom: 1px solid #b8812f;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.55px;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.attendance-table-wrapper thead th:first-child {
+    border-radius: 12px 0 0 0;
+}
+
+.attendance-table-wrapper thead th:last-child {
+    border-radius: 0 12px 0 0;
+}
+
+/* ==========================================
+   TABLE BODY
+========================================== */
+
+.attendance-table-wrapper tbody td {
+    height: 54px;
+    padding: 0 14px;
+
+    color: #63594e;
+    background: #ffffff;
+
+    border-bottom: 1px solid #f1e8da;
+
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.attendance-table-wrapper tbody tr {
+    transition: 0.2s ease;
+}
+
+.attendance-table-wrapper tbody tr:hover td {
+    background: #fff9ed;
+}
+
+.attendance-table-wrapper tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* First date column */
+.attendance-table-wrapper tbody td:first-child {
+    color: #55100c;
+    font-weight: 700;
+}
+
+/* ==========================================
+   ATTENDANCE BADGES
+========================================== */
+
+.attendance-badge,
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 72px;
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.attendance-badge::before,
+.status-badge::before {
+    content: "";
+
+    width: 5px;
+    height: 5px;
+    margin-right: 6px;
+
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* Attendance states */
+
+.attendance-badge.present {
+    color: #167346;
+    background: #e9f8ef;
+    border: 1px solid #bde8cb;
+}
+
+.attendance-badge.absent {
+    color: #c33e3e;
+    background: #fff0ef;
+    border: 1px solid #f2c7c5;
+}
+
+.attendance-badge.half-day {
+    color: #a66b00;
+    background: #fff6df;
+    border: 1px solid #efd795;
+}
+
+/* Check-in states */
+
+.status-badge.checked-in {
+    color: #2468ae;
+    background: #edf6ff;
+    border: 1px solid #c4def4;
+}
+
+.status-badge.checked-out {
+    color: #6748a8;
+    background: #f2efff;
+    border: 1px solid #d9cef7;
+}
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading-box {
+    min-height: 240px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-box .spinner-border {
+    width: 34px;
+    height: 34px;
+
+    border-width: 3px;
+    color: #811711;
+}
+
+.loading-box p {
+    margin: 12px 0 0;
+
+    color: #927f6c;
+    font-size: 12px;
+}
+
+/* ==========================================
+   NO DATA
+========================================== */
+
+.no-data {
+    min-height: 230px;
+    margin: 0 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: #fffdf9;
+    border: 1px dashed #d9c39d;
+    border-radius: 13px;
+}
+
+.no-data>i {
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8b5b20;
+    background: #fff3d7;
+
+    border: 1px solid #ebd092;
+    border-radius: 50%;
+
+    font-size: 21px;
+}
+
+.no-data h4 {
+    margin: 14px 0 5px;
+
+    color: #51130e;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.no-data p {
+    margin: 0;
+
+    color: #9a8978;
+    font-size: 11px;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 22px;
+    padding: 15px 24px;
+
+    background: #fffaf1;
+    border-top: 1px solid #eadbc5;
+}
+
+/* ==========================================
+   CLOSE ACTION
+========================================== */
+
+.close-action {
+    height: 38px;
+    padding: 0 23px;
+
+    border: 1px solid #7c1510;
+    border-radius: 7px;
+
+    background:
+        linear-gradient(135deg, #8c1b14, #4b0505);
+
+    color: #fff3d0;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+
+    box-shadow:
+        0 5px 12px rgba(91, 8, 5, 0.2);
+}
+
+.close-action:hover {
+    border-color: #bd852d;
+    background:
+        linear-gradient(135deg, #a72a1e, #650b08);
+
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 17px rgba(91, 8, 5, 0.28);
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.attendance-table-wrapper::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.attendance-table-wrapper::-webkit-scrollbar-track {
+    background: #fff8eb;
+    border-radius: 10px;
+}
+
+.attendance-table-wrapper::-webkit-scrollbar-thumb {
+    background: linear-gradient(#c58a35, #79110c);
+    border-radius: 10px;
+}
+
+.attendance-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #580805;
+}
+
+/* ==========================================
+   ANGULAR MATERIAL DIALOG
+========================================== */
+
+::ng-deep .mat-mdc-dialog-container {
+    padding: 0 !important;
+    border-radius: 18px !important;
+}
+
+::ng-deep .mat-mdc-dialog-surface {
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+    background: transparent !important;
+}
+
+/* Optional: dialog backdrop */
+::ng-deep .cdk-overlay-backdrop {
+    background: rgba(32, 5, 2, 0.62) !important;
+    backdrop-filter: blur(3px);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 850px) {
+    .summary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .dialog-header {
+        min-height: 82px;
+        padding: 18px 16px;
+    }
+
+    .dialog-header h2 {
+        font-size: 18px;
+    }
+
+    .employee-card {
+        margin: 16px 14px;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 0 14px 17px;
+    }
+
+    .attendance-table-wrapper {
+        margin: 0 14px;
+    }
+
+    .no-data {
+        margin: 0 14px;
+    }
+
+    .dialog-footer {
+        margin-top: 17px;
+        padding: 13px 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .employee-avatar {
+        width: 46px;
+        height: 46px;
+    }
+
+    .employee-info h3 {
+        font-size: 14px;
+    }
+
+    .dialog-header p {
+        font-size: 11px;
+    }
+}

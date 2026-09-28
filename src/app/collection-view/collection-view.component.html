@@ -1,0 +1,1508 @@
+<div class="collection-dialog">
+
+
+    <!-- ========================================= -->
+    <!-- HEADER -->
+    <!-- ========================================= -->
+
+    <div class="dialog-header">
+
+        <div>
+
+            <span class="dialog-label">
+                COLLECTION DETAILS
+            </span>
+
+            <h2>
+                {{ collection?.collectionNumber || '-' }}
+            </h2>
+
+        </div>
+
+
+        <button type="button" class="close-btn" (click)="close()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ========================================= -->
+    <!-- BODY -->
+    <!-- ========================================= -->
+
+    <div class="dialog-body">
+
+
+        <!-- ========================================= -->
+        <!-- COLLECTION INFORMATION -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-money"></i>
+
+                <h3>
+                    Collection Information
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Collection Number
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.collectionNumber
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Collection Date
+                    </span>
+
+                    <strong>
+                        {{
+                        formatDate(
+                        collection?.collectionDate
+                        )
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Paid Against
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.paidAgainst
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Party Type
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.partyType
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Payment Mode
+                    </span>
+
+                    <strong class="payment-badge" [ngClass]="
+                            getPaymentModeClass(
+                                collection?.paymentMode
+                            )
+                        ">
+
+                        {{
+                        collection?.paymentMode
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Collection Status
+                    </span>
+
+                    <strong class="status-badge" [ngClass]="
+                            getStatusClass(
+                                collection?.status
+                            )
+                        ">
+
+                        {{
+                        collection?.status
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- PARTY DETAILS -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-building"></i>
+
+                <h3>
+                    Customer / Party Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Party Code
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.partyCode
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Party Name
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.partyName
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Shop Name
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.shopName
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Owner Name
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.ownerName
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Mobile
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.mobile
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Alternate Mobile
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.alternateMobile
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        WhatsApp
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.whatsappNumber
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.email
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        GST Number
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.gstNumber
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        PAN Number
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.panNumber
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        City
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.city
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        District
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.district
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.state
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Pincode
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.pincode
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Credit Limit
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        collection?.party?.creditLimit
+                        || 0
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Credit Days
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.party?.creditDays
+                        || 0
+                        }}
+                        Days
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="address-box">
+
+                <span>
+                    Address
+                </span>
+
+                <p>
+                    {{
+                    collection?.party?.address
+                    || '-'
+                    }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- SALESMAN DETAILS -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-user"></i>
+
+                <h3>
+                    Salesman Details
+                </h3>
+
+            </div>
+
+
+            <div class="employee-header">
+
+
+                <div class="employee-avatar">
+
+                    <img *ngIf="
+                            collection?.employee
+                            ?.profileImage
+                        " [src]="
+                            collection.employee.profileImage
+                        " alt="Salesman">
+
+
+                    <i *ngIf="
+                            !collection?.employee
+                            ?.profileImage
+                        " class="fa fa-user">
+                    </i>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        {{
+                        collection?.employee
+                        ?.fullName || '-'
+                        }}
+                    </h4>
+
+                    <span>
+                        {{
+                        collection?.employee
+                        ?.role || '-'
+                        }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Employee Code
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.employeeCode || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Mobile
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.mobile || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Alternate Mobile
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.alternateMobile || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.email || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Gender
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.gender || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Date of Birth
+                    </span>
+
+                    <strong>
+                        {{
+                        formatDate(
+                        collection?.employee
+                        ?.dateOfBirth
+                        )
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Role
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.role || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Assignment Type
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.assignmentType || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.status || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        City
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.city || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.state || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Pincode
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.employee
+                        ?.pincode || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="address-box">
+
+                <span>
+                    Employee Address
+                </span>
+
+                <p>
+
+                    {{
+                    collection?.employee
+                    ?.addressLine1 || ''
+                    }}
+
+                    <br>
+
+                    {{
+                    collection?.employee
+                    ?.addressLine2 || ''
+                    }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- COLLECTION AMOUNT -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-inr"></i>
+
+                <h3>
+                    Collection Amount
+                </h3>
+
+            </div>
+
+
+            <div class="amount-grid">
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Collected Amount
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        collection?.collectedAmount
+                        || 0
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Previous Outstanding
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        collection?.previousOutstanding
+                        || 0
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item grand-total">
+
+                    <span>
+                        Remaining Outstanding
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        collection?.remainingOutstanding
+                        || 0
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Opening Balance
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        collection?.party
+                        ?.openingBalance || 0
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- PAYMENT DETAILS -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-credit-card"></i>
+
+                <h3>
+                    Payment Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Payment Mode
+                    </span>
+
+                    <strong class="payment-badge" [ngClass]="
+                            getPaymentModeClass(
+                                collection?.paymentMode
+                            )
+                        ">
+
+                        {{
+                        collection?.paymentMode
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Transaction Number
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.transactionNumber
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Paid Against
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.paidAgainst
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Payment Proof
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.paymentProof
+                        ? 'Available'
+                        : 'Not Available'
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Payment Proof Image -->
+
+            <div class="payment-proof" *ngIf="
+                    collection?.paymentProof
+                ">
+
+                <span>
+                    Payment Proof
+                </span>
+
+                <img [src]="collection.paymentProof" alt="Payment Proof">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- VISIT DETAILS -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-map-marker"></i>
+
+                <h3>
+                    Visit Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Visit Status
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.visitStatus || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Visit Outcome
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.visitOutcome || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Visit Start Time
+                    </span>
+
+                    <strong>
+                        {{
+                        formatDateTime(
+                        collection?.visit
+                        ?.visitStartTime
+                        )
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Visit End Time
+                    </span>
+
+                    <strong>
+                        {{
+                        formatDateTime(
+                        collection?.visit
+                        ?.visitEndTime
+                        )
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Visit Duration
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.visitDurationMinutes || 0
+                        }}
+                        Minutes
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Collection Done
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.collectionDone
+                        ? 'Yes'
+                        : 'No'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Collection Amount
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        collection?.visit
+                        ?.collectionAmount || 0
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Order Created
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.orderCreated
+                        ? 'Yes'
+                        : 'No'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Order Count
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.orderCount || 0
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Order Amount
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        collection?.visit
+                        ?.orderAmount || 0
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- VISIT LOCATION -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-location-arrow"></i>
+
+                <h3>
+                    Visit Location
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Start Latitude
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.startLatitude ?? '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Start Longitude
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.startLongitude ?? '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Start Address
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.startAddress || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        End Latitude
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.endLatitude ?? '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        End Longitude
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.endLongitude ?? '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        End Address
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.visit
+                        ?.endAddress || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- VERIFICATION -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-check-circle"></i>
+
+                <h3>
+                    Verification Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong class="status-badge" [ngClass]="
+                            getStatusClass(
+                                collection?.status
+                            )
+                        ">
+
+                        {{
+                        collection?.status
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Verified By
+                    </span>
+
+                    <strong>
+                        {{
+                        collection?.verifiedBy
+                        || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Verified At
+                    </span>
+
+                    <strong>
+                        {{
+                        formatDateTime(
+                        collection?.verifiedAt
+                        )
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- REMARKS -->
+        <!-- ========================================= -->
+
+        <div class="section-card" *ngIf="
+                collection?.remarks
+            ">
+
+            <div class="section-title">
+
+                <i class="fa fa-comment"></i>
+
+                <h3>
+                    Remarks
+                </h3>
+
+            </div>
+
+
+            <div class="remarks-box">
+
+                {{ collection.remarks }}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================= -->
+        <!-- SYSTEM INFORMATION -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-info-circle"></i>
+
+                <h3>
+                    System Information
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Collection ID
+                    </span>
+
+                    <strong class="id-text">
+                        {{
+                        collection?._id || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Order ID
+                    </span>
+
+                    <strong class="id-text">
+                        {{
+                        collection?.order || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Visit ID
+                    </span>
+
+                    <strong class="id-text">
+
+                        {{
+                        collection?.visit?._id
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Created At
+                    </span>
+
+                    <strong>
+                        {{
+                        formatDateTime(
+                        collection?.createdAt
+                        )
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Updated At
+                    </span>
+
+                    <strong>
+                        {{
+                        formatDateTime(
+                        collection?.updatedAt
+                        )
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================= -->
+
+    <div class="dialog-footer">
+
+        <button type="button" class="btn-back" (click)="close()">
+
+            <i class="fa fa-arrow-left"></i>
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

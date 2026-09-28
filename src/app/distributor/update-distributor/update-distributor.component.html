@@ -1,0 +1,701 @@
+<div class="category-container">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- ========================================== -->
+            <!-- Title -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>
+                        Create Distributor
+                    </h2>
+
+                    <p>
+                        Create a new distributor account and business details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Form Card -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="category-card">
+
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+
+                        <div class="category-grid">
+
+
+                            <!-- ====================================== -->
+                            <!-- FORM AREA -->
+                            <!-- ====================================== -->
+
+                            <div class="form-area">
+
+
+                                <!-- ================================= -->
+                                <!-- ROLE -->
+                                <!-- ================================= -->
+
+                                <div class="section-title full-width">
+
+                                    <h4>
+                                        User Role
+                                    </h4>
+
+                                </div>
+
+
+                                <div class="form-group full-width">
+
+                                    <label>
+                                        Role
+                                    </label>
+
+                                    <input type="text" value="Distributor" readonly disabled>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- BASIC INFORMATION -->
+                                <!-- ================================= -->
+
+                                <div class="section-title full-width">
+
+                                    <h4>
+                                        Basic Information
+                                    </h4>
+
+                                </div>
+
+
+                                <div class="row">
+
+
+                                    <!-- First Name -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+
+                                                First Name
+
+                                                <span class="required">
+                                                    *
+                                                </span>
+
+                                            </label>
+
+                                            <input type="text" formControlName="firstName"
+                                                placeholder="Enter first name">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Last Name -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Last Name
+                                            </label>
+
+                                            <input type="text" formControlName="lastName" placeholder="Enter last name">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Gender -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Gender
+                                            </label>
+
+                                            <select formControlName="gender">
+
+                                                <option value="Male">
+                                                    Male
+                                                </option>
+
+                                                <option value="Female">
+                                                    Female
+                                                </option>
+
+                                                <option value="Other">
+                                                    Other
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Date Of Birth -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Date of Birth
+                                            </label>
+
+                                            <input type="date" formControlName="dateOfBirth">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- DISTRIBUTOR DETAILS -->
+                                <!-- ================================= -->
+
+                                <div class="section-title full-width">
+
+                                    <h4>
+                                        Distributor Details
+                                    </h4>
+
+                                    <small>
+                                        Enter distributor business information
+                                    </small>
+
+                                </div>
+
+
+                                <div class="row">
+
+
+                                    <!-- Distributor Name -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+
+                                                Distributor Name
+
+                                                <span class="required">
+                                                    *
+                                                </span>
+
+                                            </label>
+
+                                            <input type="text" formControlName="distributorName"
+                                                placeholder="Enter distributor name">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Shop Name -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+
+                                                Shop Name
+
+                                                <span class="required">
+                                                    *
+                                                </span>
+
+                                            </label>
+
+                                            <input type="text" formControlName="shopName" placeholder="Enter shop name">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- GST -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                GST Number
+                                            </label>
+
+                                            <input type="text" formControlName="gstNumber"
+                                                placeholder="Enter GST number">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- PAN -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                PAN Number
+                                            </label>
+
+                                            <input type="text" formControlName="panNumber"
+                                                placeholder="Enter PAN number">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- CONTACT INFORMATION -->
+                                <!-- ================================= -->
+
+                                <div class="section-title full-width">
+
+                                    <h4>
+                                        Contact Information
+                                    </h4>
+
+                                </div>
+
+
+                                <div class="row">
+
+
+                                    <!-- Mobile -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+
+                                                Mobile Number
+
+                                                <span class="required">
+                                                    *
+                                                </span>
+
+                                            </label>
+
+                                            <input type="text" formControlName="mobile" maxlength="10"
+                                                placeholder="Enter mobile number">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Alternate Mobile -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Alternate Mobile
+                                            </label>
+
+                                            <input type="text" formControlName="alternateMobile" maxlength="10"
+                                                placeholder="Enter alternate mobile">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Email -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Email
+                                            </label>
+
+                                            <input type="email" formControlName="email"
+                                                placeholder="Enter email address">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Profile Image -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Profile Image
+                                            </label>
+
+                                            <input type="file" accept="image/*" (change)="onFileChange($event)">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- ADDRESS -->
+                                <!-- ================================= -->
+
+                                <div class="section-title full-width">
+
+                                    <h4>
+                                        Address Information
+                                    </h4>
+
+                                </div>
+
+
+                                <div class="row">
+
+
+                                    <!-- Address Line 1 -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Address Line 1
+                                            </label>
+
+                                            <input type="text" formControlName="addressLine1"
+                                                placeholder="Enter address">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Address Line 2 -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Address Line 2
+                                            </label>
+
+                                            <input type="text" formControlName="addressLine2"
+                                                placeholder="Enter additional address">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- City -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                City
+                                            </label>
+
+                                            <input type="text" formControlName="city" placeholder="Enter city">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- State -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                State
+                                            </label>
+
+                                            <input type="text" formControlName="state" placeholder="Enter state">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Pincode -->
+
+                                    <div class="col-6">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Pincode
+                                            </label>
+
+                                            <input type="text" formControlName="pincode" maxlength="6"
+                                                placeholder="Enter pincode">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- LOGIN INFORMATION -->
+                                <!-- ================================= -->
+
+                                <!-- <div class="section-title full-width">
+
+                                    <h4>
+                                        Login Information
+                                    </h4>
+
+                                </div> -->
+
+
+                                <!-- <div class="form-group full-width">
+
+                                    <label>
+
+                                        Password
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <div class="password-wrapper">
+
+                                        <input [type]="
+                                                showPassword
+                                                    ? 'text'
+                                                    : 'password'
+                                            " formControlName="password" placeholder="Enter password">
+
+
+                                        <i class="fa" [ngClass]="
+                                                showPassword
+                                                    ? 'fa-eye-slash'
+                                                    : 'fa-eye'
+                                            " (click)="togglePassword()">
+                                        </i>
+
+                                    </div>
+
+                                </div> -->
+
+
+                            </div>
+
+
+                            <!-- ====================================== -->
+                            <!-- PREVIEW AREA -->
+                            <!-- ====================================== -->
+
+                            <div class="preview-area">
+
+
+                                <!-- ================================= -->
+                                <!-- Profile Preview -->
+                                <!-- ================================= -->
+
+                                <div class="preview-box">
+
+
+                                    <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Preview">
+
+
+                                    <div *ngIf="!imagePreview" class="preview-empty">
+
+                                        <i class="fa fa-user"></i>
+
+                                        <p>
+                                            Profile Preview
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Fixed Role -->
+                                <!-- ================================= -->
+
+                                <div class="role-info">
+
+                                    <span>
+                                        Selected Role
+                                    </span>
+
+                                    <strong>
+                                        Distributor
+                                    </strong>
+
+                                    <small>
+                                        Distributor account will be created
+                                        with Distributor role automatically.
+                                    </small>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Distributor Preview -->
+                                <!-- ================================= -->
+
+                                <div class="role-info">
+
+                                    <span>
+                                        Distributor
+                                    </span>
+
+                                    <strong>
+
+                                        {{
+                                        userForm.get(
+                                        'distributorName'
+                                        )?.value
+                                        || 'Distributor Name'
+                                        }}
+
+                                    </strong>
+
+                                    <small>
+
+                                        {{
+                                        userForm.get(
+                                        'shopName'
+                                        )?.value
+                                        || 'Shop Name'
+                                        }}
+
+                                    </small>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Employee Code -->
+                                <!-- ================================= -->
+
+                                <div class="role-info">
+
+                                    <span>
+                                        Employee Code
+                                    </span>
+
+                                    <strong>
+                                        Auto Generated
+                                    </strong>
+
+                                    <small>
+                                        Employee code will be generated
+                                        automatically after registration.
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- ====================================== -->
+                        <!-- BUTTONS -->
+                        <!-- ====================================== -->
+
+                        <div class="button-group">
+
+
+                            <button type="submit" class="btn-create" [disabled]="isLoading">
+
+                                <span *ngIf="!isLoading">
+
+                                    <i class="fa fa-save me-2"></i>
+
+                                    Update Distributor
+
+                                </span>
+
+
+                                <span *ngIf="isLoading">
+
+                                    <i class="fa fa-spinner fa-spin me-2">
+                                    </i>
+
+                                    Updating...
+
+                                </span>
+
+                            </button>
+
+
+                            <button type="button" class="btn-back" (click)="goBack()">
+
+                                <i class="fa fa-arrow-left me-2"></i>
+
+                                Back
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

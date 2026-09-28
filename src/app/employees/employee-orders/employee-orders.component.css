@@ -1,0 +1,622 @@
+.orders-page {
+    position: relative;
+
+    width: 100%;
+    min-height: 100%;
+
+    padding: 24px;
+    box-sizing: border-box;
+
+    background: #fffaf3;
+}
+
+
+/* =====================================
+   CLOSE BUTTON - TOP RIGHT
+===================================== */
+
+.orders-page > .close-btn {
+
+    position: absolute;
+
+    top: -15px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #eadbc5;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #6f4a24;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    z-index: 20;
+    
+
+    transition: all 0.2s ease;
+}
+
+
+.orders-page > .close-btn:hover {
+
+    background: #8b5a20;
+
+    color: #ffffff;
+
+    border-color: #8b5a20;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(91, 61, 20, 0.18);
+}
+
+
+.orders-page > .close-btn:active {
+
+    transform: scale(0.95);
+
+}
+
+
+/* =====================================================
+   EMPLOYEE ORDERS PAGE
+===================================================== */
+
+.orders-page {
+    width: 100%;
+    min-height: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    background: #fffaf3;
+}
+
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 26px;
+    margin-bottom: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #fffdf9,
+        #fff6e8
+    );
+
+    border: 1px solid #eadbc5;
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 15px rgba(91, 61, 20, 0.07);
+}
+
+
+.page-header h2 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    color: #4a2f12;
+
+    letter-spacing: 0.2px;
+}
+
+
+.page-header p {
+    margin: 6px 0 0;
+
+    font-size: 13px;
+    color: #8a745d;
+}
+
+
+/* =====================================================
+   TOTAL ORDER COUNT
+===================================================== */
+
+.order-count {
+    min-width: 125px;
+
+    padding: 12px 18px;
+
+    text-align: center;
+
+    background: #fff;
+    border: 1px solid #eadbc5;
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 10px rgba(91, 61, 20, 0.06);
+}
+
+
+.order-count span {
+    display: block;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #8b735b;
+}
+
+
+.order-count strong {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    color: #8b5a20;
+}
+
+
+/* =====================================================
+   EMPLOYEE CARD
+===================================================== */
+
+.employee-card {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 18px 22px;
+    margin-bottom: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #eadbc5;
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 14px rgba(91, 61, 20, 0.06);
+}
+
+
+/* =====================================================
+   EMPLOYEE AVATAR
+===================================================== */
+
+.employee-avatar {
+    width: 62px;
+    height: 62px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #8b5a20,
+        #c89b5d
+    );
+
+    border: 3px solid #f3dfbd;
+
+    color: #ffffff;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    box-shadow:
+        0 4px 10px rgba(91, 61, 20, 0.18);
+}
+
+
+.employee-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.employee-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.employee-info h3 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #422b13;
+}
+
+
+.employee-info span {
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #8b5a20;
+}
+
+
+.employee-info small {
+    font-size: 12px;
+
+    color: #8a745d;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading-box {
+    min-height: 260px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    color: #8a745d;
+}
+
+
+.loading-box .spinner-border {
+    width: 34px;
+    height: 34px;
+
+    border-width: 3px;
+
+    color: #8b5a20;
+}
+
+
+.loading-box p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   TABLE WRAPPER
+===================================================== */
+
+.orders-table-wrapper {
+
+    width: 100%;
+
+    max-height: 500px;
+
+    overflow-x: auto;
+    overflow-y: auto;
+
+    border: 1px solid #eadbc5;
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 5px 18px rgba(91, 61, 20, 0.07);
+
+    scrollbar-width: thin;
+    scrollbar-color: #a77a43 #fff7e8;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.orders-table-wrapper table {
+
+    width: 100%;
+
+    min-width: 1250px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    background: #ffffff;
+}
+
+
+/* =====================================================
+   TABLE HEADER
+===================================================== */
+
+.orders-table-wrapper thead {
+    position: sticky;
+    top: 0;
+
+    z-index: 5;
+}
+
+
+.orders-table-wrapper th {
+
+    padding: 14px 16px;
+
+    text-align: left;
+
+    white-space: nowrap;
+
+    background: #fff4df;
+
+    color: #5a3a17;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    border-bottom: 1px solid #eadbc5;
+}
+
+
+/* =====================================================
+   TABLE BODY
+===================================================== */
+
+.orders-table-wrapper td {
+
+    padding: 14px 16px;
+
+    white-space: nowrap;
+
+    font-size: 13px;
+
+    color: #594a3b;
+
+    border-bottom: 1px solid #f0e5d5;
+
+    background: #ffffff;
+}
+
+
+.orders-table-wrapper tbody tr {
+    transition: background 0.2s ease;
+}
+
+
+.orders-table-wrapper tbody tr:hover td {
+    background: #fffaf2;
+}
+
+
+.orders-table-wrapper tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =====================================================
+   ORDER NUMBER
+===================================================== */
+
+.orders-table-wrapper td strong {
+    color: #704718;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+
+.order-status,
+.payment-status {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 82px;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    border: 1px solid transparent;
+}
+
+
+/* Order Status */
+
+.order-status {
+    background: #fff4df;
+    color: #8b5a20;
+
+    border-color: #efd8b4;
+}
+
+
+/* Payment Status */
+
+.payment-status {
+    background: #f3f8ee;
+    color: #55713b;
+
+    border-color: #d8e5c9;
+}
+
+
+/* =====================================================
+   NO DATA
+===================================================== */
+
+.no-data {
+
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #eadbc5;
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 18px rgba(91, 61, 20, 0.06);
+}
+
+
+.no-data i {
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    border-radius: 50%;
+
+    background: #fff4df;
+
+    color: #8b5a20;
+
+    font-size: 24px;
+}
+
+
+.no-data h3 {
+
+    margin: 0 0 6px;
+
+    color: #4a2f12;
+
+    font-size: 18px;
+}
+
+
+.no-data p {
+
+    margin: 0;
+
+    color: #8a745d;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.orders-table-wrapper::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+
+.orders-table-wrapper::-webkit-scrollbar-track {
+    background: #fff7e8;
+    border-radius: 10px;
+}
+
+
+.orders-table-wrapper::-webkit-scrollbar-thumb {
+    background: #a77a43;
+    border-radius: 10px;
+}
+
+
+.orders-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #8b5a20;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .orders-page {
+        padding: 14px;
+    }
+
+
+    .page-header {
+
+        padding: 18px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .order-count {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    .employee-card {
+        padding: 15px;
+    }
+
+
+    .employee-avatar {
+        width: 52px;
+        height: 52px;
+
+        font-size: 20px;
+    }
+
+
+    .employee-info h3 {
+        font-size: 16px;
+    }
+
+
+    .orders-table-wrapper {
+        max-height: 450px;
+    }
+
+}

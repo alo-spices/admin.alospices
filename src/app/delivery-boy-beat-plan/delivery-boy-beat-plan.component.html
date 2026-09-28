@@ -1,0 +1,197 @@
+<div class="category-container">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="title-section">
+                    <h2>Assign Delivery Boy</h2>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="category-card">
+
+                    <form [formGroup]="beatPlanForm" (ngSubmit)="onSubmit()">
+
+                        <div class="category-grid">
+
+                            <div class="form-area">
+
+                                <!-- Beat Plan -->
+
+                                <div class="form-group">
+                                    <label>Beat Plan</label>
+
+                                    <select formControlName="beatPlan" (change)="onBeatPlanChange()">
+
+                                        <option value="">
+                                            Select Beat Plan
+                                        </option>
+
+                                        <option *ngFor="let beat of beatPlanList" [value]="beat._id">
+
+                                            {{ beat.beatName }}
+                                            -
+                                            {{ beat.salesman?.fullName }}
+                                            -
+                                            {{ beat.day }}
+
+                                        </option>
+
+                                    </select>
+                                </div>
+
+
+                                <!-- Salesman -->
+
+                                <div class="form-group">
+                                    <label>Salesman</label>
+
+                                    <input type="text" [value]="selectedBeatPlan?.salesman?.fullName || ''"
+                                        placeholder="Salesman" readonly>
+                                </div>
+
+
+                                <!-- Beat Name -->
+
+                                <div class="form-group">
+                                    <label>Beat Name</label>
+
+                                    <input type="text" [value]="selectedBeatPlan?.beatName || ''"
+                                        placeholder="Beat Name" readonly>
+                                </div>
+
+
+                                <!-- Day -->
+
+                                <div class="form-group">
+                                    <label>Day</label>
+
+                                    <input type="text" [value]="selectedBeatPlan?.day || ''" placeholder="Day" readonly>
+                                </div>
+
+
+                                <!-- Route -->
+
+                                <div class="form-group">
+                                    <label>Route</label>
+
+                                    <input type="text" [value]="selectedBeatPlan?.route?.routeName || ''"
+                                        placeholder="Route" readonly>
+                                </div>
+
+
+                                <!-- Delivery Boy -->
+
+                                <div class="form-group">
+                                    <label>Delivery Boy</label>
+
+                                    <select formControlName="deliveryBoy">
+
+                                        <option value="">
+                                            Select Delivery Boy
+                                        </option>
+
+                                        <option *ngFor="let item of deliveryBoyList" [value]="item._id">
+
+                                            {{ item.fullName }}
+
+                                            <ng-container *ngIf="item.employeeCode">
+
+                                                -
+                                                {{ item.employeeCode }}
+
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+                                </div>
+
+
+                                <!-- Description -->
+
+                                <!-- <div class="form-group full-width">
+                                    <label>Description</label>
+
+                                    <textarea rows="4" [value]="selectedBeatPlan?.description || ''"
+                                        placeholder="Beat Plan Description"></textarea>
+                                </div> -->
+
+                            </div>
+
+
+                            <!-- Preview Area -->
+
+                            <div class="preview-area">
+
+                                <div class="preview-box">
+
+                                    <div *ngIf="selectedBeatPlan" class="preview-empty">
+
+                                        <i class="fa fa-map-marker"></i>
+
+                                        <p>
+                                            {{ selectedBeatPlan.beatName }}
+                                        </p>
+
+                                        <small>
+
+                                            {{ selectedBeatPlan.salesman?.fullName || '' }}
+
+                                            <br>
+
+                                            {{ selectedBeatPlan.day }}
+
+                                            <br>
+
+                                            {{ selectedBeatPlan.route?.routeName || '' }}
+
+                                        </small>
+
+                                    </div>
+
+
+                                    <div *ngIf="!selectedBeatPlan" class="preview-empty">
+
+                                        <i class="fa fa-map-marker"></i>
+
+                                        <p>
+                                            Beat Plan Preview
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Buttons -->
+
+                        <div class="button-group">
+
+                            <button type="submit" class="btn-create" [disabled]="isLoading">
+
+                                {{ isLoading ? 'Assigning...' : 'Assign' }}
+
+                            </button>
+
+                            <button type="button" class="btn-back" (click)="goBack()">
+
+                                Back
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

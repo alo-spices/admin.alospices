@@ -1,0 +1,237 @@
+<div class="warehouse-container">
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h2>Warehouse Details</h2>
+
+      <p>View complete warehouse information</p>
+
+    </div>
+
+    <button
+      class="back-btn"
+      (click)="goBack()">
+
+      <i class="fa fa-arrow-left me-2"></i>
+
+      Back
+
+    </button>
+
+  </div>
+
+  <!-- Card -->
+
+  <div class="warehouse-card" *ngIf="warehouse">
+
+    <!-- Top -->
+
+    <div class="card-top">
+
+      <div class="warehouse-icon">
+
+        <i class="fa fa-warehouse"></i>
+
+      </div>
+
+      <div>
+
+        <h3>
+
+          {{warehouse.warehouseName}}
+
+        </h3>
+
+        <p>
+
+          {{warehouse.warehouseCode}}
+
+        </p>
+
+      </div>
+
+      <span
+        class="status-badge"
+        [ngClass]="warehouse.isActive ? 'active' : 'inactive'">
+
+        {{warehouse.isActive ? 'Active' : 'Inactive'}}
+
+      </span>
+
+    </div>
+
+    <hr>
+
+    <!-- Details -->
+
+    <div class="row">
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          Warehouse Code
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.warehouseCode}}
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          Warehouse Name
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.warehouseName}}
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          Warehouse Type
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.warehouseType}}
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          Manager Name
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.managerName || '-'}}
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          Mobile Number
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.mobileNumber || '-'}}
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          Email Address
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.email || '-'}}
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          City
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.city || '-'}}
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          State
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.state || '-'}}
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 mb-4">
+
+        <label>
+
+          Pincode
+
+        </label>
+
+        <div class="view-box">
+
+          {{warehouse.pincode || '-'}}
+
+        </div>
+
+      </div>
+
+      <div class="col-12 mb-4">
+
+        <label>
+
+          Address
+
+        </label>
+
+        <div class="view-box address-box">
+
+          {{warehouse.address || '-'}}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

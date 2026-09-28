@@ -1,0 +1,1000 @@
+<div class="outstanding-dialog">
+
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="dialog-header">
+
+        <div class="header-left">
+
+            <div class="header-icon">
+
+                <i class="fa fa-file-invoice-dollar"></i>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Outstanding Details
+                </h2>
+
+                <p>
+                    Party payment and invoice details
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button type="button" class="close-btn" (click)="close()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- LOADING -->
+    <!-- ================================================= -->
+
+    <div class="loading-container" *ngIf="isLoading">
+
+        <div class="spinner"></div>
+
+        <span>
+            Loading outstanding details...
+        </span>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- CONTENT -->
+    <!-- ================================================= -->
+
+    <div class="dialog-body" *ngIf="!isLoading && party">
+
+
+        <!-- ================================================= -->
+        <!-- PARTY HEADER -->
+        <!-- ================================================= -->
+
+        <div class="party-card">
+
+            <div class="party-main">
+
+
+                <!-- PARTY IMAGE -->
+                <div class="party-image">
+
+                    <img *ngIf="party.shopImage" [src]="party.shopImage" [alt]="party.shopName" />
+
+
+                    <div *ngIf="!party.shopImage" class="party-image-placeholder">
+
+                        {{
+                        party.shopName
+                        ?.charAt(0)
+                        ?.toUpperCase()
+                        || 'P'
+                        }}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PARTY INFO -->
+                <div class="party-info">
+
+                    <div class="party-title-row">
+
+                        <h3>
+
+                            {{
+                            party.shopName
+                            || party.partyName
+                            || '-'
+                            }}
+
+                        </h3>
+
+
+                        <span class="party-type-badge">
+
+                            {{ party.partyType || '-' }}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="party-code">
+
+                        Party Code:
+
+                        <strong>
+                            {{ party.partyCode || '-' }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="party-owner">
+
+                        <i class="fa fa-user"></i>
+
+                        {{ party.ownerName || '-' }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTACT -->
+            <div class="party-contact">
+
+                <div class="contact-item">
+
+                    <i class="fa fa-phone"></i>
+
+                    <div>
+
+                        <span>
+                            Mobile
+                        </span>
+
+                        <strong>
+                            {{ party.mobile || '-' }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <i class="fa fa-whatsapp"></i>
+
+                    <div>
+
+                        <span>
+                            WhatsApp
+                        </span>
+
+                        <strong>
+                            {{ party.whatsappNumber || '-' }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <i class="fa fa-envelope"></i>
+
+                    <div>
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong>
+                            {{ party.email || '-' }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- LOCATION -->
+        <!-- ================================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-map-marker-alt"></i>
+
+                <span>
+                    Location Details
+                </span>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Address
+                    </span>
+
+                    <span class="detail-value">
+                        {{ party.address || '-' }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        City
+                    </span>
+
+                    <span class="detail-value">
+                        {{ party.city || '-' }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        District
+                    </span>
+
+                    <span class="detail-value">
+                        {{ party.district || '-' }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        State
+                    </span>
+
+                    <span class="detail-value">
+                        {{ party.state || '-' }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Pincode
+                    </span>
+
+                    <span class="detail-value">
+                        {{ party.pincode || '-' }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Area
+                    </span>
+
+                    <span class="detail-value">
+
+                        {{ party.area?.areaName || '-' }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Route
+                    </span>
+
+                    <span class="detail-value">
+
+                        {{ party.route?.routeName || '-' }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        GST Number
+                    </span>
+
+                    <span class="detail-value">
+
+                        {{ party.gstNumber || '-' }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- OUTSTANDING SUMMARY -->
+        <!-- ================================================= -->
+
+        <div class="summary-grid">
+
+
+            <div class="summary-card outstanding">
+
+                <div class="summary-icon">
+
+                    <i class="fa fa-wallet"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Outstanding
+                    </span>
+
+                    <strong>
+
+                        ₹{{
+                        summary.totalOutstanding
+                        | number:'1.2-2'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card pending">
+
+                <div class="summary-icon">
+
+                    <i class="fa fa-file-invoice"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Pending Invoices
+                    </span>
+
+                    <strong>
+                        {{ summary.pendingInvoices }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card completed">
+
+                <div class="summary-icon">
+
+                    <i class="fa fa-check-circle"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Completed Invoices
+                    </span>
+
+                    <strong>
+                        {{ summary.completedInvoices }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- PENDING ORDERS -->
+        <!-- ================================================= -->
+
+        <div class="section-card orders-section">
+
+            <div class="section-title">
+
+                <i class="fa fa-file-invoice"></i>
+
+                <span>
+                    Outstanding Orders
+                </span>
+
+                <span class="section-count">
+                    {{ orders.length }}
+                </span>
+
+            </div>
+
+
+
+            <div class="order-list" *ngIf="orders.length > 0">
+
+
+                <div class="order-card" *ngFor="let order of orders">
+
+
+                    <!-- ORDER HEADER -->
+
+                    <div class="order-header">
+
+                        <div>
+
+                            <span class="order-number">
+
+                                {{ order.orderNumber }}
+
+                            </span>
+
+
+                            <span class="order-date">
+
+                                <i class="fa fa-calendar"></i>
+
+                                {{
+                                formatDateTime(
+                                order.orderDate
+                                )
+                                }}
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="payment-status" [ngClass]="{
+                                'pending-status':
+                                    order.paymentStatus === 'Pending',
+
+                                'partial-status':
+                                    order.paymentStatus === 'Partial',
+
+                                'paid-status':
+                                    order.paymentStatus === 'Paid'
+                            }">
+
+                            {{ order.paymentStatus }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- ORDER AMOUNTS -->
+
+                    <div class="order-amount-grid">
+
+
+                        <div>
+
+                            <span>
+                                Sub Total
+                            </span>
+
+                            <strong>
+                                ₹{{
+                                order.subTotal
+                                | number:'1.2-2'
+                                }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Discount
+                            </span>
+
+                            <strong>
+                                ₹{{
+                                order.discountAmount
+                                | number:'1.2-2'
+                                }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                GST
+                            </span>
+
+                            <strong>
+                                ₹{{
+                                order.gstAmount
+                                | number:'1.2-2'
+                                }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Grand Total
+                            </span>
+
+                            <strong>
+                                ₹{{
+                                order.grandTotal
+                                | number:'1.2-2'
+                                }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="paid-amount">
+
+                            <span>
+                                Paid
+                            </span>
+
+                            <strong>
+                                ₹{{
+                                order.paidAmount
+                                | number:'1.2-2'
+                                }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="balance-amount">
+
+                            <span>
+                                Balance
+                            </span>
+
+                            <strong>
+                                ₹{{
+                                order.balanceAmount
+                                | number:'1.2-2'
+                                }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ORDER STATUS -->
+
+                    <div class="order-meta">
+
+
+                        <div>
+
+                            <span>
+                                Order Status
+                            </span>
+
+                            <strong>
+                                {{ order.orderStatus }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Party Type
+                            </span>
+
+                            <strong>
+                                {{ order.partyType }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Products
+                            </span>
+
+                            <strong>
+                                {{ getProductCount(order) }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Collections
+                            </span>
+
+                            <strong>
+                                {{ getCollectionCount(order) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================================================= -->
+                    <!-- PRODUCTS -->
+                    <!-- ================================================= -->
+
+                    <div class="products-section" *ngIf="order.products?.length > 0">
+
+                        <div class="sub-section-title">
+
+                            <i class="fa fa-box"></i>
+
+                            Products
+
+                        </div>
+
+
+                        <div class="products-table-wrapper">
+
+                            <table class="products-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Product
+                                        </th>
+
+                                        <th>
+                                            Pack Size
+                                        </th>
+
+                                        <th>
+                                            Qty
+                                        </th>
+
+                                        <th>
+                                            Price
+                                        </th>
+
+                                        <th>
+                                            GST
+                                        </th>
+
+                                        <th>
+                                            Total
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody>
+
+                                    <tr *ngFor="
+                                            let product
+                                            of order.products
+                                        ">
+
+                                        <td>
+
+                                            <div class="product-name">
+
+                                                <strong>
+                                                    {{
+                                                    product.productName
+                                                    }}
+                                                </strong>
+
+                                                <small>
+                                                    {{
+                                                    product.productCode
+                                                    }}
+                                                </small>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <td>
+                                            {{ product.packSize || '-' }}
+                                        </td>
+
+
+                                        <td>
+                                            {{ product.quantity || 0 }}
+                                        </td>
+
+
+                                        <td>
+                                            ₹{{
+                                            product.price
+                                            | number:'1.2-2'
+                                            }}
+                                        </td>
+
+
+                                        <td>
+                                            {{ product.gstPercentage || 0 }}%
+                                        </td>
+
+
+                                        <td>
+
+                                            <strong>
+                                                ₹{{
+                                                product.lineTotal
+                                                | number:'1.2-2'
+                                                }}
+                                            </strong>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================================================= -->
+                    <!-- COLLECTIONS -->
+                    <!-- ================================================= -->
+
+                    <div class="collections-section" *ngIf="order.collections?.length > 0">
+
+                        <div class="sub-section-title">
+
+                            <i class="fa fa-money-check-alt"></i>
+
+                            Collections
+
+                        </div>
+
+
+                        <div class="collection-item" *ngFor="
+                                let collection
+                                of order.collections
+                            ">
+
+
+                            <div>
+
+                                <span class="collection-number">
+
+                                    {{
+                                    collection.collectionNumber
+                                    }}
+
+                                </span>
+
+
+                                <small>
+
+                                    {{
+                                    formatDate(
+                                    collection.collectionDate
+                                    )
+                                    }}
+
+                                </small>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Amount
+                                </span>
+
+                                <strong class="collection-amount">
+
+                                    ₹{{
+                                    collection.collectedAmount
+                                    | number:'1.2-2'
+                                    }}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Payment Mode
+                                </span>
+
+                                <strong>
+                                    {{ collection.paymentMode || '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Status
+                                </span>
+
+                                <strong class="collection-status">
+
+                                    {{ collection.status || '-' }}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NO ORDERS -->
+
+            <div class="empty-orders" *ngIf="orders.length === 0">
+
+                <i class="fa fa-file-invoice"></i>
+
+                <p>
+                    No outstanding orders found.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- COMPLETED ORDERS -->
+        <!-- ================================================= -->
+
+        <div class="section-card completed-section" *ngIf="completedOrders.length > 0">
+
+            <div class="section-title">
+
+                <i class="fa fa-check-circle"></i>
+
+                <span>
+                    Completed Orders
+                </span>
+
+                <span class="section-count completed-count">
+                    {{ completedOrders.length }}
+                </span>
+
+            </div>
+
+
+            <div class="completed-order" *ngFor="
+                    let order
+                    of completedOrders
+                ">
+
+                <div>
+
+                    <strong>
+                        {{ order.orderNumber }}
+                    </strong>
+
+                    <span>
+                        {{
+                        formatDate(order.orderDate)
+                        }}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Amount
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        order.grandTotal
+                        | number:'1.2-2'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <span class="paid-badge">
+                    Paid
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- FOOTER -->
+    <!-- ================================================= -->
+
+    <div class="dialog-footer">
+
+        <button type="button" class="close-footer-btn" (click)="close()">
+
+            <i class="fa fa-times"></i>
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

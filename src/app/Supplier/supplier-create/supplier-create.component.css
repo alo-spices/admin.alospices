@@ -1,0 +1,316 @@
+
+/* ==========================================
+   PAGE
+========================================== */
+
+.supplier-container{
+
+    background: #f8f8f8;
+
+    min-height: 100vh;
+
+    padding: 30px;
+
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.supplier-card{
+
+    background: var(--white);
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.card-header{
+
+    background: linear-gradient(135deg,
+            var(--primary-dark),
+            var(--primary-color),
+            var(--primary-light));
+
+    color: white;
+
+    padding: 28px;
+
+}
+
+.card-header h3{
+
+    margin:0;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.card-header p{
+
+    margin-top:8px;
+
+    opacity:.9;
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+form{
+
+    padding:30px;
+
+}
+
+.row{
+
+    margin-bottom:5px;
+
+}
+
+/* ==========================================
+   LABELS
+========================================== */
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color: var(--primary-dark);
+
+}
+
+label span{
+
+    color: var(--danger);
+
+}
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.form-control,
+.form-select{
+
+    height:48px;
+
+    border-radius:8px;
+
+    border:1px solid var(--border-color);
+
+    transition:.3s;
+
+    box-shadow:none;
+
+    font-size:14px;
+
+}
+
+textarea.form-control{
+
+    height:auto;
+
+    min-height:110px;
+
+    resize:none;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color: var(--primary-color);
+
+    box-shadow:0 0 0 .18rem rgba(166,61,34,.18);
+
+}
+
+/* Placeholder */
+
+.form-control::placeholder{
+
+    color:#9ca3af;
+
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.button-group{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:30px;
+
+}
+
+.button-group button{
+
+    min-width:170px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+/* Cancel */
+
+.btn-secondary{
+
+    background: var(--secondary-dark);
+
+    color: var(--text-dark);
+
+}
+
+.btn-secondary:hover{
+
+    background:#c7ad99;
+
+}
+
+/* Save */
+
+.btn-primary{
+
+    background: var(--primary-color);
+
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    background: var(--primary-dark);
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   VALIDATION
+========================================== */
+
+.text-danger{
+
+    font-size:12px;
+
+    margin-top:5px;
+
+}
+
+/* ==========================================
+   SECTION SPACING
+========================================== */
+
+.mb-3{
+
+    margin-bottom:20px !important;
+
+}
+
+/* ==========================================
+   INPUT HOVER
+========================================== */
+
+.form-control:hover,
+.form-select:hover{
+
+    border-color: var(--primary-light);
+
+}
+
+/* ==========================================
+   CARD ANIMATION
+========================================== */
+
+.supplier-card{
+
+    animation:fadeIn .4s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+    .supplier-container{
+
+        padding:15px;
+
+    }
+
+    form{
+
+        padding:20px;
+
+    }
+
+    .button-group{
+
+        flex-direction:column;
+
+    }
+
+    .button-group button{
+
+        width:100%;
+
+    }
+
+}

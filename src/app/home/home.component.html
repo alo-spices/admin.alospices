@@ -1,0 +1,945 @@
+<!-- dashboard.component.html -->
+
+<div class="dashboard-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="dashboard-header">
+
+        <div>
+            <h1>Distribution Management Dashboard</h1>
+            <p>
+                TinSpices ERP & Sales Force Automation Overview
+            </p>
+        </div>
+
+        <div class="header-actions">
+
+            <button class="action-btn">
+                <i class="fas fa-download"></i>
+                Export Report
+            </button>
+
+            <button class="action-btn primary-btn">
+                <i class="fas fa-plus"></i>
+                Create Beat Plan
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ================= TOP STATS ================= -->
+
+    <div class="stats-grid">
+
+        <div class="stats-card">
+            <div class="stats-icon orange">
+                <i class="fas fa-users"></i>
+            </div>
+
+            <div>
+                <h2>148</h2>
+                <p>Total Salesmen</p>
+                <span>+12 This Month</span>
+            </div>
+        </div>
+
+        <div class="stats-card">
+            <div class="stats-icon red">
+                <i class="fas fa-store"></i>
+            </div>
+
+            <div>
+                <h2>2,840</h2>
+                <p>Total Shops</p>
+                <span>Retailers & Wholesalers</span>
+            </div>
+        </div>
+
+        <div class="stats-card">
+            <div class="stats-icon gold">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+
+            <div>
+                <h2>1,248</h2>
+                <p>Orders Today</p>
+                <span>₹18.4L Collection</span>
+            </div>
+        </div>
+
+        <div class="stats-card">
+            <div class="stats-icon green">
+                <i class="fas fa-truck"></i>
+            </div>
+
+            <div>
+                <h2>326</h2>
+                <p>Deliveries Running</p>
+                <span>Live Tracking Active</span>
+            </div>
+        </div>
+
+    </div>
+    <!-- =========================================================
+     DASHBOARD HOME
+========================================================= -->
+
+<div class="dashboard-container">
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
+
+  <div class="dashboard-header">
+
+    <div>
+
+      <p>
+        Manage your FMCG warehouse, inventory and production
+      </p>
+    </div>
+
+    <div class="header-date">
+      <i class="fas fa-calendar-alt me-2"></i>
+      Inventory Dashboard
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       WAREHOUSE SECTION
+  ======================================================== -->
+
+  <div class="section-heading">
+
+    <div>
+      <h3>
+        <i class="fas fa-warehouse me-2"></i>
+        Warehouses
+      </h3>
+
+      <p>
+        Click a warehouse to view available stock
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       WAREHOUSE CARDS
+  ======================================================== -->
+
+  <div class="stats-grid">
+
+  <div
+  class="stats-card"
+  *ngFor="let warehouse of warehouseList"
+  (click)="viewWarehouseStock(warehouse)">
+
+  <div class="stats-icon orange">
+
+    <i class="fas fa-warehouse"></i>
+
+  </div>
+
+  <div class="warehouse-name">
+
+    <h2>
+      {{ warehouse.warehouseName }}
+    </h2>
+
+    <p>
+      {{ warehouse.warehouseCode }}
+    </p>
+
+    <span>
+      View Stock
+    </span>
+
+  </div>
+
+</div>
+
+
+    <!-- No Warehouse -->
+
+    <div
+      class="no-data-card"
+      *ngIf="warehouseList.length === 0"
+    >
+
+      <i class="fas fa-warehouse"></i>
+
+      <h4>No Warehouses Found</h4>
+
+      <p>
+        No warehouse records available.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       SELECTED WAREHOUSE STOCK
+  ======================================================== -->
+
+  <div
+    class="warehouse-stock-section"
+    *ngIf="selectedWarehouse"
+  >
+
+
+    <!-- =====================================================
+         STOCK HEADER
+    ====================================================== -->
+
+    <div class="stock-header">
+
+      <div>
+
+        <h3>
+
+          <i class="fas fa-boxes me-2"></i>
+
+          {{ selectedWarehouse.warehouseName }}
+
+        </h3>
+
+        <p>
+
+          {{ selectedWarehouse.warehouseCode }}
+
+          <span class="mx-2">|</span>
+
+          Warehouse Stock Details
+
+        </p>
+
+      </div>
+
+
+      <!-- Close -->
+
+      <button
+        type="button"
+        class="close-stock-btn"
+        (click)="closeWarehouseStock()"
+      >
+
+        <i class="fas fa-times"></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <div
+      class="stock-loading"
+      *ngIf="loadingWarehouseStock"
+    >
+
+      <div class="spinner-border"></div>
+
+      <p>
+        Loading warehouse stock...
+      </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         STOCK CONTENT
+    ====================================================== -->
+
+    <div
+      *ngIf="
+        !loadingWarehouseStock &&
+        warehouseStock
+      "
+    >
+
+
+      <!-- ===================================================
+           SUMMARY CARDS
+      ==================================================== -->
+
+      <div class="stock-summary-grid">
+
+
+        <!-- Total Items -->
+
+        <div class="stock-summary-card">
+
+          <div class="summary-icon">
+
+            <i class="fas fa-boxes"></i>
+
+          </div>
+
+          <div>
+
+            <h6>Total Stock Items</h6>
+
+            <h3>
+
+              {{
+                warehouseStock.data?.length || 0
+              }}
+
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <!-- Total Weight -->
+
+        <div class="stock-summary-card">
+
+          <div class="summary-icon">
+
+            <i class="fas fa-weight-hanging"></i>
+
+          </div>
+
+          <div>
+
+            <h6>Total Weight</h6>
+
+            <h3>
+
+              {{
+                warehouseStock.totalWeightKg || 0
+              }}
+              KG
+
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <!-- Available Weight -->
+
+        <div class="stock-summary-card">
+
+          <div class="summary-icon">
+
+            <i class="fas fa-check-circle"></i>
+
+          </div>
+
+          <div>
+
+            <h6>Available Weight</h6>
+
+            <h3>
+
+              {{
+                warehouseStock.availableWeightKg || 0
+              }}
+              KG
+
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <!-- Used Weight -->
+
+        <div class="stock-summary-card">
+
+          <div class="summary-icon">
+
+            <i class="fas fa-dolly"></i>
+
+          </div>
+
+          <div>
+
+            <h6>Used Weight</h6>
+
+            <h3>
+
+              {{
+                warehouseStock.usedWeightKg || 0
+              }}
+              KG
+
+            </h3>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           STOCK TABLE
+      ==================================================== -->
+
+      <div class="stock-table-card">
+
+        <div class="table-title">
+
+          <div>
+
+            <h4>
+
+              <i class="fas fa-box-open me-2"></i>
+
+              Raw Material Stock
+
+            </h4>
+
+            <p>
+              Warehouse-wise available inventory
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-responsive">
+
+          <table class="table">
+
+            <thead>
+
+              <tr>
+
+                <th>S.No</th>
+
+                <th>Raw Material</th>
+
+                <th>Code</th>
+
+                <th>Batch No</th>
+
+                <th>Total Weight</th>
+
+                <th>Available Weight</th>
+
+                <th>Status</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr
+                *ngFor="
+                  let item of warehouseStock.data;
+                  let i = index
+                "
+              >
+
+                <!-- S.No -->
+
+                <td>
+
+                  {{ i + 1 }}
+
+                </td>
+
+
+                <!-- Raw Material -->
+
+                <td>
+
+                  <div class="material-info">
+
+                    <div class="material-icon">
+
+                      <i class="fas fa-box"></i>
+
+                    </div>
+
+                    <div>
+
+                      <strong>
+
+                        {{
+                          item.rawMaterial?.rawMaterialName
+                          ||
+                          item.rawMaterialName
+                          ||
+                          'N/A'
+                        }}
+
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- Code -->
+
+                <td>
+
+                  {{
+                    item.rawMaterial?.rawMaterialCode
+                    ||
+                    item.rawMaterialCode
+                    ||
+                    '-'
+                  }}
+
+                </td>
+
+
+                <!-- Batch -->
+
+                <td>
+
+                  <span class="batch-badge">
+
+                    {{
+                      item.batchNo || '-'
+                    }}
+
+                  </span>
+
+                </td>
+
+
+                <!-- Total Weight -->
+
+                <td>
+
+                  <strong>
+
+                    {{
+                      item.totalWeightKg || 0
+                    }}
+
+                    KG
+
+                  </strong>
+
+                </td>
+
+
+                <!-- Available -->
+
+                <td>
+
+                  <span class="available-stock">
+
+                    {{
+                      item.availableWeightKg || 0
+                    }}
+
+                    KG
+
+                  </span>
+
+                </td>
+
+
+                <!-- Status -->
+
+                <td>
+
+                  <span
+                    class="stock-status"
+                    [ngClass]="{
+
+                      'received':
+                        item.status === 'Received',
+
+                      'partial':
+                        item.status === 'Partially Used',
+
+                      'completed':
+                        item.status === 'Completed'
+
+                    }"
+                  >
+
+                    {{
+                      item.status || 'Available'
+                    }}
+
+                  </span>
+
+                </td>
+
+              </tr>
+
+
+              <!-- No Stock -->
+
+              <tr
+                *ngIf="
+                  !warehouseStock.data ||
+                  warehouseStock.data.length === 0
+                "
+              >
+
+                <td
+                  colspan="7"
+                  class="no-stock"
+                >
+
+                  <i class="fas fa-box-open"></i>
+
+                  <h4>
+                    No Stock Available
+                  </h4>
+
+                  <p>
+                    This warehouse currently has no
+                    raw material stock.
+                  </p>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       GENERAL DASHBOARD STATS
+  ======================================================== -->
+
+  <div class="section-heading mt-4">
+
+    <div>
+
+      <h3>
+        <i class="fas fa-chart-bar me-2"></i>
+        Overview
+      </h3>
+
+      <p>
+        Current business overview
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       EXISTING STAT CARDS
+  ======================================================== -->
+
+  
+
+
+  <!-- =======================================================
+       CHART SECTION
+  ======================================================== -->
+
+ <div class="row g-4 charts-grid">
+
+  <!-- BAR CHART -->
+  <div class="col-md-6">
+    <div class="chart-card">
+
+      <div class="chart-header">
+        <div>
+          <h4>Production Overview</h4>
+          <p>Production activity</p>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas #barChart></canvas>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- LINE CHART -->
+  <div class="col-md-6">
+    <div class="chart-card">
+
+      <div class="chart-header">
+        <div>
+          <h4>Production Trends</h4>
+          <p>Running vs Waiting</p>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas #lineChart></canvas>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- DONUT -->
+  <div class="col-md-6">
+    <div class="chart-card donut-card">
+
+      <div class="chart-header">
+        <div>
+          <h4>Sales Overview</h4>
+          <p>Device-wise sales</p>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas #donutChart></canvas>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+
+    <!-- ================= CHART SECTION ================= -->
+
+    <div class="chart-layout">
+        <div class="row">
+            <div class="col-md-6 col-6">
+                <!-- Sales Performance -->
+                <div class="chart-card large-card">
+
+                    <div class="card-header">
+                        <div>
+                            <h3>Monthly Sales Performance</h3>
+                            <p>Area wise order collections</p>
+                        </div>
+
+                        <button>
+                            This Month
+                        </button>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas #barChart></canvas>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-6">
+                <!-- Attendance -->
+                <div class="chart-card">
+
+                    <div class="card-header">
+                        <div>
+                            <h3>Attendance Ratio</h3>
+                            <p>Field Employee Status</p>
+                        </div>
+                    </div>
+
+                    <div class="donut-wrapper">
+                        <canvas #donutChart></canvas>
+                    </div>
+
+                    <div class="attendance-status">
+
+                        <div class="status-item">
+                            <span class="dot active-dot"></span>
+                            Present - 60%
+                        </div>
+
+                        <div class="status-item">
+                            <span class="dot pending-dot"></span>
+                            Leave - 40%
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================= SECOND ROW ================= -->
+
+    <div class="bottom-layout">
+
+        <!-- Live Tracking -->
+        <div class="chart-card">
+
+            <div class="card-header">
+                <div>
+                    <h3>Salesman Activity</h3>
+                    <p>Running vs Waiting</p>
+                </div>
+            </div>
+
+            <div class="chart-container line-chart">
+                <canvas #lineChart></canvas>
+            </div>
+
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="activity-card">
+
+            <div class="card-header">
+                <div>
+                    <h3>Recent Activities</h3>
+                    <p>Realtime system updates</p>
+                </div>
+            </div>
+
+            <div class="activity-list">
+
+                <div class="activity-item">
+                    <div class="activity-icon orange-bg">
+                        <i class="fas fa-check"></i>
+                    </div>
+
+                    <div>
+                        <h4>Order Collected</h4>
+                        <p>Ravi collected ₹12,400 order from Shop A</p>
+                    </div>
+
+                    <span>2m ago</span>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon gold-bg">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+
+                    <div>
+                        <h4>Live Check-In</h4>
+                        <p>Salesman checked in at Vijayawada Area</p>
+                    </div>
+
+                    <span>10m ago</span>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon green-bg">
+                        <i class="fas fa-truck"></i>
+                    </div>
+
+                    <div>
+                        <h4>Delivery Completed</h4>
+                        <p>Order #TN204 delivered successfully</p>
+                    </div>
+
+                    <span>18m ago</span>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon red-bg">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+
+                    <div>
+                        <h4>Payment Received</h4>
+                        <p>₹48,200 outstanding collected</p>
+                    </div>
+
+                    <span>32m ago</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= AREA PERFORMANCE ================= -->
+
+    <div class="table-card">
+
+        <div class="card-header">
+            <div>
+                <h3>Top Performing Areas</h3>
+                <p>Today sales performance report</p>
+            </div>
+        </div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Area</th>
+                    <th>Salesmen</th>
+                    <th>Orders</th>
+                    <th>Collections</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Vijayawada</td>
+                    <td>24</td>
+                    <td>482</td>
+                    <td>₹4.8L</td>
+                    <td>
+                        <span class="status success-status">
+                            Excellent
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Guntur</td>
+                    <td>18</td>
+                    <td>362</td>
+                    <td>₹3.2L</td>
+                    <td>
+                        <span class="status warning-status">
+                            Good
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Hyderabad</td>
+                    <td>31</td>
+                    <td>588</td>
+                    <td>₹6.4L</td>
+                    <td>
+                        <span class="status success-status">
+                            Excellent
+                        </span>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

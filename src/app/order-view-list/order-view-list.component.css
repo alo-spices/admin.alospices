@@ -1,0 +1,685 @@
+.order-dialog {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.dialog-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 20px 24px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    background: #fafafa;
+
+}
+
+
+.dialog-header h2 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    color: #222;
+
+}
+
+
+.order-number {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 13px;
+
+    color: #777;
+
+}
+
+
+.close-btn {
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f1f1f1;
+
+    color: #555;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.close-btn:hover {
+
+    background: #e5e5e5;
+
+}
+
+
+/* ==========================================
+   BODY
+========================================== */
+
+.dialog-body {
+
+    padding: 20px 24px;
+
+    max-height: calc(90vh - 140px);
+
+    overflow-y: auto;
+
+}
+
+
+/* ==========================================
+   SECTION CARD
+========================================== */
+
+.section-card {
+
+    border: 1px solid #e7e7e7;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    margin-bottom: 18px;
+
+    background: #ffffff;
+
+}
+
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid #eeeeee;
+
+}
+
+
+.section-title i {
+
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #f5f5f5;
+
+    color: #555;
+
+}
+
+
+.section-title h3 {
+
+    margin: 0;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #333;
+
+}
+
+
+/* ==========================================
+   DETAILS GRID
+========================================== */
+
+.details-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px 25px;
+
+}
+
+
+.detail-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.detail-item span {
+
+    font-size: 12px;
+
+    color: #888;
+
+}
+
+
+.detail-item strong {
+
+    font-size: 14px;
+
+    color: #222;
+
+    font-weight: 500;
+
+    word-break: break-word;
+
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.status-badge {
+
+    display: inline-block;
+
+    padding: 5px 11px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+}
+
+
+.status-pending {
+
+    background: #fff3cd;
+
+    color: #856404;
+
+}
+
+
+.status-confirmed {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+}
+
+
+.status-processing {
+
+    background: #e0e7ff;
+
+    color: #4338ca;
+
+}
+
+
+.status-completed {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.status-cancelled {
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+
+}
+
+
+.status-default {
+
+    background: #eeeeee;
+
+    color: #555;
+
+}
+
+
+/* ==========================================
+   PAYMENT
+========================================== */
+
+.payment-paid {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.payment-pending {
+
+    background: #fff3cd;
+
+    color: #856404;
+
+}
+
+
+.payment-partial {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+}
+
+
+.payment-failed {
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+
+}
+
+
+.payment-default {
+
+    background: #eeeeee;
+
+    color: #555;
+
+}
+
+
+/* ==========================================
+   EMPLOYEE
+========================================== */
+
+.employee-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.employee-avatar {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: #f1f1f1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.employee-avatar img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.employee-avatar i {
+
+    color: #888;
+
+    font-size: 22px;
+
+}
+
+
+.employee-header h4 {
+
+    margin: 0 0 5px;
+
+    font-size: 16px;
+
+    color: #222;
+
+}
+
+
+.employee-header span {
+
+    font-size: 12px;
+
+    color: #777;
+
+}
+
+
+/* ==========================================
+   ADDRESS
+========================================== */
+
+.address-box {
+
+    margin-top: 18px;
+
+    padding: 14px;
+
+    border-radius: 8px;
+
+    background: #f8f9fa;
+
+}
+
+
+.address-box span {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: #888;
+
+    margin-bottom: 5px;
+
+}
+
+
+.address-box p {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #333;
+
+    line-height: 1.6;
+
+}
+
+
+/* ==========================================
+   AMOUNT
+========================================== */
+
+.amount-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.amount-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 12px 14px;
+
+    background: #f8f9fa;
+
+    border-radius: 7px;
+
+}
+
+
+.amount-item span {
+
+    font-size: 13px;
+
+    color: #666;
+
+}
+
+
+.amount-item strong {
+
+    font-size: 14px;
+
+    color: #222;
+
+}
+
+
+.amount-item .discount {
+
+    color: #dc3545;
+
+}
+
+
+.amount-item.total {
+
+    grid-column: span 2;
+
+    background: #f1f1f1;
+
+}
+
+
+.amount-item.total strong {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+.amount-item.balance {
+
+    grid-column: span 2;
+
+    border: 1px solid #eeeeee;
+
+}
+
+
+.amount-item.balance strong {
+
+    font-size: 16px;
+
+}
+
+
+/* ==========================================
+   REMARKS
+========================================== */
+
+.remarks-box {
+
+    padding: 14px;
+
+    background: #f8f9fa;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    color: #444;
+
+    line-height: 1.6;
+
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.dialog-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    padding: 15px 24px;
+
+    border-top: 1px solid #eeeeee;
+
+    background: #fafafa;
+
+}
+
+
+.btn-close {
+
+    border: none;
+
+    padding: 9px 22px;
+
+    border-radius: 6px;
+
+    background: #333;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+}
+
+
+.btn-close:hover {
+
+    background: #222;
+
+}
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.dialog-body::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+
+.dialog-body::-webkit-scrollbar-thumb {
+
+    background: #cccccc;
+
+    border-radius: 10px;
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .dialog-header {
+
+        padding: 16px;
+
+    }
+
+
+    .dialog-body {
+
+        padding: 15px;
+
+    }
+
+
+    .details-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .amount-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .amount-item.total,
+    .amount-item.balance {
+
+        grid-column: span 1;
+
+    }
+
+}

@@ -1,0 +1,725 @@
+<div class="category-container">
+
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Route Details
+            </h2>
+
+            <p>
+                View complete sales route information
+            </p>
+
+        </div>
+
+
+        <div class="button-section">
+
+            <button type="button" (click)="goBack()">
+
+                <i class="fa fa-arrow-left"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Loading -->
+    <!-- ========================================== -->
+
+    <div class="loading-card" *ngIf="isLoading">
+
+        <i class="fa fa-spinner fa-spin"></i>
+
+        <span>
+            Loading route details...
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Main Content -->
+    <!-- ========================================== -->
+
+    <div *ngIf="
+            !isLoading &&
+            routeData
+        ">
+
+
+        <!-- ====================================== -->
+        <!-- Route Header -->
+        <!-- ====================================== -->
+
+        <div class="route-header-card">
+
+            <div class="route-main-icon">
+
+                <i class="fa fa-route"></i>
+
+            </div>
+
+
+            <div class="route-header-content">
+
+                <div class="route-title-row">
+
+                    <h2>
+                        {{ routeData.routeName || '-' }}
+                    </h2>
+
+
+                    <span class="status-badge" [ngClass]="
+                            routeData.status === 'Active'
+                                ? 'active'
+                                : 'inactive'
+                        ">
+
+                        {{
+                        routeData.status ||
+                        'Inactive'
+                        }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="route-code">
+
+                    <i class="fa fa-barcode"></i>
+
+                    {{ routeData.routeCode || '-' }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Route Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Route Information
+                    </h4>
+
+                    <p>
+                        Basic route details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Route Name -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Route Name
+                    </span>
+
+                    <strong>
+                        {{ routeData.routeName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Route Code -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Route Code
+                    </span>
+
+                    <strong>
+                        {{ routeData.routeCode || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="detail-item full-width">
+
+                    <span>
+                        Description
+                    </span>
+
+                    <strong>
+                        {{ routeData.description || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Area -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Area Assignment
+                    </h4>
+
+                    <p>
+                        Area assigned to this route
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Area Name -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Area Name
+                    </span>
+
+
+                    <ng-container *ngIf="routeData.area">
+
+                        <strong>
+
+                            {{
+                            routeData.area.areaName
+                            || '-'
+                            }}
+
+                        </strong>
+
+                    </ng-container>
+
+
+                    <span class="not-assigned" *ngIf="!routeData.area">
+
+                        Not Assigned
+
+                    </span>
+
+                </div>
+
+
+                <!-- Area Code -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Area Code
+                    </span>
+
+
+                    <strong *ngIf="routeData.area">
+
+                        {{
+                        routeData.area.areaCode
+                        || '-'
+                        }}
+
+                    </strong>
+
+
+                    <span class="not-assigned" *ngIf="!routeData.area">
+
+                        -
+
+                    </span>
+
+                </div>
+
+
+                <!-- Area City -->
+
+                <div class="detail-item" *ngIf="routeData.area">
+
+                    <span>
+                        City
+                    </span>
+
+                    <strong>
+
+                        {{
+                        routeData.area.city
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Area District -->
+
+                <div class="detail-item" *ngIf="routeData.area">
+
+                    <span>
+                        District
+                    </span>
+
+                    <strong>
+
+                        {{
+                        routeData.area.district
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Area State -->
+
+                <div class="detail-item" *ngIf="routeData.area">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong>
+
+                        {{
+                        routeData.area.state
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Area Pincode -->
+
+                <div class="detail-item" *ngIf="routeData.area">
+
+                    <span>
+                        Pincode
+                    </span>
+
+                    <strong>
+
+                        {{
+                        routeData.area.pincode
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Sales Assignment -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Sales Assignment
+                    </h4>
+
+                    <p>
+                        Managers and salesmen assigned to route
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Sales Manager -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Sales Manager
+                    </span>
+
+
+                    <ng-container *ngIf="routeData.salesManager">
+
+                        <strong>
+
+                            {{
+                            routeData.salesManager.fullName
+                            || '-'
+                            }}
+
+                        </strong>
+
+                    </ng-container>
+
+
+                    <span class="not-assigned" *ngIf="
+                            !routeData.salesManager
+                        ">
+
+                        Not Assigned
+
+                    </span>
+
+                </div>
+
+
+                <!-- Salesmen Count -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Total Salesmen
+                    </span>
+
+                    <strong>
+
+                        {{
+                        routeData.salesmen?.length
+                        || 0
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Salesmen -->
+
+                <div class="detail-item full-width">
+
+                    <span>
+                        Assigned Salesmen
+                    </span>
+
+
+                    <div class="salesmen-list" *ngIf="
+                            routeData.salesmen?.length
+                        ">
+
+                        <div class="salesman-chip" *ngFor="
+                                let salesman
+                                of routeData.salesmen
+                            ">
+
+                            <i class="fa fa-user"></i>
+
+                            <span>
+
+                                {{
+                                salesman.fullName
+                                || '-'
+                                }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <strong class="not-assigned" *ngIf="
+                            !routeData.salesmen?.length
+                        ">
+
+                        No Salesmen Assigned
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Distributor -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Distributor
+                    </span>
+
+
+                    <ng-container *ngIf="
+                            routeData.distributor
+                        ">
+
+                        <strong>
+
+                            {{
+                            routeData.distributor.fullName
+                            || '-'
+                            }}
+
+                        </strong>
+
+                    </ng-container>
+
+
+                    <span class="not-assigned" *ngIf="
+                            !routeData.distributor
+                        ">
+
+                        Not Assigned
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Target Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Target Information
+                    </h4>
+
+                    <p>
+                        Current route target configuration
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Monthly Sales Target
+                    </span>
+
+                    <strong>
+
+                        ₹
+                        {{
+                        routeData.monthlySalesTarget
+                        || 0
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Monthly Collection Target
+                    </span>
+
+                    <strong>
+
+                        ₹
+                        {{
+                        routeData.monthlyCollectionTarget
+                        || 0
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- System Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        System Information
+                    </h4>
+
+                    <p>
+                        Route record information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong>
+                        {{ routeData.status || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Created At
+                    </span>
+
+                    <strong>
+
+                        {{
+                        routeData.createdAt
+                        ? (
+                        routeData.createdAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Last Updated
+                    </span>
+
+                    <strong>
+
+                        {{
+                        routeData.updatedAt
+                        ? (
+                        routeData.updatedAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Back -->
+        <!-- ====================================== -->
+
+        <div class="button-group">
+
+            <button type="button" class="btn-back" (click)="goBack()">
+
+                <i class="fa fa-arrow-left me-2"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- No Data -->
+    <!-- ========================================== -->
+
+    <div class="empty-state" *ngIf="
+            !isLoading &&
+            !routeData
+        ">
+
+        <i class="fa fa-route"></i>
+
+        <h4>
+            Route Not Found
+        </h4>
+
+        <p>
+            Unable to load route details.
+        </p>
+
+        <button type="button" class="btn-back" (click)="goBack()">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>

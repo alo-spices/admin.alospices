@@ -1,0 +1,179 @@
+<div class="view-container">
+
+    <div class="view-header">
+
+        <h3>
+
+            Raw Material Details
+
+        </h3>
+
+    </div>
+
+    <div class="view-body">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <label>
+
+                    Raw Material Name
+
+                </label>
+
+                <p>
+
+                    {{data.rawMaterialName}}
+
+                </p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>
+
+                    Raw Material Code
+
+                </label>
+
+                <p>
+
+                    {{data.rawMaterialCode}}
+
+                </p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>
+
+                    Brand
+
+                </label>
+
+                <p>
+
+                    {{data.brand?.brandName}}
+
+                </p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>
+
+                    Category
+
+                </label>
+
+                <p>
+
+                    {{data.category?.categoryName}}
+
+                </p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>
+
+                    Unit
+
+                </label>
+
+                <p>
+
+                    {{data.unit}}
+
+                </p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>
+
+                    GST %
+
+                </label>
+
+                <p>
+
+                    {{data.gstPercentage}} %
+
+                </p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>
+
+                    HSN Code
+
+                </label>
+
+                <p>
+
+                    {{data.hsnCode}}
+
+                </p>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <p>
+
+                    {{data.status}}
+
+                </p>
+
+            </div>
+
+            <div class="col-md-12">
+
+                <label>
+
+                    Description
+
+                </label>
+
+                <p>
+
+                    {{data.description}}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-end mt-4">
+
+        <button
+
+            class="btn btn-danger"
+
+            (click)="close()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

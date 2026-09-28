@@ -1,0 +1,145 @@
+<div class="status-popup-card">
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="status-popup-header">
+
+        <div class="status-icon approve-icon">
+
+            <i class="fa fa-user-check"></i>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Approve User
+            </h3>
+
+            <p>
+                Confirm user account approval
+            </p>
+
+        </div>
+
+
+        <button type="button" class="close-btn" (click)="cancel()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- User Information -->
+    <!-- ========================================== -->
+
+    <div class="current-status">
+
+        <span>
+            User
+        </span>
+
+        <strong>
+            {{ data?.fullName || data?.firstName || 'User' }}
+        </strong>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Current Status -->
+    <!-- ========================================== -->
+
+    <div class="current-status">
+
+        <span>
+            Current Status
+        </span>
+
+        <span class="status-badge pending">
+            {{ data?.status || 'Pending' }}
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Role -->
+    <!-- ========================================== -->
+
+    <div class="current-status">
+
+        <span>
+            Account Role
+        </span>
+
+        <strong>
+            {{ data?.role || '-' }}
+        </strong>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Approval Info -->
+    <!-- ========================================== -->
+
+    <div class="status-info">
+
+        <i class="fa fa-info-circle"></i>
+
+        <span>
+
+            Approving this user will activate the account
+            and allow the user to access the system.
+
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Confirmation -->
+    <!-- ========================================== -->
+
+    <div class="approval-confirmation">
+
+        <i class="fa fa-shield-alt"></i>
+
+        <span>
+            Are you sure you want to approve this user?
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Footer -->
+    <!-- ========================================== -->
+
+    <div class="popup-footer">
+
+        <button type="button" class="btn-cancel" (click)="cancel()">
+
+            Cancel
+
+        </button>
+
+
+        <button type="button" class="btn-update approve-submit-btn" (click)="approve()">
+
+            <i class="fa fa-check me-2"></i>
+
+            Approve User
+
+        </button>
+
+    </div>
+
+</div>

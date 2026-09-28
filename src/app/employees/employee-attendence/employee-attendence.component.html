@@ -1,0 +1,564 @@
+<div class="attendance-container">
+
+
+    <!-- ========================================== -->
+    <!-- HEADER -->
+    <!-- ========================================== -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>
+                Employee Attendance
+            </h2>
+
+            <p>
+                View employee attendance and working details
+            </p>
+
+        </div>
+
+
+        <button type="button" class="back-btn" (click)="goBack()">
+
+            <i class="fa fa-arrow-left"></i>
+
+            Back
+
+        </button>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- EMPLOYEE INFO -->
+    <!-- ========================================== -->
+
+    <div class="employee-card" *ngIf="employee">
+
+        <div class="employee-left">
+
+
+            <div class="employee-avatar">
+
+                <img *ngIf="employee.profileImage" [src]="employee.profileImage"
+                    [alt]="employee.fullName || 'Employee'">
+
+
+                <span *ngIf="!employee.profileImage">
+
+                    {{
+                    employee.firstName
+                    ? employee.firstName.charAt(0)
+                    : 'U'
+                    }}
+
+                </span>
+
+            </div>
+
+
+            <div class="employee-info">
+
+                <h3>
+                    {{ employee.fullName || '-' }}
+                </h3>
+
+                <span>
+                    {{ employee.employeeCode || '-' }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="employee-right">
+
+            <span class="role-badge">
+
+                {{ employee.role || '-' }}
+
+            </span>
+
+
+            <span class="mobile-text">
+
+                {{ employee.mobile || '-' }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- FILTER SECTION -->
+    <!-- ========================================== -->
+
+    <div class="filter-card">
+
+        <div class="filter-header">
+
+            <div>
+
+                <h4>
+                    Attendance Filters
+                </h4>
+
+                <p>
+                    Filter attendance by date range
+                </p>
+
+            </div>
+
+
+            <button type="button" class="clear-filter-btn" (click)="clearFilters()">
+
+                <i class="fa fa-refresh"></i>
+
+                Clear
+
+            </button>
+
+        </div>
+
+
+        <div class="filter-grid">
+
+
+            <!-- From Date -->
+
+            <div class="filter-group">
+
+                <label>
+                    From Date
+                </label>
+
+                <input type="date" [(ngModel)]="fromDate">
+
+            </div>
+
+
+            <!-- To Date -->
+
+            <div class="filter-group">
+
+                <label>
+                    To Date
+                </label>
+
+                <input type="date" [(ngModel)]="toDate">
+
+            </div>
+
+
+            <!-- Search -->
+
+            <div class="filter-action">
+
+                <button type="button" class="search-btn" (click)="applyFilters()">
+
+                    <i class="fa fa-search"></i>
+
+                    Search Attendance
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- SUMMARY -->
+    <!-- ========================================== -->
+
+    <div class="summary-grid" *ngIf="summary">
+
+
+        <!-- Total Working Days -->
+
+        <div class="summary-box">
+
+            <span>
+                Total Working Days
+            </span>
+
+            <strong>
+                {{ summary.totalWorkingDays || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- Present -->
+
+        <div class="summary-box">
+
+            <span>
+                Present
+            </span>
+
+            <strong>
+                {{ summary.present || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- Absent -->
+
+        <div class="summary-box">
+
+            <span>
+                Absent
+            </span>
+
+            <strong>
+                {{ summary.absent || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- Half Day -->
+
+        <div class="summary-box">
+
+            <span>
+                Half Days
+            </span>
+
+            <strong>
+                {{ summary.halfDay || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- Total Orders -->
+
+        <div class="summary-box">
+
+            <span>
+                Total Orders
+            </span>
+
+            <strong>
+                {{ summary.totalOrders || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- Total Visits -->
+
+        <div class="summary-box">
+
+            <span>
+                Total Visits
+            </span>
+
+            <strong>
+                {{ summary.totalVisits || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- Total Collections -->
+
+        <div class="summary-box">
+
+            <span>
+                Total Collections
+            </span>
+
+            <strong>
+                ₹{{ summary.totalCollections || 0 }}
+            </strong>
+
+        </div>
+
+
+        <!-- Working Time -->
+
+        <div class="summary-box">
+
+            <span>
+                Working Time
+            </span>
+
+            <strong>
+
+                {{ summary.totalWorkingMinutes || 0 }}
+                min
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- LOADING -->
+    <!-- ========================================== -->
+
+    <div class="loading-box" *ngIf="isLoading">
+
+        <div class="spinner-border"></div>
+
+        <p>
+            Loading attendance...
+        </p>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- ATTENDANCE TABLE -->
+    <!-- ========================================== -->
+
+    <div class="attendance-table-wrapper" *ngIf="
+            !isLoading &&
+            attendanceList.length > 0
+        ">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Check In
+                    </th>
+
+                    <th>
+                        Check Out
+                    </th>
+
+                    <th>
+                        Working
+                    </th>
+
+                    <th>
+                        Visits
+                    </th>
+
+                    <th>
+                        Orders
+                    </th>
+
+                    <th>
+                        Collections
+                    </th>
+
+                    <th>
+                        Attendance
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr *ngFor="
+                        let attendance
+                        of attendanceList
+                    ">
+
+                    <td>
+
+                        {{
+                        attendance.attendanceDate
+                        | date:'dd MMM yyyy'
+                        }}
+
+                    </td>
+
+
+                    <td>
+
+                        {{
+                        attendance.checkInTime
+                        ? (
+                        attendance.checkInTime
+                        | date:'hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </td>
+
+
+                    <td>
+
+                        {{
+                        attendance.checkOutTime
+                        ? (
+                        attendance.checkOutTime
+                        | date:'hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </td>
+
+
+                    <td>
+
+                        {{
+                        attendance.totalWorkingMinutes
+                        || 0
+                        }}
+
+                        min
+
+                    </td>
+
+
+                    <td>
+
+                        {{
+                        attendance.totalVisits
+                        || 0
+                        }}
+
+                    </td>
+
+
+                    <td>
+
+                        {{
+                        attendance.totalOrders
+                        || 0
+                        }}
+
+                    </td>
+
+
+                    <td>
+
+                        ₹
+                        {{
+                        attendance.totalCollections
+                        || 0
+                        }}
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="attendance-badge" [ngClass]="{
+
+                                'present':
+                                    attendance.attendanceStatus
+                                    === 'Present',
+
+                                'absent':
+                                    attendance.attendanceStatus
+                                    === 'Absent',
+
+                                'half-day':
+                                    attendance.attendanceStatus
+                                    === 'Half Day'
+
+                            }">
+
+                            {{
+                            attendance.attendanceStatus
+                            || '-'
+                            }}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="status-badge" [ngClass]="{
+
+                                'checked-in':
+                                    attendance.status
+                                    === 'CheckedIn',
+
+                                'checked-out':
+                                    attendance.status
+                                    === 'CheckedOut'
+
+                            }">
+
+                            {{
+                            attendance.status
+                            || '-'
+                            }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- NO DATA -->
+    <!-- ========================================== -->
+
+    <div class="no-data" *ngIf="
+            !isLoading &&
+            attendanceList.length === 0
+        ">
+
+        <i class="fa-regular fa-calendar-xmark"></i>
+
+        <h4>
+            No Attendance Found
+        </h4>
+
+        <p>
+            No attendance records found for the selected period.
+        </p>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- FOOTER -->
+    <!-- ========================================== -->
+
+    <div class="page-footer">
+
+        <button type="button" class="close-action" (click)="goBack()">
+
+            CLOSE
+
+        </button>
+
+    </div>
+
+</div>

@@ -1,0 +1,473 @@
+<div class="category-container">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <!-- ========================================== -->
+            <!-- Title -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>
+                        <i class="fa fa-route me-2"></i>
+                        Create Beat Plan
+                    </h2>
+
+                    <p>
+                        Create a new beat plan and assign it to a salesman
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Form Card -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="category-card">
+
+                    <form [formGroup]="beatPlanForm" (ngSubmit)="onSubmit()">
+
+
+                        <div class="category-grid">
+
+
+                            <!-- ====================================== -->
+                            <!-- Form Area -->
+                            <!-- ====================================== -->
+
+                            <div class="form-area">
+
+
+                                <!-- ================================= -->
+                                <!-- BEAT PLAN INFORMATION -->
+                                <!-- ================================= -->
+
+                                <div class="section-title full-width">
+
+                                    <h4>
+                                        Beat Plan Information
+                                    </h4>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Beat Name -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Beat Name
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+                                    <input type="text" formControlName="beatName" placeholder="Enter beat name">
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Area -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Area
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <select formControlName="area">
+
+                                        <option value="">
+                                            Select Area
+                                        </option>
+
+
+                                        <option *ngFor="
+                                                let area
+                                                of areaList
+                                            " [value]="area._id">
+
+                                            {{
+                                            area.areaName
+                                            }}
+
+                                            <ng-container *ngIf="area.areaCode">
+
+                                                -
+                                                {{
+                                                area.areaCode
+                                                }}
+
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Route -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Route
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+                                    <select formControlName="route" (change)="onRouteChange()">
+
+                                        <option value="">
+                                            Select Route
+                                        </option>
+
+                                        <option *ngFor="let route of routeList" [value]="route._id">
+
+                                            {{ route.routeName }}
+
+                                            <ng-container *ngIf="route.routeCode">
+                                                - {{ route.routeCode }}
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Salesman -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Salesman
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <select formControlName="salesman">
+
+                                        <option value="">
+                                            Select Salesman
+                                        </option>
+
+
+                                        <option *ngFor="
+                                                let salesman
+                                                of salesmanList
+                                            " [value]="salesman._id">
+
+                                            {{
+                                            salesman.fullName
+                                            }}
+
+                                            <ng-container *ngIf="
+                                                    salesman.employeeCode
+                                                ">
+
+                                                -
+                                                {{
+                                                salesman.employeeCode
+                                                }}
+
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Day -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Day
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <select formControlName="day">
+
+                                        <option value="">
+                                            Select Day
+                                        </option>
+
+                                        <option value="Monday">
+                                            Monday
+                                        </option>
+
+                                        <option value="Tuesday">
+                                            Tuesday
+                                        </option>
+
+                                        <option value="Wednesday">
+                                            Wednesday
+                                        </option>
+
+                                        <option value="Thursday">
+                                            Thursday
+                                        </option>
+
+                                        <option value="Friday">
+                                            Friday
+                                        </option>
+
+                                        <option value="Saturday">
+                                            Saturday
+                                        </option>
+
+                                        <option value="Sunday">
+                                            Sunday
+                                        </option>
+
+                                    </select>
+
+                                </div>
+                                <!-- ================================= -->
+                                <!-- SHOPS -->
+                                <!-- ================================= -->
+
+                                <!-- ================= SHOP SELECTION ================= -->
+                                <div class="form-group shop-selection-section">
+
+                                    <div class="shop-section-header">
+                                        <div>
+                                            <label class="shop-title">
+                                                Select Shops <span class="required">*</span>
+                                            </label>
+
+                                            <small class="shop-subtitle">
+                                                Select shops available in the selected route
+                                            </small>
+                                        </div>
+
+                                        <div class="selected-count" *ngIf="shopsList.length > 0">
+                                            {{ selectedShopIds.length }} / {{ shopsList.length }} Selected
+                                        </div>
+                                    </div>
+
+                                    <!-- No Route -->
+                                    <div class="shop-info-box" *ngIf="!beatPlanForm.get('route')?.value">
+                                        <i class="bi bi-info-circle"></i>
+                                        <span>Please select a route to load shops.</span>
+                                    </div>
+
+                                    <!-- Loading -->
+                                    <div class="shop-loading" *ngIf="isLoadingShops">
+                                        <div class="spinner-border spinner-border-sm"></div>
+                                        <span>Loading shops...</span>
+                                    </div>
+
+                                    <!-- Shops -->
+                                    <div class="shop-picker" *ngIf="!isLoadingShops && shopsList.length > 0">
+
+                                        <!-- Search + Select All -->
+                                        <div class="shop-picker-toolbar">
+
+                                            <div class="shop-search">
+                                                <i class="bi bi-search"></i>
+
+                                                <input type="text" [(ngModel)]="shopSearchText"
+                                                    [ngModelOptions]="{ standalone: true }"
+                                                    placeholder="Search shop name, code or mobile..." />
+                                            </div>
+
+                                            <label class="select-all-checkbox">
+                                                <input type="checkbox" [checked]="selectAllShops"
+                                                    (change)="toggleSelectAll($event)" />
+
+                                                <span>Select All</span>
+                                            </label>
+
+                                        </div>
+
+                                        <!-- Scrollable Shops List -->
+                                        <div class="shops-list">
+
+                                            <label class="shop-item" *ngFor="let shop of filteredShops; let i = index">
+
+                                                <input type="checkbox" [checked]="selectedShopIds.includes(shop._id)"
+                                                    (change)="onShopSelectionChange(shop._id, $event)" />
+
+                                                <span class="custom-checkbox"></span>
+
+                                                <div class="shop-details">
+
+                                                    <div class="shop-name">
+                                                        {{ shop.shopName || shop.partyName || 'Unnamed Shop' }}
+                                                    </div>
+
+                                                    <div class="shop-meta">
+                                                        <span *ngIf="shop.partyCode">
+                                                            <i class="bi bi-upc"></i>
+                                                            {{ shop.partyCode }}
+                                                        </span>
+
+                                                        <span *ngIf="shop.mobile">
+                                                            <i class="bi bi-telephone"></i>
+                                                            {{ shop.mobile }}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+
+                                            </label>
+
+                                            <!-- No Search Result -->
+                                            <div class="no-shop-result" *ngIf="filteredShops.length === 0">
+                                                <i class="bi bi-search"></i>
+                                                <span>No shops found</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- No Shops -->
+                                    <div class="shop-info-box warning" *ngIf="
+                              !isLoadingShops &&
+                              beatPlanForm.get('route')?.value &&
+                              shopsList.length === 0
+                            ">
+                                        <i class="bi bi-shop"></i>
+                                        <span>No shops found for this route.</span>
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- ================================= -->
+                                <!-- Description -->
+                                <!-- ================================= -->
+
+                                <div class="form-group full-width">
+
+                                    <label>
+                                        Description
+                                    </label>
+
+
+                                    <textarea rows="4" formControlName="description"
+                                        placeholder="Enter beat plan description">
+                                    </textarea>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- ====================================== -->
+                            <!-- Preview Area -->
+                            <!-- ====================================== -->
+
+                        </div>
+
+
+                        <!-- ====================================== -->
+                        <!-- Buttons -->
+                        <!-- ====================================== -->
+
+                        <div class="button-group">
+
+
+                            <button type="submit" class="btn-create" [disabled]="isLoading">
+
+
+                                <span *ngIf="!isLoading">
+
+                                    <i class="fa fa-save me-2"></i>
+
+                                    Save Beat Plan
+
+                                </span>
+
+
+                                <span *ngIf="isLoading">
+
+                                    <i class="fa fa-spinner fa-spin me-2">
+                                    </i>
+
+                                    Creating...
+
+                                </span>
+
+
+                            </button>
+
+
+                            <button type="button" class="btn-back" (click)="goBack()">
+
+                                <i class="fa fa-arrow-left me-2"></i>
+
+                                Back
+
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,1012 @@
+<div class="category-container">
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Distributor Details
+            </h2>
+
+            <p>
+                View complete Distributor information
+            </p>
+
+        </div>
+
+
+        <div class="button-section">
+
+            <button type="button" (click)="goBack()">
+
+                <i class="fa fa-arrow-left me-2"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Loading -->
+    <!-- ========================================== -->
+
+    <div class="loading-card" *ngIf="isLoading">
+
+        <i class="fa fa-spinner fa-spin"></i>
+
+        <span>
+            Loading Distributor details...
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Main Details -->
+    <!-- ========================================== -->
+
+    <div *ngIf="
+            !isLoading &&
+            user
+        ">
+
+
+        <!-- ====================================== -->
+        <!-- Profile Header -->
+        <!-- ====================================== -->
+
+        <div class="profile-card">
+
+            <div class="profile-image-wrapper">
+
+                <img *ngIf="user.profileImage" [src]="user.profileImage" alt="Profile Image">
+
+                <div class="profile-placeholder" *ngIf="!user.profileImage">
+
+                    <i class="fa fa-user"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-summary">
+
+                <div class="profile-name-row">
+
+                    <h2>
+                        {{ user.fullName || '-' }}
+                    </h2>
+
+
+                    <span class="status-badge" [ngClass]="
+                            user.status === 'Active'
+                                ? 'active'
+                                : user.status === 'Pending'
+                                ? 'pending'
+                                : user.status === 'Blocked'
+                                ? 'blocked'
+                                : 'inactive'
+                        ">
+
+                        {{ user.status || '-' }}
+
+                    </span>
+
+                </div>
+
+
+                <p class="employee-code">
+
+                    <i class="fa fa-id-badge"></i>
+
+                    {{ user.employeeCode || '-' }}
+
+                </p>
+
+
+                <div class="role-badge">
+
+                    <i class="fa fa-user-shield"></i>
+
+                    {{ getRoleLabel(user.role) }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Personal Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Personal Information
+                    </h4>
+
+                    <p>
+                        Basic user details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        First Name
+                    </span>
+
+                    <strong>
+                        {{ user.firstName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Last Name
+                    </span>
+
+                    <strong>
+                        {{ user.lastName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Gender
+                    </span>
+
+                    <strong>
+                        {{ user.gender || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Date of Birth
+                    </span>
+
+                    <strong>
+                        {{
+                        user.dateOfBirth
+                        ? (
+                        user.dateOfBirth
+                        | date:'dd-MM-yyyy'
+                        )
+                        : '-'
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Contact Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Contact Information
+                    </h4>
+
+                    <p>
+                        Phone and email details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Mobile Number
+                    </span>
+
+                    <strong>
+                        {{ user.mobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Alternate Mobile
+                    </span>
+
+                    <strong>
+                        {{ user.alternateMobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong>
+                        {{ user.email || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Role & Assignment -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Role & Assignment
+                    </h4>
+
+                    <p>
+                        Access and organizational assignment
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Role -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Role
+                    </span>
+
+                    <strong>
+                        {{ getRoleLabel(user.role) }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Warehouse -->
+
+                <div class="detail-item" *ngIf="user.warehouse">
+
+                    <span>
+                        Warehouse
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.warehouseName
+                        || '-'
+                        }}
+
+                    </strong>
+
+                    <small>
+
+                        {{
+                        user.warehouse.warehouseCode
+                        || '-'
+                        }}
+
+                    </small>
+
+                </div>
+
+
+                <!-- Area -->
+
+                <div class="detail-item" *ngIf="user.area">
+
+                    <span>
+                        Area
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.area.areaName ||
+                        user.area.name ||
+                        '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Route -->
+
+                <div class="detail-item" *ngIf="user.route">
+
+                    <span>
+                        Route
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.route.routeName ||
+                        user.route.name ||
+                        '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Reporting Manager -->
+
+                <div class="detail-item" *ngIf="user.reportingManager">
+
+                    <span>
+                        Reporting Manager
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.reportingManager.fullName
+                        || '-'
+                        }}
+
+                    </strong>
+
+                    <small>
+
+                        {{
+                        user.reportingManager.employeeCode
+                        || ''
+                        }}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Warehouse Details -->
+        <!-- ====================================== -->
+
+        <div class="view-card" *ngIf="
+                user.role === 'WarehouseManager' &&
+                user.warehouse
+            ">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Warehouse Details
+                    </h4>
+
+                    <p>
+                        Assigned warehouse information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Warehouse Name
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.warehouseName
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Warehouse Code
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.warehouseCode
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Warehouse Type
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.warehouseType
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Manager Name
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.managerName
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Warehouse Mobile
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.mobileNumber
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Warehouse Email
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.email
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item full-width">
+
+                    <span>
+                        Warehouse Address
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.address
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        City
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.city
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.state
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Pincode
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.warehouse.pincode
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Distributor Details -->
+        <!-- ====================================== -->
+
+        <div class="view-card" *ngIf="
+                user.role === 'Distributor'
+            ">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Distributor Details
+                    </h4>
+
+                    <p>
+                        Business and shop information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Distributor Name
+                    </span>
+
+                    <strong>
+                        {{ user.distributorName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Shop Name
+                    </span>
+
+                    <strong>
+                        {{ user.shopName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        GST Number
+                    </span>
+
+                    <strong>
+                        {{ user.gstNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        PAN Number
+                    </span>
+
+                    <strong>
+                        {{ user.panNumber || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Address -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Address
+                    </h4>
+
+                    <p>
+                        Registered address information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item full-width">
+
+                    <span>
+                        Address Line 1
+                    </span>
+
+                    <strong>
+                        {{ user.addressLine1 || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item full-width">
+
+                    <span>
+                        Address Line 2
+                    </span>
+
+                    <strong>
+                        {{ user.addressLine2 || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        City
+                    </span>
+
+                    <strong>
+                        {{ user.city || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong>
+                        {{ user.state || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Pincode
+                    </span>
+
+                    <strong>
+                        {{ user.pincode || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Approval & Account -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Account Information
+                    </h4>
+
+                    <p>
+                        Approval and account status
+                    </p>
+
+                </div>
+
+
+                <span class="status-badge" [ngClass]="
+                        user.isApproved
+                            ? 'active'
+                            : 'pending'
+                    ">
+
+                    {{
+                    user.isApproved
+                    ? 'Approved'
+                    : 'Pending Approval'
+                    }}
+
+                </span>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Account Status
+                    </span>
+
+                    <strong>
+                        {{ user.status || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Approved At
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.approvedAt
+                        ? (
+                        user.approvedAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Last Login
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.lastLoginAt
+                        ? (
+                        user.lastLoginAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        )
+                        : 'Never Logged In'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Created At
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.createdAt
+                        ? (
+                        user.createdAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        )
+                        : '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item" *ngIf="user.approvedBy">
+
+                    <span>
+                        Approved By
+                    </span>
+
+                    <strong>
+
+                        {{
+                        user.approvedBy.fullName
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Bottom Back -->
+        <!-- ====================================== -->
+
+        <div class="button-group">
+
+            <button type="button" class="btn-back" (click)="goBack()">
+
+                <i class="fa fa-arrow-left me-2"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- No Data -->
+    <!-- ========================================== -->
+
+    <div class="empty-state" *ngIf="
+            !isLoading &&
+            !user
+        ">
+
+        <i class="fa fa-user-slash"></i>
+
+        <h4>
+            User Not Found
+        </h4>
+
+        <p>
+            Unable to load user details.
+        </p>
+
+        <button type="button" class="btn-back" (click)="goBack()">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>

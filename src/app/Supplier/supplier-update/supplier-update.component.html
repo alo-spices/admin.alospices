@@ -1,0 +1,439 @@
+<div class="container-fluid supplier-container">
+
+    <div class="supplier-wrapper">
+
+        <!-- Header -->
+
+        <div class="page-header">
+
+            <h2>
+
+                Update Supplier
+
+            </h2>
+
+            <p>
+
+                Update supplier information
+
+            </p>
+
+        </div>
+
+        <!-- Card -->
+
+        <div class="supplier-card">
+
+            <form
+                [formGroup]="supplierForm"
+                (ngSubmit)="updateSupplier()">
+
+                <div class="row">
+
+                    <!-- Supplier Code -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Supplier Code
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="supplierCode"
+                            readonly>
+
+                    </div>
+
+                    <!-- Supplier Name -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Supplier Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="supplierName">
+
+                    </div>
+
+                    <!-- Contact Person -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Contact Person
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="contactPerson">
+
+                    </div>
+
+                    <!-- Mobile -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Mobile Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="mobileNumber">
+
+                    </div>
+
+                    <!-- Alternate Mobile -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Alternate Mobile
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="alternateMobileNumber">
+
+                    </div>
+
+                    <!-- Email -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Email
+
+                        </label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            formControlName="email">
+
+                    </div>
+
+                    <!-- City -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            City
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="city">
+
+                    </div>
+
+                    <!-- District -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            District
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="district">
+
+                    </div>
+
+                    <!-- State -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            State
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="state">
+
+                    </div>
+
+                    <!-- Country -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Country
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="country">
+
+                    </div>
+
+                    <!-- Pincode -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Pincode
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="pincode">
+
+                    </div>
+
+                    <!-- GST -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            GST Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="gstNumber">
+
+                    </div>
+
+                    <!-- PAN -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            PAN Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="panNumber">
+
+                    </div>
+
+                    <!-- Payment Terms -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Payment Terms
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="paymentTerms">
+
+                    </div>
+
+                    <!-- Opening Balance -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Opening Balance
+
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            formControlName="openingBalance">
+
+                    </div>
+
+                    <!-- Account Holder -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Account Holder
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="accountHolderName">
+
+                    </div>
+
+                    <!-- Bank -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Bank Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="bankName">
+
+                    </div>
+
+                    <!-- Account Number -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Account Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="accountNumber">
+
+                    </div>
+
+                    <!-- IFSC -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            IFSC Code
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="ifscCode">
+
+                    </div>
+
+                    <!-- Status -->
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <label class="form-label">
+
+                            Status
+
+                        </label>
+
+                        <select
+                            class="form-select"
+                            formControlName="status">
+
+                            <option value="Active">
+
+                                Active
+
+                            </option>
+
+                            <option value="Inactive">
+
+                                Inactive
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Address -->
+
+                    <div class="col-12 mb-4">
+
+                        <label class="form-label">
+
+                            Address
+
+                        </label>
+
+                        <textarea
+                            rows="4"
+                            class="form-control"
+                            formControlName="address">
+
+                        </textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="button-section">
+
+                    <button
+                        type="submit"
+                        class="btn btn-save">
+
+                        <i class="fa fa-save me-2"></i>
+
+                        Update Supplier
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-back"
+                        (click)="goBack()">
+
+                        <i class="fa fa-arrow-left me-2"></i>
+
+                        Back
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

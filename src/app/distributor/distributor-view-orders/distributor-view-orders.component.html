@@ -1,0 +1,580 @@
+<div class="order-popup">
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <div class="popup-header">
+
+        <div>
+
+            <h2>
+                Order Details
+            </h2>
+
+            <p>
+                Complete order information
+            </p>
+
+        </div>
+
+
+        <button type="button" class="close-btn" (click)="close()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         ORDER HEADER
+    =========================================== -->
+
+    <div class="order-header-card">
+
+        <div class="order-icon">
+
+            <i class="fa-solid fa-receipt"></i>
+
+        </div>
+
+
+        <div class="order-main-info">
+
+            <h3>
+                {{ data?.orderNumber || '-' }}
+            </h3>
+
+            <span>
+                {{ data?.partyType || '-' }}
+            </span>
+
+        </div>
+
+
+        <div class="order-status">
+
+            <span class="status-badge" [ngClass]="
+                    data?.orderStatus == 'Pending'
+                        ? 'pending'
+                        : 'success'
+                ">
+
+                {{ data?.orderStatus || '-' }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         PARTY / CUSTOMER DETAILS
+    =========================================== -->
+
+    <div class="section-title">
+
+        <h4>
+            Customer Details
+        </h4>
+
+    </div>
+
+
+    <div class="party-card">
+
+        <!-- Shop -->
+
+        <div class="party-main">
+
+
+            <div>
+
+                <h3>
+                    <i class="fa-solid fa-store"></i> {{ data?.party?.shopName || '-' }}
+                </h3>
+
+                <span>
+                    {{ data?.partyType || '-' }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="party-details-grid">
+
+            <!-- Mobile -->
+
+            <div class="detail-item" *ngIf="!data?.party?.mobile">
+
+                <label>
+                    Mobile
+                </label>
+
+                <strong>
+                    {{ data?.party?.mobile || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="detail-item" *ngIf="!data?.party?.email">
+
+                <label>
+                    Email
+                </label>
+
+                <strong>
+                    {{ data?.party?.email || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- GST -->
+
+            <div class="detail-item">
+
+                <label>
+                    GST Number
+                </label>
+
+                <strong>
+                    {{ data?.party?.gstNumber || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- PAN -->
+
+            <div class="detail-item">
+
+                <label>
+                    PAN Number
+                </label>
+
+                <strong>
+                    {{ data?.party?.panNumber || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- City -->
+
+            <div class="detail-item">
+
+                <label>
+                    City
+                </label>
+
+                <strong>
+                    {{ data?.party?.city || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- State -->
+
+            <div class="detail-item">
+
+                <label>
+                    State
+                </label>
+
+                <strong>
+                    {{ data?.party?.state || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- Pincode -->
+
+            <div class="detail-item">
+
+                <label>
+                    Pincode
+                </label>
+
+                <strong>
+                    {{ data?.party?.pincode || '-' }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         EMPLOYEE DETAILS
+    =========================================== -->
+
+    <div class="section-title">
+
+        <h4>
+            Sales Employee
+        </h4>
+
+    </div>
+
+
+    <div class="employee-card">
+
+        <div class="employee-main">
+
+
+
+            <!-- Employee Info -->
+
+            <div class="employee-info">
+
+                <h3>
+                    {{ data?.employee?.fullName || '-' }}
+                </h3>
+
+                <span>
+                    {{ data?.employee?.employeeCode || '-' }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="employee-details-grid">
+
+            <!-- Mobile -->
+
+            <div class="detail-item">
+
+                <label>
+                    Mobile
+                </label>
+
+                <strong>
+                    {{ data?.employee?.mobile || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- Role -->
+
+            <div class="detail-item">
+
+                <label>
+                    Role
+                </label>
+
+                <strong>
+                    {{ data?.employee?.role || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- Assignment -->
+
+            <div class="detail-item">
+
+                <label>
+                    Assignment Type
+                </label>
+
+                <strong>
+                    {{ data?.employee?.assignmentType || '-' }}
+                </strong>
+
+            </div>
+
+
+            <!-- Distributor -->
+
+            <div class="detail-item">
+
+                <label>
+                    Distributor
+                </label>
+
+                <strong>
+                    {{
+                    data?.employee?.distributor
+                    ?.distributorName
+                    ||
+                    data?.employee?.distributor
+                    ?.fullName
+                    ||
+                    '-'
+                    }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         ORDER INFORMATION
+    =========================================== -->
+
+    <div class="section-title">
+
+        <h4>
+            Order Information
+        </h4>
+
+    </div>
+
+
+    <div class="detail-grid">
+
+        <!-- Order Number -->
+
+        <div class="detail-item">
+
+            <label>
+                Order Number
+            </label>
+
+            <strong>
+                {{ data?.orderNumber || '-' }}
+            </strong>
+
+        </div>
+
+
+        <!-- Customer Type -->
+
+        <div class="detail-item">
+
+            <label>
+                Customer Type
+            </label>
+
+            <strong>
+                {{ data?.partyType || '-' }}
+            </strong>
+
+        </div>
+
+
+        <!-- Order Date -->
+
+        <div class="detail-item">
+
+            <label>
+                Order Date
+            </label>
+
+            <strong>
+                {{
+                data?.orderDate
+                | date:'dd MMM yyyy, hh:mm a'
+                }}
+            </strong>
+
+        </div>
+
+
+        <!-- Order Status -->
+
+        <div class="detail-item">
+
+            <label>
+                Order Status
+            </label>
+
+            <span class="status-badge" [ngClass]="
+                    data?.orderStatus == 'Pending'
+                        ? 'pending'
+                        : 'success'
+                ">
+
+                {{ data?.orderStatus || '-' }}
+
+            </span>
+
+        </div>
+
+
+        <!-- Payment Status -->
+
+        <div class="detail-item">
+
+            <label>
+                Payment Status
+            </label>
+
+            <span class="status-badge" [ngClass]="
+                    data?.paymentStatus == 'Paid'
+                        ? 'success'
+                        : 'pending'
+                ">
+
+                {{ data?.paymentStatus || '-' }}
+
+            </span>
+
+        </div>
+
+
+        <!-- Paid Amount -->
+
+        <div class="detail-item">
+
+            <label>
+                Paid Amount
+            </label>
+
+            <strong>
+                ₹{{ data?.paidAmount || 0 }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         AMOUNT DETAILS
+    =========================================== -->
+
+    <div class="section-title">
+
+        <h4>
+            Amount Details
+        </h4>
+
+    </div>
+
+
+    <div class="amount-card">
+
+        <div class="amount-row">
+
+            <span>
+                Sub Total
+            </span>
+
+            <strong>
+                ₹{{ data?.subTotal || 0 }}
+            </strong>
+
+        </div>
+
+
+        <div class="amount-row">
+
+            <span>
+                Discount
+            </span>
+
+            <strong class="discount">
+
+                - ₹{{ data?.discountAmount || 0 }}
+
+            </strong>
+
+        </div>
+
+
+        <div class="amount-row">
+
+            <span>
+                Taxable Amount
+            </span>
+
+            <strong>
+                ₹{{ data?.taxableAmount || 0 }}
+            </strong>
+
+        </div>
+
+
+        <div class="amount-row">
+
+            <span>
+                GST
+            </span>
+
+            <strong>
+                ₹{{ data?.gstAmount || 0 }}
+            </strong>
+
+        </div>
+
+
+        <div class="amount-row total-row">
+
+            <span>
+                Grand Total
+            </span>
+
+            <strong>
+                ₹{{ data?.grandTotal || 0 }}
+            </strong>
+
+        </div>
+
+
+        <div class="amount-row balance-row">
+
+            <span>
+                Balance Amount
+            </span>
+
+            <strong>
+                ₹{{ data?.balanceAmount || 0 }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         REMARKS
+    =========================================== -->
+
+    <div class="remarks-section" *ngIf="data?.remarks">
+
+        <label>
+            Remarks
+        </label>
+
+        <p>
+            {{ data.remarks }}
+        </p>
+
+    </div>
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <div class="popup-footer">
+
+        <button type="button" class="close-action" (click)="close()">
+
+            CLOSE
+
+        </button>
+
+    </div>
+
+</div>

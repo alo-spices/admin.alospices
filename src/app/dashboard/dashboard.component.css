@@ -1,0 +1,2185 @@
+/* =========================================================
+   GLOBAL LAYOUT
+========================================================= */
+
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-color);
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  width: 350px;
+  height: 100vh;
+
+  background: var(--sidebar-bg);
+  color: var(--text-light);
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  z-index: 100;
+
+  transition: all 0.3s ease;
+
+  box-shadow: 4px 0 12px var(--shadow-light);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+
+/* Collapsed */
+
+.sidebar.collapsed {
+  width: 90px;
+  min-width: 90px;
+}
+
+
+/* Hover Expand */
+
+.sidebar.collapsed.hover-expand {
+  width: 350px;
+  min-width: 270px;
+}
+
+
+/* =========================================================
+   SIDEBAR LOGO
+========================================================= */
+
+.sidebar-logo {
+  height: 100px;
+  min-height: 100px;
+
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+}
+
+
+.logo-icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+
+.logo-icon img {
+  width: 50px;
+  max-width: none;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+
+/* Collapsed Logo */
+.sidebar.collapsed .sidebar-logo {
+  padding: 0 15px;
+  justify-content: center;
+}
+
+.sidebar.collapsed .logo-icon {
+  justify-content: center;
+}
+
+.sidebar.collapsed .logo-icon p {
+  display: none;
+}
+
+.sidebar.collapsed .logo-icon img {
+  width: 30px;
+}
+
+.sidebar.collapsed .submenu-item {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-group .group-header span {
+  display: none;
+}
+
+.sidebar.collapsed .group-header .fa-chevron-right {
+  display: none;
+}
+
+/* Hover Expanded Logo */
+
+.sidebar.collapsed.hover-expand .sidebar-logo {
+  padding: 0 22px;
+  justify-content: flex-start;
+}
+
+.sidebar.collapsed.hover-expand .submenu-item {
+  display: block;
+}
+
+.sidebar.collapsed.hover-expand .group-header .fa-chevron-right {
+  display: block;
+}
+
+.sidebar.collapsed.hover-expand .sidebar-group .group-header span,
+.fa-chevron-right {
+  display: block;
+}
+
+.sidebar.collapsed.hover-expand .logo-icon {
+  justify-content: flex-start;
+}
+
+.sidebar.collapsed.hover-expand .logo-icon img {
+  width: 50px;
+}
+
+
+.sidebar.collapsed.hover-expand .logo-icon p {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================================
+   SIDEBAR MENU
+========================================================= */
+
+.sidebar-menu {
+  padding: 18px 12px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+
+/* =========================================================
+   NORMAL MENU ITEM
+========================================================= */
+
+.menu-item {
+  min-height: 50px;
+
+  padding: 0 16px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  color: rgba(255, 255, 255, 0.86);
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+
+  white-space: nowrap;
+}
+
+
+.menu-item i {
+  min-width: 24px;
+
+  width: 24px;
+
+  text-align: center;
+
+  font-size: 17px;
+}
+
+
+/* Hover */
+
+.menu-item:hover {
+  background: var(--hover-color);
+
+  color: #ffffff;
+
+  transform: translateX(3px);
+}
+
+
+/* Active */
+
+.menu-item.active {
+  background: var(--primary-color);
+
+  color: #ffffff;
+
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================================
+   COLLAPSED MENU
+========================================================= */
+
+.sidebar.collapsed .menu-item {
+  justify-content: center;
+
+  padding: 0;
+
+  gap: 0;
+}
+
+
+.sidebar.collapsed .menu-item i {
+  min-width: auto;
+
+  width: auto;
+}
+
+
+/* =========================================================
+   HOVER EXPANDED MENU
+========================================================= */
+
+.sidebar.collapsed.hover-expand .menu-item {
+  justify-content: flex-start;
+
+  padding: 0 16px;
+
+  gap: 14px;
+}
+
+
+.sidebar.collapsed.hover-expand .menu-item i {
+  min-width: 24px;
+
+  width: 24px;
+}
+
+
+/* =========================================================
+   SIDEBAR GROUP
+   Masters / Inventory / Production / Sales
+========================================================= */
+
+.sidebar-group {
+  width: 100%;
+}
+
+
+/* Remove default marker */
+
+.sidebar-group summary {
+  list-style: none;
+}
+
+.sidebar-group summary::-webkit-details-marker {
+  display: none;
+}
+
+
+/* =========================================================
+   GROUP HEADER
+========================================================= */
+
+.group-header {
+  min-height: 50px;
+
+  padding: 0 16px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 12px;
+
+  transition: all 0.25s ease;
+
+  user-select: none;
+}
+
+
+.group-header:hover {
+  background: var(--hover-color);
+
+  color: #ffffff;
+}
+
+
+.group-left {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+.group-left i {
+  width: 24px;
+
+  min-width: 24px;
+
+  text-align: center;
+
+  font-size: 17px;
+}
+
+
+/* Arrow */
+
+.group-arrow {
+  font-size: 11px !important;
+
+  width: auto !important;
+  min-width: auto !important;
+
+  transition: transform 0.25s ease;
+}
+
+
+/* Rotate arrow */
+
+.sidebar-group[open] .group-arrow {
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   SUB MENU
+========================================================= */
+
+.submenu-item {
+  min-height: 44px;
+
+  margin: 3px 0 3px 18px;
+
+  padding-left: 16px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+
+  position: relative;
+}
+
+
+/* Vertical line */
+
+.submenu-item::before {
+  content: "";
+
+  position: absolute;
+
+  left: -8px;
+
+  top: 8px;
+
+  bottom: 8px;
+
+  width: 2px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border-radius: 10px;
+}
+
+
+/* Submenu icon */
+
+.submenu-item i {
+  font-size: 14px;
+
+  min-width: 20px;
+
+  width: 20px;
+}
+
+
+/* Submenu Hover */
+
+.submenu-item:hover {
+  transform: translateX(3px);
+
+  background: var(--hover-color);
+}
+
+
+/* Submenu Active */
+
+.submenu-item.active {
+  background: var(--primary-color);
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN WRAPPER
+========================================================= */
+
+.main-wrapper {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   TOP NAVBAR
+========================================================= */
+
+.top-navbar {
+  height: 80px;
+  min-height: 80px;
+
+  padding: 0 26px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  border-bottom: 1px solid var(--border-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.05);
+
+  position: relative;
+
+  z-index: 900;
+}
+
+
+/* =========================================================
+   NAVBAR LEFT
+========================================================= */
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   TOGGLE BUTTON
+========================================================= */
+
+.toggle-btn {
+  position: relative;
+
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(166, 61, 34, 0.10);
+
+  border-radius: 14px;
+
+  background: rgba(166, 61, 34, 0.07);
+
+  color: var(--primary-color);
+
+  font-size: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.toggle-btn:hover {
+  background: var(--primary-color);
+
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(166, 61, 34, 0.20);
+}
+
+.toggle-btn i {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.topnav-heading {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.topnav-heading h2 {
+  margin: 0;
+
+  font-size: 20px;
+
+  font-weight: 750;
+
+  line-height: 1.25;
+
+  color: var(--primary-light);
+
+  white-space: nowrap;
+}
+
+.topnav-heading span {
+  margin-top: 3px;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  color: #999999;
+
+  letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   NAVBAR RIGHT
+========================================================= */
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+/* =========================================================
+   ADMIN GUIDANCE
+========================================================= */
+
+.guidance-btn {
+  position: relative;
+
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 14px;
+
+  border: 1px solid rgba(166, 61, 34, 0.12);
+
+  border-radius: 12px;
+
+  background: rgba(166, 61, 34, 0.05);
+
+  color: var(--primary-color);
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  transition:
+    all 0.25s ease;
+}
+
+.guidance-btn:hover {
+  background: rgba(166, 61, 34, 0.10);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(166, 61, 34, 0.10);
+}
+
+.guidance-btn i,
+.guidance-btn span:not(.nav-glass-shine) {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   ROLE BADGE
+========================================================= */
+
+.role-badge {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 12px;
+
+  border-radius: 12px;
+
+  background: rgba(166, 61, 34, 0.06);
+
+  border: 1px solid rgba(166, 61, 34, 0.10);
+
+  color: var(--primary-color);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.role-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #43a047;
+
+  box-shadow:
+    0 0 0 4px rgba(67, 160, 71, 0.10);
+
+  animation: rolePulse 2s ease-in-out infinite;
+}
+
+@keyframes rolePulse {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(67, 160, 71, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(67, 160, 71, 0.03);
+  }
+
+}
+
+
+/* =========================================================
+   ICON BUTTON
+========================================================= */
+
+.icon-btn {
+  position: relative;
+
+  width: 44px;
+  height: 44px;
+
+  border: 1px solid rgba(166, 61, 34, 0.10);
+
+  border-radius: 13px;
+
+  background: rgba(166, 61, 34, 0.055);
+
+  color: var(--primary-color);
+
+  font-size: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  transition:
+    all 0.25s ease;
+}
+
+.icon-btn:hover {
+  background: var(--primary-color);
+
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(166, 61, 34, 0.20);
+}
+
+.icon-btn i {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   NOTIFICATION DOT
+========================================================= */
+
+.notification-btn {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+
+  top: 9px;
+  right: 9px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #e53935;
+
+  border: 1px solid #ffffff;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   PROFILE WRAPPER
+========================================================= */
+
+.profile-wrapper {
+  position: relative;
+
+  margin-left: 3px;
+}
+
+
+/* =========================================================
+   PROFILE BUTTON
+========================================================= */
+
+.profile-btn {
+  position: relative;
+
+  min-width: 150px;
+
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 4px 9px 4px 5px;
+
+  border: 1px solid rgba(166, 61, 34, 0.13);
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.90),
+      rgba(166, 61, 34, 0.06));
+
+  color: var(--text-primary);
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.05);
+
+  transition:
+    all 0.3s ease;
+}
+
+.profile-btn:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(166, 61, 34, 0.22);
+
+  box-shadow:
+    0 9px 24px rgba(0, 0, 0, 0.09);
+}
+
+
+/* =========================================================
+   PROFILE AVATAR
+========================================================= */
+
+.profile-avatar {
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(135deg,
+      var(--primary-color),
+      #7e2d17);
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  box-shadow:
+    0 5px 14px rgba(166, 61, 34, 0.20);
+}
+
+.profile-avatar i {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   PROFILE TEXT
+========================================================= */
+
+.profile-text {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  flex: 1;
+
+  min-width: 0;
+}
+
+.profile-text strong {
+  max-width: 90px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+.profile-text span {
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  color: #999999;
+}
+
+
+/* =========================================================
+   PROFILE ARROW
+========================================================= */
+
+.profile-arrow {
+  font-size: 10px;
+
+  color: #888888;
+
+  transition:
+    transform 0.25s ease;
+}
+
+.profile-arrow.rotate {
+  transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   PROFILE DROPDOWN
+========================================================= */
+
+.profile-dropdown {
+  position: absolute;
+
+  top: calc(100% + 12px);
+
+  right: 0;
+
+  width: 280px;
+
+  padding: 12px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255, 255, 255, 0.90);
+
+  border: 1px solid rgba(255, 255, 255, 0.80);
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.90);
+
+  animation: profileDropdownIn 0.22s ease forwards;
+
+  transform-origin: top right;
+
+  z-index: 3000;
+}
+
+
+@keyframes profileDropdownIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-8px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0) scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   DROPDOWN PROFILE HEADER
+========================================================= */
+
+.dropdown-profile-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 10px 8px 14px;
+}
+
+.dropdown-avatar {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(135deg,
+      var(--primary-color),
+      #7e2d17);
+
+  color: #ffffff;
+
+  font-size: 17px;
+}
+
+.dropdown-profile-header h4 {
+  margin: 0;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #222222;
+}
+
+.dropdown-profile-header span {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 11px;
+
+  color: #999999;
+}
+
+
+/* =========================================================
+   DROPDOWN DIVIDER
+========================================================= */
+
+.dropdown-divider {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 5px 0;
+
+  background: rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   PROFILE MENU ITEMS
+========================================================= */
+
+.profile-menu-item {
+  position: relative;
+
+  width: 100%;
+
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 8px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: transparent;
+
+  color: #444444;
+
+  font-size: 13px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.profile-menu-item:hover {
+  background: rgba(166, 61, 34, 0.07);
+
+  color: var(--primary-color);
+
+  transform: translateX(2px);
+}
+
+.profile-menu-item>span:nth-child(2) {
+  flex: 1;
+}
+
+.profile-menu-item>i {
+  font-size: 9px;
+
+  color: #aaa;
+}
+
+
+/* =========================================================
+   PROFILE MENU ICON
+========================================================= */
+
+.profile-menu-icon {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: rgba(166, 61, 34, 0.07);
+
+  color: var(--primary-color);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   PROFILE LOGOUT
+========================================================= */
+
+.profile-logout {
+  position: relative;
+
+  width: 100%;
+
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 9px;
+
+  border: 1px solid rgba(220, 53, 69, 0.12);
+
+  border-radius: 12px;
+
+  background: rgba(220, 53, 69, 0.06);
+
+  color: #dc3545;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  transition: all 0.25s ease;
+}
+
+.profile-logout:hover {
+  background: rgba(220, 53, 69, 0.10);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 16px rgba(220, 53, 69, 0.10);
+}
+
+.profile-logout .logout-icon {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: rgba(220, 53, 69, 0.10);
+
+  color: #dc3545;
+}
+
+
+/* =========================================================
+   GLASS SHINE
+========================================================= */
+
+.nav-glass-shine,
+.logout-shine {
+  position: absolute;
+
+  top: 0;
+  left: -130%;
+
+  width: 55%;
+  height: 100%;
+
+  background:
+    linear-gradient(110deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent);
+
+  transform: skewX(-20deg);
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+/* Navbar hover shine */
+
+.guidance-btn:hover .nav-glass-shine,
+.icon-btn:hover .nav-glass-shine,
+.profile-btn:hover .nav-glass-shine {
+  animation:
+    navbarGlassShine 0.75s ease forwards;
+}
+
+
+/* Logout shine */
+
+.profile-logout:hover .logout-shine {
+  animation:
+    navbarGlassShine 0.75s ease forwards;
+}
+
+
+@keyframes navbarGlassShine {
+
+  0% {
+    left: -130%;
+  }
+
+  100% {
+    left: 140%;
+  }
+
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+
+  padding: 24px;
+
+  background: var(--bg-color);
+}
+
+
+/* =========================================================
+   ROUTER CONTAINER
+========================================================= */
+
+.router-container {
+  min-height: 500px;
+
+  background: var(--card-bg);
+
+  border-radius: 24px;
+
+  padding: 24px;
+
+  border: 1px solid var(--border-color);
+
+  box-shadow: 0 8px 24px var(--shadow-light);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.sidebar::-webkit-scrollbar,
+.main-content::-webkit-scrollbar {
+  width: 7px;
+}
+
+
+.sidebar::-webkit-scrollbar-track,
+.main-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb,
+.main-content::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+
+  border-radius: 20px;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 992px) {
+
+  .sidebar {
+    width: 90px;
+    min-width: 90px;
+  }
+
+  .sidebar-logo {
+    padding: 0 15px;
+    justify-content: center;
+  }
+
+  .logo-icon {
+    justify-content: center;
+  }
+
+  .logo-icon img {
+    width: 60px;
+  }
+
+  .sidebar-menu .menu-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .sidebar-menu .menu-item i {
+    min-width: auto;
+    width: auto;
+  }
+
+  .sidebar-group {
+    display: none;
+  }
+
+  .topnav-heading h2 {
+    font-size: 18px;
+  }
+
+  .main-content {
+    padding: 18px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 70px;
+    min-width: 70px;
+  }
+
+  .sidebar.collapsed {
+    width: 70px;
+    min-width: 70px;
+  }
+
+  .sidebar.collapsed.hover-expand {
+    width: 250px;
+    min-width: 250px;
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    box-shadow: 8px 0 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .top-navbar {
+    height: 70px;
+    min-height: 70px;
+
+    padding: 0 14px;
+  }
+
+  .toggle-btn {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+  }
+
+  .topnav-heading h2 {
+    font-size: 15px;
+  }
+
+  .profile-info {
+    display: none;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 11px;
+  }
+
+  .main-content {
+    padding: 12px;
+  }
+
+  .router-container {
+    padding: 15px;
+
+    border-radius: 18px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .navbar-right {
+    gap: 6px;
+  }
+
+  .navbar-left {
+    gap: 8px;
+  }
+
+  .topnav-heading h2 {
+    font-size: 14px;
+  }
+
+  .main-content {
+    padding: 8px;
+  }
+
+  .router-container {
+    padding: 10px;
+
+    border-radius: 14px;
+  }
+
+}
+
+.admin-guidence a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+/* ==========================================
+   GLASS LOGOUT BUTTON
+========================================== */
+
+.glass-logout-btn {
+  position: relative;
+
+  width: 100%;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 0 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.10);
+
+  color: #ffffff;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    all 0.3s ease;
+}
+
+
+/* ==========================================
+   ICON
+========================================== */
+
+.logout-icon {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  transition: all 0.3s ease;
+}
+
+.logout-icon i {
+  font-size: 18px;
+
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   TEXT
+========================================== */
+
+.logout-text {
+  font-size: 14px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.3px;
+
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   HOVER
+========================================== */
+
+.glass-logout-btn:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.17);
+
+  border-color: rgba(255, 255, 255, 0.40);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.glass-logout-btn:hover .logout-icon {
+  transform: rotate(-8deg) scale(1.08);
+
+  background: rgba(255, 255, 255, 0.20);
+}
+
+
+/* ==========================================
+   ACTIVE
+========================================== */
+
+.glass-logout-btn:active {
+  transform: scale(0.97);
+}
+
+
+/* ==========================================
+   SHINE ANIMATION
+========================================== */
+
+.logout-shine {
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.20),
+      transparent);
+
+  transform: skewX(-20deg);
+
+  pointer-events: none;
+}
+
+.glass-logout-btn:hover .logout-shine {
+  left: 130%;
+
+  transition: left 1s ease;
+}
+
+
+/* ==========================================
+   FOCUS
+========================================== */
+
+.glass-logout-btn:focus-visible {
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.18),
+    0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================================
+   GLASS ANIMATION - SIDEBAR MENU ITEMS
+========================================================= */
+
+.menu-item {
+  position: relative;
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+.menu-item::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  background: linear-gradient(110deg,
+      transparent,
+      rgba(255, 255, 255, 0.18),
+      transparent);
+
+  transform: skewX(-20deg);
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+
+/* Glass shine */
+
+.menu-item:hover::before {
+  animation: sidebarGlassShine 1s ease forwards;
+}
+
+
+@keyframes sidebarGlassShine {
+
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 140%;
+  }
+
+}
+
+/* =========================================================
+   GLASS ANIMATION - SIDEBAR GROUP HEADERS
+========================================================= */
+
+.group-header {
+  position: relative;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+.group-header::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 65%;
+  height: 100%;
+
+  background: linear-gradient(110deg,
+      transparent,
+      rgba(255, 255, 255, 0.16),
+      transparent);
+
+  transform: skewX(-20deg);
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+.group-header:hover::before {
+  animation: groupGlassShine 1s ease forwards;
+}
+
+
+@keyframes groupGlassShine {
+
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 140%;
+  }
+
+}
+
+
+/* =========================================================
+   GLASS ANIMATION - SIDEBAR LOGO
+========================================================= */
+
+.sidebar-logo {
+  position: relative;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+/* Glass shine */
+
+.sidebar-logo::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 45%;
+  height: 100%;
+
+  background: linear-gradient(110deg,
+      transparent,
+      rgba(255, 255, 255, 0.28),
+      transparent);
+
+  transform: skewX(-20deg);
+
+  pointer-events: none;
+
+  z-index: 2;
+
+  animation: autoLogoGlass 6s ease-in-out infinite;
+}
+
+
+/* Keep logo content above animation */
+
+.logo-icon {
+  position: relative;
+  z-index: 3;
+}
+
+
+/* =========================================================
+   AUTO GLASS KEYFRAME
+========================================================= */
+
+@keyframes autoLogoGlass {
+
+  0% {
+    left: -120%;
+  }
+
+  35% {
+    left: 140%;
+  }
+
+  100% {
+    left: 140%;
+  }
+
+}
+
+/* Keep logo content above shine */
+
+.logo-icon {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* Continuous subtle glass animation */
+
+.sidebar-logo:hover::before {
+  animation: logoGlassShine 1s ease forwards;
+}
+
+
+@keyframes logoGlassShine {
+
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 140%;
+  }
+
+}
+
+/* =========================================================
+   GLASS ANIMATION - TOGGLE BUTTON
+========================================================= */
+
+.toggle-btn {
+  position: relative;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+.toggle-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 65%;
+  height: 100%;
+
+  background: linear-gradient(110deg,
+      transparent,
+      rgba(255, 255, 255, 0.30),
+      transparent);
+
+  transform: skewX(-20deg);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.toggle-btn i {
+  position: relative;
+
+  z-index: 1;
+}
+
+.toggle-btn:hover::before {
+  animation: navbarGlassShine 1s ease forwards;
+}
+
+/* =========================================================
+   GLASS ANIMATION - NAVBAR ICON BUTTONS
+========================================================= */
+
+.icon-btn {
+  position: relative;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+.icon-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 65%;
+  height: 100%;
+
+  background: linear-gradient(110deg,
+      transparent,
+      rgba(255, 255, 255, 0.30),
+      transparent);
+
+  transform: skewX(-20deg);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.icon-btn i {
+  position: relative;
+
+  z-index: 1;
+}
+
+.icon-btn:hover::before {
+  animation: navbarGlassShine 1s ease forwards;
+}
+
+
+@keyframes navbarGlassShine {
+
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 140%;
+  }
+
+}
+
+/* =========================================================
+   GLASS ANIMATION - ADMIN GUIDANCE
+========================================================= */
+
+.admin-guidence {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  padding: 8px 12px;
+}
+
+.admin-guidence a {
+  background-color: var(--text-primary);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.admin-guidence::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 65%;
+  height: 100%;
+
+  background: linear-gradient(110deg,
+      transparent,
+      rgba(166, 61, 34, 0.12),
+      transparent);
+
+  transform: skewX(-20deg);
+
+  pointer-events: none;
+}
+
+.admin-guidence:hover::before {
+  animation: guidanceGlassShine 1s ease forwards;
+}
+
+.admin-guidence a {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+@keyframes guidanceGlassShine {
+
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 140%;
+  }
+
+}
+
+/* ==========================================
+   NESTED STOCK TRANSFER
+========================================== */
+
+.nested-sidebar-group {
+  margin: 2px 8px;
+}
+
+
+/* ==========================================
+   NESTED HEADER
+========================================== */
+
+.nested-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 14px;
+
+  cursor: pointer;
+
+  list-style: none;
+
+  border-radius: 8px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.nested-group-header::-webkit-details-marker {
+  display: none;
+}
+
+
+.nested-group-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.nested-group-left i {
+  width: 20px;
+  text-align: center;
+}
+
+
+.nested-group-arrow {
+  font-size: 11px;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+/* ==========================================
+   OPEN STATE
+========================================== */
+
+.nested-sidebar-group[open] .nested-group-arrow {
+
+  transform: rotate(90deg);
+
+}
+
+
+.nested-sidebar-group[open] .nested-group-header {
+
+  background: rgba(255, 255, 255, 0.08);
+
+}
+
+
+/* ==========================================
+   HOVER
+========================================== */
+
+.nested-group-header:hover {
+
+  background: rgba(255, 255, 255, 0.08);
+
+}
+
+
+/* ==========================================
+   NESTED SUBMENU
+========================================== */
+
+.nested-submenu-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin: 2px 0 2px 18px;
+
+  padding: 9px 14px 9px 18px;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 0 8px 8px 0;
+
+  font-size: 13px;
+
+  transition:
+    background 0.3s ease,
+    padding-left 0.3s ease,
+    color 0.3s ease;
+
+}
+
+
+.nested-submenu-item i {
+
+  width: 18px;
+
+  text-align: center;
+
+  font-size: 12px;
+
+}
+
+
+.nested-submenu-item:hover {
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  padding-left: 23px;
+
+}
+
+
+/* ==========================================
+   ACTIVE
+========================================== */
+
+.nested-submenu-item.active {
+
+  background:
+    rgba(255, 255, 255, 0.12);
+
+}

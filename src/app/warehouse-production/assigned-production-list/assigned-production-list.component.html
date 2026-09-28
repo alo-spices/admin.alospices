@@ -1,0 +1,575 @@
+<div class="category-container">
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Production Instructions
+            </h2>
+
+            <p>
+                Manage production instructions here
+            </p>
+
+        </div>
+
+
+        <!-- <div class="button-section">
+
+            <button routerLink="/admin/create-production-instruction">
+
+                <i class="fa fa-plus me-2"></i>
+
+                Add Production Instruction
+
+            </button>
+
+        </div> -->
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Warehouse Selection -->
+    <!-- ========================================== -->
+    <!-- 
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Select Warehouse
+            </mat-label>
+
+            <mat-select [(value)]="selectedWarehouseId" (selectionChange)="
+                    onWarehouseChange($event.value)
+                ">
+
+                <mat-option *ngFor="
+                        let warehouse
+                        of warehouseList
+                    " [value]="warehouse._id">
+
+                    {{ warehouse.warehouseName }}
+
+                    -
+
+                    {{ warehouse.warehouseCode }}
+
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+    </div> -->
+
+
+    <!-- ========================================== -->
+    <!-- Selected Warehouse Information -->
+    <!-- ========================================== -->
+
+    <div class="warehouse-info-card" *ngIf="selectedWarehouse">
+
+        <div class="warehouse-details">
+
+            <div class="warehouse-icon">
+
+                <i class="fa fa-warehouse"></i>
+
+            </div>
+
+
+            <div class="warehouse-content">
+
+                <h4>
+
+                    {{ selectedWarehouse.warehouseName }}
+
+                </h4>
+
+
+                <p>
+
+                    <span>
+
+                        {{ selectedWarehouse.warehouseCode }}
+
+                    </span>
+
+
+                    <span *ngIf="selectedWarehouse.city">
+
+                        • {{ selectedWarehouse.city }}
+
+                    </span>
+
+
+                    <span *ngIf="selectedWarehouse.state">
+
+                        • {{ selectedWarehouse.state }}
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Search -->
+    <!-- ========================================== -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Search Instruction
+            </mat-label>
+
+            <input matInput placeholder="Search by Instruction No / Raw Material / Batch / SKU"
+                (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Table -->
+    <!-- ========================================== -->
+
+    <div class="table-row">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <!-- ====================================== -->
+            <!-- S.No -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+
+                <td mat-cell *matCellDef="
+                        let element;
+                        let i = index
+                    ">
+
+                    {{
+                    (paginator?.pageIndex || 0)
+                    *
+                    (paginator?.pageSize || 5)
+                    +
+                    i +
+                    1
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Instruction -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="instruction">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Instruction
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{ element.instructionNo }}
+
+                        </h6>
+
+                        <small>
+
+                            {{
+                            element.instructionDate
+                            | date:'dd-MM-yyyy'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Raw Material -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="rawMaterial">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Raw Material
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info" *ngIf="
+                            element.items?.length
+                        ">
+
+                        <h6>
+
+                            {{
+                            element.items[0]
+                            ?.rawMaterial
+                            ?.rawMaterialName
+                            || '-'
+                            }}
+
+                        </h6>
+
+
+                        <small>
+
+                            {{
+                            element.items[0]
+                            ?.rawMaterial
+                            ?.rawMaterialCode
+                            || '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+
+                    <span *ngIf="
+                            !element.items?.length
+                        ">
+
+                        -
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+
+
+
+            <!-- ====================================== -->
+            <!-- Variant / SKU -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="variant">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Production Item
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info" *ngIf="
+                            element.items?.length
+                        ">
+
+                        <h6>
+
+                            {{
+                            element.items[0]
+                            ?.variantName
+                            || '-'
+                            }}
+
+                        </h6>
+
+
+                        <small>
+
+                            {{
+                            element.items[0]
+                            ?.skuCode
+                            || '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+
+                    <span *ngIf="
+                            !element.items?.length
+                        ">
+
+                        -
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Pack Size -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="packSize">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Pack Size
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.items?.[0]?.packSize
+                    || '-'
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Target Packs -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="targetPacks">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Target Packs
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <strong>
+
+                        {{
+                        element.items?.[0]
+                        ?.targetPacks
+                        || 0
+                        }}
+
+                    </strong>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Target Weight -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="targetWeight">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Target Weight
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.items?.[0]
+                    ?.targetWeightKg
+                    || 0
+                    }}
+
+                    KG
+
+                </td>
+
+            </ng-container>
+
+
+
+
+
+            <!-- ====================================== -->
+            <!-- Status -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="status">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Status
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="
+                            getStatusClass(
+                                element.status
+                            )
+                        ">
+
+                        {{ element.status }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+
+
+            <!-- ====================================== -->
+            <!-- Actions -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Actions
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="action-buttons">
+                        <!-- Production Entry -->
+
+                        <!-- Production Entry -->
+
+                        <button type="button" class="btn-production-entry" *ngIf="element.status === 'Accepted'"
+                            (click)="goToProductionEntry(element)">
+
+                            <i class="fa fa-industry me-2"></i>
+
+                            Production Entry
+
+                        </button>
+
+                        <!-- Accept -->
+
+                        <button mat-icon-button class="accept-btn" *ngIf="element.status === 'Pending'" (click)="
+                                acceptProductionInstruction(
+                                    element
+                                )
+                            " matTooltip="Accept">
+
+                            <i class="fa fa-check"></i>
+
+                        </button>
+
+
+                        <!-- View -->
+
+                        <button mat-icon-button class="view-btn" (click)="
+                                viewProductionInstruction(
+                                    element
+                                )
+                            " matTooltip="View">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Header -->
+            <!-- ====================================== -->
+
+            <tr mat-header-row *matHeaderRowDef="
+                    displayedColumns
+                ">
+
+            </tr>
+
+
+            <!-- ====================================== -->
+            <!-- Rows -->
+            <!-- ====================================== -->
+
+            <tr mat-row *matRowDef="
+                    let row;
+                    columns: displayedColumns;
+                ">
+
+            </tr>
+
+
+            <!-- ====================================== -->
+            <!-- No Data -->
+            <!-- ====================================== -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell text-center" colspan="12">
+
+                    No Production Instructions Found
+
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <!-- ========================================== -->
+        <!-- Paginator -->
+        <!-- ========================================== -->
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons>
+
+        </mat-paginator>
+
+    </div>
+
+</div>

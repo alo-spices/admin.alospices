@@ -1,0 +1,459 @@
+<div class="category-container">
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Raw Material Details
+            </h2>
+
+            <p>
+                View complete raw material information
+            </p>
+
+        </div>
+
+
+        <div class="button-section">
+
+            <button type="button" (click)="goBack()">
+
+                <i class="fa fa-arrow-left me-2"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Loading -->
+    <!-- ========================================== -->
+
+    <div class="loading-card" *ngIf="isLoading">
+
+        <i class="fa fa-spinner fa-spin"></i>
+
+        <span>
+            Loading raw material details...
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Main Details -->
+    <!-- ========================================== -->
+
+    <div *ngIf="
+            !isLoading &&
+            rawMaterial
+        ">
+
+
+        <!-- ====================================== -->
+        <!-- Basic Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Basic Information
+                    </h4>
+
+                    <p>
+                        Raw material master details
+                    </p>
+
+                </div>
+
+
+                <span class="status-badge" [ngClass]="
+                        rawMaterial.status === 'Active'
+                            ? 'active'
+                            : 'inactive'
+                    ">
+
+                    {{ rawMaterial.status }}
+
+                </span>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Raw Material Name -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Raw Material Name
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.rawMaterialName
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Raw Material Code -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Raw Material Code
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.rawMaterialCode
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- HSN -->
+
+                <div class="detail-item">
+
+                    <span>
+                        HSN Code
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.hsnCode
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Unit -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Unit
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.unit
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- GST -->
+
+                <div class="detail-item">
+
+                    <span>
+                        GST Percentage
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.gstPercentage
+                        || 0
+                        }}%
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.status
+                        || '-'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Brand & Category -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Brand & Category
+                    </h4>
+
+                    <p>
+                        Classification information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Brand -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Brand Name
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.brand
+                        ?.brandName
+                        || '-'
+                        }}
+
+                    </strong>
+
+                    <small>
+
+                        {{
+                        rawMaterial.brand
+                        ?.brandCode
+                        || '-'
+                        }}
+
+                    </small>
+
+                </div>
+
+
+                <!-- Category -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Category Name
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.category
+                        ?.categoryName
+                        || '-'
+                        }}
+
+                    </strong>
+
+                    <small>
+
+                        {{
+                        rawMaterial.category
+                        ?.categoryCode
+                        || '-'
+                        }}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Description -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        Description
+                    </h4>
+
+                </div>
+
+            </div>
+
+
+            <div class="remarks-box">
+
+                {{
+                rawMaterial.description
+                || 'No description available'
+                }}
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- System Information -->
+        <!-- ====================================== -->
+
+        <div class="view-card">
+
+            <div class="view-card-header">
+
+                <div>
+
+                    <h4>
+                        System Information
+                    </h4>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <!-- Created -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Created At
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.createdAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <!-- Updated -->
+
+                <div class="detail-item">
+
+                    <span>
+                        Last Updated
+                    </span>
+
+                    <strong>
+
+                        {{
+                        rawMaterial.updatedAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Back -->
+        <!-- ====================================== -->
+
+        <div class="button-group">
+
+            <button type="button" class="btn-back" (click)="goBack()">
+
+                <i class="fa fa-arrow-left me-2"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- No Data -->
+    <!-- ========================================== -->
+
+    <div class="empty-state" *ngIf="
+            !isLoading &&
+            !rawMaterial
+        ">
+
+        <i class="fa fa-box-open"></i>
+
+        <h4>
+            Raw Material Not Found
+        </h4>
+
+        <p>
+            Unable to load raw material details.
+        </p>
+
+
+        <button type="button" class="btn-back" (click)="goBack()">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>

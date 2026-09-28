@@ -1,0 +1,639 @@
+<div class="category-container">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- ========================================== -->
+            <!-- Title -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>
+                        Update Production Instruction
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Form Card -->
+            <!-- ========================================== -->
+
+
+
+            <div class="category-card">
+
+                <form [formGroup]="productionInstructionForm" (ngSubmit)="onSubmit()">
+
+
+                    <!-- ====================================== -->
+                    <!-- BASIC DETAILS -->
+                    <!-- ====================================== -->
+
+                    <div class="form-section-title">
+
+                        <h4>
+                            Basic Details
+                        </h4>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+
+                                <label>
+                                    Instruction Number
+                                </label>
+
+                                <input type="text" formControlName="instructionNo"
+                                    placeholder="Enter instruction number">
+
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <!-- Instruction Date -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Instruction Date
+                                </label>
+
+                                <input type="date" formControlName="instructionDate">
+
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <!-- Warehouse -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Warehouse
+                                </label>
+
+                                <select formControlName="warehouse" (change)="onWarehouseChange($event)">
+
+                                    <option value="">
+                                        Select Warehouse
+                                    </option>
+
+                                    <option *ngFor="
+                                                        let warehouse
+                                                        of warehouseList
+                                                      " [value]="warehouse._id">
+
+                                        {{ warehouse.warehouseName }}
+
+                                        -
+
+                                        {{ warehouse.warehouseCode }}
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <!-- Remarks -->
+
+                            <div class="form-group full-width">
+
+                                <label>
+                                    Remarks
+                                </label>
+
+                                <textarea rows="4" formControlName="remarks" placeholder="Enter remarks">
+                  </textarea>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ====================================== -->
+                    <!-- PRODUCTION ITEMS -->
+                    <!-- ====================================== -->
+
+                    <div class="items-header">
+
+                        <div>
+
+                            <h4>
+                                Production Requirements
+                            </h4>
+
+                            <p>
+                                Add raw material and production details
+                            </p>
+
+                        </div>
+
+
+                        <button type="button" class="btn-add-item" (click)="addItem()">
+
+                            <i class="fa fa-plus me-2"></i>
+
+                            Add Item
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- ====================================== -->
+                    <!-- ITEMS -->
+                    <!-- ====================================== -->
+
+                    <div formArrayName="items" class="production-items">
+
+
+                        <div class="production-item-card" *ngFor="
+                                  let item of items.controls;
+                                  let i = index
+                                " [formGroupName]="i">
+
+
+                            <!-- Item Header -->
+
+                            <div class="item-card-header">
+
+                                <div>
+
+                                    <h5>
+
+                                        Item {{ i + 1 }}
+
+                                    </h5>
+
+                                </div>
+
+
+                                <button type="button" class="remove-item-btn" *ngIf="items.length > 1"
+                                    (click)="removeItem(i)">
+
+                                    <i class="fa fa-trash"></i>
+
+                                </button>
+
+                            </div>
+
+
+                            <!-- Item Fields -->
+
+                            <div class="item-grid">
+
+
+                                <!-- ================================= -->
+                                <!-- Raw Material -->
+                                <!-- ================================= -->
+                                <div class="row">
+                                    <!-- ================================= -->
+                                    <!-- Product -->
+                                    <!-- ================================= -->
+
+                                    <div class="col-4">
+                                        <div class="form-group">
+
+                                            <label>
+                                                Product
+                                            </label>
+
+                                            <select formControlName="product" (change)="onProductChange(i, $event)">
+
+                                                <option value="">
+                                                    Select Product
+                                                </option>
+
+                                                <option *ngFor="let product of productList" [value]="product._id">
+                                                    {{ product.productName }}
+                                                    -
+                                                    {{ product.productCode }}
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <!-- ================================= -->
+                                    <!-- Product Variant -->
+                                    <!-- ================================= -->
+
+                                    <div class="col-4">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Product Variant
+                                            </label>
+
+                                            <select formControlName="variantId" (change)="onVariantChange(i, $event)">
+
+                                                <option value="">
+                                                    Select Variant
+                                                </option>
+
+                                                <option *ngFor="let variant of selectedVariants[i]"
+                                                    [value]="variant._id">
+                                                    {{ variant.packSize }}
+                                                    -
+                                                    {{ variant.skuCode }}
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+
+                                            <label>
+                                                Raw Material
+                                            </label>
+
+                                            <select formControlName="rawMaterial" (change)="
+                                            onRawMaterialChange(
+                                              i,
+                                              $event
+                                            )
+                                          ">
+
+                                                <option value="">
+                                                    Select Raw Material
+                                                </option>
+
+                                                <option *ngFor="
+                                              let material
+                                              of rawMaterialList
+                                            " [value]="material._id">
+
+                                                    {{ material.rawMaterialName }}
+
+                                                    -
+
+                                                    {{ material.rawMaterialCode }}
+
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- ================================= -->
+                                        <!-- Stock Receive -->
+                                        <!-- ================================= -->
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Stock Receive
+                                            </label>
+
+                                            <select formControlName="stockReceive" (change)="
+                                                onStockReceiveChange(
+                                                  i,
+                                                  $event
+                                                )
+                                              ">
+
+                                                <option value="">
+                                                    Select Stock Receive
+                                                </option>
+
+                                                <option *ngFor="
+                                                  let stock
+                                                  of getStockReceiveList(i)
+                                                " [value]="stock.stockReceiveId">
+
+                                                    {{ stock.receiveNo }}
+
+                                                    -
+
+                                                    {{ stock.supplier }}
+
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- ================================= -->
+                                        <!-- Batch -->
+                                        <!-- ================================= -->
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Batch Number
+                                            </label>
+
+                                            <select formControlName="batchNo">
+
+                                                <option value="">
+                                                    Select Batch
+                                                </option>
+
+                                                <option *ngFor="
+                                              let batch
+                                              of getBatchList(i)
+                                            " [value]="batch.batchNo">
+
+                                                    {{ batch.batchNo }}
+
+                                                    -
+
+                                                    Available:
+                                                    {{ batch.availableWeightKg }}
+                                                    KG
+
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- ================================= -->
+                                        <!-- Variant -->
+                                        <!-- ================================= -->
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Variant Name
+                                            </label>
+
+                                            <input type="text" formControlName="variantName"
+                                                placeholder="Example: CLOVA 10GM">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- ================================= -->
+                                        <!-- SKU -->
+                                        <!-- ================================= -->
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                SKU Code
+                                            </label>
+
+                                            <input type="text" formControlName="skuCode"
+                                                placeholder="Example: CLO-10GM">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- ================================= -->
+                                        <!-- Pack Size -->
+                                        <!-- ================================= -->
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Pack Size
+                                            </label>
+
+                                            <input type="text" formControlName="packSize" placeholder="Example: 10GM">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- ================================= -->
+                                        <!-- Weight -->
+                                        <!-- ================================= -->
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Weight Per Pack (Grams)
+                                            </label>
+
+                                            <input type="number" formControlName="weightInGrams" min="0.001"
+                                                step="0.001" placeholder="Enter weight">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- ================================= -->
+                                        <!-- Target Packs -->
+                                        <!-- ================================= -->
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Target Packs
+                                            </label>
+
+                                            <input type="number" formControlName="targetPacks" min="1" step="1"
+                                                placeholder="Enter target packs" (input)="
+                                                        calculateTargetWeight(i)
+                                                      ">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- ================================= -->
+                                        <!-- Calculated Target Weight -->
+                                        <!-- ================================= -->
+
+                                        <div class="form-group calculated-field">
+
+                                            <label>
+                                                Required Weight
+                                            </label>
+
+                                            <div class="calculated-value">
+
+                                                {{
+                                                getTargetWeight(i)
+                                                | number:'1.3-3'
+                                                }}
+
+                                                KG
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- ================================= -->
+                            <!-- Item Summary -->
+                            <!-- ================================= -->
+
+                            <div class="item-summary">
+
+                                <div class="summary-item">
+
+                                    <span>
+                                        Raw Material
+                                    </span>
+
+                                    <strong>
+
+                                        {{
+                                        getRawMaterialName(i)
+                                        || '-'
+                                        }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="summary-item">
+
+                                    <span>
+                                        Batch
+                                    </span>
+
+                                    <strong>
+
+                                        {{
+                                        item.get('batchNo')?.value
+                                        || '-'
+                                        }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="summary-item">
+
+                                    <span>
+                                        Target Packs
+                                    </span>
+
+                                    <strong>
+
+                                        {{
+                                        item.get('targetPacks')?.value
+                                        || 0
+                                        }}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="summary-item">
+
+                                    <span>
+                                        Required Weight
+                                    </span>
+
+                                    <strong>
+
+                                        {{
+                                        getTargetWeight(i)
+                                        | number:'1.3-3'
+                                        }}
+
+                                        KG
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ====================================== -->
+                    <!-- TOTAL -->
+                    <!-- ====================================== -->
+
+                    <div class="total-section">
+
+                        <div class="total-label">
+
+                            <span>
+                                Total Required Raw Material
+                            </span>
+
+                            <small>
+                                Based on all production items
+                            </small>
+
+                        </div>
+
+
+                        <div class="total-value">
+
+                            {{
+                            getTotalTargetWeight()
+                            | number:'1.3-3'
+                            }}
+
+                            KG
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ====================================== -->
+                    <!-- Buttons -->
+                    <!-- ====================================== -->
+
+                    <div class="button-group">
+
+                        <button type="submit" class="btn-create">
+
+                            <i class="fa fa-save me-2"></i>
+
+                            Update
+
+                        </button>
+
+
+                        <button type="button" class="btn-back" (click)="goBack()">
+
+                            <i class="fa fa-arrow-left me-2"></i>
+
+                            Back
+
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

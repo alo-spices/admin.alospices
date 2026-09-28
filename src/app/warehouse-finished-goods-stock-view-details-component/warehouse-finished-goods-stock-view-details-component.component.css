@@ -1,0 +1,831 @@
+/* ==========================================
+   MAIN
+   ========================================== */
+
+.finished-stock-details-container {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 28px 20px;
+
+    background:
+        linear-gradient(180deg,
+            var(--bg-color) 0%,
+            #f4ece6 100%);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Header
+   ========================================== */
+
+.top-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.title-section h2 {
+    margin: 0;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: var(--primary-color);
+}
+
+.title-section p {
+    margin: 7px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+}
+
+.button-section button,
+.empty-state button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    min-width: 100px;
+
+    padding: 10px 16px;
+
+    border-radius: 9px;
+
+    border: 1px solid var(--secondary-dark);
+
+    background: var(--secondary-color);
+
+    color: var(--primary-dark);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.button-section button:hover,
+.empty-state button:hover {
+    background: #ead7c7;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   Loading
+   ========================================== */
+
+.loading-card {
+    min-height: 240px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    background: var(--card-bg);
+
+    border-radius: 16px;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+}
+
+.loading-card i {
+    color: var(--primary-color);
+
+    font-size: 18px;
+}
+
+
+/* ==========================================
+   Warehouse Card
+   ========================================== */
+
+.warehouse-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+    background: var(--card-bg);
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(166, 61, 34, 0.08);
+
+    box-shadow:
+        0 10px 28px rgba(43, 43, 43, 0.07);
+}
+
+.warehouse-icon {
+    width: 58px;
+
+    height: 58px;
+
+    min-width: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(166, 61, 34, 0.08);
+
+    color: var(--primary-color);
+
+    font-size: 22px;
+}
+
+.warehouse-content .label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    font-weight: 700;
+
+    letter-spacing: 0.4px;
+}
+
+.warehouse-content h3 {
+    margin: 0;
+
+    font-size: 20px;
+
+    color: var(--primary-color);
+
+    font-weight: 800;
+}
+
+.warehouse-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 16px;
+
+    margin-top: 8px;
+}
+
+.warehouse-meta span {
+    color: var(--text-secondary);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.warehouse-meta i {
+    margin-right: 5px;
+
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   Summary
+   ========================================== */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+.summary-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 17px;
+
+    background: var(--card-bg);
+
+    border:
+        1px solid rgba(166, 61, 34, 0.08);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 22px rgba(43, 43, 43, 0.05);
+}
+
+.summary-icon {
+    width: 45px;
+
+    height: 45px;
+
+    min-width: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    font-size: 17px;
+}
+
+.summary-icon.products {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.summary-icon.packs {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.summary-icon.rejected {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.summary-icon.weight {
+    background: #ecfdf5;
+    color: #15803d;
+}
+
+.summary-card span {
+    display: block;
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+    margin-bottom: 4px;
+}
+
+.summary-card strong {
+    display: block;
+
+    font-size: 18px;
+
+    color: var(--primary-color);
+
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   Products Section
+   ========================================== */
+
+.products-section {
+    background: var(--card-bg);
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(166, 61, 34, 0.08);
+
+    box-shadow:
+        0 10px 28px rgba(43, 43, 43, 0.06);
+}
+
+.section-header {
+    padding-bottom: 15px;
+
+    margin-bottom: 18px;
+
+    border-bottom:
+        1px solid #eee4de;
+}
+
+.section-header h3 {
+    margin: 0;
+
+    font-size: 18px;
+
+    color: var(--primary-color);
+
+    font-weight: 800;
+}
+
+.section-header p {
+    margin: 4px 0 0;
+
+    font-size: 12px;
+
+    color: var(--text-secondary);
+}
+
+
+/* ==========================================
+   Product List
+   ========================================== */
+
+.product-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+/* ==========================================
+   Product Card
+   ========================================== */
+
+.product-card {
+    padding: 18px;
+
+    border:
+        1px solid #eee3dc;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(180deg,
+            #fffdfa 0%,
+            #fbf8f5 100%);
+}
+
+
+/* ==========================================
+   Product Header
+   ========================================== */
+
+.product-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 15px;
+
+    border-bottom:
+        1px solid #eee4de;
+}
+
+.product-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.sku-icon {
+    width: 42px;
+
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(166, 61, 34, 0.08);
+
+    color:
+        var(--primary-color);
+}
+
+.product-title h4 {
+    margin: 0;
+
+    font-size: 15px;
+
+    color: var(--primary-color);
+
+    font-weight: 800;
+}
+
+.product-title span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+}
+
+.production-count {
+    padding: 6px 10px;
+
+    border-radius: 18px;
+
+    background:
+        #f4efe9;
+
+    color:
+        var(--primary-color);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================
+   Product Stats
+   ========================================== */
+
+.product-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 10px;
+
+    padding: 16px 0;
+}
+
+.product-stat {
+    padding: 11px;
+
+    border-radius: 9px;
+
+    background: #fff;
+
+    border: 1px solid #eee5df;
+}
+
+.product-stat span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 10px;
+
+    color: #8b7770;
+
+    text-transform: uppercase;
+
+    font-weight: 700;
+}
+
+.product-stat strong {
+    font-size: 13px;
+
+    color: var(--text-primary);
+
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   History
+   ========================================== */
+
+.history-section {
+    border-top:
+        1px solid #eee4de;
+
+    padding-top: 15px;
+}
+
+.history-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 12px;
+
+    color: var(--primary-color);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.history-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.history-item {
+    padding: 13px;
+
+    border-radius: 9px;
+
+    background: #fff;
+
+    border:
+        1px solid #eee5df;
+}
+
+.history-date {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 10px;
+}
+
+.history-date>i {
+    color: var(--primary-color);
+
+    font-size: 13px;
+}
+
+.history-date strong {
+    display: block;
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+}
+
+.history-date small {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+.history-values {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 9px;
+
+    padding-top: 10px;
+
+    border-top:
+        1px solid #f0e9e4;
+}
+
+.history-values div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.history-values span {
+    font-size: 9px;
+
+    color: #8b7770;
+
+    text-transform: uppercase;
+
+    font-weight: 700;
+}
+
+.history-values strong {
+    font-size: 12px;
+
+    color: var(--text-primary);
+}
+
+.history-remarks {
+    margin-top: 10px;
+
+    padding-top: 9px;
+
+    border-top:
+        1px solid #f0e9e4;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.history-remarks i {
+    margin-right: 5px;
+
+    color: var(--primary-color);
+}
+
+
+/* ==========================================
+   Empty
+   ========================================== */
+
+.empty-state {
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background: var(--card-bg);
+
+    border-radius: 16px;
+
+    padding: 30px;
+}
+
+.empty-state>i {
+    margin-bottom: 13px;
+
+    font-size: 40px;
+
+    color: #b9aaa1;
+}
+
+.empty-state h3 {
+    margin: 0 0 7px;
+
+    font-size: 17px;
+
+    color: var(--text-primary);
+}
+
+.empty-state p {
+    margin: 0 0 17px;
+
+    font-size: 12px;
+
+    color: var(--text-secondary);
+}
+
+
+/* ==========================================
+   Tablet
+   ========================================== */
+
+@media (max-width: 1100px) {
+
+    .summary-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .product-stats {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .history-values {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* ==========================================
+   Mobile
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .finished-stock-details-container {
+        padding: 20px 14px;
+    }
+
+    .top-row {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .button-section button {
+        width: 100%;
+    }
+
+    .warehouse-card {
+        align-items: flex-start;
+    }
+
+    .summary-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .product-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .product-stats {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* ==========================================
+   Small Mobile
+   ========================================== */
+
+@media (max-width: 480px) {
+
+    .title-section h2 {
+        font-size: 22px;
+    }
+
+    .warehouse-card {
+        padding: 16px;
+
+        gap: 12px;
+    }
+
+    .warehouse-icon {
+        width: 48px;
+
+        height: 48px;
+
+        min-width: 48px;
+    }
+
+    .warehouse-content h3 {
+        font-size: 17px;
+    }
+
+    .products-section {
+        padding: 15px;
+    }
+
+    .product-card {
+        padding: 14px;
+    }
+
+    .product-stats {
+        grid-template-columns:
+            1fr;
+    }
+
+    .history-values {
+        grid-template-columns:
+            1fr;
+    }
+
+}

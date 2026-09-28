@@ -1,0 +1,602 @@
+<div class="container-fluid py-3">
+
+    <!-- ===================================================== -->
+    <!-- HEADER -->
+    <!-- ===================================================== -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <h3 class="mb-1">
+                        <i class="fa fa-industry me-2"></i>
+                        Production Details
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        View complete production information
+                    </p>
+
+                </div>
+
+                <button type="button" class="btn btn-secondary" routerLink="/admin/production-monitoring">
+                    <i class="fa fa-arrow-left me-2"></i>
+                    Back
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- LOADING -->
+    <!-- ===================================================== -->
+
+    <div *ngIf="loading" class="text-center py-5">
+
+        <div class="spinner-border"></div>
+
+        <p class="mt-2 text-muted">
+            Loading Production Details...
+        </p>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- CONTENT -->
+    <!-- ===================================================== -->
+
+    <div *ngIf="!loading && production">
+
+
+        <!-- ================================================= -->
+        <!-- PRODUCTION INFORMATION -->
+        <!-- ================================================= -->
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-header">
+
+                <h5 class="mb-0">
+                    <i class="fa fa-file-text me-2"></i>
+                    Production Information
+                </h5>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <!-- Production No -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="text-muted">
+                            Production No
+                        </label>
+
+                        <div class="fw-bold">
+                            {{ production.productionNo }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- Production Date -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="text-muted">
+                            Production Date
+                        </label>
+
+                        <div class="fw-bold">
+                            {{ production.productionDate | date:'dd-MM-yyyy' }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- Warehouse -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="text-muted">
+                            Warehouse
+                        </label>
+
+                        <div class="fw-bold">
+
+                            {{ production.warehouse?.warehouseName }}
+
+                            <span class="text-muted">
+
+                                ({{ production.warehouse?.warehouseCode }})
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Status -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <label class="text-muted">
+                            Status
+                        </label>
+
+                        <div>
+
+                            <span class="badge" [ngClass]="{
+                  'bg-success': production.status === 'Completed',
+                  'bg-warning text-dark': production.status === 'Pending',
+                  'bg-danger': production.status === 'Cancelled'
+                }">
+
+                                {{ production.status }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- RAW MATERIAL CONSUMPTION -->
+        <!-- ================================================= -->
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-header">
+
+                <h5 class="mb-0">
+
+                    <i class="fa fa-cubes me-2"></i>
+
+                    Raw Material Consumption
+
+                </h5>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover align-middle">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>Raw Material</th>
+
+                                <th>Code</th>
+
+                                <th>Stock Receive</th>
+
+                                <th>Batch No</th>
+
+                                <th>Available Before</th>
+
+                                <th>Weight Used</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr *ngFor="
+                  let item of production.rawMaterials;
+                  let i = index
+                ">
+
+                                <td>
+                                    {{ i + 1 }}
+                                </td>
+
+                                <td>
+
+                                    <strong>
+                                        {{ item.rawMaterial?.rawMaterialName }}
+                                    </strong>
+
+                                </td>
+
+                                <td>
+                                    {{ item.rawMaterial?.rawMaterialCode }}
+                                </td>
+
+                                <td>
+                                    {{ item.stockReceive?.receiveNo }}
+                                </td>
+
+                                <td>
+                                    {{ item.batchNo }}
+                                </td>
+
+                                <td>
+                                    {{ item.availableWeightKg }} KG
+                                </td>
+
+                                <td>
+
+                                    <strong>
+                                        {{ item.weightUsedKg }}
+                                    </strong>
+
+                                    KG
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr *ngIf="
+                  !production.rawMaterials ||
+                  production.rawMaterials.length === 0
+                ">
+
+                                <td colspan="7" class="text-center text-muted">
+
+                                    No Raw Material Consumption Found
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- Total Raw Weight -->
+
+                <div class="text-end mt-3">
+
+                    <strong>
+                        Total Raw Material Used:
+                    </strong>
+
+                    <span class="fs-5 ms-2">
+
+                        {{ production.rawWeightUsedKg }}
+
+                        KG
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- PRODUCTION VARIANTS -->
+        <!-- ================================================= -->
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-header">
+
+                <h5 class="mb-0">
+
+                    <i class="fa fa-boxes me-2"></i>
+
+                    Production Variants
+
+                </h5>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover align-middle">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>Variant Name</th>
+
+                                <th>SKU Code</th>
+
+                                <th>Pack Size</th>
+
+                                <th>Weight / Pack</th>
+
+                                <th>Packs Produced</th>
+
+                                <th>Rejected Packs</th>
+
+                                <th>Produced Weight</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr *ngFor="
+                  let item of production.productionItems;
+                  let i = index
+                ">
+
+                                <td>
+                                    {{ i + 1 }}
+                                </td>
+
+                                <td>
+
+                                    <strong>
+                                        {{ item.variantName }}
+                                    </strong>
+
+                                </td>
+
+                                <td>
+                                    {{ item.skuCode }}
+                                </td>
+
+                                <td>
+                                    {{ item.packSize }}
+                                </td>
+
+                                <td>
+                                    {{ item.weightInGrams }} g
+                                </td>
+
+                                <td>
+                                    {{ item.packsProduced }}
+                                </td>
+
+                                <td>
+                                    {{ item.rejectedPacks }}
+                                </td>
+
+                                <td>
+
+                                    <strong>
+                                        {{ item.totalWeightUsedKg }}
+                                    </strong>
+
+                                    KG
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr *ngIf="
+                  !production.productionItems ||
+                  production.productionItems.length === 0
+                ">
+
+                                <td colspan="8" class="text-center text-muted">
+
+                                    No Production Variants Found
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- PRODUCTION SUMMARY -->
+        <!-- ================================================= -->
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-header">
+
+                <h5 class="mb-0">
+
+                    <i class="fa fa-bar-chart me-2"></i>
+
+                    Production Summary
+
+                </h5>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="row">
+
+
+                    <!-- Raw Weight -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <div class="summary-card">
+
+                            <h6>
+                                Raw Material Used
+                            </h6>
+
+                            <h3>
+
+                                {{ production.rawWeightUsedKg }}
+
+                                KG
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Produced -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <div class="summary-card success">
+
+                            <h6>
+                                Produced Weight
+                            </h6>
+
+                            <h3>
+
+                                {{ production.totalProducedWeightKg }}
+
+                                KG
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Waste -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <div class="summary-card warning">
+
+                            <h6>
+                                Waste
+                            </h6>
+
+                            <h3>
+
+                                {{ production.wasteKg }}
+
+                                KG
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Production Status -->
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+
+                        <div class="summary-card primary">
+
+                            <h6>
+                                Status
+                            </h6>
+
+                            <h3>
+
+                                {{ production.status }}
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- REMARKS -->
+        <!-- ================================================= -->
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-header">
+
+                <h5 class="mb-0">
+
+                    <i class="fa fa-comment me-2"></i>
+
+                    Remarks
+
+                </h5>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <p class="mb-0">
+
+                    {{ production.remarks || 'No remarks available.' }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- NO DATA -->
+    <!-- ===================================================== -->
+
+    <div *ngIf="!loading && !production" class="text-center py-5 text-muted">
+
+        <i class="fa fa-exclamation-circle fa-2x mb-2"></i>
+
+        <p>
+            Production details not found.
+        </p>
+
+    </div>
+
+</div>

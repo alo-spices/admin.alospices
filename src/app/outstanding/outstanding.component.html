@@ -1,0 +1,440 @@
+<div class="category-container">
+
+    <!-- ===================================================== -->
+    <!-- HEADER -->
+    <!-- ===================================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <div>
+                <h2>Outstanding</h2>
+
+                <p>
+                    Party wise outstanding payments
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- SUMMARY -->
+        <!-- ================================================= -->
+
+        <div class="outstanding-summary">
+
+            <div class="summary-item">
+
+                <span class="summary-label">
+                    Parties
+                </span>
+
+                <span class="summary-value">
+                    {{ totalParties }}
+                </span>
+
+            </div>
+
+
+            <div class="summary-divider"></div>
+
+
+            <div class="summary-item">
+
+                <span class="summary-label">
+                    Total Outstanding
+                </span>
+
+                <span class="summary-value outstanding-value">
+                    ₹{{ totalOutstanding | number:'1.2-2' }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- SEARCH -->
+    <!-- ===================================================== -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Search Outstanding
+            </mat-label>
+
+            <input matInput type="text" placeholder="Search party, owner, mobile, order, employee..."
+                (keyup)="applyFilter($event)" />
+
+
+
+        </mat-form-field>
+
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- TABLE -->
+    <!-- ===================================================== -->
+
+    <div class="table-row">
+
+        <div class="table-responsive">
+
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+
+
+                <!-- ========================================= -->
+                <!-- S.NO -->
+                <!-- ========================================= -->
+
+                <ng-container matColumnDef="sno">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        S.No
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element; let i = index">
+
+                        {{
+                        (paginator?.pageIndex || 0)
+                        *
+                        (paginator?.pageSize || 5)
+                        +
+                        i + 1
+                        }}
+
+                    </td>
+
+                </ng-container>
+
+
+
+                <!-- ========================================= -->
+                <!-- PARTY -->
+                <!-- ========================================= -->
+
+                <ng-container matColumnDef="party">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Party
+
+                    </th>
+
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <div class="party-info">
+
+                            <div class="party-avatar">
+
+                                {{
+                                element.party?.shopName
+                                ?.charAt(0)
+                                ?.toUpperCase()
+                                || 'P'
+                                }}
+
+                            </div>
+
+
+                            <div class="party-details">
+
+                                <span class="party-name">
+
+                                    {{
+                                    element.party?.shopName
+                                    || '-'
+                                    }}
+
+                                </span>
+
+
+                                <span class="party-owner">
+
+                                    <i class="fa fa-user"></i>
+
+                                    {{
+                                    element.party?.ownerName
+                                    || '-'
+                                    }}
+
+                                </span>
+
+
+                                <span class="party-mobile">
+
+                                    <i class="fa fa-phone"></i>
+
+                                    {{
+                                    element.party?.mobile
+                                    || '-'
+                                    }}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                </ng-container>
+
+
+
+                <!-- ========================================= -->
+                <!-- PARTY TYPE -->
+                <!-- ========================================= -->
+
+                <ng-container matColumnDef="partyType">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Party Type
+
+                    </th>
+
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="party-type" [ngClass]="{
+                                'retailer': element.partyType === 'Retailer',
+                                'wholesaler': element.partyType === 'Wholesaler',
+                                'distributor': element.partyType === 'Distributor'
+                            }">
+
+                            {{ element.partyType || '-' }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+
+                <!-- ========================================= -->
+                <!-- TOTAL ORDERS -->
+                <!-- ========================================= -->
+
+                <ng-container matColumnDef="totalOrders">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Orders
+
+                    </th>
+
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="order-count">
+
+                            {{ element.totalOrders || 0 }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+
+                <!-- ========================================= -->
+                <!-- TOTAL ORDER AMOUNT -->
+                <!-- ========================================= -->
+
+                <ng-container matColumnDef="totalOrderAmount">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Total Amount
+
+                    </th>
+
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="amount-text">
+
+                            ₹{{
+                            element.totalOrderAmount
+                            | number:'1.2-2'
+                            }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+
+                <!-- ========================================= -->
+                <!-- COLLECTED -->
+                <!-- ========================================= -->
+
+                <ng-container matColumnDef="totalCollectedAmount">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Collected
+
+                    </th>
+
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="collected-text">
+
+                            ₹{{
+                            element.totalCollectedAmount
+                            | number:'1.2-2'
+                            }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+
+                <!-- ========================================= -->
+                <!-- OUTSTANDING -->
+                <!-- ========================================= -->
+
+                <ng-container matColumnDef="totalOutstanding">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Outstanding
+
+                    </th>
+
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="outstanding-text">
+
+                            ₹{{
+                            element.totalOutstanding
+                            | number:'1.2-2'
+                            }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+
+                <!-- ========================================= -->
+                <!-- ACTIONS -->
+                <!-- ========================================= -->
+
+                <ng-container matColumnDef="actions">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Action
+
+                    </th>
+
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <button type="button" class="action-btn view-btn" title="View Outstanding"
+                            (click)="viewOutstanding(element)">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+                    </td>
+
+                </ng-container>
+
+
+
+                <!-- ========================================= -->
+                <!-- HEADER ROW -->
+                <!-- ========================================= -->
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                </tr>
+
+
+
+                <!-- ========================================= -->
+                <!-- DATA ROW -->
+                <!-- ========================================= -->
+
+                <tr mat-row *matRowDef="
+                        let row;
+                        columns: displayedColumns;
+                    ">
+                </tr>
+
+
+
+                <!-- ========================================= -->
+                <!-- NO DATA -->
+                <!-- ========================================= -->
+
+                <tr class="mat-row" *matNoDataRow>
+
+                    <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumns.length">
+
+                        <div class="no-data">
+
+                            <i class="fa fa-wallet"></i>
+
+                            <h4>
+                                No Outstanding Found
+                            </h4>
+
+                            <p>
+                                There are no pending outstanding payments.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- PAGINATOR -->
+    <!-- ===================================================== -->
+
+    <div class="paginator-row">
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons>
+        </mat-paginator>
+
+    </div>
+
+</div>

@@ -1,0 +1,289 @@
+:root {
+
+  --primary-dark: #7E2D17;
+
+  --primary-light: #C45A3A;
+
+  --warning-color: #ED6C02;
+
+  --text-secondary: #6B6B6B;
+
+}
+
+/* ==========================================
+   PAGE
+========================================== */
+
+.warehouse-container {
+
+  padding: 30px;
+
+  background: #f7f8fa;
+
+  min-height: 100vh;
+
+}
+
+.warehouse-wrapper {
+
+  max-width: 1400px;
+
+  margin: auto;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.page-header {
+
+  margin-bottom: 25px;
+
+}
+
+.page-header h2 {
+
+  color: var(--primary-dark);
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+  margin-bottom: 5px;
+
+}
+
+.page-header p {
+
+  color: var(--text-secondary);
+
+  font-size: 15px;
+
+  margin: 0;
+
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.warehouse-card {
+
+  background: #fff;
+
+  border-radius: 18px;
+
+  padding: 35px;
+
+  box-shadow: 0 8px 30px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================
+   LABEL
+========================================== */
+
+.form-label {
+
+  color: var(--primary-dark);
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  margin-bottom: 8px;
+
+}
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.form-control,
+
+.form-select {
+
+  height: 52px;
+
+  border-radius: 10px;
+
+  border: 1px solid #d9d9d9;
+
+  font-size: 15px;
+
+  transition: .3s;
+
+}
+
+textarea.form-control {
+
+  height: auto;
+
+  resize: none;
+
+  padding-top: 12px;
+
+}
+
+.form-control:focus,
+
+.form-select:focus {
+
+  border-color: var(--primary-light);
+
+  box-shadow: 0 0 0 .2rem rgba(196,90,58,.15);
+
+}
+
+/* Readonly */
+
+.form-control[readonly] {
+
+  background: #f4f4f4;
+
+  color: #666;
+
+  cursor: not-allowed;
+
+}
+
+/* ==========================================
+   VALIDATION
+========================================== */
+
+.text-danger {
+
+  font-size: 13px;
+
+  margin-top: 5px;
+
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.button-section {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 15px;
+
+  margin-top: 20px;
+
+}
+
+.btn {
+
+  border-radius: 10px;
+
+  padding: 11px 26px;
+
+  font-weight: 600;
+
+  transition: .3s;
+
+  min-width: 170px;
+
+}
+
+.btn-save {
+
+  background: var(--primary-dark);
+
+  color: #fff;
+
+  border: none;
+
+}
+
+.btn-save:hover {
+
+  background: var(--primary-light);
+
+  transform: translateY(-2px);
+
+}
+
+.btn-save:disabled {
+
+  opacity: .7;
+
+  cursor: not-allowed;
+
+}
+
+.btn-back {
+
+  background: #fff;
+
+  color: var(--primary-dark);
+
+  border: 2px solid var(--primary-dark);
+
+}
+
+.btn-back:hover {
+
+  background: var(--primary-dark);
+
+  color: #fff;
+
+}
+
+/* ==========================================
+   PLACEHOLDER
+========================================== */
+
+::placeholder {
+
+  color: #999;
+
+  font-size: 14px;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:991px){
+
+  .warehouse-card{
+
+    padding:25px;
+
+  }
+
+}
+
+@media (max-width:768px){
+
+  .warehouse-container{
+
+    padding:15px;
+
+  }
+
+  .warehouse-card{
+
+    padding:20px;
+
+  }
+
+  .button-section{
+
+    flex-direction: column;
+
+  }
+
+  .btn{
+
+    width:100%;
+
+  }
+
+}

@@ -1,0 +1,349 @@
+<div class="category-container">
+
+  <!-- Top Row -->
+  <div class="top-row">
+
+    <!-- Title Section -->
+    <div class="title-section">
+      <h2>
+        Address Management
+      </h2>
+      <p>
+        Manage all addresses here
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Search Row -->
+  <div class="search-row">
+
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Search Address
+      </mat-label>
+
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Enter name, city, state">
+
+    </mat-form-field>
+
+  </div>
+
+  <!-- Table Row -->
+  <div class="table-row">
+
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="mat-elevation-z8">
+
+      <!-- S.No -->
+      <ng-container
+        matColumnDef="sno">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          S.No
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element;
+            let i = index
+          ">
+
+          {{ i + 1 }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Full Name -->
+      <ng-container
+        matColumnDef="fullName">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header>
+
+          Full Name
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{ element.fullName }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Phone -->
+      <ng-container
+        matColumnDef="phone">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Phone
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{ element.phone }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Address Line 1 -->
+      <ng-container
+        matColumnDef="addressLine1">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Address 1
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{ element.addressLine1 }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Address Line 2 -->
+      <ng-container
+        matColumnDef="addressLine2">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Address 2
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{ element.addressLine2 }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- City -->
+      <ng-container
+        matColumnDef="city">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          City
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{ element.city }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- State -->
+      <ng-container
+        matColumnDef="state">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          State
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{ element.state }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Pincode -->
+      <ng-container
+        matColumnDef="pincode">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Pincode
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{ element.pincode }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Country -->
+      <ng-container
+        matColumnDef="country">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Country
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{ element.country }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Default -->
+      <ng-container
+        matColumnDef="isDefault">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Default
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{
+            element.isDefault
+            ? 'Yes'
+            : 'No'
+          }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Created Date -->
+      <ng-container
+        matColumnDef="createdAt">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Created At
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element
+          ">
+
+          {{
+            element.createdAt
+            | date:'short'
+          }}
+
+        </td>
+
+      </ng-container>
+
+      <!-- Header -->
+      <tr
+        mat-header-row
+        *matHeaderRowDef="
+          displayedColumns
+        ">
+      </tr>
+
+      <!-- Rows -->
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: displayedColumns;
+        ">
+      </tr>
+
+    </table>
+
+    <!-- Pagination -->
+    <mat-paginator
+      [pageSizeOptions]="
+        [5,10,20,50]
+      "
+      showFirstLastButtons>
+    </mat-paginator>
+
+  </div>
+
+</div>

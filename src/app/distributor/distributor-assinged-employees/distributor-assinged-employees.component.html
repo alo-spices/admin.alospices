@@ -1,0 +1,189 @@
+<div class="search-row">
+
+    <mat-form-field appearance="outline" class="w-100">
+
+        <mat-label>Select Distributor</mat-label>
+
+        <mat-select [(value)]="selectedDistributorId" (selectionChange)="onDistributorChange($event.value)">
+
+            <mat-option value="">
+                Select Distributor
+            </mat-option>
+
+            <mat-option *ngFor="let distributor of users" [value]="distributor._id">
+
+                {{
+                distributor.distributorName ||
+                distributor.shopName ||
+                distributor.fullName
+                }}
+
+            </mat-option>
+
+        </mat-select>
+
+    </mat-form-field>
+
+</div>
+<!-- =====================================================
+     NO DISTRIBUTOR SELECTED
+====================================================== -->
+
+<div class="select-distributor-message" *ngIf="!selectedDistributorId">
+
+    <div class="select-distributor-icon">
+        <i class="fas fa-users"></i>
+    </div>
+
+    <h4>
+        Please Select a Distributor
+    </h4>
+
+    <p>
+        Please select a distributor first.
+        Once you select a distributor,
+        the employees assigned to that distributor
+        will be displayed here.
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     EMPLOYEES TABLE
+====================================================== -->
+
+<div class="table-row" *ngIf="selectedDistributorId">
+
+    <table mat-table [dataSource]="employeeDataSource" matSort>
+
+        <!-- S.No -->
+
+        <ng-container matColumnDef="sno">
+
+            <th mat-header-cell *matHeaderCellDef>
+                S.No
+            </th>
+
+            <td mat-cell *matCellDef="let employee; let i = index">
+                {{ i + 1 }}
+            </td>
+
+        </ng-container>
+
+
+        <!-- Employee -->
+
+        <ng-container matColumnDef="employee">
+
+            <th mat-header-cell *matHeaderCellDef>
+                Employee
+            </th>
+
+            <td mat-cell *matCellDef="let employee">
+
+                <div class="d-flex align-items-center">
+
+                    <img [src]="employee.profileImage || 'assets/images/no-image.png'" class="category-image me-2">
+
+                    <div>
+
+                        <h6 class="mb-0">
+                            {{
+                            employee.fullName ||
+                            (employee.firstName + ' ' + employee.lastName)
+                            }}
+                        </h6>
+
+                        <small>
+                            {{ employee.email || 'No Email' }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+        </ng-container>
+
+
+        <!-- Employee Code -->
+
+        <ng-container matColumnDef="employeeCode">
+
+            <th mat-header-cell *matHeaderCellDef>
+                Employee Code
+            </th>
+
+            <td mat-cell *matCellDef="let employee">
+                {{ employee.employeeCode || '-' }}
+            </td>
+
+        </ng-container>
+
+
+        <!-- Role -->
+
+        <ng-container matColumnDef="role">
+
+            <th mat-header-cell *matHeaderCellDef>
+                Role
+            </th>
+
+            <td mat-cell *matCellDef="let employee">
+
+                <span class="status-badge role-badge">
+                    {{ employee.role }}
+                </span>
+
+            </td>
+
+        </ng-container>
+
+
+        <!-- Mobile -->
+
+        <ng-container matColumnDef="mobile">
+
+            <th mat-header-cell *matHeaderCellDef>
+                Mobile
+            </th>
+
+            <td mat-cell *matCellDef="let employee">
+                {{ employee.mobile || '-' }}
+            </td>
+
+        </ng-container>
+
+
+        <!-- Header -->
+
+        <tr mat-header-row *matHeaderRowDef="employeeDisplayedColumns"></tr>
+
+
+        <!-- Rows -->
+
+        <tr mat-row *matRowDef="
+                let row;
+                columns: employeeDisplayedColumns;
+            "></tr>
+
+
+        <!-- No Employees -->
+
+        <tr class="mat-row" *matNoDataRow>
+
+            <td class="mat-cell text-center" colspan="5">
+                No Employees Assigned
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons>
+    </mat-paginator>
+
+</div>

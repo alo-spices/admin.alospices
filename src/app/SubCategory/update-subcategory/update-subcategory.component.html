@@ -1,0 +1,96 @@
+<div class="page-container">
+
+  <!-- Title -->
+  <div class="page-title">
+    <h2>Update SubCategory</h2>
+  </div>
+
+  <!-- Card -->
+  <div class="category-card">
+
+    <form [formGroup]="subCategoryForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-layout">
+
+        <!-- LEFT SIDE -->
+        <div class="left-section">
+
+          <!-- Name -->
+          <div class="form-group">
+            <label>SubCategory Name</label>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Enter subcategory name"
+            />
+          </div>
+
+          <!-- Category Dropdown -->
+          <div class="form-group">
+            <label>Category</label>
+
+            <select formControlName="category">
+              <option value="">Select Category</option>
+
+              <option
+                *ngFor="let cat of categories"
+                [value]="cat._id">
+                {{ cat.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Image -->
+          <div class="form-group">
+            <label>SubCategory Image</label>
+
+            <input
+              type="file"
+              (change)="onFileChange($event)"
+            />
+          </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right-section">
+
+          <div class="image-preview-box">
+
+            <img
+              *ngIf="imagePreview"
+              [src]="imagePreview"
+            />
+
+            <span *ngIf="!imagePreview">
+              Image Preview
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="button-group">
+
+        <button type="submit" class="btn-create">
+          Update
+        </button>
+
+        <button
+          type="button"
+          class="btn-back"
+          (click)="goBack()"
+        >
+          Back
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

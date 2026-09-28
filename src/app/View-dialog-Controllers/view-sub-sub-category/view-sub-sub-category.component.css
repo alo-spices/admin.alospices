@@ -1,0 +1,20 @@
+.details-grid {
+  margin-bottom: 20px;
+}
+
+.details-grid p {
+  margin: 10px 0;
+}
+
+.image-preview {
+  text-align: center;
+}
+
+.image-preview img {
+  border-radius: 10px;
+  object-fit: cover;
+}
+.button-group{
+    justify-self: end;
+    padding: 20px;
+}

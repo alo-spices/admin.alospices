@@ -1,0 +1,267 @@
+/* ==========================================
+   PAGE
+========================================== */
+
+.warehouse-container{
+    padding:25px;
+    background:#f8f9fc;
+    min-height:100vh;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.warehouse-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.card-header{
+    background:linear-gradient(135deg,#A63D22,#7E2D17);
+    padding:25px 30px;
+    color:#fff;
+}
+
+.card-header h3{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+}
+
+.card-header p{
+    margin-top:8px;
+    margin-bottom:0;
+    opacity:.9;
+    font-size:14px;
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+form{
+    padding:30px;
+}
+
+label{
+    display:block;
+    font-weight:600;
+    color:#444;
+    margin-bottom:8px;
+}
+
+label span{
+    color:#dc3545;
+}
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.form-control,
+.form-select{
+
+    height:48px;
+
+    border-radius:10px;
+
+    border:1px solid #dcdcdc;
+
+    transition:.3s;
+
+    box-shadow:none;
+
+}
+
+textarea.form-control{
+
+    height:auto;
+
+    min-height:110px;
+
+    resize:none;
+
+    padding-top:12px;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:#A63D22;
+
+    box-shadow:0 0 0 .15rem rgba(166,61,34,.18);
+
+}
+
+::placeholder{
+
+    color:#999;
+
+    font-size:14px;
+
+}
+
+/* ==========================================
+   VALIDATION
+========================================== */
+
+.text-danger{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:13px;
+
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.button-group{
+
+    margin-top:20px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn{
+
+    border-radius:10px;
+
+    padding:10px 24px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-save{
+
+    background:#A63D22;
+
+    color:#fff;
+
+    border:none;
+
+}
+
+.btn-save:hover{
+
+    background:#7E2D17;
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 18px rgba(166,61,34,.25);
+
+}
+
+.btn-secondary{
+
+    background:#6c757d;
+
+    border:none;
+
+}
+
+.btn-secondary:hover{
+
+    background:#5b636a;
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   INPUT HOVER
+========================================== */
+
+.form-control:hover,
+.form-select:hover{
+
+    border-color:#A63D22;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:992px){
+
+    form{
+
+        padding:20px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .warehouse-container{
+
+        padding:15px;
+
+    }
+
+    .card-header{
+
+        padding:20px;
+
+    }
+
+    .card-header h3{
+
+        font-size:22px;
+
+    }
+
+    .button-group{
+
+        flex-direction:column;
+
+    }
+
+    .button-group .btn{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    form{
+
+        padding:15px;
+
+    }
+
+    .card-header{
+
+        text-align:center;
+
+    }
+
+}

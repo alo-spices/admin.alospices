@@ -1,0 +1,405 @@
+<div class="category-container">
+
+    <!-- ==========================================
+         TOP ROW
+    =========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Stock Transfers
+            </h2>
+
+            <p>
+                Manage warehouse stock transfers
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         SEARCH ROW
+    =========================================== -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>Search Distributor Stocks</mat-label>
+
+            <input matInput placeholder="Search by transfer no, warehouse, distributor..."
+                (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ==========================================
+         TABLE ROW
+    =========================================== -->
+
+    <div class="table-row">
+
+        <div class="table-responsive">
+
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1 w-100">
+
+
+                <!-- ==================================
+                     S.NO
+                =================================== -->
+
+                <ng-container matColumnDef="sno">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        S.No
+
+                    </th>
+
+                    <td mat-cell *matCellDef="
+                            let element;
+                            let i = index
+                        ">
+
+                        {{
+                        paginator
+                        ? paginator.pageIndex *
+                        paginator.pageSize +
+                        i + 1
+                        : i + 1
+                        }}
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     TRANSFER NO
+                =================================== -->
+
+                <ng-container matColumnDef="transferNo">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Transfer No
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="transfer-number">
+
+                            {{ element.transferNo }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     TRANSFER DATE
+                =================================== -->
+
+                <ng-container matColumnDef="transferDate">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Transfer Date
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        {{
+                        element.transferDate
+                        | date:'dd-MM-yyyy'
+                        }}
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     SOURCE WAREHOUSE
+                =================================== -->
+
+                <ng-container matColumnDef="sourceWarehouse">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Source Warehouse
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <div class="warehouse-info">
+
+                            <strong>
+
+                                {{
+                                element
+                                .sourceWarehouse
+                                ?.warehouseName
+                                }}
+
+                            </strong>
+
+                            <small>
+
+                                {{
+                                element
+                                .sourceWarehouse
+                                ?.warehouseCode
+                                }}
+
+                            </small>
+
+                        </div>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     DESTINATION
+                =================================== -->
+
+                <ng-container matColumnDef="destination">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Destination
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <div class="destination-info">
+
+                            <strong>
+
+                                {{
+                                element
+                                .destination
+                                ?.fullName ||
+                                element
+                                .destination
+                                ?.shopName ||
+                                '-'
+                                }}
+
+                            </strong>
+
+                            <small>
+
+                                {{
+                                element.destinationType
+                                }}
+
+                            </small>
+
+                        </div>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     ITEMS
+                =================================== -->
+
+                <ng-container matColumnDef="items">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Items
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="item-count">
+
+                            {{
+                            getItemCount(element)
+                            }}
+
+                            {{
+                            getItemCount(element) === 1
+                            ? 'Item'
+                            : 'Items'
+                            }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     STATUS
+                =================================== -->
+
+                <ng-container matColumnDef="status">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Status
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <span class="status-badge" [ngClass]="
+                                getStatusClass(
+                                    element.status
+                                )
+                            ">
+
+                            {{ element.status }}
+
+                        </span>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     RECEIVED AT
+                =================================== -->
+
+                <ng-container matColumnDef="receivedAt">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                        Received At
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <ng-container *ngIf="
+                                element.receivedAt;
+                                else notReceived
+                            ">
+
+                            {{
+                            element.receivedAt
+                            | date:'dd-MM-yyyy hh:mm a'
+                            }}
+
+                        </ng-container>
+
+                        <ng-template #notReceived>
+
+                            <span class="text-muted">
+                                Not Received
+                            </span>
+
+                        </ng-template>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     ACTIONS
+                =================================== -->
+
+                <ng-container matColumnDef="actions">
+
+                    <th mat-header-cell *matHeaderCellDef>
+
+                        Actions
+
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+
+                        <button type="button" class="btn btn-sm btn-outline-success" title="View"
+                            (click)="viewStockTransfer(element)">
+
+                            <i class="fa fa-eye">
+                            </i>
+
+                        </button>
+
+                    </td>
+
+                </ng-container>
+
+
+                <!-- ==================================
+                     HEADER
+                =================================== -->
+
+                <tr mat-header-row *matHeaderRowDef="
+                        displayedColumns
+                    ">
+                </tr>
+
+
+                <!-- ==================================
+                     ROW
+                =================================== -->
+
+                <tr mat-row *matRowDef="
+                        let row;
+                        columns: displayedColumns
+                    ">
+                </tr>
+
+
+                <!-- ==================================
+                     NO DATA
+                =================================== -->
+
+                <tr class="mat-row" *matNoDataRow>
+
+                    <td class="mat-cell text-center" [attr.colspan]="
+                            displayedColumns.length
+                        ">
+
+                        No stock transfers found.
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         PAGINATOR
+    =========================================== -->
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[
+            5,
+            10,
+            20,
+            50
+        ]" showFirstLastButtons>
+
+    </mat-paginator>
+
+</div>

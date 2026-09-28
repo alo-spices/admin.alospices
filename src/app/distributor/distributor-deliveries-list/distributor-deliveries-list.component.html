@@ -1,0 +1,340 @@
+<div class="category-container">
+
+    <div class="container-fluid">
+
+        <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+        <!-- Header -->
+        <div class="top-row">
+
+            <div class="title-section">
+                <h2>
+                    Delivery Orders
+                </h2>
+            </div>
+
+
+
+        </div>
+
+        <!-- Search -->
+        <div class="search-row">
+
+            <mat-form-field appearance="outline" class="w-100">
+
+                <mat-label>Search Deliveries</mat-label>
+
+                <input matInput placeholder="Search by Deliveries Name / Code" (keyup)="applyFilter($event)">
+
+            </mat-form-field>
+
+        </div>
+
+
+        <!-- ==========================================
+         TABLE CARD
+    =========================================== -->
+
+        <div class="category-card">
+
+            <div class="table-responsive">
+
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+
+
+                    <!-- ======================================
+               S.NO
+          ======================================= -->
+
+                    <ng-container matColumnDef="sno">
+
+                        <th mat-header-cell *matHeaderCellDef>
+
+                            S.No
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element; let i = index">
+
+                            {{
+                            (paginator?.pageIndex || 0)
+                            *
+                            (paginator?.pageSize || 10)
+                            + i + 1
+                            }}
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               DELIVERY NUMBER
+          ======================================= -->
+
+                    <ng-container matColumnDef="deliveryNumber">
+
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                            Delivery No
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+                            <strong>
+                                {{ element?.deliveryNumber || '-' }}
+                            </strong>
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               ORDER
+          ======================================= -->
+
+                    <ng-container matColumnDef="order">
+
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                            Order
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+                            {{ getOrderNumber(element) }}
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               PARTY
+          ======================================= -->
+
+                    <ng-container matColumnDef="party">
+
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                            Party
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+                            <div>
+
+                                <strong>
+                                    {{ getPartyName(element) }}
+                                </strong>
+
+                                <small *ngIf="element?.party?.mobile" class="d-block text-muted">
+
+                                    {{ element.party.mobile }}
+
+                                </small>
+
+                            </div>
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               DELIVERY BOY
+          ======================================= -->
+
+                    <ng-container matColumnDef="deliveryBoy">
+
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                            Delivery Boy
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+                            <div>
+
+                                <strong>
+                                    {{ getDeliveryBoyName(element) }}
+                                </strong>
+
+                                <small *ngIf="element?.deliveryBoy?.employeeCode" class="d-block text-muted">
+
+                                    {{ element.deliveryBoy.employeeCode }}
+
+                                </small>
+
+                            </div>
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               SOURCE TYPE
+          ======================================= -->
+
+                    <ng-container matColumnDef="sourceType">
+
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                            Source
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+                            <span>
+
+                                {{ element?.sourceType || '-' }}
+
+                            </span>
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               STATUS
+          ======================================= -->
+
+                    <ng-container matColumnDef="status">
+
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                            Status
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+                            <span class="status-badge" [ngClass]="{
+                  'assigned':
+                    element?.deliveryStatus === 'Assigned',
+
+                  'dispatched':
+                    element?.deliveryStatus === 'Dispatched',
+
+                  'delivered':
+                    element?.deliveryStatus === 'Delivered',
+
+                  'cancelled':
+                    element?.deliveryStatus === 'Cancelled'
+                }">
+
+                                {{ element?.deliveryStatus || '-' }}
+
+                            </span>
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               CREATED AT
+          ======================================= -->
+
+                    <ng-container matColumnDef="createdAt">
+
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                            Created At
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+                            {{
+                            element?.createdAt
+                            ? (element.createdAt | date:'dd-MM-yyyy hh:mm a')
+                            : '-'
+                            }}
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               ACTIONS
+          ======================================= -->
+
+                    <ng-container matColumnDef="actions">
+
+                        <th mat-header-cell *matHeaderCellDef>
+
+                            Actions
+
+                        </th>
+
+                        <td mat-cell *matCellDef="let element">
+
+                            <button type="button" class="btn btn-outline-success" (click)="viewDelivery(element)">
+
+                                <i class="fa fa-eye"></i>
+
+                            </button>
+
+                        </td>
+
+                    </ng-container>
+
+
+                    <!-- ======================================
+               HEADER / ROW
+          ======================================= -->
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                    </tr>
+
+
+                    <tr mat-row *matRowDef="
+              let row;
+              columns: displayedColumns;
+            ">
+                    </tr>
+
+
+                    <!-- ======================================
+               NO DATA
+          ======================================= -->
+
+                    <tr class="mat-row" *matNoDataRow>
+
+                        <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length">
+
+                            No deliveries found
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+            <!-- ==========================================
+           PAGINATOR
+      =========================================== -->
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" [pageSize]="10" showFirstLastButtons>
+            </mat-paginator>
+
+        </div>
+
+    </div>
+
+</div>

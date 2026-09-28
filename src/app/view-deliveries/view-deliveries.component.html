@@ -1,0 +1,1165 @@
+<div class="delivery-dialog">
+
+    <!-- ========================================= -->
+    <!-- HEADER -->
+    <!-- ========================================= -->
+
+    <div class="dialog-header">
+
+        <div>
+
+            <span class="dialog-label">
+                DELIVERY DETAILS
+            </span>
+
+            <h2>
+                {{ delivery?.deliveryNumber || '-' }}
+            </h2>
+
+        </div>
+
+        <button type="button" class="close-btn" (click)="close()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- BODY -->
+    <!-- ========================================= -->
+
+    <div class="dialog-body">
+
+
+        <!-- ========================================= -->
+        <!-- DELIVERY INFORMATION -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-truck"></i>
+
+                <h3>
+                    Delivery Information
+                </h3>
+
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Delivery Number
+                    </span>
+
+                    <strong>
+                        {{ delivery?.deliveryNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Delivery Date
+                    </span>
+
+                    <strong>
+                        {{ formatDate(delivery?.deliveryDate) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Delivery Status
+                    </span>
+
+                    <strong class="status-badge" [ngClass]="
+                            getDeliveryStatusClass(
+                                delivery?.deliveryStatus
+                            )
+                        ">
+
+                        {{ delivery?.deliveryStatus || '-' }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Source Type
+                    </span>
+
+                    <strong class="source-badge" [ngClass]="
+                            getSourceTypeClass(
+                                delivery?.sourceType
+                            )
+                        ">
+
+                        {{ delivery?.sourceType || '-' }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Created At
+                    </span>
+
+                    <strong>
+                        {{ formatDateTime(delivery?.createdAt) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Updated At
+                    </span>
+
+                    <strong>
+                        {{ formatDateTime(delivery?.updatedAt) }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- ORDER INFORMATION -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-shopping-cart"></i>
+
+                <h3>
+                    Order Information
+                </h3>
+
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Order Number
+                    </span>
+
+                    <strong>
+                        {{ delivery?.order?.orderNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Party Type
+                    </span>
+
+                    <strong>
+                        {{ delivery?.order?.partyType || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Order Date
+                    </span>
+
+                    <strong>
+                        {{ formatDate(delivery?.order?.orderDate) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Order Status
+                    </span>
+
+                    <strong class="status-badge" [ngClass]="
+                            getOrderStatusClass(
+                                delivery?.order?.orderStatus
+                            )
+                        ">
+
+                        {{ delivery?.order?.orderStatus || '-' }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Payment Status
+                    </span>
+
+                    <strong class="status-badge" [ngClass]="
+                            getPaymentStatusClass(
+                                delivery?.order?.paymentStatus
+                            )
+                        ">
+
+                        {{ delivery?.order?.paymentStatus || '-' }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Balance Amount
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.order?.balanceAmount || 0 }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- PARTY DETAILS -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-building"></i>
+
+                <h3>
+                    Customer / Party Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Party Code
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.partyCode || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Party Name
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.partyName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Shop Name
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.shopName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Owner Name
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.ownerName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Mobile
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.mobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        WhatsApp
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.whatsappNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        GST Number
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.gstNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        PAN Number
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.panNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Credit Limit
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.party?.creditLimit || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Credit Days
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.creditDays || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        City
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.city || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        District
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.district || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.state || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Pincode
+                    </span>
+
+                    <strong>
+                        {{ delivery?.party?.pincode || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="address-box">
+
+                <span>
+                    Address
+                </span>
+
+                <p>
+                    {{ delivery?.party?.address || '-' }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- DELIVERY BOY -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-user"></i>
+
+                <h3>
+                    Delivery Boy Details
+                </h3>
+
+            </div>
+
+
+            <div class="employee-header">
+
+                <div class="employee-avatar">
+
+                    <i class="fa fa-user"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        {{ delivery?.deliveryBoy?.fullName || '-' }}
+                    </h4>
+
+                    <span>
+                        {{ delivery?.deliveryBoy?.role || '-' }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Employee Code
+                    </span>
+
+                    <strong>
+                        {{ delivery?.deliveryBoy?.employeeCode || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Mobile
+                    </span>
+
+                    <strong>
+                        {{ delivery?.deliveryBoy?.mobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Role
+                    </span>
+
+                    <strong>
+                        {{ delivery?.deliveryBoy?.role || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Distributor
+                    </span>
+
+                    <strong class="id-text">
+
+                        {{ delivery?.deliveryBoy?.distributor || '-' }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- DELIVERY SOURCE -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-database"></i>
+
+                <h3>
+                    Delivery Source
+                </h3>
+
+            </div>
+
+
+            <div class="source-box">
+
+                <div class="source-icon">
+
+                    <i class="fa" [ngClass]="
+                            delivery?.sourceType === 'WAREHOUSE'
+                            ? 'fa-home'
+                            : 'fa-truck'
+                        ">
+                    </i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Source Type
+                    </span>
+
+                    <h4>
+
+                        {{
+                        delivery?.sourceType === 'WAREHOUSE'
+                        ? 'Warehouse'
+                        : delivery?.sourceType === 'DISTRIBUTOR'
+                        ? 'Distributor'
+                        : '-'
+                        }}
+
+                    </h4>
+
+
+                    <p *ngIf="
+                            delivery?.sourceType === 'WAREHOUSE'
+                        ">
+
+                        {{
+                        delivery?.sourceWarehouse?.warehouseName
+                        || '-'
+                        }}
+
+                    </p>
+
+
+                    <p *ngIf="
+                            delivery?.sourceType === 'DISTRIBUTOR'
+                        ">
+
+                        {{
+                        delivery?.sourceDistributor?.fullName
+                        || '-'
+                        }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- DISPATCH DETAILS -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-paper-plane"></i>
+
+                <h3>
+                    Dispatch Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Dispatched At
+                    </span>
+
+                    <strong>
+                        {{ formatDateTime(delivery?.dispatchedAt) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Dispatched By
+                    </span>
+
+                    <strong>
+                        {{ delivery?.dispatchedBy || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Delivery Date
+                    </span>
+
+                    <strong>
+                        {{ formatDateTime(delivery?.deliveryDate) }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- RECEIVER DETAILS -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-handshake-o"></i>
+
+                <h3>
+                    Receiver Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Receiver Name
+                    </span>
+
+                    <strong>
+                        {{ delivery?.receiverName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Receiver Mobile
+                    </span>
+
+                    <strong>
+                        {{ delivery?.receiverMobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Delivered At
+                    </span>
+
+                    <strong>
+                        {{ formatDateTime(delivery?.deliveredAt) }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- DELIVERY LOCATION -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-map-marker"></i>
+
+                <h3>
+                    Delivery Location
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Latitude
+                    </span>
+
+                    <strong>
+                        {{ delivery?.latitude ?? '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Longitude
+                    </span>
+
+                    <strong>
+                        {{ delivery?.longitude ?? '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Delivery Address
+                    </span>
+
+                    <strong>
+                        {{ delivery?.deliveryAddress || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- DELIVERY PROOF -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-file-image-o"></i>
+
+                <h3>
+                    Delivery Proof
+                </h3>
+
+            </div>
+
+
+            <div class="proof-grid">
+
+
+                <!-- Delivery Photo -->
+
+                <div class="proof-item">
+
+                    <span>
+                        Delivery Photo
+                    </span>
+
+
+                    <div class="proof-preview" *ngIf="delivery?.deliveryPhoto">
+
+                        <img [src]="delivery.deliveryPhoto" alt="Delivery Photo">
+
+                    </div>
+
+
+                    <div class="proof-empty" *ngIf="!delivery?.deliveryPhoto">
+
+                        <i class="fa fa-image"></i>
+
+                        <p>
+                            No Delivery Photo
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Delivery Signature -->
+
+                <div class="proof-item">
+
+                    <span>
+                        Delivery Signature
+                    </span>
+
+
+                    <div class="proof-preview" *ngIf="delivery?.deliverySignature">
+
+                        <img [src]="delivery.deliverySignature" alt="Delivery Signature">
+
+                    </div>
+
+
+                    <div class="proof-empty" *ngIf="!delivery?.deliverySignature">
+
+                        <i class="fa fa-pencil"></i>
+
+                        <p>
+                            No Signature
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- ORDER AMOUNT -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-money"></i>
+
+                <h3>
+                    Order Amount
+                </h3>
+
+            </div>
+
+
+            <div class="amount-grid">
+
+                <div class="amount-item">
+
+                    <span>
+                        Sub Total
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.order?.subTotal || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Discount
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.order?.discountAmount || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Taxable Amount
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.order?.taxableAmount || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        GST
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.order?.gstAmount || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item grand-total">
+
+                    <span>
+                        Grand Total
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.order?.grandTotal || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Paid Amount
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.order?.paidAmount || 0 }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item balance">
+
+                    <span>
+                        Balance Amount
+                    </span>
+
+                    <strong>
+                        ₹{{ delivery?.order?.balanceAmount || 0 }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- REMARKS -->
+        <!-- ========================================= -->
+
+        <div class="section-card" *ngIf="
+                delivery?.remarks ||
+                delivery?.order?.remarks
+            ">
+
+            <div class="section-title">
+
+                <i class="fa fa-comment"></i>
+
+                <h3>
+                    Remarks
+                </h3>
+
+            </div>
+
+
+            <div class="remarks-box">
+
+                <span *ngIf="delivery?.remarks">
+
+                    {{ delivery.remarks }}
+
+                </span>
+
+
+                <span *ngIf="
+                        !delivery?.remarks &&
+                        delivery?.order?.remarks
+                    ">
+
+                    {{ delivery.order.remarks }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- SYSTEM INFORMATION -->
+        <!-- ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-info-circle"></i>
+
+                <h3>
+                    System Information
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Delivery ID
+                    </span>
+
+                    <strong class="id-text">
+                        {{ delivery?._id || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Order ID
+                    </span>
+
+                    <strong class="id-text">
+                        {{ delivery?.order?._id || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Party ID
+                    </span>
+
+                    <strong class="id-text">
+                        {{ delivery?.party?._id || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================= -->
+
+    <div class="dialog-footer">
+
+        <button type="button" class="btn-back" (click)="close()">
+
+            <i class="fa fa-arrow-left"></i>
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

@@ -1,0 +1,610 @@
+<div class="finished-stock-details-container">
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Finished Goods Stock Details
+            </h2>
+
+            <p>
+                Warehouse-wise finished goods inventory
+                and production history
+            </p>
+
+        </div>
+
+
+        <div class="button-section">
+
+            <button type="button" (click)="goBack()">
+
+                <i class="fa fa-arrow-left"></i>
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Loading -->
+    <!-- ========================================== -->
+
+    <div class="loading-card" *ngIf="isLoading">
+
+        <i class="fa fa-spinner fa-spin"></i>
+
+        <span>
+            Loading finished goods details...
+        </span>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Main Content -->
+    <!-- ========================================== -->
+
+    <div *ngIf="
+            !isLoading &&
+            stockData
+        ">
+
+
+        <!-- ====================================== -->
+        <!-- Warehouse Card -->
+        <!-- ====================================== -->
+
+        <div class="warehouse-card">
+
+            <div class="warehouse-icon">
+
+                <i class="fa fa-warehouse"></i>
+
+            </div>
+
+
+            <div class="warehouse-content">
+
+                <span class="label">
+                    Warehouse
+                </span>
+
+                <h3>
+                    {{
+                    stockData.warehouse?.warehouseName
+                    || '-'
+                    }}
+                </h3>
+
+                <div class="warehouse-meta">
+
+                    <span>
+
+                        <i class="fa fa-barcode"></i>
+
+                        {{
+                        stockData.warehouse?.warehouseCode
+                        || '-'
+                        }}
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="fa fa-boxes"></i>
+
+                        {{
+                        stockData.warehouse?.warehouseType
+                        || '-'
+                        }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Summary -->
+        <!-- ====================================== -->
+
+        <div class="summary-grid">
+
+
+            <!-- Total Products -->
+
+            <div class="summary-card">
+
+                <div class="summary-icon products">
+
+                    <i class="fa fa-box"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Products
+                    </span>
+
+                    <strong>
+                        {{
+                        stockData.summary?.totalProducts
+                        || 0
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Total Packs -->
+
+            <div class="summary-card">
+
+                <div class="summary-icon packs">
+
+                    <i class="fa fa-boxes"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Packs
+                    </span>
+
+                    <strong>
+                        {{
+                        stockData.summary?.totalPacks
+                        || 0
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Rejected -->
+
+            <div class="summary-card">
+
+                <div class="summary-icon rejected">
+
+                    <i class="fa fa-times-circle"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Rejected Packs
+                    </span>
+
+                    <strong>
+                        {{
+                        stockData.summary?.totalRejectedPacks
+                        || 0
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Total Weight -->
+
+            <div class="summary-card">
+
+                <div class="summary-icon weight">
+
+                    <i class="fa fa-weight-hanging"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Weight
+                    </span>
+
+                    <strong>
+
+                        {{
+                        stockData.summary?.totalWeightKg
+                        || 0
+                        }}
+
+                        KG
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ====================================== -->
+        <!-- Product List -->
+        <!-- ====================================== -->
+
+        <div class="products-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h3>
+                        Finished Goods
+                    </h3>
+
+                    <p>
+                        SKU-wise production summary
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="product-list">
+
+                <div class="product-card" *ngFor="
+                        let product
+                        of stockData.finishedGoods
+                    ">
+
+
+                    <!-- Product Header -->
+
+                    <div class="product-header">
+
+                        <div class="product-title">
+
+                            <div class="sku-icon">
+
+                                <i class="fa fa-box-open"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    {{
+                                    product.variantName
+                                    || product.skuCode
+                                    || '-'
+                                    }}
+                                </h4>
+
+                                <span>
+
+                                    SKU:
+
+                                    {{
+                                    product.skuCode
+                                    || '-'
+                                    }}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="production-count">
+
+                            {{
+                            product.productionCount
+                            || 0
+                            }}
+
+                            Production(s)
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- Product Stats -->
+
+                    <div class="product-stats">
+
+
+                        <div class="product-stat">
+
+                            <span>
+                                Pack Size
+                            </span>
+
+                            <strong>
+                                {{
+                                product.packSize
+                                || '-'
+                                }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="product-stat">
+
+                            <span>
+                                Weight
+                            </span>
+
+                            <strong>
+
+                                {{
+                                product.weightInGrams
+                                || 0
+                                }}
+
+                                g
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="product-stat">
+
+                            <span>
+                                Packs Produced
+                            </span>
+
+                            <strong>
+
+                                {{
+                                product.packsProduced
+                                || 0
+                                }}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="product-stat">
+
+                            <span>
+                                Rejected
+                            </span>
+
+                            <strong>
+
+                                {{
+                                product.rejectedPacks
+                                || 0
+                                }}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="product-stat">
+
+                            <span>
+                                Total Weight
+                            </span>
+
+                            <strong>
+
+                                {{
+                                product.totalWeightKg
+                                || 0
+                                }}
+
+                                KG
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================================== -->
+                    <!-- Production History -->
+                    <!-- ================================== -->
+
+                    <div class="history-section" *ngIf="
+                            product.productionHistory?.length
+                        ">
+
+                        <div class="history-title">
+
+                            <i class="fa fa-history"></i>
+
+                            Production History
+
+                        </div>
+
+
+                        <div class="history-list">
+
+                            <div class="history-item" *ngFor="
+                                    let history
+                                    of product.productionHistory
+                                ">
+
+
+                                <div class="history-date">
+
+                                    <i class="fa fa-calendar"></i>
+
+                                    <div>
+
+                                        <strong>
+
+                                            {{
+                                            history.productionNo
+                                            || '-'
+                                            }}
+
+                                        </strong>
+
+                                        <small>
+
+                                            {{
+                                            history.productionDate
+                                            | date:'dd-MM-yyyy'
+                                            }}
+
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-values">
+
+                                    <div>
+
+                                        <span>
+                                            Batch
+                                        </span>
+
+                                        <strong>
+                                            {{
+                                            history.batchNo
+                                            || '-'
+                                            }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <span>
+                                            Packs
+                                        </span>
+
+                                        <strong>
+                                            {{
+                                            history.packsProduced
+                                            || 0
+                                            }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <span>
+                                            Rejected
+                                        </span>
+
+                                        <strong>
+                                            {{
+                                            history.rejectedPacks
+                                            || 0
+                                            }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <span>
+                                            Weight
+                                        </span>
+
+                                        <strong>
+
+                                            {{
+                                            history.totalWeightKg
+                                            || 0
+                                            }}
+
+                                            KG
+
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="history-remarks" *ngIf="
+                                        history.remarks
+                                    ">
+
+                                    <i class="fa fa-comment-alt"></i>
+
+                                    {{
+                                    history.remarks
+                                    }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- No Data -->
+    <!-- ========================================== -->
+
+    <div class="empty-state" *ngIf="
+            !isLoading &&
+            !stockData
+        ">
+
+        <i class="fa fa-box-open"></i>
+
+        <h3>
+            No Finished Goods Details Found
+        </h3>
+
+        <p>
+            Unable to load warehouse finished goods information.
+        </p>
+
+        <button type="button" (click)="goBack()">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>

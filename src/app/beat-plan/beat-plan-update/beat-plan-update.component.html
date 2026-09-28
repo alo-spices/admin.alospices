@@ -1,0 +1,373 @@
+<div class="category-container">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <!-- ========================================== -->
+            <!-- Title -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>
+                        <i class="fa fa-route me-2"></i>
+                        {{isViewMode ? 'View Beat Plan Details' : 'Update Beat Plan Details'}}
+                    </h2>
+
+                    <p>
+                        Create a new beat plan and assign it to a salesman
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Form Card -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="category-card">
+
+                    <form [formGroup]="beatPlanForm" (ngSubmit)="onSubmit()">
+
+
+                        <div class="category-grid">
+
+
+                            <!-- ====================================== -->
+                            <!-- Form Area -->
+                            <!-- ====================================== -->
+
+                            <div class="form-area">
+
+
+                                <!-- ================================= -->
+                                <!-- BEAT PLAN INFORMATION -->
+                                <!-- ================================= -->
+
+                                <div class="section-title full-width">
+
+                                    <h4>
+                                        Beat Plan Information
+                                    </h4>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Beat Name -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Beat Name
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+                                    <input type="text" formControlName="beatName" placeholder="Enter beat name">
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Area -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Area
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <select formControlName="area">
+
+                                        <option value="">
+                                            Select Area
+                                        </option>
+
+
+                                        <option *ngFor="
+                                                let area
+                                                of areaList
+                                            " [value]="area._id">
+
+                                            {{
+                                            area.areaName
+                                            }}
+
+                                            <ng-container *ngIf="area.areaCode">
+
+                                                -
+                                                {{
+                                                area.areaCode
+                                                }}
+
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Route -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Route
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <select formControlName="route">
+
+                                        <option value="">
+                                            Select Route
+                                        </option>
+
+
+                                        <option *ngFor="
+                                                let route
+                                                of routeList
+                                            " [value]="route._id">
+
+                                            {{
+                                            route.routeName
+                                            }}
+
+                                            <ng-container *ngIf="route.routeCode">
+
+                                                -
+                                                {{
+                                                route.routeCode
+                                                }}
+
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Salesman -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Salesman
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <select formControlName="salesman">
+
+                                        <option value="">
+                                            Select Salesman
+                                        </option>
+
+
+                                        <option *ngFor="
+                                                let salesman
+                                                of salesmanList
+                                            " [value]="salesman._id">
+
+                                            {{
+                                            salesman.fullName
+                                            }}
+
+                                            <ng-container *ngIf="
+                                                    salesman.employeeCode
+                                                ">
+
+                                                -
+                                                {{
+                                                salesman.employeeCode
+                                                }}
+
+                                            </ng-container>
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Day -->
+                                <!-- ================================= -->
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Day
+
+                                        <span class="required">
+                                            *
+                                        </span>
+
+                                    </label>
+
+
+                                    <select formControlName="day">
+
+                                        <option value="">
+                                            Select Day
+                                        </option>
+
+                                        <option value="Monday">
+                                            Monday
+                                        </option>
+
+                                        <option value="Tuesday">
+                                            Tuesday
+                                        </option>
+
+                                        <option value="Wednesday">
+                                            Wednesday
+                                        </option>
+
+                                        <option value="Thursday">
+                                            Thursday
+                                        </option>
+
+                                        <option value="Friday">
+                                            Friday
+                                        </option>
+
+                                        <option value="Saturday">
+                                            Saturday
+                                        </option>
+
+                                        <option value="Sunday">
+                                            Sunday
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- Description -->
+                                <!-- ================================= -->
+
+                                <div class="form-group full-width">
+
+                                    <label>
+                                        Description
+                                    </label>
+
+
+                                    <textarea rows="4" formControlName="description"
+                                        placeholder="Enter beat plan description">
+                                    </textarea>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- ====================================== -->
+                            <!-- Preview Area -->
+                            <!-- ====================================== -->
+
+                        </div>
+
+
+                        <!-- ====================================== -->
+                        <!-- Buttons -->
+                        <!-- ====================================== -->
+
+                        <div class="button-group">
+
+
+                            <button type="submit" class="btn-create" [disabled]="isLoading" *ngIf="!isViewMode">
+
+
+                                <span *ngIf="!isLoading">
+
+                                    <i class="fa fa-save me-2"></i>
+
+                                    Update Beat Plan
+
+                                </span>
+
+
+                                <span *ngIf="isLoading">
+
+                                    <i class="fa fa-spinner fa-spin me-2">
+                                    </i>
+
+                                    Updating...
+
+                                </span>
+
+
+                            </button>
+
+
+                            <button type="button" class="btn-back" (click)="goBack()">
+
+                                <i class="fa fa-arrow-left me-2"></i>
+
+                                Back
+
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

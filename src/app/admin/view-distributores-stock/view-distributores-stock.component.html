@@ -1,0 +1,606 @@
+<div class="stock-transfer-popup">
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <div class="popup-header">
+
+        <div class="header-content">
+
+            <div class="header-icon">
+
+                <i class="fa fa-exchange-alt"></i>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    Stock Transfer Details
+                </h2>
+
+                <span>
+                    {{ data?.transferNo }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button type="button" class="close-btn" (click)="close()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         BODY
+    =========================================== -->
+
+    <div class="popup-body">
+
+
+        <!-- ======================================
+             TRANSFER SUMMARY
+        ======================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-info-circle"></i>
+
+                <span>
+                    Transfer Information
+                </span>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Transfer No
+                    </span>
+
+                    <strong>
+                        {{ data?.transferNo || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Transfer Date
+                    </span>
+
+                    <strong>
+                        {{
+                        data?.transferDate
+                        | date:'dd-MM-yyyy'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Status
+                    </span>
+
+                    <span class="status-badge" [ngClass]="
+                            'status-' +
+                            (data?.status || '')
+                                .toLowerCase()
+                        ">
+
+                        {{ data?.status || '-' }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Destination Type
+                    </span>
+
+                    <strong>
+                        {{
+                        data?.destinationType || '-'
+                        }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             SOURCE / DESTINATION
+        ======================================= -->
+
+        <div class="location-grid">
+
+
+            <!-- SOURCE -->
+
+            <div class="location-card">
+
+                <div class="location-header">
+
+                    <div class="location-icon source">
+
+                        <i class="fa fa-warehouse"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Source Warehouse
+                        </span>
+
+                        <h3>
+
+                            {{
+                            data?.sourceWarehouse
+                            ?.warehouseName || '-'
+                            }}
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="location-details">
+
+                    <div>
+
+                        <span>
+                            Warehouse Code
+                        </span>
+
+                        <strong>
+
+                            {{
+                            data?.sourceWarehouse
+                            ?.warehouseCode || '-'
+                            }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Warehouse Type
+                        </span>
+
+                        <strong>
+
+                            {{
+                            data?.sourceWarehouse
+                            ?.warehouseType || '-'
+                            }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESTINATION -->
+
+            <div class="location-card">
+
+                <div class="location-header">
+
+                    <div class="location-icon destination">
+
+                        <i class="fa fa-user"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Destination
+                        </span>
+
+                        <h3>
+
+                            {{
+                            data?.destination
+                            ?.fullName ||
+                            data?.destination
+                            ?.shopName ||
+                            '-'
+                            }}
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="location-details">
+
+                    <div>
+
+                        <span>
+                            Shop Name
+                        </span>
+
+                        <strong>
+
+                            {{
+                            data?.destination
+                            ?.shopName || '-'
+                            }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Mobile
+                        </span>
+
+                        <strong>
+
+                            {{
+                            data?.destination
+                            ?.mobile || '-'
+                            }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             ITEMS
+        ======================================= -->
+
+        <div class="section-card items-section">
+
+            <div class="section-title">
+
+                <i class="fa fa-boxes"></i>
+
+                <span>
+                    Transfer Items
+                </span>
+
+                <span class="item-count">
+
+                    {{ data?.items?.length || 0 }}
+
+                    {{
+                    (data?.items?.length || 0) === 1
+                    ? 'Item'
+                    : 'Items'
+                    }}
+
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table class="items-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                S.No
+                            </th>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                SKU
+                            </th>
+
+                            <th>
+                                Batch No
+                            </th>
+
+                            <th>
+                                Pack Size
+                            </th>
+
+                            <th>
+                                Weight
+                            </th>
+
+                            <th>
+                                Quantity
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr *ngFor="
+                                let item of data?.items;
+                                let i = index
+                            ">
+
+                            <td>
+                                {{ i + 1 }}
+                            </td>
+
+
+                            <td>
+
+                                <div class="product-info">
+
+                                    <strong>
+
+                                        {{
+                                        item?.product
+                                        ?.productName || '-'
+                                        }}
+
+                                    </strong>
+
+                                    <small>
+
+                                        {{
+                                        item?.product
+                                        ?.productCode || '-'
+                                        }}
+
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="sku-badge">
+
+                                    {{ item?.skuCode || '-' }}
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                {{ item?.batchNo || '-' }}
+
+                            </td>
+
+
+                            <td>
+
+                                {{ item?.packSize || '-' }}
+
+                            </td>
+
+
+                            <td>
+
+                                {{
+                                item?.weightInGrams || 0
+                                }}
+                                g
+
+                            </td>
+
+
+                            <td>
+
+                                <strong class="quantity">
+
+                                    {{ item?.quantity || 0 }}
+
+                                </strong>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr *ngIf="
+                                !data?.items ||
+                                data.items.length === 0
+                            ">
+
+                            <td colspan="7" class="no-items">
+
+                                No items found.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                    <tfoot *ngIf="
+                            data?.items?.length
+                        ">
+
+                        <tr>
+
+                            <td colspan="6" class="total-label">
+
+                                Total Quantity
+
+                            </td>
+
+                            <td>
+
+                                <strong class="total-quantity">
+
+                                    {{ getTotalQuantity() }}
+
+                                </strong>
+
+                            </td>
+
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             RECEIVING INFORMATION
+        ======================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-check-circle"></i>
+
+                <span>
+                    Receiving Information
+                </span>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Received At
+                    </span>
+
+                    <strong>
+
+                        {{
+                        data?.receivedAt
+                        ? (
+                        data.receivedAt
+                        | date:'dd-MM-yyyy hh:mm a'
+                        )
+                        : 'Not Received'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Received By
+                    </span>
+
+                    <strong>
+
+                        {{
+                        data?.receivedBy?.fullName ||
+                        'Not Available'
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             REMARKS
+        ======================================= -->
+
+        <div class="remarks-card" *ngIf="data?.remarks">
+
+            <div class="remarks-title">
+
+                <i class="fa fa-comment-alt"></i>
+
+                Remarks
+
+            </div>
+
+            <p>
+                {{ data.remarks }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <div class="popup-footer">
+
+        <button type="button" class="btn btn-secondary" (click)="close()">
+
+            <i class="fa fa-times"></i>
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

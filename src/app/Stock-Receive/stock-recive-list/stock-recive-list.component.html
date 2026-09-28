@@ -1,0 +1,352 @@
+<div class="category-container">
+
+    <!-- ==========================================
+         TOP HEADER
+    =========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+
+                <i class="fa fa-truck me-2"></i>
+
+                Stock Receive Management
+
+            </h2>
+
+            <p>
+
+                Manage all received Raw Materials
+
+            </p>
+
+        </div>
+
+        <div class="button-section">
+
+            <button routerLink="/admin/create-stock-receive">
+
+                <i class="fa fa-plus me-2"></i>
+
+                Add Stock Receive
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         SEARCH
+    =========================================== -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+
+                Search Stock Receive
+
+            </mat-label>
+
+            <input matInput placeholder="Search by Receive No / Supplier / Warehouse" (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+    <!-- ==========================================
+         TABLE
+    =========================================== -->
+
+    <div class="table-row">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- ==========================================
+     S.NO
+========================================== -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+                <td mat-cell *matCellDef="let element;let i=index">
+
+                    {{i+1}}
+
+                </td>
+
+            </ng-container>
+            <!-- ==========================================
+     RECEIVE NUMBER
+========================================== -->
+
+           
+            <!-- ==========================================
+     SUPPLIER
+========================================== -->
+
+            <ng-container matColumnDef="supplier">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Supplier
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="supplier-info">
+
+                        <h6>
+
+                            {{element.supplier?.supplierName}}
+
+                        </h6>
+
+                        <!-- <small>
+
+                            {{element.supplier?.supplierCode}}
+
+                        </small> -->
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+            <!-- ==========================================
+     WAREHOUSE
+========================================== -->
+
+            <ng-container matColumnDef="warehouse">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Warehouse
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="warehouse-info">
+
+                        <h6>
+
+                            {{element.warehouse?.warehouseName}}
+
+                        </h6>
+
+                        <small>
+
+                            {{element.warehouse?.warehouseCode}}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+            <!-- ==========================================
+     RAW MATERIAL COUNT
+========================================== -->
+
+            <ng-container matColumnDef="items">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Raw Materials
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="count-badge">
+
+                        {{element.items.length}}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+            <!-- ==========================================
+     TOTAL WEIGHT
+========================================== -->
+
+            <ng-container matColumnDef="weight">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Total Weight
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="weight-badge">
+
+                        {{getTotalWeight(element)}} KG
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+            <!-- ==========================================
+     STATUS
+========================================== -->
+
+            <ng-container matColumnDef="status">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Status
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="{
+
+            'received':element.status=='Received',
+
+            'partial':element.status=='Partially Used',
+
+            'completed':element.status=='Completed'
+
+            }">
+
+                        {{element.status}}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+            <!-- ==========================================
+     RECEIVED DATE
+========================================== -->
+
+            <ng-container matColumnDef="receivedDate">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Received Date
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{element.receivedDate | date:'dd-MM-yyyy'}}
+
+                </td>
+
+            </ng-container>
+            <!-- ==========================================
+     ACTIONS
+========================================== -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Actions
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="action-buttons">
+
+                        <!-- View -->
+
+                        <button mat-icon-button class="view-btn" (click)="viewStockReceive(element)">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+                        <!-- Edit -->
+
+                        <button mat-icon-button class="edit-btn" (click)="editStockReceive(element)">
+
+                            <i class="fa fa-pencil"></i>
+
+                        </button>
+
+                        <!-- Delete -->
+
+                        <button mat-icon-button class="delete-btn" (click)="deleteStockReceive(element)">
+
+                            <i class="fa fa-trash"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+            <!-- ==========================================
+     HEADER ROW
+========================================== -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
+
+            </tr>
+            <!-- ==========================================
+     DATA ROW
+========================================== -->
+
+            <tr mat-row *matRowDef="let row;columns:displayedColumns;">
+
+            </tr>
+            <!-- ==========================================
+     NO DATA
+========================================== -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td colspan="8" class="text-center">
+
+                    <div class="py-4">
+
+                        <i class="fa fa-inbox fa-3x text-muted mb-3">
+
+                        </i>
+
+                        <h5>
+
+                            No Stock Receives Found
+
+                        </h5>
+
+                        <small>
+
+                            Create your first Stock Receive.
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        </table>
+
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10,20,50,100]" showFirstLastButtons>
+
+        </mat-paginator>
+
+    </div>
+
+</div>

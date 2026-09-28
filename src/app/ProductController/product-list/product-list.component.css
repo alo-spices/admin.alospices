@@ -1,0 +1,140 @@
+/* ===========================
+   Product Container
+=========================== */
+
+.product-container {
+  padding: 20px;
+  background: #f7f8fb;
+  min-height: 100vh;
+}
+
+/* ===========================
+   Top Row
+=========================== */
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.title-section h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.title-section p {
+  margin: 4px 0 0;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+/* ===========================
+   Button
+=========================== */
+
+.button-section button {
+  background: #640101;
+  color: #fff;
+  border: none;
+  padding: 11px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.button-section button:hover {
+  background: #870101;
+}
+
+/* ===========================
+   Search
+=========================== */
+
+.search-row {
+  margin-bottom: 20px;
+}
+
+.search-row mat-form-field {
+  width: 100%;
+}
+
+/* ===========================
+   Table
+=========================== */
+
+.table-row {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+table {
+  width: 100%;
+}
+
+.mat-header-cell {
+  background: #640101;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+th{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:var(--primary-light);
+
+    background:#fafafa;
+
+}
+.mat-cell {
+  font-size: 14px;
+  color: #444;
+}
+
+.mat-row:hover {
+  background: #fafafa;
+}
+
+.category-info h6{
+
+    margin:0;
+
+    font-size:15px;
+
+
+    color:#1f2937;
+
+}
+
+.category-info small{
+
+    color:#9ca3af;
+
+}
+.view-btn{
+
+    color:var(--info-color);
+
+}
+
+.edit-btn{
+
+    color:#f59e0b;
+
+}
+
+.delete-btn{
+
+    color:#dc2626;
+
+}

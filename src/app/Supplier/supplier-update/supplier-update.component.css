@@ -1,0 +1,287 @@
+:root {
+
+  --primary-dark: #7E2D17;
+
+  --primary-light: #C45A3A;
+
+  --warning-color: #ED6C02;
+
+  --text-secondary: #6B6B6B;
+
+}
+
+/* ==========================================
+   Page
+========================================== */
+
+.supplier-container {
+
+    background: #f5f6f8;
+
+    min-height: 100vh;
+
+    padding: 30px;
+
+}
+
+.supplier-wrapper {
+
+    max-width: 1400px;
+
+    margin: auto;
+
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.page-header {
+
+    margin-bottom: 25px;
+
+}
+
+.page-header h2 {
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: var(--primary-dark);
+
+    margin-bottom: 5px;
+
+}
+
+.page-header p {
+
+    color: var(--text-secondary);
+
+    margin: 0;
+
+    font-size: 15px;
+
+}
+
+/* ==========================================
+   Card
+========================================== */
+
+.supplier-card {
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================
+   Labels
+========================================== */
+
+.form-label {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--primary-dark);
+
+    margin-bottom: 8px;
+
+}
+
+/* ==========================================
+   Inputs
+========================================== */
+
+.form-control,
+
+.form-select {
+
+    height: 52px;
+
+    border-radius: 10px;
+
+    border: 1px solid #dcdcdc;
+
+    font-size: 15px;
+
+    transition: .3s;
+
+}
+
+textarea.form-control {
+
+    min-height: 120px;
+
+    resize: none;
+
+    padding-top: 12px;
+
+}
+
+.form-control:focus,
+
+.form-select:focus {
+
+    border-color: var(--primary-light);
+
+    box-shadow: 0 0 0 .18rem rgba(196,90,58,.15);
+
+}
+
+.form-control[readonly] {
+
+    background: #f5f5f5;
+
+    cursor: not-allowed;
+
+    color: #666;
+
+}
+
+/* ==========================================
+   Validation
+========================================== */
+
+.text-danger {
+
+    font-size: 13px;
+
+    margin-top: 4px;
+
+}
+
+/* ==========================================
+   Buttons
+========================================== */
+
+.button-section {
+
+    display: flex;
+
+    justify-content: end;
+
+    gap: 15px;
+
+    margin-top: 25px;
+
+}
+
+.btn {
+
+    min-width: 180px;
+
+    padding: 12px 24px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    transition: .3s;
+
+}
+
+.btn-save {
+
+    background: var(--primary-dark);
+
+    color: #fff;
+
+    border: none;
+
+}
+
+.btn-save:hover {
+
+    background: var(--primary-light);
+
+    transform: translateY(-2px);
+
+}
+
+.btn-save:disabled {
+
+    opacity: .7;
+
+    cursor: not-allowed;
+
+}
+
+.btn-back {
+
+    background: #fff;
+
+    border: 2px solid var(--primary-dark);
+
+    color: var(--primary-dark);
+
+}
+
+.btn-back:hover {
+
+    background: var(--primary-dark);
+
+    color: #fff;
+
+}
+
+/* ==========================================
+   Placeholder
+========================================== */
+
+::placeholder {
+
+    color: #999;
+
+    font-size: 14px;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px){
+
+    .supplier-card{
+
+        padding:25px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .supplier-container{
+
+        padding:15px;
+
+    }
+
+    .supplier-card{
+
+        padding:20px;
+
+    }
+
+    .button-section{
+
+        flex-direction:column;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
+}

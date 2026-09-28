@@ -1,0 +1,297 @@
+<div class="orders-page">
+     <button
+            type="button"
+            class="close-btn"
+            (click)="goBack()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+   
+
+   <!-- =====================================
+     PAGE HEADER
+====================================== -->
+
+<div class="page-header">
+
+    <div class="header-left">
+
+       
+
+        <div>
+
+            <h2>
+                Employee Orders
+            </h2>
+
+            <p *ngIf="employee">
+                {{ employee?.fullName }}
+                -
+                {{ employee?.employeeCode }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="order-count">
+
+        <span>
+            Total Orders
+        </span>
+
+        <strong>
+            {{ orders.length }}
+        </strong>
+        
+
+    </div>
+    
+    
+
+</div>
+
+
+
+    <!-- =====================================
+         EMPLOYEE INFO
+    ====================================== -->
+
+    <div
+        class="employee-card"
+        *ngIf="employee">
+
+        <div class="employee-avatar">
+
+            <img
+                *ngIf="employee?.profileImage"
+                [src]="employee.profileImage"
+                [alt]="employee.fullName">
+
+            <span
+                *ngIf="!employee?.profileImage">
+
+                {{ employee?.firstName?.charAt(0) }}
+
+            </span>
+
+        </div>
+
+
+        <div class="employee-info">
+
+            <h3>
+                {{ employee?.fullName }}
+            </h3>
+
+            <span>
+                {{ employee?.employeeCode }}
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         LOADING
+    ====================================== -->
+
+    <div
+        class="loading-box"
+        *ngIf="isLoading">
+
+        <div class="spinner-border"></div>
+
+        <p>
+            Loading orders...
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         ORDERS TABLE
+    ====================================== -->
+
+    <div
+        class="orders-table-wrapper"
+        *ngIf="
+            !isLoading &&
+            orders.length > 0
+        ">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+
+                    <th>
+                        Order Number
+                    </th>
+
+                    <th>
+                        Order Date
+                    </th>
+
+                    <th>
+                        Party
+                    </th>
+
+                    <th>
+                        Party Type
+                    </th>
+
+                    <th>
+                        Sub Total
+                    </th>
+
+                    <th>
+                        GST
+                    </th>
+
+                    <th>
+                        Grand Total
+                    </th>
+
+                    <th>
+                        Order Status
+                    </th>
+
+                    <th>
+                        Payment
+                    </th>
+
+                    <th>
+                        Paid
+                    </th>
+
+                    <th>
+                        Balance
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr
+                    *ngFor="
+                        let order of orders;
+                        let i = index
+                    ">
+
+                    <td>
+                        {{ i + 1 }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ order?.orderNumber }}
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        {{
+                            order?.orderDate
+                            | date:'dd MMM yyyy'
+                        }}
+
+                    </td>
+
+                    <td>
+                        {{ order?.party?.partyName || '-' }}
+                    </td>
+
+                    <td>
+                        {{ order?.partyType || '-' }}
+                    </td>
+
+                    <td>
+                        ₹{{ order?.subTotal || 0 }}
+                    </td>
+
+                    <td>
+                        ₹{{ order?.gstAmount || 0 }}
+                    </td>
+
+                    <td>
+
+                        <strong>
+                            ₹{{ order?.grandTotal || 0 }}
+                        </strong>
+
+                    </td>
+
+                    <td>
+
+                        <span class="order-status">
+
+                            {{ order?.orderStatus }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="payment-status">
+
+                            {{ order?.paymentStatus }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ₹{{ order?.paidAmount || 0 }}
+                    </td>
+
+                    <td>
+                        ₹{{ order?.balanceAmount || 0 }}
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- =====================================
+         NO ORDERS
+    ====================================== -->
+
+    <div
+        class="no-data"
+        *ngIf="
+            !isLoading &&
+            orders.length === 0
+        ">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <h3>
+            No Orders Found
+        </h3>
+
+        <p>
+            This employee has not created any orders.
+        </p>
+
+    </div>
+
+</div>

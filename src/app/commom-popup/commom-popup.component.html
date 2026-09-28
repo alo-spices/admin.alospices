@@ -1,0 +1,142 @@
+<div class="popup-card">
+
+    <!-- Close -->
+    <button
+        type="button"
+        class="close-btn"
+        (click)="close()">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <!-- Icon -->
+    <div class="icon-wrapper">
+
+        <!-- Success -->
+        <div
+            class="icon-circle success"
+            *ngIf="popupData.type == 'success'">
+
+            <i class="fa-solid fa-check"></i>
+
+        </div>
+
+
+        <!-- Error -->
+        <div
+            class="icon-circle error"
+            *ngIf="popupData.type == 'error'">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </div>
+
+
+        <!-- Warning -->
+        <div
+            class="icon-circle warning"
+            *ngIf="popupData.type == 'warning'">
+
+            <i class="fa-solid fa-exclamation"></i>
+
+        </div>
+
+
+        <!-- Info -->
+        <div
+            class="icon-circle info"
+            *ngIf="popupData.type == 'info'">
+
+            <i class="fa-solid fa-info"></i>
+
+        </div>
+
+
+        <!-- Confirm -->
+        <div
+            class="icon-circle confirm"
+            *ngIf="popupData.type == 'confirm'">
+
+            <i class="fa-solid fa-question"></i>
+
+        </div>
+
+    </div>
+
+
+    <!-- Content -->
+    <div class="popup-content">
+
+        <h2>
+            {{ popupData.title }}
+        </h2>
+
+        <p>
+            {{ popupData.message }}
+        </p>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div class="popup-footer">
+
+        <!-- Normal Popup -->
+        <ng-container
+            *ngIf="popupData.type != 'confirm'">
+
+            <button
+                type="button"
+                class="popup-action-btn"
+                [ngClass]="popupData.type"
+                (click)="close()">
+
+                {{ popupData.okText || 'Continue Browsing' }}
+
+            </button>
+
+        </ng-container>
+
+
+        <!-- Confirm Popup -->
+        <ng-container
+            *ngIf="popupData.type == 'confirm'">
+
+            <button
+                type="button"
+                class="popup-action-btn secondary"
+                (click)="cancel()">
+
+                {{ popupData.cancelText || 'Cancel' }}
+
+            </button>
+
+
+            <button
+                type="button"
+                class="popup-action-btn confirm"
+                (click)="confirm()">
+
+                {{ popupData.okText || 'Confirm' }}
+
+            </button>
+
+        </ng-container>
+
+    </div>
+
+
+    <!-- Bottom Line -->
+    <div class="popup-bottom-line">
+
+        <div
+            class="popup-bottom-progress"
+            [ngClass]="popupData.type">
+
+        </div>
+
+    </div>
+
+</div>

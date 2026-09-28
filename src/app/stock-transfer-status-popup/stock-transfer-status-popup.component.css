@@ -1,0 +1,590 @@
+/* ==========================================
+   USER STATUS POPUP
+   ========================================== */
+
+.status-popup-card {
+    width: 100%;
+    max-width: 460px;
+
+    background: var(--card-bg);
+
+    padding: 24px;
+
+    border-radius: 18px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Header
+   ========================================== */
+
+.status-popup-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    position: relative;
+
+    padding-right: 30px;
+
+    margin-bottom: 22px;
+}
+
+
+.status-icon {
+    width: 48px;
+
+    height: 48px;
+
+    min-width: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(166, 61, 34, 0.09);
+
+    color:
+        var(--primary-color);
+
+    font-size: 19px;
+}
+
+
+.status-popup-header h3 {
+    margin: 0;
+
+    color:
+        var(--primary-color);
+
+    font-size: 19px;
+
+    font-weight: 800;
+}
+
+
+.status-popup-header p {
+    margin: 4px 0 0;
+
+    color:
+        var(--text-secondary);
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   Close Button
+   ========================================== */
+
+.close-btn {
+    position: absolute;
+
+    top: -2px;
+
+    right: -2px;
+
+    width: 32px;
+
+    height: 32px;
+
+    padding: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        #f4efeb;
+
+    color:
+        #77675f;
+
+    cursor: pointer;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.close-btn:hover {
+    background:
+        #eaded5;
+
+    color:
+        var(--primary-color);
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* ==========================================
+   Current Status
+   ========================================== */
+
+.current-status {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 14px 15px;
+
+    margin-bottom: 20px;
+
+    border-radius: 11px;
+
+    border:
+        1px solid #eee1d9;
+
+    background:
+        #fbf8f5;
+}
+
+
+.current-status>span:first-child {
+    color:
+        var(--text-secondary);
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   Status Badge
+   ========================================== */
+
+.status-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 75px;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+.status-badge.active {
+    background:
+        #ecfdf5;
+
+    color:
+        #15803d;
+}
+
+
+.status-badge.inactive {
+    background:
+        #f3f4f6;
+
+    color:
+        #6b7280;
+}
+
+
+.status-badge.blocked {
+    background:
+        #fef2f2;
+
+    color:
+        #dc2626;
+}
+
+
+.status-badge.pending {
+    background:
+        #fff7ed;
+
+    color:
+        #c2410c;
+}
+
+
+/* ==========================================
+   Form Group
+   ========================================== */
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+    margin-bottom: 8px;
+
+    color:
+        var(--primary-color);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+.form-group select {
+    width: 100%;
+
+    min-height: 45px;
+
+    padding: 11px 13px;
+
+    border:
+        1px solid #ddd4cc;
+
+    border-radius: 10px;
+
+    background:
+        #fff;
+
+    color:
+        var(--text-primary);
+
+    outline: none;
+
+    font-size: 13px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        all 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+
+.form-group select:hover {
+    border-color:
+        rgba(166, 61, 34, 0.45);
+}
+
+
+.form-group select:focus {
+    border-color:
+        var(--primary-color);
+
+    box-shadow:
+        0 0 0 3px rgba(166, 61, 34, 0.12);
+}
+
+
+/* ==========================================
+   Information Box
+   ========================================== */
+
+.status-info {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    padding: 12px 13px;
+
+    margin-bottom: 22px;
+
+    border-radius: 10px;
+
+    background:
+        #f8f3ef;
+
+    border:
+        1px solid #eadfd7;
+
+    color:
+        #6e5b52;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+.status-info i {
+    margin-top: 1px;
+
+    color:
+        var(--primary-color);
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   Footer
+   ========================================== */
+
+.popup-footer {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid #eee4de;
+}
+
+
+/* ==========================================
+   Cancel Button
+   ========================================== */
+
+.btn-cancel,
+.btn-update {
+    min-width: 120px;
+
+    min-height: 40px;
+
+    padding: 9px 16px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        all 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+
+.btn-cancel {
+    border:
+        1px solid var(--secondary-dark);
+
+    background:
+        var(--secondary-color);
+
+    color:
+        var(--primary-dark);
+}
+
+
+.btn-cancel:hover {
+    background:
+        #ead7c7;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ==========================================
+   Update Button
+   ========================================== */
+
+.btn-update {
+    border: none;
+
+    background:
+        linear-gradient(135deg,
+            var(--primary-color),
+            var(--primary-dark));
+
+    color:
+        #fff;
+
+    box-shadow:
+        0 6px 15px rgba(166, 61, 34, 0.18);
+}
+
+
+.btn-update:hover:not(:disabled) {
+    transform:
+        translateY(-1px);
+
+    background:
+        linear-gradient(135deg,
+            var(--primary-light),
+            var(--primary-color));
+}
+
+
+.btn-update:disabled {
+    opacity: 0.5;
+
+    cursor:
+        not-allowed;
+
+    box-shadow:
+        none;
+
+    transform:
+        none;
+}
+
+
+/* ==========================================
+   Angular Material Dialog
+   ========================================== */
+
+::ng-deep .user-status-dialog {
+
+    .mat-mdc-dialog-container {
+        padding: 0 !important;
+        border-radius: 18px !important;
+        overflow: hidden;
+    }
+
+    .mdc-dialog__surface {
+        padding: 0 !important;
+        border-radius: 18px !important;
+    }
+
+}
+
+
+/* ==========================================
+   Tablet
+   ========================================== */
+
+@media (max-width: 576px) {
+
+    .status-popup-card {
+        padding: 20px;
+    }
+
+    .status-popup-header h3 {
+        font-size: 17px;
+    }
+
+    .current-status {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .popup-footer {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .btn-cancel,
+    .btn-update {
+        width: 100%;
+    }
+
+}
+
+
+/* ==========================================
+   Small Mobile
+   ========================================== */
+
+@media (max-width: 380px) {
+
+    .status-popup-card {
+        padding: 16px;
+    }
+
+    .status-icon {
+        width: 42px;
+
+        height: 42px;
+
+        min-width: 42px;
+
+        font-size: 16px;
+    }
+
+    .status-popup-header {
+        gap: 10px;
+    }
+
+    .status-popup-header h3 {
+        font-size: 16px;
+    }
+
+}
+
+.receive-confirmation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    margin-top: 18px;
+    border-radius: 10px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+
+.receive-icon {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dcfce7;
+    color: #16a34a;
+    font-size: 18px;
+}
+
+.receive-content h4 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    color: #166534;
+}
+
+.receive-content p {
+    margin: 0 0 3px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+}
+
+.receive-content small {
+    color: #777;
+}

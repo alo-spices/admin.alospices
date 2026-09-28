@@ -1,0 +1,524 @@
+<div class="category-container">
+
+    <!-- ========================================== -->
+    <!-- Header -->
+    <!-- ========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Finished Goods Stock
+            </h2>
+
+            <p>
+                View finished goods stock by warehouse
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Warehouse Selection -->
+    <!-- ========================================== -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Select Warehouse
+            </mat-label>
+
+            <mat-select [(value)]="selectedWarehouseId" (selectionChange)="
+                    onWarehouseChange($event.value)
+                ">
+
+                <mat-option *ngFor="
+                        let warehouse
+                        of warehouseList
+                    " [value]="warehouse._id">
+
+                    {{ warehouse.warehouseName }}
+
+                    -
+
+                    {{ warehouse.warehouseCode }}
+
+                </mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Selected Warehouse Information -->
+    <!-- ========================================== -->
+
+    <div class="warehouse-info-card" *ngIf="selectedWarehouse">
+
+        <div class="warehouse-details">
+
+            <div class="warehouse-icon">
+
+                <i class="fa fa-warehouse"></i>
+
+            </div>
+
+
+            <div class="warehouse-content">
+
+                <h4>
+
+                    {{ selectedWarehouse.warehouseName }}
+
+                </h4>
+
+
+                <p>
+
+                    <span>
+
+                        {{ selectedWarehouse.warehouseCode }}
+
+                    </span>
+
+
+                    <span *ngIf="selectedWarehouse.city">
+
+                        • {{ selectedWarehouse.city }}
+
+                    </span>
+
+
+                    <span *ngIf="selectedWarehouse.state">
+
+                        • {{ selectedWarehouse.state }}
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Search -->
+    <!-- ========================================== -->
+
+    <div class="search-row" *ngIf="selectedWarehouseId">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Search Finished Goods
+            </mat-label>
+
+            <input matInput placeholder="Search by SKU / Variant / Pack Size" (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- Finished Goods Table -->
+    <!-- ========================================== -->
+
+    <div class="table-row" *ngIf="selectedWarehouseId">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <!-- ====================================== -->
+            <!-- S.No -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+
+                <td mat-cell *matCellDef="
+                        let element;
+                        let i = index
+                    ">
+
+                    {{
+                    (paginator?.pageIndex || 0)
+                    *
+                    (paginator?.pageSize || 5)
+                    +
+                    i +
+                    1
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Product -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="product">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Product
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{
+                            element.variantName
+                            || '-'
+                            }}
+
+                        </h6>
+
+
+                        <small>
+
+                            {{
+                            element.skuCode
+                            || '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Pack Size -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="packSize">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Pack Size
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.packSize
+                    || '-'
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Weight -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="weight">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Weight
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.weightInGrams
+                    || 0
+                    }}
+
+                    Grams
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Packs Produced -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="packsProduced">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Packs Produced
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <strong>
+
+                        {{
+                        element.packsProduced
+                        || 0
+                        }}
+
+                    </strong>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Rejected Packs -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="rejectedPacks">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Rejected
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.rejectedPacks
+                    || 0
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Total Weight -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="totalWeightKg">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Total Weight
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge active">
+
+                        {{
+                        element.totalWeightKg
+                        || 0
+                        }}
+
+                        KG
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Production Count -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="productionCount">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Productions
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.productionCount
+                    || 0
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ====================================== -->
+            <!-- Warehouse -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="warehouse">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Warehouse
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{
+                            element.warehouseName
+                            || '-'
+                            }}
+
+                        </h6>
+
+
+                        <small>
+
+                            {{
+                            element.warehouseCode
+                            || '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+            <!-- ====================================== -->
+            <!-- Actions -->
+            <!-- ====================================== -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Actions
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="action-buttons">
+
+                        <!-- View Finished Stock Details -->
+
+                        <button mat-icon-button class="view-btn" (click)="viewFinishedStockDetails(element)"
+                            matTooltip="View Finished Stock Details">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+            <!-- ====================================== -->
+            <!-- Header -->
+            <!-- ====================================== -->
+
+            <tr mat-header-row *matHeaderRowDef="
+                    displayedColumns
+                ">
+
+            </tr>
+
+
+            <!-- ====================================== -->
+            <!-- Rows -->
+            <!-- ====================================== -->
+
+            <tr mat-row *matRowDef="
+                    let row;
+                    columns: displayedColumns;
+                ">
+
+            </tr>
+
+
+            <!-- ====================================== -->
+            <!-- No Data -->
+            <!-- ====================================== -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell text-center" colspan="9">
+
+                    No Finished Goods Stock Found
+
+                </td>
+
+            </tr>
+
+
+        </table>
+
+
+        <!-- ========================================== -->
+        <!-- Paginator -->
+        <!-- ========================================== -->
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons>
+
+        </mat-paginator>
+
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- No Warehouse Selected -->
+    <!-- ========================================== -->
+
+    <div class="empty-state" *ngIf="!selectedWarehouseId">
+
+        <i class="fa fa-warehouse"></i>
+
+        <h4>
+            Select a Warehouse
+        </h4>
+
+        <p>
+            Select a warehouse to view finished goods stock.
+        </p>
+
+    </div>
+
+</div>

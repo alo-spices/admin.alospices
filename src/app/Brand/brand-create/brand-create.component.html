@@ -1,0 +1,89 @@
+<div class="category-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section">
+                    <h2>Create Brand</h2>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="category-card">
+                    <form [formGroup]="brandForm" (ngSubmit)="onSubmit()">
+                        <div class="category-grid">
+                            <div class="form-area">
+
+                                <!-- Brand Name -->
+                                <div class="form-group">
+                                    <label>Brand Name</label>
+                                    <input type="text" formControlName="brandName" placeholder="Enter brand name" />
+                                </div>
+
+                                <!-- Brand Code -->
+                                <div class="form-group">
+                                    <label>Brand Code</label>
+                                    <input type="text" formControlName="brandCode" placeholder="Enter brand code" />
+                                </div>
+
+                                <!-- Website -->
+                                <div class="form-group">
+                                    <label>Website</label>
+                                    <input type="text" formControlName="website" placeholder="https://example.com" />
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" formControlName="email" placeholder="brand@example.com" />
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" formControlName="phone" placeholder="Enter phone number" />
+                                </div>
+
+                                <!-- Description -->
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea rows="4" formControlName="description"
+                                        placeholder="Enter brand description"></textarea>
+                                </div>
+
+                                <!-- Logo -->
+                                <div class="form-group">
+                                    <label>Logo</label>
+                                    <input type="file" accept="image/*" (change)="onLogoChange($event)" />
+                                </div>
+
+                                <!-- Banner Image -->
+                                <div class="form-group">
+                                    <label>Banner Image</label>
+                                    <input type="file" accept="image/*" (change)="onBannerChange($event)" />
+                                </div>
+
+                            </div>
+
+                            <!-- Preview Area (optional: show logo preview) -->
+                            <div class="preview-area">
+                                <div class="preview-box">
+                                    <img *ngIf="logoPreview" [src]="logoPreview" alt="Logo Preview"
+                                        style="max-width: 100%; height: auto;" />
+                                    <div *ngIf="!logoPreview" class="preview-empty">
+                                        <i class="fa fa-image"></i>
+                                        <p>Logo Preview</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="submit" class="btn-create">Save</button>
+                            <button type="button" class="btn-back" (click)="goBack()">Back</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

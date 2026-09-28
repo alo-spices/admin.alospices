@@ -1,0 +1,638 @@
+<div class="production-container">
+
+    <!-- Header -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>
+
+                Production Details
+
+            </h2>
+
+            <p>
+
+                View complete production information
+
+            </p>
+
+        </div>
+
+        <button
+            class="back-btn"
+            (click)="close()">
+
+            <i class="fa fa-times me-2"></i>
+
+            Close
+
+        </button>
+
+    </div>
+
+    <!-- Card -->
+
+    <div class="production-card">
+
+        <!-- Top -->
+
+        <div class="card-top">
+
+            <div class="production-icon">
+
+                <i class="fa fa-industry"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    {{production.productionNo}}
+
+                </h3>
+
+                <p>
+
+                    Production Entry
+
+                </p>
+
+            </div>
+
+            <span
+                class="status-badge"
+                [ngClass]="production.status=='Completed' ? 'active' : 'inactive'">
+
+                {{production.status}}
+
+            </span>
+
+        </div>
+
+        <hr>
+
+        <!-- ===================================== -->
+        <!-- Production Information -->
+        <!-- ===================================== -->
+
+        <h5 class="section-title">
+
+            Production Information
+
+        </h5>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Production No
+
+                </label>
+
+                <div class="view-box">
+
+                    {{production.productionNo}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Production Date
+
+                </label>
+
+                <div class="view-box">
+
+                    {{production.productionDate | date:'dd-MM-yyyy'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <div class="view-box">
+
+                    {{production.status}}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 mb-4">
+
+                <label>
+
+                    Warehouse
+
+                </label>
+
+                <div class="view-box">
+
+                    {{production.warehouse?.warehouseName}}
+
+                </div>
+
+            </div>
+
+            <!-- <div class="col-lg-6 col-md-6 mb-4">
+
+                <label>
+
+                    Product
+
+                </label>
+
+                <div class="view-box">
+
+                   {{production.finishedProduct.productName}}
+
+                </div>
+
+            </div> -->
+
+        </div>
+
+        <hr>
+
+        <!-- ===================================== -->
+        <!-- Raw Material Details -->
+        <!-- ===================================== -->
+
+        <h5 class="section-title">
+
+            Raw Material Details
+
+        </h5>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered">
+
+                <thead>
+
+                    <tr>
+
+                        <th>S.No</th>
+
+                        <th>Receive Name</th>
+
+                        <th>Batch</th>
+
+                        <th>Weight Used (Kg)</th>
+
+                    </tr>
+
+                </thead>
+
+               <tbody>
+
+<tr *ngFor="let item of production.rawMaterials">
+
+<td>
+
+{{item.stockReceive?.receiveNo}}
+
+</td>
+
+<td>
+
+{{item.rawMaterial?.rawMaterialName}}
+
+</td>
+
+<td>
+
+{{item.batchNo}}
+
+</td>
+
+<td>
+
+{{item.weightUsedKg}} KG
+
+</td>
+
+</tr>
+
+</tbody>
+
+            </table>
+
+        </div>
+                <hr>
+
+        <!-- ===================================== -->
+        <!-- Production Items -->
+        <!-- ===================================== -->
+
+        <h5 class="section-title">
+
+            Production Items
+
+        </h5>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered">
+
+                <thead>
+
+                    <tr>
+
+                        <th>S.No</th>
+
+                        <th>SKU Code</th>
+
+                        <th>Pack Size</th>
+
+                        <th>Weight (g)</th>
+
+                        <th>Packs Produced</th>
+
+                        <th>Total Weight (Kg)</th>
+
+                        <th>Rejected Packs</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let item of production.productionItems; let i=index">
+
+                        <td>
+
+                            {{i+1}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.skuCode}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.packSize}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.weightInGrams}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.packsProduced}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.totalWeightUsedKg}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.rejectedPacks}}
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <hr>
+
+        <!-- ===================================== -->
+        <!-- Summary -->
+        <!-- ===================================== -->
+
+        <h5 class="section-title">
+
+            Production Summary
+
+        </h5>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="summary-card">
+
+                    <h6>
+
+                        Raw Weight Used
+
+                    </h6>
+
+                    <h3>
+
+                        {{production.rawWeightUsedKg}} Kg
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="summary-card">
+
+                    <h6>
+
+                        Produced Weight
+
+                    </h6>
+
+                    <h3>
+
+                        {{production.totalProducedWeightKg}} Kg
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="summary-card">
+
+                    <h6>
+
+                        Waste
+
+                    </h6>
+
+                    <h3>
+
+                        {{production.wasteKg}} Kg
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- ===================================== -->
+        <!-- Remarks -->
+        <!-- ===================================== -->
+
+        <h5 class="section-title">
+
+            Remarks
+
+        </h5>
+
+        <div class="view-box remarks-box">
+
+            {{production.remarks || '-'}}
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ====================================================== -->
+<!-- Production Summary -->
+<!-- ====================================================== -->
+
+<div class="card-section mt-4">
+
+    <div class="section-title">
+
+        <i class="fa fa-bar-chart me-2"></i>
+
+        Production Summary
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-3 col-md-6 mb-3">
+
+            <div class="summary-card">
+
+                <h6>
+
+                    Raw Weight Used
+
+                </h6>
+
+                <h3>
+
+                    {{production.rawWeightUsedKg}}
+
+                    KG
+
+                </h3>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+
+            <div class="summary-card success">
+
+                <h6>
+
+                    Produced Weight
+
+                </h6>
+
+                <h3>
+
+                    {{production.totalProducedWeightKg}}
+
+                    KG
+
+                </h3>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+
+            <div class="summary-card warning">
+
+                <h6>
+
+                    Waste
+
+                </h6>
+
+                <h3>
+
+                    {{production.wasteKg}}
+
+                    KG
+
+                </h3>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+
+            <div class="summary-card primary">
+
+                <h6>
+
+                    Total Variants
+
+                </h6>
+
+                <h3>
+
+                    {{production.productionItems.length}}
+
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================================== -->
+<!-- Remarks -->
+<!-- ====================================================== -->
+
+<div class="card-section mt-4">
+
+    <div class="section-title">
+
+        <i class="fa fa-comment me-2"></i>
+
+        Remarks
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <textarea
+                rows="4"
+                class="form-control"
+                readonly>
+
+{{production.remarks || 'No Remarks'}}
+
+            </textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================================== -->
+<!-- Audit Information -->
+<!-- ====================================================== -->
+
+<div class="card-section mt-4">
+
+    <div class="section-title">
+
+        <i class="fa fa-clock-o me-2"></i>
+
+        Audit Information
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6 mb-3">
+
+            <label class="form-label">
+
+                Created At
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                [value]="production.createdAt | date:'dd-MM-yyyy hh:mm a'"
+                readonly>
+
+        </div>
+
+        <div class="col-lg-6 mb-3">
+
+            <label class="form-label">
+
+                Last Updated
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                [value]="production.updatedAt | date:'dd-MM-yyyy hh:mm a'"
+                readonly>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ====================================================== -->
+<!-- Footer -->
+<!-- ====================================================== -->
+
+<div class="form-footer mt-4 text-end">
+
+    <button
+
+        type="button"
+
+        class="btn btn-secondary"
+
+        (click)="close()">
+
+        <i class="fa fa-times me-2"></i>
+
+        Close
+
+    </button>
+
+</div>

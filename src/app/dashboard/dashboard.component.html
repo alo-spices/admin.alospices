@@ -1,0 +1,1860 @@
+<!-- ========================================================= -->
+<!-- ADMIN LAYOUT -->
+<!-- ========================================================= -->
+
+<div class="admin-layout">
+
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================================== -->
+
+    <aside class="sidebar" [class.collapsed]="sidebarCollapsed" [class.hover-expand]="isSidebarHovered"
+        (mouseenter)="onSidebarEnter()" (mouseleave)="onSidebarLeave()">
+
+
+        <!-- ================================================= -->
+        <!-- LOGO -->
+        <!-- ================================================= -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+
+                <img src="../../assets/Images/alo.png" alt="Tin Spice Logo">
+
+                <p>Alo Spices Admin Panel</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- SIDEBAR MENU -->
+        <!-- ================================================= -->
+
+        <nav class="sidebar-menu">
+
+
+            <!-- ================================================= -->
+            <!-- DASHBOARD -->
+            <!-- ADMIN / WAREHOUSE / DISTRIBUTOR -->
+            <!-- ================================================= -->
+
+            <a class="menu-item" routerLink="/admin/dashboard" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
+
+                <i class="fas fa-home"></i>
+
+                <span *ngIf="!sidebarCollapsed || isSidebarHovered">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+
+            <!-- ================================================= -->
+            <!-- ADMIN SECTION -->
+            <!-- ================================================= -->
+
+
+            <!-- ================================================= -->
+            <!-- MASTERS -->
+            <!-- ADMIN ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-database"></i>
+
+                        <span>
+                            Masters
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Brand -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/brand-list" routerLinkActive="active">
+
+                    <i class="fas fa-tags"></i>
+
+                    <span>
+                        Brand
+                    </span>
+
+                </a>
+
+
+                <!-- Category -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/category" routerLinkActive="active">
+
+                    <i class="fas fa-layer-group"></i>
+
+                    <span>
+                        Category
+                    </span>
+
+                </a>
+
+
+                <!-- Supplier -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/supplier-list" routerLinkActive="active">
+
+                    <i class="fas fa-truck"></i>
+
+                    <span>
+                        Supplier
+                    </span>
+
+                </a>
+
+
+                <!-- Warehouse -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-list" routerLinkActive="active">
+
+                    <i class="fas fa-warehouse"></i>
+
+                    <span>
+                        Warehouse
+                    </span>
+
+                </a>
+
+
+                <!-- Raw Material -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/rawmaterial-list" routerLinkActive="active">
+
+                    <i class="fas fa-cubes"></i>
+
+                    <span>
+                        Raw Material
+                    </span>
+
+                </a>
+
+
+                <!-- Product -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/product" routerLinkActive="active">
+
+                    <i class="fas fa-box-open"></i>
+
+                    <span>
+                        Product
+                    </span>
+
+                </a>
+
+            </details>
+            <!-- <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-user"></i>
+
+                        <span>
+                            Users Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <a class="menu-item submenu-item" routerLink="/admin/users" routerLinkActive="active">
+
+                    <i class="fas fa-layer-group"></i>
+
+                    <span>
+                        Users List
+                    </span>
+
+                </a>
+
+
+
+            </details> -->
+
+
+
+            <!-- ================================================= -->
+            <!-- ADMIN INVENTORY -->
+            <!-- ADMIN ONLY -->
+            <!-- ================================================= -->
+            <!-- ==========================================
+     ADMIN INVENTORY
+========================================== -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-boxes"></i>
+
+                        <span>
+                            Admin Inventory
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- ======================================
+         STOCK RECEIVE
+    ======================================= -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/stockReceive-list" routerLinkActive="active">
+
+                    <i class="fas fa-arrow-circle-down"></i>
+
+                    <span>
+                        Stock Receive
+                    </span>
+
+                </a>
+
+
+                <!-- ======================================
+         RAW MATERIAL STOCK
+    ======================================= -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/current-raw-material-stock"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-cubes"></i>
+
+                    <span>
+                        Raw Material Stock
+                    </span>
+
+                </a>
+
+
+                <!-- ======================================
+         FINISHED GOODS
+    ======================================= -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/finished-goods-stock" routerLinkActive="active">
+
+                    <i class="fas fa-boxes"></i>
+
+                    <span>
+                        Finished Goods Stock
+                    </span>
+
+                </a>
+
+
+                <!-- ======================================
+         STOCK TRANSFER DROPDOWN
+    ======================================= -->
+
+                <details class="nested-sidebar-group">
+
+                    <summary class="nested-group-header">
+
+                        <div class="nested-group-left">
+
+                            <i class="fas fa-exchange-alt"></i>
+
+                            <span>
+                                Stock Transfer
+                            </span>
+
+                        </div>
+
+                        <i class="fas fa-chevron-right nested-group-arrow"></i>
+
+                    </summary>
+
+
+                    <!-- Create Stock Transfer -->
+
+                    <a class="menu-item nested-submenu-item" routerLink="/admin/create-stock-transfer"
+                        routerLinkActive="active">
+
+                        <i class="fas fa-plus-circle"></i>
+
+                        <span>
+                            Create Stock Transfer
+                        </span>
+
+                    </a>
+
+
+                    <!-- All Stock Transfers -->
+
+                    <a class="menu-item nested-submenu-item" routerLink="/admin/all-stock-transfer"
+                        routerLinkActive="active">
+
+                        <i class="fas fa-list"></i>
+
+                        <span>
+                            All Stock Transfers
+                        </span>
+
+                    </a>
+
+
+                    <!-- Transfer History -->
+
+                    <!-- <a class="menu-item nested-submenu-item" routerLink="/admin/transfer-stock-history"
+                        routerLinkActive="active">
+
+                        <i class="fas fa-history"></i>
+
+                        <span>
+                            Transfer History
+                        </span>
+
+                    </a> -->
+
+                </details>
+
+            </details>
+
+
+            <!-- ================================================= -->
+            <!-- PRODUCTION MANAGEMENT -->
+            <!-- ADMIN ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-industry"></i>
+
+                        <span>
+                            Production Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Create Production Instruction -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/production-instructions" routerLinkActive="active">
+
+                    <i class="fas fa-clipboard-list"></i>
+
+                    <span>
+                        Create Production Instruction
+                    </span>
+
+                </a>
+
+
+                <!-- Production Monitoring -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/production-monitoring" routerLinkActive="active">
+
+                    <i class="fas fa-history"></i>
+
+                    <span>
+                        Production Monitoring
+                    </span>
+
+                </a>
+
+            </details>
+
+
+
+            <!-- ================================================= -->
+            <!-- WAREHOUSE MANAGEMENT -->
+            <!-- ADMIN ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-warehouse"></i>
+
+                        <span>
+                            Warehouse Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Warehouse Raw Material -->
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse" routerLinkActive="active">
+
+                    <i class="fas fa-layer-group"></i>
+
+                    <span>
+                        Wearhouse List
+                    </span>
+
+                </a>
+                <!-- Warehouse Raw Material -->
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-logins-list" routerLinkActive="active">
+
+                    <i class="fas fa-layer-group"></i>
+
+                    <span>
+                        Wearhouse Logins List
+                    </span>
+
+                </a>
+                <!-- Warehouse Raw Material -->
+                <a class="menu-item submenu-item" routerLink="/admin/add-warehouse-logins" routerLinkActive="active">
+
+                    <i class="fas fa-layer-group"></i>
+
+                    <span>
+                        Wearhouse Generate Logins
+                    </span>
+
+                </a>
+
+
+
+
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-raw-material-stock"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-cubes"></i>
+
+                    <span>
+                        Warehouse Raw Material Stock
+                    </span>
+
+                </a>
+
+
+                <!-- Warehouse Finished Goods -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-finished-goods-stock"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-boxes"></i>
+
+                    <span>
+                        Warehouse Finished Goods Stock
+                    </span>
+
+                </a>
+
+
+                <!-- Assigned Production -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-production-assigned"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-clipboard-check"></i>
+
+                    <span>
+                        Assigned Production
+                    </span>
+
+                </a>
+
+            </details>
+
+
+
+            <!-- ================================================= -->
+            <!-- EMPLOYEE MANAGEMENT -->
+            <!-- ADMIN ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-users"></i>
+
+                        <span>
+                            Employee Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Employees -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/users-list" routerLinkActive="active">
+
+                    <i class="fas fa-users"></i>
+
+                    <span>
+                        Employees
+                    </span>
+
+                </a>
+
+
+                <!-- Add Employee -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/add-user" routerLinkActive="active">
+
+                    <i class="fas fa-user-plus"></i>
+
+                    <span>
+                        Add Employee
+                    </span>
+
+                </a>
+
+
+                <!-- Employee Assignment -->
+
+                <!-- <a class="menu-item submenu-item" routerLink="/admin/employee-assignment" routerLinkActive="active">
+
+                    <i class="fas fa-user-cog"></i>
+
+                    <span>
+                        Employee Assignment
+                    </span>
+
+                </a> -->
+
+            </details>
+
+
+
+            <!-- ================================================= -->
+            <!-- DISTRIBUTOR MANAGEMENT -->
+            <!-- ADMIN ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-user-tie"></i>
+
+                        <span>
+                            Distributor Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Distributor List -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributors-list" routerLinkActive="active">
+
+                    <i class="fas fa-users"></i>
+
+                    <span>
+                        Distributors
+                    </span>
+
+                </a>
+
+
+                <!-- Assigned Employees -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-assinged-employees"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-user-friends"></i>
+
+                    <span>
+                        Assigned Employees
+                    </span>
+
+                </a>
+                <a class="menu-item submenu-item" routerLink="/admin/create-stock-transfer" routerLinkActive="active">
+
+                    <i class="fas fa-exchange-alt"></i>
+
+                    <span>
+                        Stock Transfer
+                    </span>
+
+                </a>
+
+                <!-- Distributor Stock -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributores-stock-list"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-boxes"></i>
+
+                    <span>
+                        Distributor Stock
+                    </span>
+
+                </a>
+
+
+                <!-- Stock Transfer -->
+
+
+
+            </details>
+
+
+
+            <!-- ================================================= -->
+            <!-- FIELD MANAGEMENT -->
+            <!-- ADMIN ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-map-marked-alt"></i>
+
+                        <span>
+                            Field Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Areas -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/areas-list" routerLinkActive="active">
+
+                    <i class="fas fa-map-marker-alt"></i>
+
+                    <span>
+                        Areas
+                    </span>
+
+                </a>
+
+
+                <!-- Routes -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/routes-list" routerLinkActive="active">
+
+                    <i class="fas fa-route"></i>
+
+                    <span>
+                        Routes
+                    </span>
+
+                </a>
+
+
+                <!-- Beat Plans -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/beat-plan-list" routerLinkActive="active">
+
+                    <i class="fas fa-calendar-alt"></i>
+
+                    <span>
+                        Sales Man Beat Plans
+                    </span>
+
+                </a>
+                <a class="menu-item submenu-item" routerLink="/admin/delivery-boy-beat-plan-list"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-calendar-alt"></i>
+
+                    <span>
+                        Delivery Boy Beat Plans
+                    </span>
+
+                </a>
+
+
+                <!-- Parties -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/parties-list" routerLinkActive="active">
+
+                    <i class="fas fa-store"></i>
+
+                    <span>
+                        Parties
+                    </span>
+
+                </a>
+
+            </details>
+
+
+
+            <!-- ================================================= -->
+            <!-- SHOP MANAGEMENT -->
+            <!-- ADMIN / DISTRIBUTOR -->
+            <!-- ================================================= -->
+
+            <!-- <details class="sidebar-group" *ngIf="hasRole('Admin', 'Distributor')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-store-alt"></i>
+
+                        <span>
+                            Shop Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <a class="menu-item submenu-item" routerLink="/admin/shops" routerLinkActive="active">
+
+                    <i class="fas fa-store"></i>
+
+                    <span>
+                        Shops
+                    </span>
+
+                </a>
+
+            </details> -->
+
+
+
+            <!-- ================================================= -->
+            <!-- SALES -->
+            <!-- ADMIN / DISTRIBUTOR -->
+            <!-- ================================================= -->
+
+            <!-- ==========================================
+         DISTRIBUTOR - MY STOCK
+    ========================================== -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Distributor')">
+
+                <!-- Parent Group -->
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-boxes"></i>
+
+                        <span>
+                            My Stock
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- ==========================================
+             INCOMING TRANSFERS
+        =========================================== -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-incoming-stock"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-truck-loading"></i>
+
+                    <span>
+                        Incoming Transfers
+                    </span>
+
+                </a>
+
+
+                <!-- ==========================================
+             CURRENT STOCK
+        =========================================== -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-my-stock" routerLinkActive="active">
+
+                    <i class="fas fa-boxes"></i>
+
+                    <span>
+                        Current Stock
+                    </span>
+
+                </a>
+
+
+                <!-- ==========================================
+             STOCK HISTORY
+        =========================================== -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-stock-history"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-history"></i>
+
+                    <span>
+                        Stock History
+                    </span>
+
+                </a>
+
+            </details>
+
+            <!-- ================================================= -->
+            <!-- DISTRIBUTOR EMPLOYEES -->
+            <!-- DISTRIBUTOR ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Distributor')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-users"></i>
+
+                        <span>
+                            My Employees
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- My Employees -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-my-employees"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-users"></i>
+
+                    <span>
+                        My Employees
+                    </span>
+
+                </a>
+
+
+                <!-- Employee Stock -->
+                <!-- 
+                <a class="menu-item submenu-item" routerLink="/distributor/employee-stock" routerLinkActive="active">
+
+                    <i class="fas fa-box-open"></i>
+
+                    <span>
+                        Employee Stock
+                    </span>
+
+                </a> -->
+
+
+                <!-- Employee Orders -->
+
+                <!-- <a class="menu-item submenu-item" routerLink="/distributor/employee-orders" routerLinkActive="active">
+
+                    <i class="fas fa-shopping-bag"></i>
+
+                    <span>
+                        Employee Orders
+                    </span>
+
+                </a> -->
+
+            </details>
+            <details class="sidebar-group" *ngIf="hasRole('Distributor')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-shopping-cart"></i>
+
+                        <span>
+                            Sales
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Orders -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-orders" routerLinkActive="active">
+
+                    <i class="fas fa-shopping-bag"></i>
+
+                    <span>
+                        Orders
+                    </span>
+
+                </a>
+
+
+                <!-- Invoice -->
+
+                <!-- <a class="menu-item submenu-item" routerLink="/distributor/invoice" routerLinkActive="active">
+
+                    <i class="fas fa-file-invoice"></i>
+
+                    <span>
+                        Invoice
+                    </span>
+
+                </a> -->
+
+            </details>
+
+
+            <!-- ================================================= -->
+            <!-- COLLECTIONS -->
+            <!-- ADMIN / DISTRIBUTOR -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-money-bill-wave"></i>
+
+                        <span>
+                            Collections
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Collections -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/collections" routerLinkActive="active">
+
+                    <i class="fas fa-receipt"></i>
+
+                    <span>
+                        Collections
+                    </span>
+
+                </a>
+
+
+                <!-- Outstanding -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/outstandings" routerLinkActive="active">
+
+                    <i class="fas fa-file-invoice-dollar"></i>
+
+                    <span>
+                        Outstanding
+                    </span>
+
+                </a>
+
+            </details>
+
+
+            <!-- ================================================= -->
+            <!-- COLLECTIONS -->
+            <!-- ADMIN / DISTRIBUTOR -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Distributor')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-money-bill-wave"></i>
+
+                        <span>
+                            Collections
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Collections -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-collections" routerLinkActive="active">
+
+                    <i class="fas fa-receipt"></i>
+
+                    <span>
+                        Collections
+                    </span>
+
+                </a>
+
+
+                <!-- Outstanding -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-outstandings"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-file-invoice-dollar"></i>
+
+                    <span>
+                        Outstanding
+                    </span>
+
+                </a>
+
+            </details>
+            <!-- ================================================= -->
+            <!-- DELIVERY MANAGEMENT -->
+            <!-- ADMIN / WAREHOUSE / DISTRIBUTOR -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('Admin', 'WarehouseManager')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-truck"></i>
+
+                        <span>
+                            Delivery Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <a class="menu-item submenu-item" routerLink="/admin/delivery-list" routerLinkActive="active">
+
+                    <i class="fas fa-truck-loading"></i>
+
+                    <span>
+                        Deliveries
+                    </span>
+
+                </a>
+
+            </details>
+            <details class="sidebar-group" *ngIf="hasRole('Distributor')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-truck"></i>
+
+                        <span>
+                            Delivery Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <a class="menu-item submenu-item" routerLink="/admin/distributor-deliveries-list"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-truck-loading"></i>
+
+                    <span>
+                        Deliveries
+                    </span>
+
+                </a>
+
+            </details>
+            <details class="sidebar-group" *ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-industry"></i>
+
+                        <span>
+                            Orders
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Assigned Production -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/orders" routerLinkActive="active">
+
+                    <i class="fas fa-clipboard-check"></i>
+
+                    <span>
+                        Orders List
+                    </span>
+
+                </a>
+            </details>
+            <!-- ================================================= -->
+            <!-- Employee Management -->
+            <!-- ================================================= -->
+
+            <!-- <details class="sidebar-group" ngIf="hasRole('Admin')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-shopping-cart"></i>
+
+                        <span>
+
+                            Orders
+
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+
+
+                <a class="menu-item submenu-item" routerLink="/admin/orders" routerLinkActive="active">
+
+                    <i class="fas fa-shopping-bag"></i>
+
+                    <span>
+
+                        Orders
+
+                    </span>
+
+                </a>
+
+
+                <a class="menu-item submenu-item" routerLink="/admin/invoice" routerLinkActive="active">
+
+                    <i class="fas fa-file-invoice"></i>
+
+                    <span>
+
+                        Invoice
+
+                    </span>
+
+                </a>
+
+            </details> -->
+
+
+            <!-- ================================================= -->
+            <!-- ANALYTICS -->
+            <!-- ADMIN / DISTRIBUTOR -->
+            <!-- ================================================= -->
+
+            <a class="menu-item" *ngIf="hasRole('Admin', 'Distributor')" routerLink="/admin/analytics"
+                routerLinkActive="active">
+
+                <i class="fas fa-chart-line"></i>
+
+                <span *ngIf="!sidebarCollapsed || isSidebarHovered">
+                    Analytics
+                </span>
+
+            </a>
+
+
+
+            <!-- ================================================= -->
+            <!-- WAREHOUSE PRODUCTION -->
+            <!-- WAREHOUSE MANAGER ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('WarehouseManager')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-industry"></i>
+
+                        <span>
+                            Warehouse Production
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Assigned Production -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-production-assigned"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-clipboard-check"></i>
+
+                    <span>
+                        Assigned Production
+                    </span>
+
+                </a>
+
+
+                <!-- Production Entry -->
+
+                <a class="menu-item submenu-item" routerLink="/warehouse/production-entry" routerLinkActive="active">
+
+                    <i class="fas fa-industry"></i>
+
+                    <span>
+                        Production Entry
+                    </span>
+
+                </a>
+
+
+                <!-- Production History -->
+
+                <a class="menu-item submenu-item" routerLink="/warehouse/production-history" routerLinkActive="active">
+
+                    <i class="fas fa-history"></i>
+
+                    <span>
+                        Production History
+                    </span>
+
+                </a>
+
+            </details>
+
+
+
+            <!-- ================================================= -->
+            <!-- WAREHOUSE INVENTORY -->
+            <!-- WAREHOUSE MANAGER ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('WarehouseManager')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-warehouse"></i>
+
+                        <span>
+                            Warehouse Inventory
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Raw Material Stock -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-raw-material-stock"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-cubes"></i>
+
+                    <span>
+                        Raw Material Stock
+                    </span>
+
+                </a>
+
+
+                <!-- Finished Goods Stock -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-finished-goods-stock"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-boxes"></i>
+
+                    <span>
+                        Finished Goods Stock
+                    </span>
+
+                </a>
+
+            </details>
+
+
+
+            <!-- ================================================= -->
+            <!-- WAREHOUSE ORDERS -->
+            <!-- WAREHOUSE MANAGER ONLY -->
+            <!-- ================================================= -->
+
+            <details class="sidebar-group" *ngIf="hasRole('WarehouseManager')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-shopping-bag"></i>
+
+                        <span>
+                            Warehouse Orders
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <a class="menu-item submenu-item" routerLink="/warehouse/orders" routerLinkActive="active">
+
+                    <i class="fas fa-shopping-bag"></i>
+
+                    <span>
+                        Orders
+                    </span>
+
+                </a>
+
+
+                <a class="menu-item submenu-item" routerLink="/warehouse/pending-orders" routerLinkActive="active">
+
+                    <i class="fas fa-clock"></i>
+
+                    <span>
+                        Pending Orders
+                    </span>
+
+                </a>
+
+            </details>
+
+            <!-- ================================================= -->
+            <!-- DISTRIBUTOR INVENTORY -->
+            <!-- DISTRIBUTOR ONLY -->
+            <!-- ================================================= -->
+
+            <!-- <details class="sidebar-group" *ngIf="hasRole('Distributor')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-boxes"></i>
+
+                        <span>
+                            My Inventory
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+ 
+
+                <a class="menu-item submenu-item" routerLink="/distributor/my-stock" routerLinkActive="active">
+
+                    <i class="fas fa-boxes"></i>
+
+                    <span>
+                        My Stock
+                    </span>
+
+                </a>
+ 
+
+                <a class="menu-item submenu-item" routerLink="/distributor/low-stock" routerLinkActive="active">
+
+                    <i class="fas fa-exclamation-triangle"></i>
+
+                    <span>
+                        Low Stock
+                    </span>
+
+                </a>
+
+            </details> -->
+
+
+
+
+            <!-- ================================================= -->
+            <!-- DISTRIBUTOR COLLECTIONS -->
+            <!-- DISTRIBUTOR ONLY -->
+            <!-- ================================================= -->
+
+            <!-- <details class="sidebar-group" *ngIf="hasRole('Distributor')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-money-bill-wave"></i>
+
+                        <span>
+                            Collections
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+ 
+
+                <a class="menu-item submenu-item" routerLink="/distributor/collections" routerLinkActive="active">
+
+                    <i class="fas fa-receipt"></i>
+
+                    <span>
+                        Collections
+                    </span>
+
+                </a>
+ 
+                <a class="menu-item submenu-item" routerLink="/distributor/outstanding" routerLinkActive="active">
+
+                    <i class="fas fa-file-invoice-dollar"></i>
+
+                    <span>
+                        Outstanding
+                    </span>
+
+                </a>
+
+            </details> -->
+
+
+
+            <!-- ================================================= -->
+            <!-- DISTRIBUTOR DELIVERY -->
+            <!-- DISTRIBUTOR ONLY -->
+            <!-- ================================================= -->
+
+            <!-- <details class="sidebar-group" *ngIf="hasRole('Distributor')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-truck"></i>
+
+                        <span>
+                            Delivery Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <a class="menu-item submenu-item" routerLink="/distributor/deliveries" routerLinkActive="active">
+
+                    <i class="fas fa-truck-loading"></i>
+
+                    <span>
+                        Deliveries
+                    </span>
+
+                </a>
+
+            </details> -->
+
+
+
+            <!-- ================================================= -->
+            <!-- SETTINGS -->
+            <!-- ALL THREE ROLES -->
+            <!-- ================================================= -->
+
+            <a class="menu-item" *ngIf="hasRole('Admin', 'WarehouseManager', 'Distributor')"
+                routerLink="/admin/settings" routerLinkActive="active">
+
+                <i class="fas fa-cog"></i>
+
+                <span *ngIf="!sidebarCollapsed || isSidebarHovered">
+                    Settings
+                </span>
+
+            </a>
+
+            <button type="button" class="glass-logout-btn" (click)="logout()">
+                <span class="logout-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </span>
+
+                <span class="logout-text">
+                    Logout
+                </span>
+
+                <span class="logout-shine"></span>
+            </button>
+        </nav>
+
+
+    </aside>
+
+
+
+    <!-- ===================================================== -->
+    <!-- MAIN WRAPPER -->
+    <!-- ===================================================== -->
+
+    <div class="main-wrapper">
+
+
+        <!-- ================================================= -->
+        <!-- TOP NAVBAR -->
+        <!-- ================================================= -->
+
+        <!-- ================================================= -->
+        <!-- TOP NAVBAR -->
+        <!-- ================================================= -->
+
+        <header class="top-navbar">
+
+
+            <!-- ============================================= -->
+            <!-- LEFT -->
+            <!-- ============================================= -->
+
+            <div class="navbar-left">
+
+
+                <!-- Sidebar Toggle -->
+
+                <button type="button" class="toggle-btn" (click)="toggleSidebar()">
+
+                    <i class="fas fa-bars"></i>
+
+                </button>
+
+
+                <!-- Page Heading -->
+
+                <div class="topnav-heading">
+
+                    <h2>
+                        Welcome Back
+                    </h2>
+
+                    <span>
+                        Dashboard Overview
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ============================================= -->
+            <!-- RIGHT -->
+            <!-- ============================================= -->
+
+            <div class="navbar-right">
+
+
+                <!-- ========================================= -->
+                <!-- ADMIN GUIDANCE -->
+                <!-- ========================================= -->
+
+                <a routerLink="/admin/admin-guidence-file" class="guidance-btn">
+
+                    <i class="fas fa-book-open"></i>
+
+                    <span>
+                        Admin Guidance
+                    </span>
+
+                    <span class="nav-glass-shine"></span>
+
+                </a>
+
+
+
+                <!-- ========================================= -->
+                <!-- ROLE -->
+                <!-- ========================================= -->
+
+                <div class="role-badge">
+
+                    <span class="role-dot"></span>
+
+                    <span>
+                        {{ currentRole }}
+                    </span>
+
+                </div>
+
+
+
+                <!-- ========================================= -->
+                <!-- NOTIFICATION -->
+                <!-- ========================================= -->
+
+                <button type="button" class="icon-btn notification-btn">
+
+                    <i class="fas fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                    <span class="nav-glass-shine"></span>
+
+                </button>
+
+
+
+                <!-- ========================================= -->
+                <!-- MESSAGE -->
+                <!-- ========================================= -->
+
+                <button type="button" class="icon-btn">
+
+                    <i class="fas fa-envelope"></i>
+
+                    <span class="nav-glass-shine"></span>
+
+                </button>
+
+
+
+                <!-- ========================================= -->
+                <!-- PROFILE -->
+                <!-- ========================================= -->
+
+                <div class="profile-wrapper">
+
+
+                    <!-- Profile Button -->
+
+                    <button type="button" class="profile-btn" (click)="toggleProfileMenu()">
+
+                        <div class="profile-avatar">
+
+                            <i class="fas fa-user"></i>
+
+                        </div>
+
+
+                        <div class="profile-text">
+
+                            <strong>
+                                {{ currentRole }}
+                            </strong>
+
+                            <span>
+                                Account
+                            </span>
+
+                        </div>
+
+
+                        <i class="fas fa-chevron-down profile-arrow" [class.rotate]="showProfileMenu"></i>
+
+
+                        <span class="nav-glass-shine"></span>
+
+                    </button>
+
+
+
+                    <!-- ===================================== -->
+                    <!-- PROFILE DROPDOWN -->
+                    <!-- ===================================== -->
+
+                    <div class="profile-dropdown" *ngIf="showProfileMenu">
+
+
+                        <!-- Profile Header -->
+
+                        <div class="dropdown-profile-header">
+
+                            <div class="dropdown-avatar">
+
+                                <i class="fas fa-user"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    {{ currentRole }}
+                                </h4>
+
+                                <span>
+                                    TinSpices Admin Panel
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Divider -->
+
+                        <div class="dropdown-divider"></div>
+
+
+
+                        <!-- Profile -->
+
+                        <button type="button" class="profile-menu-item">
+
+                            <span class="profile-menu-icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+
+                            <span>
+                                My Profile
+                            </span>
+
+                            <i class="fas fa-chevron-right"></i>
+
+                        </button>
+
+
+
+                        <!-- Settings -->
+
+                        <button type="button" class="profile-menu-item" routerLink="/admin/settings">
+
+                            <span class="profile-menu-icon">
+                                <i class="fas fa-cog"></i>
+                            </span>
+
+                            <span>
+                                Settings
+                            </span>
+
+                            <i class="fas fa-chevron-right"></i>
+
+                        </button>
+
+
+
+                        <!-- Divider -->
+
+                        <div class="dropdown-divider"></div>
+
+
+
+                        <!-- Logout -->
+
+                        <button type="button" class="profile-logout" (click)="logout()">
+
+                            <span class="logout-icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </span>
+
+                            <span>
+                                Logout
+                            </span>
+
+                            <span class="logout-shine"></span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================================================= -->
+        <!-- MAIN CONTENT -->
+        <!-- ================================================= -->
+
+        <main class="main-content">
+
+            <div class="router-container">
+
+                <router-outlet></router-outlet>
+
+            </div>
+
+        </main>
+
+
+    </div>
+
+
+</div>

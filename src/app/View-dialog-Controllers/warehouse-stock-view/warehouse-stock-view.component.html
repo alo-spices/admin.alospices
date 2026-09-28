@@ -1,0 +1,470 @@
+<div class="warehouse-stock-container">
+
+  <!-- ========================================= -->
+  <!-- HEADER -->
+  <!-- ========================================= -->
+
+  <div class="stock-header">
+
+    <div class="header-left">
+
+      <div class="warehouse-icon">
+
+        <i class="fas fa-warehouse"></i>
+
+      </div>
+
+      <div>
+
+        <h2>
+          {{ warehouse?.warehouseName || 'Warehouse Stock' }}
+        </h2>
+
+        <p>
+          {{ warehouse?.warehouseCode || '' }}
+
+          <span
+            *ngIf="warehouse?.warehouseType">
+
+            | {{ warehouse.warehouseType }}
+
+          </span>
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="close-btn"
+      (click)="close()">
+
+      <i class="fas fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================= -->
+  <!-- LOADING -->
+  <!-- ========================================= -->
+
+  <div
+    class="loading-box"
+    *ngIf="loading">
+
+    <i class="fas fa-spinner fa-spin"></i>
+
+    <span>
+      Loading warehouse stock...
+    </span>
+
+  </div>
+
+
+  <!-- ========================================= -->
+  <!-- CONTENT -->
+  <!-- ========================================= -->
+
+  <div
+    *ngIf="!loading"
+    class="stock-content">
+
+
+    <!-- ===================================== -->
+    <!-- SUMMARY -->
+    <!-- ===================================== -->
+
+    <div class="summary-grid">
+
+
+      <!-- Total Batches -->
+
+      <div class="summary-card batch-card">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-layer-group"></i>
+
+        </div>
+
+        <div>
+
+          <span>
+            Total Batches
+          </span>
+
+          <h3>
+            {{ totalBatches }}
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <!-- Total Stock -->
+
+      <div class="summary-card total-card">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-boxes"></i>
+
+        </div>
+
+        <div>
+
+          <span>
+            Total Stock
+          </span>
+
+          <h3>
+            {{ totalWeightKg | number:'1.0-3' }} KG
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <!-- Used -->
+
+      <div class="summary-card used-card">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-dolly"></i>
+
+        </div>
+
+        <div>
+
+          <span>
+            Used Stock
+          </span>
+
+          <h3>
+            {{ usedWeightKg | number:'1.0-3' }} KG
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <!-- Available -->
+
+      <div class="summary-card available-card">
+
+        <div class="summary-icon">
+
+          <i class="fas fa-check-circle"></i>
+
+        </div>
+
+        <div>
+
+          <span>
+            Available Stock
+          </span>
+
+          <h3>
+            {{ availableWeightKg | number:'1.0-3' }} KG
+          </h3>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- BATCH TITLE -->
+    <!-- ===================================== -->
+
+    <div class="section-header">
+
+      <div>
+
+        <h3>
+
+          <i class="fas fa-boxes-stacked me-2"></i>
+
+          Batch-wise Stock
+
+        </h3>
+
+        <p>
+          Raw material stock available in this warehouse
+        </p>
+
+      </div>
+
+      <span class="batch-count">
+
+        {{ stockList.length }} Batches
+
+      </span>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- NO DATA -->
+    <!-- ===================================== -->
+
+    <div
+      class="empty-state"
+      *ngIf="stockList.length === 0">
+
+      <i class="fas fa-box-open"></i>
+
+      <h4>
+        No Stock Available
+      </h4>
+
+      <p>
+        There is no raw material stock in this warehouse.
+      </p>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- TABLE -->
+    <!-- ===================================== -->
+
+    <div
+      class="table-wrapper"
+      *ngIf="stockList.length > 0">
+
+      <table class="stock-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              S.No
+            </th>
+
+            <th>
+              Raw Material
+            </th>
+
+            <th>
+              Receive No
+            </th>
+
+            <th>
+              Batch No
+            </th>
+
+            <th>
+              Total Stock
+            </th>
+
+            <th>
+              Used
+            </th>
+
+            <th>
+              Available
+            </th>
+
+            <th>
+              Status
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let item of stockList;
+              let i = index
+            ">
+
+
+            <!-- S.No -->
+
+            <td>
+
+              <span class="serial">
+
+                {{ i + 1 }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Raw Material -->
+
+            <td>
+
+              <div class="material-info">
+
+                <div class="material-icon">
+
+                  <i class="fas fa-leaf"></i>
+
+                </div>
+
+                <div>
+
+                  <strong>
+
+                    {{ item.rawMaterial?.rawMaterialName }}
+
+                  </strong>
+
+                  <small>
+
+                    {{ item.rawMaterial?.rawMaterialCode }}
+
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Receive -->
+
+            <td>
+
+              <span class="receive-no">
+
+                {{ item.receiveNo }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Batch -->
+
+            <td>
+
+              <span class="batch-no">
+
+                {{ item.batchNo }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Total -->
+
+            <td>
+
+              <strong>
+
+                {{ item.totalWeightKg | number:'1.0-3' }}
+
+                KG
+
+              </strong>
+
+            </td>
+
+
+            <!-- Used -->
+
+            <td>
+
+              <span class="used-value">
+
+                {{ item.usedWeightKg | number:'1.0-3' }}
+
+                KG
+
+              </span>
+
+            </td>
+
+
+            <!-- Available -->
+
+            <td>
+
+              <span class="available-value">
+
+                {{ item.availableWeightKg | number:'1.0-3' }}
+
+                KG
+
+              </span>
+
+            </td>
+
+
+            <!-- Status -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="{
+
+                  'received':
+                    item.status === 'Received',
+
+                  'partial':
+                    item.status === 'Partially Used',
+
+                  'completed':
+                    item.status === 'Completed'
+
+                }">
+
+                {{ item.status }}
+
+              </span>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================= -->
+
+  <div class="stock-footer">
+
+    <button
+      type="button"
+      class="close-footer-btn"
+      (click)="close()">
+
+      <i class="fas fa-times me-2"></i>
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

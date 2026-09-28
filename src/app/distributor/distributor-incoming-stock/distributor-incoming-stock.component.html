@@ -1,0 +1,311 @@
+<div class="stock-transfer-container">
+
+    <!-- ==========================================
+       HEADER
+  =========================================== -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Incoming Stock Transfers
+            </h2>
+
+            <p>
+                View stock transfers received from warehouse
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+       SEARCH
+  =========================================== -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Search Incoming Transfer
+            </mat-label>
+
+            <input matInput placeholder="Search by Transfer No / Warehouse / SKU / Status"
+                (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- ==========================================
+       TABLE
+  =========================================== -->
+
+    <div class="table-row">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <!-- ======================================
+           S.NO
+      ======================================= -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+                <td mat-cell *matCellDef="let element; let i = index">
+
+                    {{ i + 1 }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+           TRANSFER
+      ======================================= -->
+
+            <ng-container matColumnDef="transferNo">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Transfer
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="transfer-info">
+
+                        <h6>
+                            {{ element.transferNo }}
+                        </h6>
+
+                        <small>
+
+                            {{ element.transferDate | date:'dd-MM-yyyy' }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+           SOURCE WAREHOUSE
+      ======================================= -->
+
+            <ng-container matColumnDef="sourceWarehouse">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Source Warehouse
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="warehouse-info">
+
+                        <strong>
+
+                            {{ element.sourceWarehouse?.warehouseName }}
+
+                        </strong>
+
+                        <small>
+
+                            {{ element.sourceWarehouse?.warehouseCode }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+           ITEMS
+      ======================================= -->
+
+            <ng-container matColumnDef="items">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Items
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="items-info">
+
+                        <span class="item-count">
+
+                            {{ element.items?.length || 0 }}
+
+                        </span>
+
+                        <small>
+                            Product(s)
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+           QUANTITY
+      ======================================= -->
+
+            <ng-container matColumnDef="quantity">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Quantity
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <strong>
+
+                        {{ getTotalQuantity(element) }}
+
+                    </strong>
+
+                    <small class="ms-1">
+
+                        Units
+
+                    </small>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+           STATUS
+      ======================================= -->
+
+            <ng-container matColumnDef="status">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Status
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <button type="button" class="status-badge status-button" [ngClass]="getStatusClass(element.status)"
+                        (click)="openStatusPopup(element)">
+
+                        {{ element.status }}
+
+                        <i class="fa fa-chevron-down ms-2"></i>
+
+                    </button>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+           ACTIONS
+      ======================================= -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Actions
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="action-buttons">
+
+                        <button mat-icon-button class="view-btn" (click)="viewStockTransfer(element)" matTooltip="View">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ======================================
+           HEADER
+      ======================================= -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
+
+            </tr>
+
+
+            <!-- ======================================
+           ROWS
+      ======================================= -->
+
+            <tr mat-row *matRowDef="
+          let row;
+          columns: displayedColumns;
+        ">
+
+            </tr>
+
+
+            <!-- ======================================
+           NO DATA
+      ======================================= -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length">
+
+                    No Incoming Stock Transfers Found
+
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <!-- ========================================
+         PAGINATION
+    ========================================= -->
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons>
+
+        </mat-paginator>
+
+    </div>
+
+</div>

@@ -1,0 +1,455 @@
+<div class="category-container">
+
+
+    <!-- Header -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>
+                Collection Management
+            </h2>
+
+            <p>
+                Manage all collections here
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Search Collection
+            </mat-label>
+
+            <input matInput placeholder="Search by Collection / Party / Salesman" (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- Table -->
+
+    <div class="table-row">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <!-- ================================= -->
+            <!-- S.NO -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+
+                <td mat-cell *matCellDef="
+            let element;
+            let i=index
+          ">
+
+                    {{
+                    (paginator.pageIndex *
+                    paginator.pageSize) + i + 1
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- COLLECTION -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="collection">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Collection
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{ element.collectionNumber }}
+
+                        </h6>
+
+                        <small>
+
+                            {{ element.paidAgainst }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- PARTY -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="party">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Party
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{
+                            element.party?.shopName ||
+                            element.party?.partyName ||
+                            '-'
+                            }}
+
+                        </h6>
+
+
+                        <small>
+
+                            {{
+                            element.party?.partyCode ||
+                            '-'
+                            }}
+
+                            |
+
+                            {{
+                            element.party?.mobile ||
+                            '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- SALESMAN -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="salesman">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Salesman
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{
+                            element.employee?.fullName ||
+                            '-'
+                            }}
+
+                        </h6>
+
+
+                        <small>
+
+                            {{
+                            element.employee?.employeeCode ||
+                            '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- AMOUNT -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="amount">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Amount
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <strong>
+
+                        ₹{{ element.collectedAmount || 0 }}
+
+                    </strong>
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- PAYMENT MODE -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="paymentMode">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Payment Mode
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge">
+
+                        {{ element.paymentMode || '-' }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- OUTSTANDING -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="outstanding">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Outstanding
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            ₹{{ element.remainingOutstanding || 0 }}
+
+                        </h6>
+
+                        <small>
+
+                            Previous:
+                            ₹{{ element.previousOutstanding || 0 }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- STATUS -->
+            <!-- ================================= -->
+
+            <!-- <ng-container matColumnDef="status">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Status
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="
+              element.status === 'Verified'
+                ? 'active'
+                : element.status === 'Pending'
+                ? 'inactive'
+                : 'inactive'
+            ">
+
+                        {{ element.status }}
+
+                    </span>
+
+                </td>
+
+            </ng-container> -->
+
+
+
+            <!-- ================================= -->
+            <!-- COLLECTION DATE -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="collectionDate">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Collection Date
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.collectionDate
+                    | date:'dd-MM-yyyy'
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- ACTIONS -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Actions
+
+                </th>
+
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="action-buttons">
+
+
+                        <!-- View -->
+
+                        <button mat-icon-button class="view-btn" (click)="viewCollection(element)">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+
+            <!-- ================================= -->
+            <!-- HEADER -->
+            <!-- ================================= -->
+
+            <tr mat-header-row *matHeaderRowDef="
+          displayedColumns
+        ">
+
+            </tr>
+
+
+
+            <!-- ================================= -->
+            <!-- ROWS -->
+            <!-- ================================= -->
+
+            <tr mat-row *matRowDef="
+          let row;
+          columns: displayedColumns;
+        ">
+
+            </tr>
+
+
+
+            <!-- ================================= -->
+            <!-- NO DATA -->
+            <!-- ================================= -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell text-center" [attr.colspan]="
+            displayedColumns.length
+          ">
+
+                    No Collections Found
+
+                </td>
+
+            </tr>
+
+        </table>
+
+
+
+        <!-- ================================= -->
+        <!-- PAGINATOR -->
+        <!-- ================================= -->
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[
+        5,
+        10,
+        20,
+        50
+      ]" showFirstLastButtons>
+
+        </mat-paginator>
+
+    </div>
+
+</div>

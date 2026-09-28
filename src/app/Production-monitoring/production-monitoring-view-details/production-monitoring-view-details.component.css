@@ -1,0 +1,435 @@
+/* =========================================================
+   PRODUCTION HISTORY VIEW
+   ========================================================= */
+
+:host {
+    display: block;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.container-fluid {
+    background: #f5f7fa;
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+
+/* =========================================================
+   COMMON CARD
+   ========================================================= */
+
+.card {
+    border: 1px solid #e3e7ed;
+    border-radius: 10px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.card.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+
+/* =========================================================
+   HEADER CARD
+   ========================================================= */
+
+.card:first-child {
+    border-radius: 12px;
+}
+
+.card:first-child .card-body {
+    padding: 22px 25px;
+}
+
+.card:first-child h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #263238;
+}
+
+.card:first-child h3 i {
+    color: #3f51b5;
+}
+
+.card:first-child p {
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.card-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e8ebef;
+    padding: 15px 20px;
+}
+
+.card-header h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #263238;
+}
+
+.card-header h5 i {
+    color: #3f51b5;
+}
+
+
+/* =========================================================
+   CARD BODY
+   ========================================================= */
+
+.card-body {
+    padding: 20px;
+}
+
+
+/* =========================================================
+   PRODUCTION INFORMATION
+   ========================================================= */
+
+.card-body label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #7a8490;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.card-body .fw-bold {
+    font-size: 14px;
+    color: #263238;
+    min-height: 22px;
+}
+
+.card-body .fw-bold .text-muted {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   STATUS BADGE
+   ========================================================= */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    margin-bottom: 0;
+    width: 100%;
+    min-width: 900px;
+}
+
+.table thead th {
+    background: #f7f8fa;
+    color: #59636e;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 12px 14px;
+    border-color: #e2e6ea;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #374151;
+    border-color: #e6e9ed;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.table tbody td strong {
+    color: #263238;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TOTAL RAW WEIGHT
+   ========================================================= */
+
+.text-end {
+    color: #374151;
+}
+
+.text-end strong {
+    font-size: 13px;
+    color: #59636e;
+}
+
+.text-end .fs-5 {
+    font-size: 18px !important;
+    font-weight: 700;
+    color: #263238;
+}
+
+
+/* =========================================================
+   PRODUCTION SUMMARY
+   ========================================================= */
+
+.summary-card {
+    height: 100%;
+    min-height: 120px;
+    padding: 18px;
+    border: 1px solid #e3e7ed;
+    border-radius: 10px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.summary-card h6 {
+    margin: 0 0 8px;
+    color: #7a8490;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.summary-card h3 {
+    margin: 0;
+    color: #263238;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SUMMARY VARIANTS
+   ========================================================= */
+
+.summary-card.success {
+    border-left: 4px solid #28a745;
+}
+
+.summary-card.success h3 {
+    color: #218838;
+}
+
+
+.summary-card.warning {
+    border-left: 4px solid #f0ad4e;
+}
+
+.summary-card.warning h3 {
+    color: #d88900;
+}
+
+
+.summary-card.primary {
+    border-left: 4px solid #3f51b5;
+}
+
+.summary-card.primary h3 {
+    color: #3f51b5;
+}
+
+
+/* =========================================================
+   REMARKS
+   ========================================================= */
+
+.card-body p.mb-0 {
+    margin: 0;
+    padding: 14px 16px;
+    background: #f8f9fb;
+    border: 1px solid #e5e8ec;
+    border-radius: 7px;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.btn-secondary {
+    border: none;
+    border-radius: 7px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.btn-secondary i {
+    margin-right: 5px;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+.text-center.py-5 p {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.text-center.text-muted {
+    color: #8a939d !important;
+    font-size: 13px;
+}
+
+.text-center.text-muted i {
+    color: #b4bbc3;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+    .card-body {
+        padding: 16px;
+    }
+
+    .card:first-child .card-body {
+        padding: 18px;
+    }
+
+    .card:first-child h3 {
+        font-size: 19px;
+    }
+
+    .summary-card {
+        min-height: 105px;
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .container-fluid {
+        padding: 12px !important;
+    }
+
+    .card-header {
+        padding: 13px 15px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card:first-child .card-body {
+        padding: 16px;
+    }
+
+    .card:first-child .d-flex {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 15px;
+    }
+
+    .card:first-child .btn {
+        width: 100%;
+    }
+
+    .summary-card {
+        min-height: 100px;
+    }
+
+    .summary-card h3 {
+        font-size: 19px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL DETAILS
+   ========================================================= */
+
+.me-2 {
+    margin-right: 8px !important;
+}
+
+.mb-4 {
+    margin-bottom: 20px !important;
+}
+
+.mb-3 {
+    margin-bottom: 16px !important;
+}
+
+.mt-3 {
+    margin-top: 16px !important;
+}
+
+
+/* =========================================================
+   TABLE SCROLLBAR
+   ========================================================= */
+
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f3f5;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #c8ced6;
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #aeb5bf;
+}

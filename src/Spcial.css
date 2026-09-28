@@ -1,0 +1,143 @@
+.sidebar ul li:hover i {
+  animation: spin 1.0s linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* card hover effects  */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.button_1 {
+  padding: 10px 20px;
+  background-color: var(--gray-colour);
+}
+
+.heading {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.sub_heading {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sub_mini_heading {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* all forms ki title css */
+.title-section h2 {
+   margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--primary-dark);
+
+}
+
+/* form lo buttons */
+
+/* BUTTONS */
+.button-group {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.btn-create {
+  background: var(--primary-light);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-back {
+  background: #757575;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-create:hover {
+  background:var(--primary-dark);
+}
+
+.btn-back:hover {
+  background: #5a5a5a;
+}
+.dialog-title{
+  color: var(--red-color);
+}
+
+
+/* icons colours */
+
+/* Actions */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+.edit-btn,
+.delete-btn {
+  color: var(  --gray-colour);
+  border-radius: 8px;
+  transition: 0.3s;
+  border: none;
+  font-size: 17px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  transform: scale(1.15);
+}
+.view-btn {
+  color: var( --blue-colour);
+  border-radius: 8px;
+  transition: 0.3s;
+  border: none;
+    font-size: 17px;
+}
+
+.view-btn:hover {
+  transform: scale(1.15);
+}
+
+/* Image */
+img {
+  border-radius: 8px;
+  object-fit: cover;
+}
+.button-section button{
+   margin-top:30px;
+  padding:15px 40px;
+  border:none;
+  border-radius:30px;
+  background:var(--red-color);
+  color:var(--wight-color);
+  cursor:pointer; 
+}
+

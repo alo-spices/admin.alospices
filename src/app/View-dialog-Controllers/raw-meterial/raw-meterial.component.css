@@ -1,0 +1,270 @@
+:host {
+    display: block;
+}
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.view-container {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    animation: fadeIn .3s ease-in-out;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.view-header {
+    background: linear-gradient(135deg,
+            var(--primary-dark),
+            var(--primary-light));
+    color: #fff;
+    padding: 22px 30px;
+}
+
+.view-header h3 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+/* ==========================================
+   BODY
+========================================== */
+
+.view-body {
+    padding: 30px;
+}
+
+.row {
+    row-gap: 15px;
+}
+
+/* ==========================================
+   LABEL
+========================================== */
+
+.view-body label {
+    display: block;
+    color: var(--primary-dark);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+/* ==========================================
+   VALUE BOX
+========================================== */
+
+.view-body p {
+
+    margin: 0;
+
+    background: #fafafa;
+
+    border: 1px solid #ececec;
+
+    border-left: 5px solid var(--primary-light);
+
+    border-radius: 10px;
+
+    padding: 13px 15px;
+
+    min-height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    color: #444;
+
+    font-size: 15px;
+
+    transition: .3s;
+
+    word-break: break-word;
+
+}
+
+.view-body p:hover {
+
+    background: #fff8f5;
+
+    border-left-color: var(--warning-color);
+
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.status-active {
+
+    background: #eaf8ef !important;
+
+    color: #198754 !important;
+
+    border-left: 5px solid #198754 !important;
+
+    font-weight: 700;
+
+}
+
+.status-inactive {
+
+    background: #fdeaea !important;
+
+    color: #dc3545 !important;
+
+    border-left: 5px solid #dc3545 !important;
+
+    font-weight: 700;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.dialog-footer {
+
+    padding: 0 30px 25px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.close-btn {
+
+    background: linear-gradient(
+        135deg,
+        var(--primary-dark),
+        var(--primary-light));
+
+    border: none;
+
+    color: #fff;
+
+    padding: 11px 30px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: .3s;
+
+}
+
+.close-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(126, 45, 23, .25);
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar {
+
+    width: 8px;
+
+}
+
+::-webkit-scrollbar-track {
+
+    background: #f1f1f1;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: var(--primary-light);
+
+    border-radius: 20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+    background: var(--primary-dark);
+
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px) {
+
+    .view-header {
+
+        padding: 18px;
+
+    }
+
+    .view-header h3 {
+
+        font-size: 22px;
+
+    }
+
+    .view-body {
+
+        padding: 20px;
+
+    }
+
+    .dialog-footer {
+
+        padding: 20px;
+
+    }
+
+    .close-btn {
+
+        width: 100%;
+
+    }
+
+}

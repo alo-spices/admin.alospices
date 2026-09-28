@@ -1,0 +1,574 @@
+/* =========================================================
+   POPUP CARD
+========================================================= */
+
+.popup-card {
+
+    width: 340px;
+
+    min-height: 190px;
+
+    position: relative;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    padding: 42px 28px 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 22px rgba(20, 30, 60, 0.13);
+
+    overflow: visible;
+
+    animation: popupOpen 0.28s ease-out;
+
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.close-btn {
+
+    position: absolute;
+
+    top: 8px;
+
+    right: 8px;
+
+    width: 20px;
+
+    height: 20px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+}
+
+
+.close-btn i {
+
+    font-size: 8px;
+
+    color: #a5a5a5;
+
+    transition: 0.2s ease;
+
+}
+
+
+.close-btn:hover i {
+
+    color: #555;
+
+    transform: rotate(90deg);
+
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.icon-wrapper {
+
+    position: absolute;
+
+    top: -17px;
+
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    z-index: 10;
+
+}
+
+
+.icon-circle {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 4px solid;
+
+    box-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.12);
+
+    animation: iconPop 0.35s ease-out;
+
+}
+
+
+.icon-circle i {
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.icon-circle.success {
+
+    background: #16a765;
+
+    border-color: #a8e2c6;
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.icon-circle.error {
+
+    background: #e60012;
+
+    border-color: #f3a5ad;
+
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+.icon-circle.warning {
+
+    background: #f2a900;
+
+    border-color: #f7d58a;
+
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.icon-circle.info {
+
+    background: #2584d8;
+
+    border-color: #a9d4f5;
+
+}
+
+
+/* =========================================================
+   CONFIRM
+========================================================= */
+
+.icon-circle.confirm {
+
+    background: #7252c6;
+
+    border-color: #c9baf0;
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.popup-content {
+
+    margin-top: 4px;
+
+}
+
+
+.popup-content h2 {
+
+    margin: 0;
+
+    color: #171717;
+
+    font-size: 17px;
+
+    line-height: 1.25;
+
+    font-weight: 700;
+
+}
+
+
+.popup-content p {
+
+    width: 240px;
+
+    max-width: 100%;
+
+    margin: 8px auto 0;
+
+    color: #888888;
+
+    font-size: 9px;
+
+    line-height: 1.45;
+
+    font-weight: 400;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.popup-footer {
+
+    margin-top: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.popup-action-btn {
+
+    min-width: 116px;
+
+    height: 27px;
+
+    padding: 0 14px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    color: #ffffff;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.popup-action-btn.success {
+
+    background: #16a765;
+
+}
+
+
+.popup-action-btn.success:hover {
+
+    background: #128b54;
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.popup-action-btn.error {
+
+    background: #e60012;
+
+}
+
+
+.popup-action-btn.error:hover {
+
+    background: #c90010;
+
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+.popup-action-btn.warning {
+
+    background: #f2a900;
+
+}
+
+
+.popup-action-btn.warning:hover {
+
+    background: #d99700;
+
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.popup-action-btn.info {
+
+    background: #2584d8;
+
+}
+
+
+.popup-action-btn.info:hover {
+
+    background: #1d70b9;
+
+}
+
+
+/* =========================================================
+   CONFIRM
+========================================================= */
+
+.popup-action-btn.confirm {
+
+    background: #7252c6;
+
+}
+
+
+.popup-action-btn.confirm:hover {
+
+    background: #6043aa;
+
+}
+
+
+/* =========================================================
+   SECONDARY
+========================================================= */
+
+.popup-action-btn.secondary {
+
+    background: #eeeeee;
+
+    color: #555555;
+
+}
+
+
+.popup-action-btn.secondary:hover {
+
+    background: #dddddd;
+
+}
+
+
+/* =========================================================
+   BOTTOM LINE
+========================================================= */
+
+.popup-bottom-line {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -3px;
+
+    width: 100%;
+
+    height: 4px;
+
+    border-radius: 0 0 10px 10px;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.popup-bottom-progress {
+
+    width: 100%;
+
+    height: 100%;
+
+    transform: scaleX(0);
+
+    transform-origin: left;
+
+    animation: progressLine 2.2s ease-out forwards;
+
+}
+
+
+/* =========================================================
+   COLORS
+========================================================= */
+
+.popup-bottom-progress.success {
+
+    background: #16a765;
+
+}
+
+
+.popup-bottom-progress.error {
+
+    background: #e60012;
+
+}
+
+
+.popup-bottom-progress.warning {
+
+    background: #f2a900;
+
+}
+
+
+.popup-bottom-progress.info {
+
+    background: #2584d8;
+
+}
+
+
+.popup-bottom-progress.confirm {
+
+    background: #7252c6;
+
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes popupOpen {
+
+    from {
+
+        opacity: 0;
+
+        transform: scale(0.88) translateY(5px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1) translateY(0);
+
+    }
+
+}
+
+
+@keyframes iconPop {
+
+    from {
+
+        opacity: 0;
+
+        transform: scale(0.65);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1);
+
+    }
+
+}
+
+
+@keyframes progressLine {
+
+    from {
+
+        transform: scaleX(0);
+
+    }
+
+    to {
+
+        transform: scaleX(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .popup-card {
+
+        width: 300px;
+
+        min-height: 185px;
+
+        padding-left: 22px;
+
+        padding-right: 22px;
+
+    }
+
+}

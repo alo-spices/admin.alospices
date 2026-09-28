@@ -1,0 +1,755 @@
+/* ==========================================
+   CREATE AREA CONTAINER
+   ========================================== */
+
+.category-container {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 28px 20px;
+
+    background:
+        linear-gradient(180deg,
+            var(--bg-color) 0%,
+            #f4ece6 100%);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   TITLE
+   ========================================== */
+
+.title-section {
+    margin-bottom: 20px;
+}
+
+.title-section h2 {
+    margin: 0;
+
+    display: inline-block;
+
+    position: relative;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: var(--primary-color);
+
+    letter-spacing: 0.3px;
+}
+
+.title-section h2::after {
+    content: "";
+
+    display: block;
+
+    width: 70px;
+
+    height: 3px;
+
+    margin-top: 8px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(90deg,
+            var(--primary-color),
+            var(--primary-light));
+}
+
+.title-section p {
+    margin: 8px 0 0;
+
+    font-size: 13px;
+
+    color: var(--text-secondary);
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   MAIN CARD
+   ========================================== */
+
+.category-card {
+    width: 100%;
+
+    padding: 28px;
+
+    background: var(--card-bg);
+
+    border:
+        1px solid rgba(166, 61, 34, 0.08);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 30px rgba(43, 43, 43, 0.08);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   MAIN GRID
+   ========================================== */
+
+.category-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr) 280px;
+
+    gap: 28px;
+
+    align-items: start;
+}
+
+
+/* ==========================================
+   FORM AREA
+   ========================================== */
+
+.form-area {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px 20px;
+
+    min-width: 0;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* ==========================================
+   SECTION TITLE
+   ========================================== */
+
+.section-title {
+    grid-column: 1 / -1;
+
+    margin-top: 4px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        1px solid #eee4de;
+}
+
+.section-title h4 {
+    margin: 0;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    color: var(--primary-color);
+}
+
+.section-title small {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+}
+
+
+/* ==========================================
+   FORM GROUP
+   ========================================== */
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+/* ==========================================
+   LABEL
+   ========================================== */
+
+.form-group label {
+    margin-bottom: 8px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: var(--primary-color);
+
+    letter-spacing: 0.2px;
+}
+
+.required {
+    margin-left: 3px;
+
+    color: #d93025;
+}
+
+
+/* ==========================================
+   FORM CONTROLS
+   ========================================== */
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    min-height: 45px;
+
+    padding: 11px 14px;
+
+    border:
+        1px solid #ddd4cc;
+
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: var(--text-primary);
+
+    outline: none;
+
+    font-size: 14px;
+
+    font-family: inherit;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* ==========================================
+   TEXTAREA
+   ========================================== */
+
+.form-group textarea {
+    min-height: 110px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   HOVER
+   ========================================== */
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color:
+        rgba(166, 61, 34, 0.45);
+}
+
+
+/* ==========================================
+   FOCUS
+   ========================================== */
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color:
+        var(--primary-color);
+
+    box-shadow:
+        0 0 0 3px rgba(166, 61, 34, 0.12);
+}
+
+
+/* ==========================================
+   PREVIEW AREA
+   ========================================== */
+
+.preview-area {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+
+    position: sticky;
+
+    top: 20px;
+
+    min-width: 0;
+}
+
+
+/* ==========================================
+   AREA PREVIEW CARD
+   ========================================== */
+
+.area-preview-card {
+    width: 100%;
+
+    max-width: 280px;
+
+    padding: 22px 18px;
+
+    background:
+        linear-gradient(180deg,
+            #fffdfa 0%,
+            #faf5f1 100%);
+
+    border:
+        1px solid rgba(166, 61, 34, 0.12);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 24px rgba(43, 43, 43, 0.07);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   AREA ICON
+   ========================================== */
+
+.area-icon {
+    width: 56px;
+
+    height: 56px;
+
+    margin: 0 auto 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(166, 61, 34, 0.09);
+
+    color:
+        var(--primary-color);
+
+    font-size: 22px;
+}
+
+
+/* ==========================================
+   PREVIEW TITLE
+   ========================================== */
+
+.area-preview-card h4 {
+    margin: 0 0 18px;
+
+    text-align: center;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    color:
+        var(--primary-color);
+}
+
+
+/* ==========================================
+   PREVIEW INFO
+   ========================================== */
+
+.preview-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 11px 12px;
+
+    margin-bottom: 9px;
+
+    background: #fff;
+
+    border:
+        1px solid #eee4de;
+
+    border-radius: 9px;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.preview-info:last-child {
+    margin-bottom: 0;
+}
+
+.preview-info:hover {
+    border-color:
+        rgba(166, 61, 34, 0.2);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ==========================================
+   PREVIEW LABEL
+   ========================================== */
+
+.preview-info span {
+    font-size: 10px;
+
+    color: #8b7770;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.45px;
+}
+
+
+/* ==========================================
+   PREVIEW VALUE
+   ========================================== */
+
+.preview-info strong {
+    font-size: 13px;
+
+    color: var(--text-primary);
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+
+/* ==========================================
+   ROLE / INFO CARD
+   ========================================== */
+
+.role-info {
+    width: 100%;
+
+    max-width: 280px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 14px 15px;
+
+    background:
+        #fffaf6;
+
+    border:
+        1px solid #eadfd7;
+
+    border-radius: 11px;
+
+    box-sizing: border-box;
+}
+
+.role-info span {
+    font-size: 10px;
+
+    color: #9a867d;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+.role-info strong {
+    font-size: 14px;
+
+    color: var(--primary-color);
+
+    font-weight: 800;
+}
+
+.role-info small {
+    margin-top: 2px;
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   BUTTON GROUP
+   ========================================== */
+
+.button-group {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 24px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #eee4de;
+}
+
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
+.btn-create,
+.btn-back {
+    min-width: 120px;
+
+    padding: 11px 20px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ==========================================
+   CREATE BUTTON
+   ========================================== */
+
+.btn-create {
+    border: none;
+
+    background:
+        linear-gradient(135deg,
+            var(--primary-color),
+            var(--primary-dark));
+
+    color: #fff;
+
+    box-shadow:
+        0 8px 18px rgba(166, 61, 34, 0.18);
+}
+
+.btn-create:hover:not(:disabled) {
+    transform:
+        translateY(-1px);
+
+    background:
+        linear-gradient(135deg,
+            var(--primary-light),
+            var(--primary-color));
+}
+
+.btn-create:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    box-shadow: none;
+
+    transform: none;
+}
+
+
+/* ==========================================
+   BACK BUTTON
+   ========================================== */
+
+.btn-back {
+    border:
+        1px solid var(--secondary-dark);
+
+    background:
+        var(--secondary-color);
+
+    color:
+        var(--primary-dark);
+}
+
+.btn-back:hover {
+    background:
+        #ead7c7;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ==========================================
+   VALIDATION
+   ========================================== */
+
+.form-group input.ng-invalid.ng-touched,
+.form-group select.ng-invalid.ng-touched,
+.form-group textarea.ng-invalid.ng-touched {
+    border-color: #d93025;
+
+    box-shadow:
+        0 0 0 3px rgba(217, 48, 37, 0.08);
+}
+
+
+/* ==========================================
+   TABLET
+   ========================================== */
+
+@media (max-width: 991px) {
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-area {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .preview-area {
+        position: static;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        align-items: start;
+
+        justify-items: center;
+
+        width: 100%;
+    }
+
+    .area-preview-card,
+    .role-info {
+        width: 100%;
+
+        max-width: 320px;
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .category-container {
+        padding: 20px 14px;
+    }
+
+    .category-card {
+        padding: 20px;
+
+        border-radius: 15px;
+    }
+
+    .form-area {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .preview-area {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .area-preview-card,
+    .role-info {
+        max-width: 340px;
+    }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+   ========================================== */
+
+@media (max-width: 576px) {
+
+    .category-container {
+        padding: 16px 12px;
+    }
+
+    .title-section h2 {
+        font-size: 22px;
+    }
+
+    .category-card {
+        padding: 18px;
+
+        border-radius: 14px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn-create,
+    .btn-back {
+        width: 100%;
+    }
+
+    .area-preview-card,
+    .role-info {
+        max-width: 100%;
+    }
+
+}

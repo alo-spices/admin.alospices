@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>
+  Category Details
+</h2>
+
+<div mat-dialog-content>
+
+  <div class="details-grid">
+
+    <p>
+      <strong>Name:</strong>
+      {{ data.name }}
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      {{
+        data.isActive
+        ? 'Active'
+        : 'Inactive'
+      }}
+    </p>
+
+    <p>
+      <strong>Created At:</strong>
+      {{ data.createdAt }}
+    </p>
+
+  </div>
+
+  <div class="image-preview">
+
+    <img
+      [src]="data.image"
+      width="150"
+      height="150">
+
+  </div>
+
+</div>
+
+<div mat-dialog-actions class="button-group">
+
+ <button mat-button [mat-dialog-close]="false"  class="btn-back">
+  Close
+</button>
+</div>

@@ -1,0 +1,870 @@
+/* ==========================================
+   Finished Goods Stock Details
+   ========================================== */
+
+
+/* ==========================================
+   View Card
+   ========================================== */
+
+.view-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   View Card Header
+   ========================================== */
+
+.view-card-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 15px;
+
+    margin-bottom: 18px;
+
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.view-card-header h4 {
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    color: #1f2937;
+}
+
+.view-card-header p {
+    margin: 4px 0 0;
+
+    font-size: 12px;
+
+    color: #6b7280;
+}
+
+
+/* ==========================================
+   Details Grid
+   ========================================== */
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    width: 100%;
+}
+
+
+/* ==========================================
+   Detail Item
+   ========================================== */
+
+.detail-item {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    min-width: 0;
+
+    padding: 14px 15px;
+
+    background: #f9fafb;
+
+    border: 1px solid #edf0f2;
+
+    border-radius: 8px;
+
+    box-sizing: border-box;
+}
+
+.detail-item span {
+    font-size: 12px;
+
+    font-weight: 500;
+
+    color: #6b7280;
+}
+
+.detail-item strong {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #1f2937;
+
+    word-break: break-word;
+}
+
+
+/* ==========================================
+   Summary Grid
+   ========================================== */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    width: 100%;
+}
+
+
+/* ==========================================
+   Summary Card
+   ========================================== */
+
+.summary-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-height: 90px;
+
+    padding: 15px 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+
+    transition: all 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+.summary-card:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+
+/* ==========================================
+   Summary Icon
+   ========================================== */
+
+.summary-icon {
+    width: 44px;
+    height: 44px;
+
+    min-width: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f3f4f6;
+
+    color: #374151;
+
+    font-size: 18px;
+}
+
+
+/* ==========================================
+   Summary Content
+   ========================================== */
+
+.summary-content {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    min-width: 0;
+}
+
+.summary-content span {
+    font-size: 12px;
+
+    font-weight: 500;
+
+    color: #6b7280;
+}
+
+.summary-content strong {
+    font-size: 19px;
+
+    font-weight: 700;
+
+    color: #1f2937;
+}
+
+
+/* ==========================================
+   Finished Goods Container
+   ========================================== */
+
+.finished-goods-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    width: 100%;
+}
+
+
+/* ==========================================
+   Finished Good Card
+   ========================================== */
+
+.finished-good-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 1px 5px rgba(0, 0, 0, 0.03);
+}
+
+
+/* ==========================================
+   Finished Good Header
+   ========================================== */
+
+.finished-good-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 15px;
+
+    margin-bottom: 18px;
+
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+/* ==========================================
+   Product Title
+   ========================================== */
+
+.product-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.product-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f3f4f6;
+
+    color: #374151;
+
+    font-size: 17px;
+}
+
+.product-title h5 {
+    margin: 0 0 4px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #1f2937;
+}
+
+.product-title span {
+    font-size: 12px;
+
+    color: #6b7280;
+}
+
+
+/* ==========================================
+   Production Count
+   ========================================== */
+
+.production-count {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 3px;
+
+    min-width: 100px;
+}
+
+.production-count span {
+    font-size: 11px;
+
+    color: #6b7280;
+}
+
+.production-count strong {
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #1f2937;
+}
+
+
+/* ==========================================
+   History Section
+   ========================================== */
+
+.history-section {
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #f0f0f0;
+}
+
+
+/* ==========================================
+   History Header
+   ========================================== */
+
+.history-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+.history-header h5 {
+    margin: 0 0 4px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.history-header span {
+    font-size: 11px;
+
+    color: #9ca3af;
+}
+
+
+/* ==========================================
+   History List
+   ========================================== */
+
+.history-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    width: 100%;
+}
+
+
+/* ==========================================
+   History Item
+   ========================================== */
+
+.history-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 14px;
+
+    background: #f9fafb;
+
+    border: 1px solid #edf0f2;
+
+    border-radius: 8px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   History Main
+   ========================================== */
+
+.history-main {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 180px;
+}
+
+.history-icon {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    color: #4b5563;
+
+    font-size: 13px;
+}
+
+.history-main h6 {
+    margin: 0 0 3px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.history-main small {
+    font-size: 10px;
+
+    color: #9ca3af;
+}
+
+
+/* ==========================================
+   History Details
+   ========================================== */
+
+.history-details {
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+}
+
+.history-details>div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 3px;
+}
+
+.history-details span {
+    font-size: 10px;
+
+    color: #9ca3af;
+}
+
+.history-details strong {
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+/* ==========================================
+   History Remarks
+   ========================================== */
+
+.history-remarks {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    max-width: 300px;
+
+    padding: 7px 10px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 6px;
+
+    color: #6b7280;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+.history-remarks i {
+    flex-shrink: 0;
+
+    font-size: 10px;
+
+    color: #9ca3af;
+}
+
+.history-remarks span {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================
+   Loading
+   ========================================== */
+
+.loading-card {
+    width: 100%;
+
+    min-height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+.loading-card i {
+    font-size: 18px;
+
+    color: #374151;
+}
+
+
+/* ==========================================
+   Empty State
+   ========================================== */
+
+.empty-state {
+    width: 100%;
+
+    min-height: 250px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+.empty-state>i {
+    margin-bottom: 14px;
+
+    font-size: 42px;
+
+    color: #9ca3af;
+}
+
+.empty-state h4 {
+    margin: 0 0 7px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.empty-state p {
+    margin: 0 0 18px;
+
+    font-size: 13px;
+
+    color: #6b7280;
+}
+
+
+/* ==========================================
+   Back Button
+   ========================================== */
+
+.btn-back {
+    min-width: 100px;
+
+    padding: 10px 18px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+    background: #f9fafb;
+
+    border-color: #9ca3af;
+}
+
+
+/* ==========================================
+   Responsive - Tablet
+   ========================================== */
+
+@media (max-width: 1100px) {
+
+    .summary-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .details-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* ==========================================
+   Responsive - Mobile
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .view-card {
+        padding: 16px;
+    }
+
+
+    .view-card-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .details-grid {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .finished-good-card {
+        padding: 15px;
+    }
+
+
+    .finished-good-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    .production-count {
+        align-items: flex-start;
+    }
+
+
+    .history-item {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+
+    .history-main {
+        min-width: 0;
+
+        width: 100%;
+    }
+
+
+    .history-details {
+        width: 100%;
+
+        justify-content: space-between;
+
+        gap: 10px;
+    }
+
+
+    .history-details>div {
+        align-items: flex-start;
+    }
+
+
+    .history-remarks {
+        max-width: 100%;
+
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+}
+
+
+/* ==========================================
+   Small Mobile
+   ========================================== */
+
+@media (max-width: 480px) {
+
+    .view-card {
+        padding: 14px;
+    }
+
+
+    .finished-good-card {
+        padding: 13px;
+    }
+
+
+    .product-title h5 {
+        font-size: 14px;
+    }
+
+
+    .detail-item {
+        padding: 12px;
+    }
+
+
+    .summary-content strong {
+        font-size: 17px;
+    }
+
+
+    .history-details {
+        flex-wrap: wrap;
+    }
+
+}

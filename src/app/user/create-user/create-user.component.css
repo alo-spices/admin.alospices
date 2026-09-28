@@ -1,0 +1,1057 @@
+/* ==========================================
+   CREATE USER
+   ========================================== */
+
+.category-container {
+    width: 100%;
+    min-height: 100vh;
+
+    background:
+        linear-gradient(180deg,
+            var(--bg-color) 0%,
+            #f4ece6 100%);
+
+    padding: 28px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Title
+   ========================================== */
+
+.title-section {
+    margin-bottom: 20px;
+}
+
+.title-section h2 {
+    margin: 0;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: var(--primary-color);
+
+    letter-spacing: 0.3px;
+
+    position: relative;
+
+    display: inline-block;
+}
+
+.title-section h2::after {
+    content: "";
+
+    display: block;
+
+    width: 70px;
+
+    height: 3px;
+
+    margin-top: 8px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(90deg,
+            var(--primary-color),
+            var(--primary-light));
+}
+
+.title-section p {
+    margin: 10px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   Main Card
+   ========================================== */
+
+.category-card {
+    width: 100%;
+
+    background: var(--card-bg);
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(166, 61, 34, 0.08);
+
+    box-shadow:
+        0 12px 30px rgba(43, 43, 43, 0.08);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Main Grid
+   ========================================== */
+
+.category-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr) 280px;
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+
+
+/* ==========================================
+   Section Title
+   ========================================== */
+
+.section-title {
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        1px solid #eee3db;
+}
+
+.section-title:first-child {
+    margin-top: 0;
+}
+
+.section-title h4 {
+    margin: 0;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    color: var(--primary-color);
+
+    letter-spacing: 0.2px;
+}
+
+.section-title small {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+    font-weight: 500;
+}
+
+
+/* ==========================================
+   Form Group
+   ========================================== */
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.form-group label {
+    margin-top: 5px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* ==========================================
+   Labels
+   ========================================== */
+
+.form-group label {
+    margin-bottom: 8px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: var(--primary-color);
+
+    letter-spacing: 0.2px;
+}
+
+.required {
+    color: #d93025;
+
+    margin-left: 3px;
+}
+
+
+/* ==========================================
+   Inputs
+   ========================================== */
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    min-height: 45px;
+
+    padding: 11px 14px;
+
+    border:
+        1px solid #ddd4cc;
+
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: var(--text-primary);
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+
+    font-size: 14px;
+
+    font-family: inherit;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Textarea
+   ========================================== */
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 100px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   Input Hover
+   ========================================== */
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color:
+        rgba(166, 61, 34, 0.45);
+}
+
+
+/* ==========================================
+   Input Focus
+   ========================================== */
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color:
+        var(--primary-color);
+
+    box-shadow:
+        0 0 0 3px rgba(166, 61, 34, 0.12);
+}
+
+
+/* ==========================================
+   Disabled / Readonly Inputs
+   ========================================== */
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled,
+.form-group input[readonly],
+.form-group textarea[readonly] {
+    background:
+        #f3f4f6;
+
+    color:
+        #6b7280;
+
+    border-color:
+        #e1e3e6;
+
+    cursor:
+        not-allowed;
+
+    box-shadow:
+        none;
+}
+
+
+/* ==========================================
+   File Input
+   ========================================== */
+
+.form-group input[type="file"] {
+    padding: 9px 12px;
+
+    background: #fff;
+
+    cursor: pointer;
+}
+
+.form-group input[type="file"]::file-selector-button {
+    margin-right: 10px;
+
+    padding: 7px 12px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background:
+        var(--secondary-color);
+
+    color:
+        var(--primary-dark);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   Password Wrapper
+   ========================================== */
+
+.password-wrapper {
+    position: relative;
+
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 45px;
+}
+
+.password-wrapper i {
+    position: absolute;
+
+    right: 14px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        #8a7770;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease;
+}
+
+.password-wrapper i:hover {
+    color:
+        var(--primary-color);
+}
+
+
+/* ==========================================
+   Warehouse Section
+   ========================================== */
+
+.warehouse-preview {
+    grid-column: 1 / -1;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px 20px;
+
+    margin-top: 4px;
+
+    padding: 18px;
+
+    border:
+        1px solid #eadbd2;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(180deg,
+            #fffdfa 0%,
+            #faf6f2 100%);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Warehouse Preview Header
+   ========================================== */
+
+.warehouse-preview .section-title {
+    margin-top: 0;
+
+    margin-bottom: 2px;
+}
+
+
+/* ==========================================
+   Role Note
+   ========================================== */
+
+.role-note {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    padding: 11px 13px;
+
+    margin-top: 1px;
+
+    border-radius: 9px;
+
+    background:
+        #f8f3ef;
+
+    border:
+        1px solid #eadfd7;
+
+    color:
+        #6f5a50;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.role-note i {
+    margin-top: 2px;
+
+    color:
+        var(--primary-color);
+}
+
+
+/* ==========================================
+   Preview Area
+   ========================================== */
+
+.preview-area {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+
+    min-width: 0;
+
+    position: sticky;
+
+    top: 20px;
+}
+
+
+/* ==========================================
+   Profile Preview
+   ========================================== */
+
+.preview-box {
+    width: 100%;
+
+    max-width: 260px;
+
+    aspect-ratio: 1 / 1;
+
+    border:
+        1.5px dashed rgba(166, 61, 34, 0.28);
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(180deg,
+            #fff 0%,
+            #fbf8f6 100%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+
+    box-sizing: border-box;
+}
+
+.preview-box img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.preview-empty {
+    text-align: center;
+
+    color:
+        var(--text-secondary);
+
+    padding: 20px;
+}
+
+.preview-empty i {
+    display: block;
+
+    font-size: 44px;
+
+    color:
+        rgba(166, 61, 34, 0.35);
+
+    margin-bottom: 10px;
+}
+
+.preview-empty p {
+    margin: 0;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   Warehouse Preview Card
+   ========================================== */
+
+.warehouse-preview-card {
+    width: 100%;
+
+    max-width: 260px;
+
+    padding: 22px 18px;
+
+    border:
+        1px solid #eadbd2;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(180deg,
+            #fffdfa 0%,
+            #f8f2ed 100%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    box-shadow:
+        0 6px 18px rgba(68, 50, 40, 0.06);
+}
+
+.warehouse-icon {
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 12px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(166, 61, 34, 0.08);
+
+    color:
+        var(--primary-color);
+
+    font-size: 21px;
+}
+
+.warehouse-preview-card h4 {
+    margin: 0 0 5px;
+
+    color:
+        var(--primary-color);
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+.warehouse-preview-card span {
+    font-size: 12px;
+
+    color:
+        #5f534e;
+
+    font-weight: 700;
+}
+
+.warehouse-preview-card small {
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    color:
+        var(--text-secondary);
+
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   Role Information
+   ========================================== */
+
+.role-info {
+    width: 100%;
+
+    max-width: 260px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 14px 15px;
+
+    border-radius: 11px;
+
+    border:
+        1px solid #eadfd7;
+
+    background:
+        #fffaf6;
+
+    box-sizing: border-box;
+}
+
+.role-info span {
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+
+    color:
+        #9a867d;
+
+    font-weight: 700;
+}
+
+.role-info strong {
+    font-size: 14px;
+
+    color:
+        var(--primary-color);
+
+    font-weight: 800;
+}
+
+.role-info small {
+    margin-top: 2px;
+
+    font-size: 11px;
+
+    color:
+        var(--text-secondary);
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   Button Group
+   ========================================== */
+
+.button-group {
+    display: flex;
+
+    gap: 12px;
+
+    justify-content: flex-end;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #eee4de;
+}
+
+
+/* ==========================================
+   Buttons
+   ========================================== */
+
+.btn-create,
+.btn-back {
+    min-width: 125px;
+
+    padding: 11px 20px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   Create Button
+   ========================================== */
+
+.btn-create {
+    border: none;
+
+    background:
+        linear-gradient(135deg,
+            var(--primary-color),
+            var(--primary-dark));
+
+    color: #fff;
+
+    box-shadow:
+        0 8px 18px rgba(166, 61, 34, 0.18);
+}
+
+.btn-create:hover:not(:disabled) {
+    transform:
+        translateY(-1px);
+
+    background:
+        linear-gradient(135deg,
+            var(--primary-light),
+            var(--primary-color));
+}
+
+.btn-create:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* ==========================================
+   Back Button
+   ========================================== */
+
+.btn-back {
+    background:
+        var(--secondary-color);
+
+    color:
+        var(--primary-dark);
+
+    border:
+        1px solid var(--secondary-dark);
+}
+
+.btn-back:hover {
+    background:
+        #ead7c7;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ==========================================
+   Validation
+   ========================================== */
+
+.form-group input.ng-invalid.ng-touched,
+.form-group select.ng-invalid.ng-touched,
+.form-group textarea.ng-invalid.ng-touched {
+    border-color:
+        #d93025;
+
+    box-shadow:
+        0 0 0 3px rgba(217, 48, 37, 0.08);
+}
+
+
+/* ==========================================
+   Scrollbar
+   ========================================== */
+
+.warehouse-preview::-webkit-scrollbar {
+    width: 6px;
+}
+
+.warehouse-preview::-webkit-scrollbar-thumb {
+    background:
+        #d7c6bb;
+
+    border-radius: 10px;
+}
+
+
+/* ==========================================
+   Tablet
+   ========================================== */
+
+@media (max-width: 991px) {
+
+    .category-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .preview-area {
+        position: static;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        align-items: start;
+
+        justify-items: center;
+    }
+
+
+    .preview-box,
+    .warehouse-preview-card,
+    .role-info {
+        max-width: 100%;
+    }
+
+
+    .form-area {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* ==========================================
+   Mobile
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .category-container {
+        padding:
+            20px 14px;
+    }
+
+
+    .category-card {
+        padding:
+            20px;
+
+        border-radius:
+            15px;
+    }
+
+
+    .title-section h2 {
+        font-size:
+            24px;
+    }
+
+
+    .form-area {
+        grid-template-columns:
+            1fr;
+
+        gap:
+            16px;
+    }
+
+
+    .warehouse-preview {
+        grid-template-columns:
+            1fr;
+
+        padding:
+            15px;
+    }
+
+
+    .preview-area {
+        grid-template-columns:
+            1fr;
+
+        width: 100%;
+    }
+
+
+    .preview-box,
+    .warehouse-preview-card,
+    .role-info {
+        width: 100%;
+
+        max-width:
+            320px;
+    }
+
+
+    .button-group {
+        flex-direction:
+            column;
+    }
+
+
+    .btn-create,
+    .btn-back {
+        width: 100%;
+    }
+
+}
+
+
+/* ==========================================
+   Small Mobile
+   ========================================== */
+
+@media (max-width: 480px) {
+
+    .category-container {
+        padding:
+            14px 10px;
+    }
+
+
+    .category-card {
+        padding:
+            15px;
+
+        border-radius:
+            13px;
+    }
+
+
+    .title-section {
+        margin-bottom:
+            15px;
+    }
+
+
+    .title-section h2 {
+        font-size:
+            21px;
+    }
+
+
+    .title-section p {
+        font-size:
+            12px;
+    }
+
+
+    .section-title h4 {
+        font-size:
+            14px;
+    }
+
+
+    .form-group label {
+        font-size:
+            12px;
+    }
+
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="date"],
+    .form-group input[type="password"],
+    .form-group select,
+    .form-group textarea {
+        font-size:
+            13px;
+
+        padding:
+            10px 12px;
+    }
+
+
+    .preview-box {
+        max-width:
+            240px;
+    }
+
+
+    .warehouse-preview-card {
+        max-width:
+            240px;
+    }
+
+
+    .role-info {
+        max-width:
+            240px;
+    }
+
+}

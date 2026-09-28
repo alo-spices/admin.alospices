@@ -1,0 +1,208 @@
+<div class="view-container">
+
+    <!-- Header -->
+
+    <div class="dialog-header">
+
+        <div>
+
+            <h2>Stock Receive Details</h2>
+
+            <p>View complete stock receive information</p>
+
+        </div>
+
+        <button mat-icon-button mat-dialog-close>
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+    <!-- Receive Information -->
+
+    <div class="info-card">
+
+        <h4>Receive Information</h4>
+
+        <div class="info-grid">
+
+            <div class="info-item">
+                <label>Receive No</label>
+                <span>{{stock.receiveNo}}</span>
+            </div>
+
+            <div class="info-item">
+                <label>Supplier</label>
+                <span>{{stock.supplier?.supplierName}}</span>
+            </div>
+
+            <div class="info-item">
+                <label>Warehouse</label>
+                <span>{{stock.warehouse?.warehouseName}}</span>
+            </div>
+
+            <div class="info-item">
+                <label>Invoice No</label>
+                <span>{{stock.invoiceNo}}</span>
+            </div>
+
+            <div class="info-item">
+                <label>Invoice Date</label>
+                <span>{{stock.invoiceDate | date:'dd-MM-yyyy'}}</span>
+            </div>
+
+            <div class="info-item">
+                <label>Received Date</label>
+                <span>{{stock.receivedDate | date:'dd-MM-yyyy'}}</span>
+            </div>
+
+            <div class="info-item">
+                <label>Status</label>
+
+                <span
+                    class="status-badge"
+                    [ngClass]="{
+                    'received':stock.status=='Received',
+                    'partial':stock.status=='Partially Used',
+                    'completed':stock.status=='Completed'
+                }">
+
+                    {{stock.status}}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Items -->
+
+    <div class="table-card">
+
+        <h4>Received Products</h4>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>S.No</th>
+
+                        <th>Product</th>
+
+                        <th>Batch</th>
+
+                        <th>Bags</th>
+
+                        <th>Bag Weight</th>
+
+                        <th>Total Weight</th>
+
+                        <th>Available</th>
+
+                        <th>Rate</th>
+
+                        <th>Amount</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let item of stock.items; let i=index">
+
+                        <td>{{i+1}}</td>
+
+                        <td>
+
+                            {{item.rawMaterial?.
+rawMaterialName
+}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.batchNo}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.noOfBags}}
+
+                        </td>
+
+                        <td>
+
+                            {{item.bagWeightKg}} Kg
+
+                        </td>
+
+                        <td>
+
+                            {{item.totalWeightKg}} Kg
+
+                        </td>
+
+                        <td>
+
+                            {{item.availableWeightKg}} Kg
+
+                        </td>
+
+                        <td>
+
+                            ₹ {{item.rate}}
+
+                        </td>
+
+                        <td>
+
+                            ₹ {{item.amount}}
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Remarks -->
+
+    <div class="remarks-card" *ngIf="stock.remarks">
+
+        <h4>Remarks</h4>
+
+        <p>{{stock.remarks}}</p>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="dialog-footer">
+
+        <button
+            class="close-btn"
+            mat-dialog-close>
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

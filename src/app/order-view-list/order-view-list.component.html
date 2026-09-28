@@ -1,0 +1,814 @@
+<div class="order-dialog">
+
+
+    <!-- ==========================================
+       HEADER
+  =========================================== -->
+
+    <div class="dialog-header">
+
+        <div>
+
+            <h2>
+                Order Details
+            </h2>
+
+            <span class="order-number">
+
+                {{ data?.orderNumber || '-' }}
+
+            </span>
+
+        </div>
+
+
+        <button type="button" class="close-btn" (click)="close()">
+
+            <i class="fa fa-times"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+       BODY
+  =========================================== -->
+
+    <div class="dialog-body">
+
+
+        <!-- ========================================
+         ORDER SUMMARY
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-shopping-cart"></i>
+
+                <h3>
+                    Order Information
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>Order Number</span>
+
+                    <strong>
+                        {{ data?.orderNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Order Date</span>
+
+                    <strong>
+                        {{ formatDateTime(data?.orderDate) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Party Type</span>
+
+                    <strong>
+                        {{ data?.partyType || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Visit ID</span>
+
+                    <strong>
+                        {{ data?.visit || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Order Status</span>
+
+                    <strong>
+
+                        <span class="status-badge" [ngClass]="getOrderStatusClass()">
+
+                            {{ data?.orderStatus || '-' }}
+
+                        </span>
+
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Payment Status</span>
+
+                    <strong>
+
+                        <span class="status-badge" [ngClass]="getPaymentStatusClass()">
+
+                            {{ data?.paymentStatus || '-' }}
+
+                        </span>
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+         CUSTOMER / PARTY
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-building"></i>
+
+                <h3>
+                    Customer / Party Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>Shop Name</span>
+
+                    <strong>
+                        {{ getPartyName() }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Mobile</span>
+
+                    <strong>
+                        {{ data?.party?.mobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Email</span>
+
+                    <strong>
+                        {{ data?.party?.email || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>GST Number</span>
+
+                    <strong>
+                        {{ data?.party?.gstNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>PAN Number</span>
+
+                    <strong>
+                        {{ data?.party?.panNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>City</span>
+
+                    <strong>
+                        {{ data?.party?.city || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>State</span>
+
+                    <strong>
+                        {{ data?.party?.state || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Pincode</span>
+
+                    <strong>
+                        {{ data?.party?.pincode || '-' }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+         SALESMAN
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-user"></i>
+
+                <h3>
+                    Salesman Details
+                </h3>
+
+            </div>
+
+
+            <div class="employee-header">
+
+                <div class="employee-avatar">
+
+                    <img *ngIf="data?.employee?.profileImage" [src]="data.employee.profileImage" alt="Salesman">
+
+                    <i *ngIf="!data?.employee?.profileImage" class="fa fa-user"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        {{ getSalesmanName() }}
+                    </h4>
+
+                    <span>
+
+                        {{
+                        data?.employee?.employeeCode ||
+                        '-'
+                        }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>Employee Code</span>
+
+                    <strong>
+                        {{ data?.employee?.employeeCode || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Mobile</span>
+
+                    <strong>
+                        {{ data?.employee?.mobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Role</span>
+
+                    <strong>
+                        {{ data?.employee?.role || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Assignment Type</span>
+
+                    <strong>
+                        {{ data?.employee?.assignmentType || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Area ID</span>
+
+                    <strong>
+                        {{ data?.employee?.area?._id || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Route ID</span>
+
+                    <strong>
+                        {{ data?.employee?.route?._id || '-' }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+         DISTRIBUTOR
+    ========================================= -->
+
+        <div class="section-card" *ngIf="data?.employee?.distributor">
+
+            <div class="section-title">
+
+                <i class="fa fa-users"></i>
+
+                <h3>
+                    Distributor Details
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>Distributor Name</span>
+
+                    <strong>
+                        {{ getDistributorName() }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Shop Name</span>
+
+                    <strong>
+                        {{
+                        data?.employee?.distributor?.shopName ||
+                        '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Employee Code</span>
+
+                    <strong>
+                        {{
+                        data?.employee?.distributor?.employeeCode ||
+                        '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Mobile</span>
+
+                    <strong>
+                        {{
+                        data?.employee?.distributor?.mobile ||
+                        '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Email</span>
+
+                    <strong>
+                        {{
+                        data?.employee?.distributor?.email ||
+                        '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>GST Number</span>
+
+                    <strong>
+                        {{
+                        data?.employee?.distributor?.gstNumber ||
+                        '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>PAN Number</span>
+
+                    <strong>
+                        {{
+                        data?.employee?.distributor?.panNumber ||
+                        '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Distributor Name</span>
+
+                    <strong>
+                        {{
+                        data?.employee?.distributor?.distributorName ||
+                        '-'
+                        }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Address -->
+
+            <div class="address-box">
+
+                <span>
+                    Address
+                </span>
+
+                <p>
+
+                    {{
+                    data?.employee?.distributor?.addressLine1 ||
+                    ''
+                    }}
+
+                    <ng-container *ngIf="
+              data?.employee?.distributor?.addressLine2
+            ">
+
+                        ,
+                        {{
+                        data.employee.distributor.addressLine2
+                        }}
+
+                    </ng-container>
+
+                    <br>
+
+                    {{
+                    data?.employee?.distributor?.city ||
+                    ''
+                    }}
+
+                    ,
+
+                    {{
+                    data?.employee?.distributor?.state ||
+                    ''
+                    }}
+
+                    -
+
+                    {{
+                    data?.employee?.distributor?.pincode ||
+                    ''
+                    }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+         AMOUNT DETAILS
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-inr"></i>
+
+                <h3>
+                    Amount Details
+                </h3>
+
+            </div>
+
+
+            <div class="amount-grid">
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Sub Total
+                    </span>
+
+                    <strong>
+                        ₹{{ data?.subTotal || 0 | number:'1.2-2' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Discount
+                    </span>
+
+                    <strong class="discount">
+
+                        - ₹{{
+                        data?.discountAmount || 0
+                        | number:'1.2-2'
+                        }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Taxable Amount
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        data?.taxableAmount || 0
+                        | number:'1.2-2'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        GST
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        data?.gstAmount || 0
+                        | number:'1.2-2'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item total">
+
+                    <span>
+                        Grand Total
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        data?.grandTotal || 0
+                        | number:'1.2-2'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item">
+
+                    <span>
+                        Paid Amount
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        data?.paidAmount || 0
+                        | number:'1.2-2'
+                        }}
+                    </strong>
+
+                </div>
+
+
+                <div class="amount-item balance">
+
+                    <span>
+                        Balance Amount
+                    </span>
+
+                    <strong>
+                        ₹{{
+                        data?.balanceAmount || 0
+                        | number:'1.2-2'
+                        }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+         REMARKS
+    ========================================= -->
+
+        <div class="section-card" *ngIf="data?.remarks">
+
+            <div class="section-title">
+
+                <i class="fa fa-comment"></i>
+
+                <h3>
+                    Remarks
+                </h3>
+
+            </div>
+
+
+            <div class="remarks-box">
+
+                {{ data.remarks }}
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+         SYSTEM INFORMATION
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <i class="fa fa-info-circle"></i>
+
+                <h3>
+                    System Information
+                </h3>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+
+                    <span>Created At</span>
+
+                    <strong>
+                        {{ formatDateTime(data?.createdAt) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Updated At</span>
+
+                    <strong>
+                        {{ formatDateTime(data?.updatedAt) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Deleted</span>
+
+                    <strong>
+                        {{ data?.isDeleted ? 'Yes' : 'No' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>Order ID</span>
+
+                    <strong>
+                        {{ data?._id || '-' }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==========================================
+       FOOTER
+  =========================================== -->
+
+    <div class="dialog-footer">
+
+        <button type="button" class="btn-close" (click)="close()">
+
+            Close
+
+        </button>
+
+    </div>
+
+
+</div>

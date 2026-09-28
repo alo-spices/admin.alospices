@@ -1,0 +1,117 @@
+<div class="container">
+
+  <div class="row">
+
+    <!-- Title -->
+    <div class="col-md-12">
+      <div class="title-section">
+        <h2>
+          Update Banner
+        </h2>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="category-card">
+
+      <form
+        [formGroup]="bannerForm"
+        (ngSubmit)="onSubmit()">
+
+        <div class="form-layout">
+
+          <!-- Left Section -->
+          <div class="left-section">
+
+            <!-- Banner Title -->
+            <div class="form-group">
+
+              <label>
+                Banner Title
+              </label>
+
+              <input
+                type="text"
+                formControlName="title"
+                placeholder="Enter banner title" />
+
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+
+              <label>
+                Description
+              </label>
+
+              <textarea
+                formControlName="description"
+                placeholder="Enter banner description">
+              </textarea>
+
+            </div>
+
+            <!-- Banner Image -->
+            <div class="form-group">
+
+              <label>
+                Banner Image
+              </label>
+
+              <input
+                type="file"
+                (change)="onFileChange($event)" />
+
+            </div>
+
+          </div>
+
+          <!-- Right Section -->
+          <div class="right-section">
+
+            <div class="preview-box">
+
+              <img
+                *ngIf="imagePreview"
+                [src]="imagePreview"
+                alt="Preview" />
+
+              <p *ngIf="!imagePreview">
+                Image Preview
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+
+          <button
+            type="submit"
+            class="btn-create">
+
+            Save
+
+          </button>
+
+          <button
+            type="button"
+            class="btn-back"
+            (click)="goBack()">
+
+            Back
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

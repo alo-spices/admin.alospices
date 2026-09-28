@@ -1,0 +1,89 @@
+<div class="accept-popup-card">
+
+    <!-- Close -->
+    <button type="button" class="close-btn" (click)="cancel()">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <!-- Icon -->
+    <div class="icon-wrapper">
+
+        <div class="icon-circle accept">
+
+            <i class="fa-solid fa-check"></i>
+
+        </div>
+
+    </div>
+
+
+    <!-- Content -->
+    <div class="popup-content">
+
+        <h2>
+            Accept Production Instruction?
+        </h2>
+
+        <p>
+
+            Are you sure you want to accept this
+            production instruction?
+
+        </p>
+
+        <div class="instruction-info" *ngIf="data?.instructionNo">
+
+            <strong>
+                Instruction No:
+            </strong>
+
+            <span>
+                {{ data.instructionNo }}
+            </span>
+
+        </div>
+
+        <p class="warning-text">
+
+            Once accepted, the instruction status
+            will change to <strong>Accepted</strong>.
+
+        </p>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div class="popup-footer">
+
+        <button type="button" class="popup-action-btn secondary" (click)="cancel()">
+
+            Cancel
+
+        </button>
+
+
+        <button type="button" class="popup-action-btn accept" (click)="confirm()">
+
+            <i class="fa-solid fa-check me-1"></i>
+
+            Yes, Accept
+
+        </button>
+
+    </div>
+
+
+    <!-- Bottom Line -->
+    <div class="popup-bottom-line">
+
+        <div class="popup-bottom-progress accept">
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,617 @@
+<div class="category-container">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <!-- ========================================== -->
+            <!-- Title -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>
+                        <i class="fa fa-store me-2"></i>
+                        Parties
+                    </h2>
+
+                    <p>
+                        Manage retailers and wholesalers
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Search -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="search-row">
+
+                    <mat-form-field appearance="outline" class="w-100">
+
+                        <mat-label>
+                            Search Party
+                        </mat-label>
+
+                        <input matInput
+                            placeholder="Search by Party Name / Shop Name / Code / Mobile / Area / Route / Salesman / Type"
+                            (keyup)="applyFilter($event)">
+
+                    </mat-form-field>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- Table Card -->
+            <!-- ========================================== -->
+
+            <div class="col-md-12">
+
+                <div class="category-card table-card">
+
+                    <div class="table-responsive">
+
+                        <table mat-table [dataSource]="dataSource" matSort>
+
+
+                            <!-- ========================= -->
+                            <!-- S.NO -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="sno">
+
+                                <th mat-header-cell *matHeaderCellDef>
+
+                                    S.No
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element;
+                                        let i = index
+                                    ">
+
+                                    {{ i + 1 }}
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- PARTY -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="party">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                                    Party
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <div class="primary-text">
+
+                                        {{
+                                        element.partyName
+                                        || '-'
+                                        }}
+
+                                    </div>
+
+                                    <div class="secondary-text">
+
+                                        {{
+                                        element.partyCode
+                                        || '-'
+                                        }}
+
+                                    </div>
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- SHOP -->
+                            <!-- ========================= -->
+
+                            <!-- <ng-container matColumnDef="shopName">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                                    Shop
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <div class="primary-text">
+
+                                        {{
+                                        element.shopName
+                                        || '-'
+                                        }}
+
+                                    </div>
+
+                                    <div class="secondary-text" *ngIf="
+                                            element.ownerName
+                                        ">
+
+                                        Owner:
+                                        {{
+                                        element.ownerName
+                                        }}
+
+                                    </div>
+
+                                </td>
+
+                            </ng-container> -->
+
+
+                            <!-- ========================= -->
+                            <!-- TYPE -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="partyType">
+
+                                <th mat-header-cell *matHeaderCellDef>
+
+                                    Type
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <span class="type-badge" [ngClass]="{
+                                            'retailer-badge':
+                                                element.partyType === 'Retailer',
+
+                                            'wholesaler-badge':
+                                                element.partyType === 'Wholesaler'
+                                        }">
+
+                                        {{
+                                        element.partyType
+                                        || '-'
+                                        }}
+
+                                    </span>
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- MOBILE -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="mobile">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                                    Mobile
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <div class="mobile-info">
+
+                                        <i class="fa fa-phone"></i>
+
+                                        {{
+                                        element.mobile
+                                        || '-'
+                                        }}
+
+                                    </div>
+
+                                    <div class="secondary-text" *ngIf="
+                                            element.whatsappNumber
+                                        ">
+
+                                        WhatsApp:
+                                        {{
+                                        element.whatsappNumber
+                                        }}
+
+                                    </div>
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- AREA -->
+                            <!-- ========================= -->
+
+                            <!-- <ng-container matColumnDef="area">
+
+                                <th mat-header-cell *matHeaderCellDef>
+
+                                    Area
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <ng-container *ngIf="
+                                            element.area;
+                                            else noArea
+                                        ">
+
+                                        <div class="primary-text">
+
+                                            {{
+                                            element.area.areaName
+                                            || '-'
+                                            }}
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-template #noArea>
+
+                                        <span class="text-muted">
+                                            No Area
+                                        </span>
+
+                                    </ng-template>
+
+                                </td>
+
+                            </ng-container> -->
+
+
+                            <!-- ========================= -->
+                            <!-- ROUTE -->
+                            <!-- ========================= -->
+
+                            <!-- <ng-container matColumnDef="route">
+
+                                <th mat-header-cell *matHeaderCellDef>
+
+                                    Route
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <ng-container *ngIf="
+                                            element.route;
+                                            else noRoute
+                                        ">
+
+                                        <div class="primary-text">
+
+                                            {{
+                                            element.route.routeName
+                                            || '-'
+                                            }}
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-template #noRoute>
+
+                                        <span class="text-muted">
+                                            No Route
+                                        </span>
+
+                                    </ng-template>
+
+                                </td>
+
+                            </ng-container> -->
+
+
+                            <!-- ========================= -->
+                            <!-- SALESMAN -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="assignedSalesman">
+
+                                <th mat-header-cell *matHeaderCellDef>
+
+                                    Salesman
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <ng-container *ngIf="
+                                            element.assignedSalesman;
+                                            else noSalesman
+                                        ">
+
+                                        <div class="primary-text">
+
+                                            {{
+                                            element.assignedSalesman.fullName
+                                            || '-'
+                                            }}
+
+                                        </div>
+
+                                    </ng-container>
+
+                                    <ng-template #noSalesman>
+
+                                        <span class="text-muted">
+                                            Not Assigned
+                                        </span>
+
+                                    </ng-template>
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- CITY -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="city">
+
+                                <th mat-header-cell *matHeaderCellDef>
+
+                                    Location
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <div class="primary-text">
+
+                                        {{
+                                        element.city
+                                        || '-'
+                                        }}
+
+                                    </div>
+
+                                    <div class="secondary-text" *ngIf="
+                                            element.state
+                                        ">
+
+                                        {{
+                                        element.state
+                                        }}
+
+                                    </div>
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- STATUS -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="status">
+
+                                <th mat-header-cell *matHeaderCellDef>
+
+                                    Status
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    <span class="status-badge" [ngClass]="{
+                                            'status-active':
+                                                element.status === 'Active',
+
+                                            'status-inactive':
+                                                element.status !== 'Active'
+                                        }">
+
+                                        {{
+                                        element.status
+                                        || '-'
+                                        }}
+
+                                    </span>
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- CREATED DATE -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="createdAt">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                                    Created Date
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    ">
+
+                                    {{
+                                    element.createdAt
+                                    ? (
+                                    element.createdAt
+                                    | date:'dd-MM-yyyy'
+                                    )
+                                    : '-'
+                                    }}
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- ACTIONS -->
+                            <!-- ========================= -->
+
+                            <ng-container matColumnDef="actions">
+
+                                <th mat-header-cell *matHeaderCellDef class="action-header">
+
+                                    Actions
+
+                                </th>
+
+                                <td mat-cell *matCellDef="
+                                        let element
+                                    " class="action-cell">
+
+
+                                    <button type="button" class="action-btn view-btn" title="View"
+                                        (click)="viewParty(element)">
+
+                                        <i class="fa fa-eye"></i>
+
+                                    </button>
+
+
+                                    <!-- <button type="button" class="action-btn edit-btn" title="Edit"
+                                        (click)="editParty(element)">
+
+                                        <i class="fa fa-edit"></i>
+
+                                    </button> -->
+
+
+                                    <!-- <button type="button" class="action-btn delete-btn" title="Delete"
+                                        (click)="deleteParty(element)">
+
+                                        <i class="fa fa-trash"></i>
+
+                                    </button> -->
+
+                                </td>
+
+                            </ng-container>
+
+
+                            <!-- ========================= -->
+                            <!-- HEADER -->
+                            <!-- ========================= -->
+
+                            <tr mat-header-row *matHeaderRowDef="
+                                    displayedColumns
+                                ">
+
+                            </tr>
+
+
+                            <!-- ========================= -->
+                            <!-- ROW -->
+                            <!-- ========================= -->
+
+                            <tr mat-row *matRowDef="
+                                    let row;
+                                    columns: displayedColumns
+                                ">
+
+                            </tr>
+
+
+                            <!-- ========================= -->
+                            <!-- NO DATA -->
+                            <!-- ========================= -->
+
+                            <tr class="mat-row" *matNoDataRow>
+
+                                <td class="mat-cell no-data-cell" [attr.colspan]="
+                                        displayedColumns.length
+                                    ">
+
+                                    <div class="no-data">
+
+                                        <i class="fa fa-store"></i>
+
+                                        <h4>
+                                            No Parties Found
+                                        </h4>
+
+                                        <p>
+                                            No parties match your search.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                        </table>
+
+                    </div>
+
+
+                    <!-- ========================= -->
+                    <!-- PAGINATOR -->
+                    <!-- ========================= -->
+
+                    <mat-paginator [pageSizeOptions]="[
+                            10,
+                            20,
+                            50,
+                            100
+                        ]" showFirstLastButtons>
+
+                    </mat-paginator>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
