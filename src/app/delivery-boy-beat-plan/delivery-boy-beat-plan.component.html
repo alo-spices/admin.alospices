@@ -17,71 +17,9 @@
 
                             <div class="form-area">
 
-                                <!-- Beat Plan -->
-
-                                <div class="form-group">
-                                    <label>Beat Plan</label>
-
-                                    <select formControlName="beatPlan" (change)="onBeatPlanChange()">
-
-                                        <option value="">
-                                            Select Beat Plan
-                                        </option>
-
-                                        <option *ngFor="let beat of beatPlanList" [value]="beat._id">
-
-                                            {{ beat.beatName }}
-                                            -
-                                            {{ beat.salesman?.fullName }}
-                                            -
-                                            {{ beat.day }}
-
-                                        </option>
-
-                                    </select>
-                                </div>
-
-
-                                <!-- Salesman -->
-
-                                <div class="form-group">
-                                    <label>Salesman</label>
-
-                                    <input type="text" [value]="selectedBeatPlan?.salesman?.fullName || ''"
-                                        placeholder="Salesman" readonly>
-                                </div>
-
-
-                                <!-- Beat Name -->
-
-                                <div class="form-group">
-                                    <label>Beat Name</label>
-
-                                    <input type="text" [value]="selectedBeatPlan?.beatName || ''"
-                                        placeholder="Beat Name" readonly>
-                                </div>
-
-
-                                <!-- Day -->
-
-                                <div class="form-group">
-                                    <label>Day</label>
-
-                                    <input type="text" [value]="selectedBeatPlan?.day || ''" placeholder="Day" readonly>
-                                </div>
-
-
-                                <!-- Route -->
-
-                                <div class="form-group">
-                                    <label>Route</label>
-
-                                    <input type="text" [value]="selectedBeatPlan?.route?.routeName || ''"
-                                        placeholder="Route" readonly>
-                                </div>
-
-
-                                <!-- Delivery Boy -->
+                                <!-- ========================================== -->
+                                <!-- DELIVERY BOY -->
+                                <!-- ========================================== -->
 
                                 <div class="form-group">
                                     <label>Delivery Boy</label>
@@ -97,10 +35,7 @@
                                             {{ item.fullName }}
 
                                             <ng-container *ngIf="item.employeeCode">
-
-                                                -
-                                                {{ item.employeeCode }}
-
+                                                - {{ item.employeeCode }}
                                             </ng-container>
 
                                         </option>
@@ -109,56 +44,198 @@
                                 </div>
 
 
-                                <!-- Description -->
+                                <!-- ========================================== -->
+                                <!-- BEAT PLANS -->
+                                <!-- ========================================== -->
 
-                                <!-- <div class="form-group full-width">
-                                    <label>Description</label>
+                                <div class="form-group full-width">
 
-                                    <textarea rows="4" [value]="selectedBeatPlan?.description || ''"
-                                        placeholder="Beat Plan Description"></textarea>
-                                </div> -->
+                                    <label>
+                                        Select Beat Plans
+                                        <span class="required">*</span>
+                                    </label>
+
+
+                                    <div class="beat-plan-list">
+
+                                        <div class="beat-plan-item" *ngFor="let beat of beatPlanList">
+
+                                            <!-- Checkbox -->
+
+                                            <div class="beat-plan-check">
+
+                                                <input type="checkbox" [id]="'beat-' + beat._id"
+                                                    [checked]="isBeatPlanSelected(beat._id)"
+                                                    (change)="toggleBeatPlan(beat)">
+
+                                            </div>
+
+
+                                            <!-- Beat Plan Information -->
+
+                                            <label class="beat-plan-content" [for]="'beat-' + beat._id">
+
+                                                <div class="beat-plan-title">
+
+                                                    {{ beat.beatName }}
+
+                                                </div>
+
+
+                                                <div class="beat-plan-details">
+
+                                                    <span>
+                                                        <strong>Salesman:</strong>
+                                                        {{ beat.salesman?.fullName || '-' }}
+                                                    </span>
+
+                                                    <span>
+                                                        <strong>Route:</strong>
+                                                        {{ beat.route?.routeName || '-' }}
+                                                    </span>
+
+                                                    <span>
+                                                        <strong>Area:</strong>
+                                                        {{ beat.area?.areaName || '-' }}
+                                                    </span>
+
+                                                    <span>
+                                                        <strong>Day:</strong>
+                                                        {{ beat.day || '-' }}
+                                                    </span>
+
+                                                </div>
+
+                                            </label>
+
+                                        </div>
+
+
+                                        <!-- No Beat Plans -->
+
+                                        <div *ngIf="beatPlanList.length === 0" class="no-data">
+
+                                            <i class="fa fa-info-circle"></i>
+
+                                            <p>
+                                                No unassigned Beat Plans available.
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ========================================== -->
+                                <!-- SELECTED COUNT -->
+                                <!-- ========================================== -->
+
+                                <div class="selected-count" *ngIf="selectedBeatPlans.length > 0">
+
+                                    <i class="fa fa-check-circle"></i>
+
+                                    <strong>
+                                        {{ selectedBeatPlans.length }}
+                                    </strong>
+
+                                    Beat Plan(s) selected
+
+                                </div>
+
+
+                                <!-- ========================================== -->
+                                <!-- SELECTED SUMMARY -->
+                                <!-- ========================================== -->
+
+                                <div class="selected-summary" *ngIf="selectedBeatPlans.length > 0">
+
+                                    <div class="summary-title">
+                                        Selected Delivery Routes
+                                    </div>
+
+
+                                    <div class="selected-route-item" *ngFor="let beat of selectedBeatPlans">
+
+                                        <div>
+
+                                            <strong>
+                                                {{ beat.beatName }}
+                                            </strong>
+
+                                            <small>
+                                                {{ beat.day }}
+                                                |
+                                                {{ beat.route?.routeName || '-' }}
+                                                |
+                                                {{ beat.salesman?.fullName || '-' }}
+                                            </small>
+
+                                        </div>
+
+
+                                        <button type="button" class="remove-btn" (click)="removeBeatPlan(beat._id)">
+
+                                            <i class="fa fa-times"></i>
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
 
-                            <!-- Preview Area -->
+                            <!-- ========================================== -->
+                            <!-- PREVIEW AREA -->
+                            <!-- ========================================== -->
 
                             <div class="preview-area">
 
                                 <div class="preview-box">
 
-                                    <div *ngIf="selectedBeatPlan" class="preview-empty">
+                                    <div *ngIf="selectedDeliveryBoy" class="preview-empty">
 
-                                        <i class="fa fa-map-marker"></i>
+                                        <i class="fa fa-truck"></i>
 
                                         <p>
-                                            {{ selectedBeatPlan.beatName }}
+                                            {{ selectedDeliveryBoy?.fullName }}
                                         </p>
 
                                         <small>
 
-                                            {{ selectedBeatPlan.salesman?.fullName || '' }}
+                                            <ng-container *ngIf="selectedDeliveryBoy?.employeeCode">
 
-                                            <br>
+                                                Employee Code:
+                                                {{ selectedDeliveryBoy.employeeCode }}
 
-                                            {{ selectedBeatPlan.day }}
+                                                <br>
 
-                                            <br>
+                                            </ng-container>
 
-                                            {{ selectedBeatPlan.route?.routeName || '' }}
+
+                                            Beat Plans Selected:
+                                            {{ selectedBeatPlans.length }}
 
                                         </small>
 
                                     </div>
 
 
-                                    <div *ngIf="!selectedBeatPlan" class="preview-empty">
+                                    <div *ngIf="!selectedDeliveryBoy" class="preview-empty">
 
-                                        <i class="fa fa-map-marker"></i>
+                                        <i class="fa fa-truck"></i>
 
                                         <p>
-                                            Beat Plan Preview
+                                            Delivery Boy Assignment
                                         </p>
+
+                                        <small>
+                                            Select a Delivery Boy and
+                                            multiple Beat Plans
+                                        </small>
 
                                     </div>
 
@@ -169,15 +246,22 @@
                         </div>
 
 
-                        <!-- Buttons -->
+                        <!-- ========================================== -->
+                        <!-- BUTTONS -->
+                        <!-- ========================================== -->
 
                         <div class="button-group">
 
                             <button type="submit" class="btn-create" [disabled]="isLoading">
 
-                                {{ isLoading ? 'Assigning...' : 'Assign' }}
+                                {{
+                                isLoading
+                                ? 'Assigning...'
+                                : 'Assign Beat Plans'
+                                }}
 
                             </button>
+
 
                             <button type="button" class="btn-back" (click)="goBack()">
 

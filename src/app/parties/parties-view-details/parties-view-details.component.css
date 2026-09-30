@@ -1,0 +1,772 @@
+.party-dialog {
+    background: #f5f7fb;
+
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.dialog-header {
+    background: #ffffff;
+
+    padding: 14px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #e7ebf2;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+}
+
+
+.header-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+
+.header-icon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.header-icon mat-icon {
+    font-size: 21px;
+
+    width: 21px;
+    height: 21px;
+}
+
+
+.dialog-header h2 {
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 750;
+
+    color: #182033;
+}
+
+
+.dialog-header span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    color: #8b94a7;
+}
+
+
+.close-btn {
+    color: #687184;
+}
+
+
+/* ==========================================
+   BODY
+========================================== */
+
+.dialog-body {
+    padding: 16px;
+
+    overflow-y: auto;
+
+    flex: 1;
+}
+
+
+/* ==========================================
+   PARTY HERO
+========================================== */
+
+.party-hero {
+    background: linear-gradient(135deg,
+            #172033,
+            #2d3e61);
+
+    border-radius: 20px;
+
+    padding: 18px;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    position: relative;
+
+    margin-bottom: 12px;
+
+    box-shadow:
+        0 10px 25px rgba(23, 32, 51, 0.16);
+}
+
+
+.shop-image {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 16px;
+
+    background: rgba(255,
+            255,
+            255,
+            0.12);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+
+.shop-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.shop-image mat-icon {
+    font-size: 27px;
+
+    width: 27px;
+    height: 27px;
+
+    opacity: 0.8;
+}
+
+
+.party-hero-info {
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.party-type {
+    display: inline-block;
+
+    padding: 4px 7px;
+
+    border-radius: 6px;
+
+    background: rgba(255,
+            255,
+            255,
+            0.12);
+
+    font-size: 9px;
+
+    margin-bottom: 5px;
+}
+
+
+.party-hero h1 {
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+.party-hero-info>span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 10px;
+
+    opacity: 0.6;
+}
+
+
+.status-badge {
+    position: absolute;
+
+    top: 14px;
+
+    right: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 3px;
+
+    padding: 4px 7px;
+
+    border-radius: 7px;
+
+    background: rgba(34,
+            197,
+            94,
+            0.16);
+
+    color: #86efac;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.status-badge mat-icon {
+    font-size: 12px;
+
+    width: 12px;
+    height: 12px;
+}
+
+
+.status-badge.inactive {
+    background: rgba(239,
+            68,
+            68,
+            0.16);
+
+    color: #fca5a5;
+}
+
+
+/* ==========================================
+   QUICK ACTIONS
+========================================== */
+
+.quick-actions {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+}
+
+
+.quick-actions button {
+    height: 40px;
+
+    border-radius: 11px;
+
+    border-color: #dfe4ed;
+
+    background: #ffffff;
+
+    color: #4b5563;
+
+    font-size: 11px;
+}
+
+
+.quick-actions mat-icon {
+    font-size: 17px;
+
+    width: 17px;
+    height: 17px;
+
+    margin-right: 3px;
+}
+
+
+/* ==========================================
+   SECTION CARD
+========================================== */
+
+.section-card {
+    background: #ffffff;
+
+    border: 1px solid #e8ecf3;
+
+    border-radius: 18px;
+
+    padding: 16px;
+
+    margin-bottom: 12px;
+
+    box-shadow:
+        0 4px 14px rgba(31, 41, 55, 0.04);
+}
+
+
+/* ==========================================
+   SECTION TITLE
+========================================== */
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 16px;
+}
+
+
+.section-icon {
+    width: 37px;
+    height: 37px;
+
+    border-radius: 11px;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.section-icon mat-icon {
+    font-size: 19px;
+
+    width: 19px;
+    height: 19px;
+}
+
+
+.section-title h3 {
+    margin: 0;
+
+    color: #202a3c;
+
+    font-size: 14px;
+
+    font-weight: 750;
+}
+
+
+.section-title span {
+    display: block;
+
+    color: #929aaa;
+
+    font-size: 9px;
+
+    margin-top: 2px;
+}
+
+
+/* ==========================================
+   DETAILS GRID
+========================================== */
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+}
+
+
+.detail-item {
+    min-width: 0;
+}
+
+
+.detail-item.full {
+    grid-column: 1 / -1;
+}
+
+
+.detail-item span {
+    display: block;
+
+    color: #929aaa;
+
+    font-size: 9px;
+
+    margin-bottom: 4px;
+}
+
+
+.detail-item strong {
+    display: block;
+
+    color: #293245;
+
+    font-size: 11px;
+
+    font-weight: 650;
+
+    overflow-wrap: anywhere;
+}
+
+
+.active-text {
+    color: #16a34a !important;
+}
+
+
+/* ==========================================
+   ADDRESS
+========================================== */
+
+.address-box {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    background: #f7f8fb;
+
+    border-radius: 12px;
+
+    padding: 12px;
+
+    margin-bottom: 12px;
+}
+
+
+.address-box>mat-icon {
+    color: #4f46e5;
+
+    font-size: 19px;
+
+    width: 19px;
+    height: 19px;
+}
+
+
+.address-box strong {
+    display: block;
+
+    color: #344054;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+
+.address-box p {
+    margin: 4px 0 0;
+
+    color: #7d8798;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   ROUTE
+========================================== */
+
+.route-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+}
+
+
+.route-box {
+    padding: 11px;
+
+    border: 1px solid #e8ecf3;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+}
+
+
+.route-box span {
+    display: block;
+
+    color: #929aaa;
+
+    font-size: 9px;
+
+    margin-bottom: 4px;
+}
+
+
+.route-box strong {
+    display: block;
+
+    color: #293245;
+
+    font-size: 11px;
+
+    font-weight: 750;
+}
+
+
+.route-box small {
+    display: block;
+
+    color: #9ba3b1;
+
+    font-size: 8px;
+
+    margin-top: 3px;
+}
+
+
+/* ==========================================
+   SALESMAN
+========================================== */
+
+.salesman-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    background: #f8f9fc;
+
+    border-radius: 13px;
+
+    padding: 11px;
+}
+
+
+.salesman-avatar {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: #e9edff;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #4f46e5;
+
+    flex-shrink: 0;
+}
+
+
+.salesman-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.salesman-avatar mat-icon {
+    font-size: 22px;
+
+    width: 22px;
+    height: 22px;
+}
+
+
+.salesman-info h4 {
+    margin: 0;
+
+    color: #293245;
+
+    font-size: 12px;
+
+    font-weight: 750;
+}
+
+
+.salesman-info span {
+    display: block;
+
+    color: #7d8798;
+
+    font-size: 9px;
+
+    margin-top: 3px;
+}
+
+
+.salesman-info p {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    margin: 5px 0 0;
+
+    color: #4f46e5;
+
+    font-size: 9px;
+}
+
+
+.salesman-info p mat-icon {
+    font-size: 13px;
+
+    width: 13px;
+    height: 13px;
+}
+
+
+/* ==========================================
+   CREDIT
+========================================== */
+
+.credit-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+}
+
+
+.credit-box {
+    background: #f7f8fb;
+
+    border-radius: 12px;
+
+    padding: 12px;
+
+    text-align: center;
+}
+
+
+.credit-box span {
+    display: block;
+
+    color: #929aaa;
+
+    font-size: 8px;
+
+    margin-bottom: 5px;
+}
+
+
+.credit-box strong {
+    display: block;
+
+    color: #293245;
+
+    font-size: 11px;
+
+    font-weight: 750;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.dialog-footer {
+    padding: 12px 16px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e7ebf2;
+
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+
+.dialog-footer button {
+    min-width: 90px;
+
+    height: 38px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 600px) {
+
+    .dialog-body {
+        padding: 12px;
+    }
+
+    .dialog-header {
+        padding: 12px;
+    }
+
+    .party-hero {
+        padding: 15px;
+    }
+
+    .party-hero h1 {
+        font-size: 14px;
+    }
+
+    .details-grid {
+        gap: 11px;
+    }
+
+    .credit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions button {
+        font-size: 10px;
+    }
+
+}

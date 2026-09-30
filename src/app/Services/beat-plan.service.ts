@@ -81,6 +81,17 @@ export class BeatPlanService {
     );
 
   }
+
+
+  assignDeliveryBoyToBeatPlans(payload: any) {
+
+    return this.http.put(
+      `${this.apiUrl}/assign-delivery-boy-to-beatplans`,
+      payload
+    );
+
+  }
+
   // ==========================================
   // GET DELIVERY BOY BEAT PLANS
   // ==========================================

@@ -37,4 +37,10 @@ export class PartiesService {
     );
 
   }
+
+  getPartyById(partyId: string) {
+    return this.http.get<any>(
+      `${this.apiUrl}/getbyid-parties/${partyId}`
+    );
+  }
 }

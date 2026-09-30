@@ -1,1 +1,750 @@
-<p>parties-view-details works!</p>
+<div class="party-dialog">
+
+    <!-- ==========================================
+       HEADER
+  =========================================== -->
+
+    <div class="dialog-header">
+
+        <div class="header-left">
+
+            <div class="header-icon">
+
+                <mat-icon>
+                    store
+                </mat-icon>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    Party Details
+                </h2>
+
+                <span>
+                    Complete customer information
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button mat-icon-button class="close-btn" (click)="close()">
+            <mat-icon>
+                close
+            </mat-icon>
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+       BODY
+  =========================================== -->
+
+    <div class="dialog-body">
+
+
+        <!-- ========================================
+         PARTY HERO
+    ========================================= -->
+
+        <div class="party-hero">
+
+            <div class="shop-image">
+
+                <img *ngIf="party?.shopImage" [src]="party.shopImage" alt="Shop">
+
+                <mat-icon *ngIf="!party?.shopImage">
+                    store
+                </mat-icon>
+
+            </div>
+
+
+            <div class="party-hero-info">
+
+                <div class="party-type">
+                    {{ party?.partyType || '-' }}
+                </div>
+
+                <h1>
+                    {{
+                    party?.shopName ||
+                    party?.partyName ||
+                    '-'
+                    }}
+                </h1>
+
+                <span>
+                    {{ party?.partyCode || '-' }}
+                </span>
+
+            </div>
+
+
+            <div class="status-badge" [class.inactive]="
+          party?.status !== 'Active'
+        ">
+
+                <mat-icon>
+                    check_circle
+                </mat-icon>
+
+                {{ party?.status || '-' }}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+         QUICK ACTIONS
+    ========================================= -->
+
+        <div class="quick-actions">
+
+            <button mat-stroked-button (click)="callShop()">
+
+                <mat-icon>
+                    phone
+                </mat-icon>
+
+                Call
+
+            </button>
+
+
+            <button mat-stroked-button (click)="openWhatsApp()">
+
+                <mat-icon>
+                    chat
+                </mat-icon>
+
+                WhatsApp
+
+            </button>
+
+
+            <button mat-stroked-button (click)="openLocation()">
+
+                <mat-icon>
+                    location_on
+                </mat-icon>
+
+                Location
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================================
+         OWNER DETAILS
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    <mat-icon>
+                        person
+                    </mat-icon>
+                </div>
+
+                <div>
+
+                    <h3>
+                        Owner Details
+                    </h3>
+
+                    <span>
+                        Shop owner contact information
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Owner Name
+                    </span>
+
+                    <strong>
+                        {{ party?.ownerName || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Mobile
+                    </span>
+
+                    <strong>
+                        {{ party?.mobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Alternate Mobile
+                    </span>
+
+                    <strong>
+                        {{ party?.alternateMobile || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        WhatsApp
+                    </span>
+
+                    <strong>
+                        {{ party?.whatsappNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item full">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong>
+                        {{ party?.email || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+         BUSINESS DETAILS
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    <mat-icon>
+                        business
+                    </mat-icon>
+                </div>
+
+                <div>
+
+                    <h3>
+                        Business Details
+                    </h3>
+
+                    <span>
+                        Registration and business information
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Party Type
+                    </span>
+
+                    <strong>
+                        {{ party?.partyType || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Party Code
+                    </span>
+
+                    <strong>
+                        {{ party?.partyCode || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        GST Number
+                    </span>
+
+                    <strong>
+                        {{ party?.gstNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        PAN Number
+                    </span>
+
+                    <strong>
+                        {{ party?.panNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        License Number
+                    </span>
+
+                    <strong>
+                        {{ party?.licenseNumber || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong class="active-text">
+                        {{ party?.status || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+         LOCATION
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    <mat-icon>
+                        location_on
+                    </mat-icon>
+                </div>
+
+                <div>
+
+                    <h3>
+                        Location Details
+                    </h3>
+
+                    <span>
+                        Address, area and route
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="address-box">
+
+                <mat-icon>
+                    location_on
+                </mat-icon>
+
+                <div>
+
+                    <strong>
+                        {{ party?.address || '-' }}
+                    </strong>
+
+                    <p>
+
+                        {{ party?.city || '' }}
+
+                        <ng-container *ngIf="party?.district">
+
+                            , {{ party.district }}
+
+                        </ng-container>
+
+                        <ng-container *ngIf="party?.state">
+
+                            , {{ party.state }}
+
+                        </ng-container>
+
+                        <ng-container *ngIf="party?.pincode">
+
+                            - {{ party.pincode }}
+
+                        </ng-container>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="route-grid">
+
+                <div class="route-box">
+
+                    <span>
+                        Area
+                    </span>
+
+                    <strong>
+                        {{ party?.area?.areaName || '-' }}
+                    </strong>
+
+                    <small>
+                        {{ party?.area?.areaCode || '-' }}
+                    </small>
+
+                </div>
+
+
+                <div class="route-box">
+
+                    <span>
+                        Route
+                    </span>
+
+                    <strong>
+                        {{ party?.route?.routeName || '-' }}
+                    </strong>
+
+                    <small>
+                        {{ party?.route?.routeCode || '-' }}
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+         ASSIGNED SALESMAN
+    ========================================= -->
+
+        <div class="section-card" *ngIf="party?.assignedSalesman">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    <mat-icon>
+                        badge
+                    </mat-icon>
+                </div>
+
+                <div>
+
+                    <h3>
+                        Assigned Salesman
+                    </h3>
+
+                    <span>
+                        Employee assigned to this party
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="salesman-card">
+
+                <div class="salesman-avatar">
+
+                    <img *ngIf="
+              party.assignedSalesman.profileImage
+            " [src]="
+              party.assignedSalesman.profileImage
+            " alt="Salesman">
+
+                    <mat-icon *ngIf="
+              !party.assignedSalesman.profileImage
+            ">
+                        person
+                    </mat-icon>
+
+                </div>
+
+
+                <div class="salesman-info">
+
+                    <h4>
+                        {{
+                        party.assignedSalesman.fullName
+                        || '-'
+                        }}
+                    </h4>
+
+                    <span>
+
+                        {{
+                        party.assignedSalesman.employeeCode
+                        || '-'
+                        }}
+
+                        •
+
+                        {{
+                        party.assignedSalesman.role
+                        || '-'
+                        }}
+
+                    </span>
+
+                    <p>
+
+                        <mat-icon>
+                            phone
+                        </mat-icon>
+
+                        {{
+                        party.assignedSalesman.mobile
+                        || '-'
+                        }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+         CREDIT DETAILS
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    <mat-icon>
+                        credit_card
+                    </mat-icon>
+                </div>
+
+                <div>
+
+                    <h3>
+                        Credit Details
+                    </h3>
+
+                    <span>
+                        Customer credit information
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="credit-grid">
+
+                <div class="credit-box">
+
+                    <span>
+                        Credit Limit
+                    </span>
+
+                    <strong>
+                        ₹{{ formatAmount(
+                        party?.creditLimit
+                        ) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="credit-box">
+
+                    <span>
+                        Credit Days
+                    </span>
+
+                    <strong>
+                        {{ party?.creditDays || 0 }}
+                        Days
+                    </strong>
+
+                </div>
+
+
+                <div class="credit-box">
+
+                    <span>
+                        Opening Balance
+                    </span>
+
+                    <strong>
+                        ₹{{ formatAmount(
+                        party?.openingBalance
+                        ) }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+         SYSTEM DETAILS
+    ========================================= -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    <mat-icon>
+                        calendar_today
+                    </mat-icon>
+                </div>
+
+                <div>
+
+                    <h3>
+                        System Information
+                    </h3>
+
+                    <span>
+                        Party record information
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+                        Created On
+                    </span>
+
+                    <strong>
+                        {{ formatDate(party?.createdAt) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Last Updated
+                    </span>
+
+                    <strong>
+                        {{ formatDate(party?.updatedAt) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Latitude
+                    </span>
+
+                    <strong>
+                        {{ party?.latitude || '-' }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Longitude
+                    </span>
+
+                    <strong>
+                        {{ party?.longitude || '-' }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+       FOOTER
+  =========================================== -->
+
+    <div class="dialog-footer">
+
+        <button mat-stroked-button (click)="close()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>

@@ -109,7 +109,15 @@
                             )
                         ">
 
-                        {{ delivery?.sourceType || '-' }}
+                        <h4>
+                            {{
+                            delivery?.sourceType === 'WAREHOUSE'
+                            ? 'Warehouse'
+                            : delivery?.sourceType === 'DISTRIBUTOR'
+                            ? 'Distributor'
+                            : '-'
+                            }}
+                        </h4>
 
                     </strong>
 
@@ -689,7 +697,7 @@
                 </div>
 
 
-                <div class="detail-item">
+                <!-- <div class="detail-item">
 
                     <span>
                         Dispatched By
@@ -699,7 +707,7 @@
                         {{ delivery?.dispatchedBy || '-' }}
                     </strong>
 
-                </div>
+                </div> -->
 
 
                 <div class="detail-item">
@@ -848,7 +856,7 @@
         <!-- ========================================= -->
 
         <div class="section-card">
-
+            <!-- 
             <div class="section-title">
 
                 <i class="fa fa-file-image-o"></i>
@@ -857,13 +865,12 @@
                     Delivery Proof
                 </h3>
 
-            </div>
+            </div> -->
 
 
-            <div class="proof-grid">
+            <!-- <div class="proof-grid">
 
 
-                <!-- Delivery Photo -->
 
                 <div class="proof-item">
 
@@ -892,7 +899,6 @@
                 </div>
 
 
-                <!-- Delivery Signature -->
 
                 <div class="proof-item">
 
@@ -920,11 +926,157 @@
 
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
 
+        <!-- ========================================= -->
+        <!-- ORDER PRODUCTS -->
+        <!-- ========================================= -->
 
+        <div class="section-card" *ngIf="delivery?.orderItems?.length">
+
+            <div class="section-title">
+
+                <i class="fa fa-cubes"></i>
+
+                <h3>
+                    Order Products
+                </h3>
+
+            </div>
+
+            <div class="products-table-wrapper">
+
+                <table class="products-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Product</th>
+
+                            <th>Product Code</th>
+
+                            <th>Variant ID</th>
+
+                            <th>Pack Size</th>
+
+                            <th>Price</th>
+
+                            <th>GST %</th>
+
+                            <th>Discount</th>
+
+                            <th>Quantity</th>
+
+                            <th>Line Total</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="
+            let item of delivery?.orderItems;
+            let i = index
+          ">
+
+                            <!-- # -->
+                            <td>
+                                {{ i + 1 }}
+                            </td>
+
+
+                            <!-- PRODUCT -->
+                            <td>
+
+                                <div class="product-info">
+
+                                    <strong>
+                                        {{ item?.product?.productName || '-' }}
+                                    </strong>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- PRODUCT CODE -->
+                            <td>
+
+                                <span class="code-badge">
+                                    {{ item?.product?.productCode || '-' }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- VARIANT ID -->
+                            <!-- <td>
+
+                                <span class="id-text">
+                                    {{ item?.variantId || '-' }}
+                                </span>
+
+                            </td> -->
+
+
+                            <!-- PACK SIZE -->
+                            <td>
+                                {{ item?.packSize || '-' }}
+                            </td>
+
+
+                            <!-- PRICE -->
+                            <td>
+                                ₹{{ item?.price || 0 }}
+                            </td>
+
+
+                            <!-- GST -->
+                            <td>
+                                {{ item?.gstPercentage || 0 }}%
+                            </td>
+
+
+                            <!-- DISCOUNT -->
+                            <td>
+                                ₹{{ item?.discountAmount || 0 }}
+                            </td>
+
+
+                            <!-- QUANTITY -->
+                            <td>
+
+                                <strong>
+                                    {{ item?.quantity || 0 }}
+                                </strong>
+
+                            </td>
+
+
+                            <!-- LINE TOTAL -->
+                            <td>
+
+                                <strong class="line-total">
+                                    ₹{{ item?.lineTotal || 0 }}
+                                </strong>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
         <!-- ========================================= -->
         <!-- ORDER AMOUNT -->
         <!-- ========================================= -->

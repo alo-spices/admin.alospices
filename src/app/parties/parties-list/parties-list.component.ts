@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { CommomPopupService } from 'src/app/Services/commom-popup.service';
 import { PartiesService } from 'src/app/Services/parties.service';
+import { PartiesViewDetailsComponent } from '../parties-view-details/parties-view-details.component';
 
 @Component({
   selector: 'app-parties-list',
@@ -80,7 +82,8 @@ export class PartiesListComponent implements OnInit, AfterViewInit {
       Router,
 
     private alertService:
-      CommomPopupService
+      CommomPopupService,
+    private dialog: MatDialog
 
   ) { }
 
@@ -298,41 +301,48 @@ export class PartiesListComponent implements OnInit, AfterViewInit {
   // View Party
   // ==========================================
 
-  viewParty(element: any): void {
+  viewParty(party: any): void {
 
-    if (!element?._id) {
-
-      this.alertService.error(
-        'Party ID not found'
-      );
-
+    if (!party?._id) {
+      console.error('Party ID not found');
       return;
-
     }
 
+    this.partyService.getPartyById(party._id).subscribe({
+      next: (response) => {
 
-    console.log(
-      'View Party ID:',
-      element._id
-    );
+        console.log('Party Details:', response);
 
+        if (response?.success && response?.data) {
 
-    this.router.navigate([
+          this.dialog.open(
+            PartiesViewDetailsComponent,
+            {
+              width: '900px',
+              maxWidth: '95vw',
+              maxHeight: '90vh',
+              panelClass: 'party-details-dialog',
+              data: response.data
+            }
+          );
 
-      '/admin/update-parties',
+        } else {
 
-      element._id
+          console.error('Party details not found');
 
-    ], {
+        }
+      },
 
-      queryParams: {
-        mode: 'view'
+      error: (error) => {
+
+        console.error(
+          'Get Party Details Error:',
+          error
+        );
+
       }
-
     });
-
   }
-
 
   // ==========================================
   // Edit Party

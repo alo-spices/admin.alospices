@@ -29,6 +29,8 @@ export class BeatPlanAddComponent implements OnInit {
 
   areaList: any[] = [];
   shopsList: any[] = [];
+  routeList: any[] = [];
+  allRoutes: any[] = [];
 
   selectedShopIds: string[] = [];
 
@@ -40,8 +42,6 @@ export class BeatPlanAddComponent implements OnInit {
   // ==========================================
   // Route List
   // ==========================================
-
-  routeList: any[] = [];
 
 
   // ==========================================
@@ -242,7 +242,52 @@ export class BeatPlanAddComponent implements OnInit {
 
   }
 
+  // ==========================================
+  // Area Change
+  // ==========================================
 
+  onAreaChange(event: any): void {
+
+    const selectedAreaId =
+      event.target.value;
+
+    console.log(
+      'Selected Area ID:',
+      selectedAreaId
+    );
+
+    // Clear previously selected route
+    this.beatPlanForm.patchValue({
+      route: ''
+    });
+
+    // No area selected
+    if (!selectedAreaId) {
+
+      this.routeList = [];
+
+      return;
+    }
+
+    // Filter routes based on selected area
+    this.routeList =
+      this.allRoutes.filter((route: any) => {
+
+        const routeAreaId =
+          route?.area?._id ||
+          route?.area;
+
+        return String(routeAreaId) ===
+          String(selectedAreaId);
+
+      });
+
+    console.log(
+      'Filtered Routes:',
+      this.routeList
+    );
+
+  }
   // ==========================================
   // Get All Routes
   // ==========================================
@@ -260,12 +305,14 @@ export class BeatPlanAddComponent implements OnInit {
             response
           );
 
-
-          this.routeList =
+          // Store complete route list
+          this.allRoutes =
             response?.data || [];
 
-        },
+          // Initially don't show routes
+          this.routeList = [];
 
+        },
 
         error: (error: any) => {
 
@@ -274,16 +321,12 @@ export class BeatPlanAddComponent implements OnInit {
             error
           );
 
-
+          this.allRoutes = [];
           this.routeList = [];
 
-
           this.alertService.error(
-
             error?.error?.message ||
-
             'Failed to load routes'
-
           );
 
         }
@@ -291,7 +334,6 @@ export class BeatPlanAddComponent implements OnInit {
       });
 
   }
-
 
   // ==========================================
   // Get All Salesmen

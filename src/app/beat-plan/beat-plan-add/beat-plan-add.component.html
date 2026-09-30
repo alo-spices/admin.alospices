@@ -85,43 +85,25 @@
                                 <!-- ================================= -->
                                 <!-- Area -->
                                 <!-- ================================= -->
-
                                 <div class="form-group">
 
                                     <label>
-
                                         Area
-
-                                        <span class="required">
-                                            *
-                                        </span>
-
+                                        <span class="required">*</span>
                                     </label>
 
-
-                                    <select formControlName="area">
+                                    <select formControlName="area" (change)="onAreaChange($event)">
 
                                         <option value="">
                                             Select Area
                                         </option>
 
+                                        <option *ngFor="let area of areaList" [value]="area._id">
 
-                                        <option *ngFor="
-                                                let area
-                                                of areaList
-                                            " [value]="area._id">
-
-                                            {{
-                                            area.areaName
-                                            }}
+                                            {{ area.areaName }}
 
                                             <ng-container *ngIf="area.areaCode">
-
-                                                -
-                                                {{
-                                                area.areaCode
-                                                }}
-
+                                                - {{ area.areaCode }}
                                             </ng-container>
 
                                         </option>
@@ -138,16 +120,12 @@
                                 <div class="form-group">
 
                                     <label>
-
                                         Route
-
-                                        <span class="required">
-                                            *
-                                        </span>
-
+                                        <span class="required">*</span>
                                     </label>
 
-                                    <select formControlName="route" (change)="onRouteChange()">
+                                    <select formControlName="route" (change)="onRouteChange()"
+                                        [disabled]="!beatPlanForm.get('area')?.value">
 
                                         <option value="">
                                             Select Route

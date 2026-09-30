@@ -11,11 +11,6 @@ import { UserService } from '../Services/user.service';
   styleUrls: ['./delivery-boy-beat-plan.component.css']
 })
 export class DeliveryBoyBeatPlanComponent implements OnInit {
-
-  // ==========================================
-  // FORM
-  // ==========================================
-
   beatPlanForm!: FormGroup;
 
 
@@ -27,6 +22,13 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
 
   // ==========================================
+  // SELECTED BEAT PLANS
+  // ==========================================
+
+  selectedBeatPlans: any[] = [];
+
+
+  // ==========================================
   // DELIVERY BOY LIST
   // ==========================================
 
@@ -34,10 +36,10 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
 
   // ==========================================
-  // SELECTED BEAT PLAN
+  // SELECTED DELIVERY BOY
   // ==========================================
 
-  selectedBeatPlan: any = null;
+  selectedDeliveryBoy: any = null;
 
 
   // ==========================================
@@ -91,20 +93,14 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
     this.beatPlanForm = this.fb.group({
 
-      beatPlan: [
-
+      deliveryBoy: [
         '',
-
         Validators.required
-
       ],
 
-      deliveryBoy: [
-
-        '',
-
+      beatPlans: [
+        [],
         Validators.required
-
       ]
 
     });
@@ -129,10 +125,12 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
 
           /*
-           * Only Active Salesman Beat Plans
+           * Only Active Beat Plans
            *
-           * deliveryBoy empty means
-           * Delivery Boy is not assigned yet.
+           * Must have Salesman
+           *
+           * Delivery Boy should NOT
+           * already be assigned.
            */
 
           this.beatPlanList =
@@ -152,6 +150,22 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
             });
 
+
+          // Clear selected Beat Plans
+          // which are no longer available
+
+          this.selectedBeatPlans =
+            this.selectedBeatPlans.filter(
+              (selected: any) =>
+                this.beatPlanList.some(
+                  (beat: any) =>
+                    beat._id === selected._id
+                )
+            );
+
+
+          this.updateBeatPlanFormValue();
+
         },
 
 
@@ -162,7 +176,10 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
             error
           );
 
+
           this.beatPlanList = [];
+
+          this.selectedBeatPlans = [];
 
           this.alertService.error(
 
@@ -222,7 +239,9 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
             error
           );
 
+
           this.deliveryBoyList = [];
+
 
           this.alertService.error(
 
@@ -240,34 +259,118 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
 
   // ==========================================
-  // BEAT PLAN CHANGE
+  // DELIVERY BOY CHANGE
   // ==========================================
 
-  onBeatPlanChange(): void {
+  onDeliveryBoyChange(): void {
 
-    const beatPlanId =
+    const deliveryBoyId =
       this.beatPlanForm
-        .get('beatPlan')
+        .get('deliveryBoy')
         ?.value;
 
 
-    this.selectedBeatPlan =
-      this.beatPlanList.find(
-        (beat: any) =>
-          beat._id === beatPlanId
+    this.selectedDeliveryBoy =
+      this.deliveryBoyList.find(
+        (item: any) =>
+          item._id === deliveryBoyId
       ) || null;
 
+  }
 
-    /*
-     * Clear previously selected
-     * Delivery Boy
-     */
+
+  // ==========================================
+  // CHECK BEAT PLAN SELECTED
+  // ==========================================
+
+  isBeatPlanSelected(
+    beatPlanId: string
+  ): boolean {
+
+    return this.selectedBeatPlans.some(
+      (beat: any) =>
+        beat._id === beatPlanId
+    );
+
+  }
+
+
+  // ==========================================
+  // TOGGLE BEAT PLAN
+  // ==========================================
+
+  toggleBeatPlan(beatPlan: any): void {
+
+    const index =
+      this.selectedBeatPlans.findIndex(
+        (beat: any) =>
+          beat._id === beatPlan._id
+      );
+
+
+    if (index === -1) {
+
+      // Add
+
+      this.selectedBeatPlans.push(
+        beatPlan
+      );
+
+    } else {
+
+      // Remove
+
+      this.selectedBeatPlans.splice(
+        index,
+        1
+      );
+
+    }
+
+
+    this.updateBeatPlanFormValue();
+
+  }
+
+
+  // ==========================================
+  // UPDATE FORM VALUE
+  // ==========================================
+
+  updateBeatPlanFormValue(): void {
+
+    const ids =
+      this.selectedBeatPlans.map(
+        (beat: any) =>
+          beat._id
+      );
+
 
     this.beatPlanForm.patchValue({
 
-      deliveryBoy: ''
+      beatPlans: ids
 
     });
+
+  }
+
+
+  // ==========================================
+  // REMOVE BEAT PLAN
+  // ==========================================
+
+  removeBeatPlan(
+    beatPlanId: string
+  ): void {
+
+    this.selectedBeatPlans =
+      this.selectedBeatPlans.filter(
+        (beat: any) =>
+          beat._id !== beatPlanId
+      );
+
+
+    this.updateBeatPlanFormValue();
 
   }
 
@@ -280,33 +383,9 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
     this.isSubmitted = true;
 
-
     // ==========================================
-    // VALIDATION
+    // DELIVERY BOY VALIDATION
     // ==========================================
-
-    if (this.beatPlanForm.invalid) {
-
-      this.alertService.validation(
-
-        'Please select Beat Plan and Delivery Boy'
-
-      );
-
-      return;
-
-    }
-
-
-    // ==========================================
-    // GET FORM VALUES
-    // ==========================================
-
-    const beatPlanId =
-      this.beatPlanForm
-        .get('beatPlan')
-        ?.value;
-
 
     const deliveryBoy =
       this.beatPlanForm
@@ -314,42 +393,10 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
         ?.value;
 
 
-    // ==========================================
-    // EXTRA VALIDATION
-    // ==========================================
-
-    if (!beatPlanId) {
-
-      this.alertService.error(
-
-        'Please select Beat Plan'
-
-      );
-
-      return;
-
-    }
-
-
     if (!deliveryBoy) {
 
-      this.alertService.error(
-
+      this.alertService.validation(
         'Please select Delivery Boy'
-
-      );
-
-      return;
-
-    }
-
-
-    if (!this.selectedBeatPlan) {
-
-      this.alertService.error(
-
-        'Selected Beat Plan not found'
-
       );
 
       return;
@@ -358,17 +405,67 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
 
     // ==========================================
-    // API CALL
+    // BEAT PLAN VALIDATION
+    // ==========================================
+
+    if (
+      !this.selectedBeatPlans ||
+      this.selectedBeatPlans.length === 0
+    ) {
+
+      this.alertService.validation(
+        'Please select at least one Beat Plan'
+      );
+
+      return;
+
+    }
+
+
+    // ==========================================
+    // GET BEAT PLAN IDS
+    // ==========================================
+
+    const beatPlanIds =
+      this.selectedBeatPlans.map(
+        (beat: any) =>
+          beat._id
+      );
+
+
+    // ==========================================
+    // API PAYLOAD
+    // ==========================================
+
+    const payload = {
+
+      deliveryBoy: deliveryBoy,
+
+      beatPlans: beatPlanIds
+
+    };
+
+
+    console.log(
+      'Bulk Delivery Boy Assignment Payload:',
+      payload
+    );
+
+
+    // ==========================================
+    // LOADING
     // ==========================================
 
     this.isLoading = true;
 
 
-    this.beatPlanService
-      .assignDeliveryBoyToBeatPlan(
-        beatPlanId,
-        deliveryBoy
-      )
+    // ==========================================
+    // BULK API CALL
+    // ==========================================
+
+    this.beatPlanService.assignDeliveryBoyToBeatPlans(
+      payload
+    )
       .subscribe({
 
         next: (response: any) => {
@@ -380,27 +477,43 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
             response?.message ||
 
-            'Delivery Boy assigned successfully'
+            'Beat Plans assigned successfully'
 
           );
-          this.goBack();
+
 
           // ======================================
-          // RESET FORM
+          // RESET
           // ======================================
 
-          this.beatPlanForm.reset();
+          this.beatPlanForm.reset({
 
-          this.selectedBeatPlan = null;
+            deliveryBoy: '',
+
+            beatPlans: []
+
+          });
+
+
+          this.selectedBeatPlans = [];
+
+          this.selectedDeliveryBoy = null;
 
           this.isSubmitted = false;
 
 
           // ======================================
-          // RELOAD BEAT PLANS
+          // RELOAD
           // ======================================
 
           this.getAllBeatPlans();
+
+
+          // ======================================
+          // BACK
+          // ======================================
+
+          this.goBack();
 
         },
 
@@ -411,7 +524,7 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
 
           console.log(
-            'Assign Delivery Boy Error:',
+            'Bulk Assign Delivery Boy Error:',
             error
           );
 
@@ -420,7 +533,7 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
 
             error?.error?.message ||
 
-            'Failed to assign Delivery Boy'
+            'Failed to assign Beat Plans'
 
           );
 
@@ -444,6 +557,4 @@ export class DeliveryBoyBeatPlanComponent implements OnInit {
     ]);
 
   }
-
-
 }
