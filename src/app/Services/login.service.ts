@@ -58,4 +58,10 @@ export class LoginService {
     );
 
   }
+
+  getDashboard() {
+    return this.http.get<any>(
+      `${this.apiUrl}/get-dashboard`
+    );
+  }
 }
