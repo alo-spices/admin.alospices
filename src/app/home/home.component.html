@@ -112,7 +112,7 @@
            EMPLOYEES
       ==================================================== -->
 
-      <div class="stats-card">
+      <div class="stats-card" (click)="employeesList()">
 
         <div class="stats-icon orange">
 
@@ -146,7 +146,7 @@
            WAREHOUSE MANAGERS
       ==================================================== -->
 
-      <div class="stats-card">
+      <div class="stats-card" (click)="warehouseManagement()">
 
         <div class="stats-icon red">
 
@@ -161,7 +161,7 @@
           </h2>
 
           <p>
-            Warehouse Managers
+            Warehouse Management
           </p>
 
           <span>
@@ -178,7 +178,7 @@
            DISTRIBUTORS
       ==================================================== -->
 
-      <div class="stats-card">
+      <div class="stats-card" (click)="distributorManagement()">
 
         <div class="stats-icon gold">
 
@@ -210,7 +210,7 @@
            PARTIES
       ==================================================== -->
 
-      <div class="stats-card">
+      <div class="stats-card" (click)="shopsManagement()">
 
         <div class="stats-icon green">
 
@@ -247,7 +247,7 @@
          SECOND STATS
     ====================================================== -->
 
-    <div class="stats-grid mt-3">
+    <div class="stats-grid mt-3" (click)="ordersManagement()">
 
 
       <!-- Orders -->
@@ -283,7 +283,7 @@
 
       <!-- Deliveries -->
 
-      <div class="stats-card">
+      <div class="stats-card" (click)="deliveriesManagement()">
 
         <div class="stats-icon green">
 
@@ -314,7 +314,7 @@
 
       <!-- Sales -->
 
-      <div class="stats-card">
+      <div class="stats-card" (click)="collectionsManagement()">
 
         <div class="stats-icon gold">
 
@@ -329,7 +329,7 @@
           </h2>
 
           <p>
-            Total Sales
+            Total Collections
           </p>
 
           <span>
@@ -345,7 +345,7 @@
 
       <!-- Outstanding -->
 
-      <div class="stats-card">
+      <div class="stats-card" (click)="outstandingsManagement()">
 
         <div class="stats-icon red">
 

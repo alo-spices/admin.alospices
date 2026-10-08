@@ -238,7 +238,8 @@ export class HomeComponent implements AfterViewInit {
   // =========================================================
 
   constructor(
-    private dashboardService: LoginService
+    private dashboardService: LoginService,
+    private router: Router
   ) { }
   ngAfterViewInit(): void {
     throw new Error('Method not implemented.');
@@ -1198,5 +1199,38 @@ export class HomeComponent implements AfterViewInit {
     this.selectedWarehouse = null;
     this.selectedWarehouseStock = null;
     this.showWarehouseStock = false;
+  }
+
+
+  employeesList() {
+    this.router.navigate(["/admin/users-list"]);
+  }
+
+  warehouseManagement() {
+    this.router.navigate(["/admin/warehouse"]);
+  }
+
+  distributorManagement() {
+    this.router.navigate(["/admin/distributors-list"]);
+  }
+
+  shopsManagement() {
+    this.router.navigate(["/admin/parties-list"]);
+  }
+
+  ordersManagement() {
+    this.router.navigate(["/admin/orders"]);
+  }
+
+  deliveriesManagement() {
+    this.router.navigate(["/admin/delivery-list"]);
+  }
+
+  collectionsManagement() {
+    this.router.navigate(["/admin/collections"]);
+  }
+
+  outstandingsManagement() {
+    this.router.navigate(["/admin/outstandings"]);
   }
 }
