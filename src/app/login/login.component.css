@@ -3,7 +3,7 @@
 ========================================================= */
 
 .login-page {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   width: 100%;
   font-family: 'Poppins', sans-serif;
 }
@@ -617,11 +617,11 @@ select.form-control-custom {
 
 @media (max-width: 991.98px) {
 
-  .login-page,
+  /* .login-page,
   .login-page>.container-fluid,
   .login-page .row {
     min-height: 100vh;
-  }
+  } */
 
   /* Hide desktop branding */
 
@@ -854,4 +854,696 @@ select.form-control-custom {
 .password-toggle:focus {
   outline: none;
   box-shadow: none;
+}
+
+
+
+/* =========================================================
+   TABLET PORTRAIT (768px - 991px)
+========================================================= */
+@media (max-width: 991.98px) and (min-width: 768px) {
+  .login-section {
+    padding: 45px 40px;
+  }
+
+  .login-card {
+    padding: 35px;
+  }
+
+  .welcome-content h2 {
+    font-size: 38px;
+  }
+
+  .welcome-content p {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .form-control-custom {
+    height: 56px;
+  }
+
+  .login-btn {
+    height: 56px;
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   MOBILE LANDSCAPE (576px - 767px)
+========================================================= */
+@media (max-width: 767.98px) and (min-width: 576px) {
+  .login-section {
+    padding: 35px 28px;
+  }
+
+  .login-card {
+    padding: 30px 25px;
+  }
+
+  .welcome-content h2 {
+    font-size: 34px;
+  }
+
+  .welcome-content p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .mobile-logo h1 {
+    font-size: 28px;
+  }
+
+  .form-control-custom {
+    height: 54px;
+    padding: 0 50px 0 16px;
+  }
+
+  .login-btn {
+    height: 54px;
+    font-size: 15px;
+  }
+
+  .options-row {
+    margin-bottom: 22px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE (320px - 575px)
+========================================================= */
+@media (max-width: 575.98px) {
+  .login-section {
+    padding: 28px 18px;
+  }
+
+  .login-card {
+    padding: 26px 20px;
+    border-radius: 20px;
+  }
+
+  .welcome-content {
+    margin-bottom: 22px;
+  }
+
+  .welcome-content h2 {
+    font-size: 30px;
+  }
+
+  .welcome-content p {
+    font-size: 13px;
+    line-height: 22px;
+    margin-top: 8px;
+  }
+
+  .mobile-logo {
+    margin-bottom: 24px;
+  }
+
+  .mobile-logo img {
+    width: 110px;
+  }
+
+  .mobile-logo h1 {
+    font-size: 25px;
+    margin-top: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-control-custom {
+    height: 52px;
+    padding: 0 48px 0 14px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .input-group>i {
+    right: 14px;
+    font-size: 18px;
+  }
+
+  .login-btn {
+    height: 52px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .options-row {
+    margin-bottom: 20px;
+  }
+
+  .remember-me,
+  .forgot-btn {
+    font-size: 12px;
+  }
+
+  .card-divider {
+    margin: 22px 0;
+    gap: 10px;
+  }
+
+  .card-divider span {
+    font-size: 11px;
+  }
+
+  .copyright {
+    margin-top: 16px;
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE (320px - 379px)
+========================================================= */
+@media (max-width: 379.98px) {
+  .login-section {
+    padding: 22px 14px;
+  }
+
+  .login-card {
+    padding: 22px 16px;
+    border-radius: 18px;
+  }
+
+  .welcome-content h2 {
+    font-size: 27px;
+  }
+
+  .welcome-content p {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .mobile-logo img {
+    width: 95px;
+  }
+
+  .mobile-logo h1 {
+    font-size: 22px;
+  }
+
+  .form-control-custom {
+    height: 50px;
+    padding: 0 45px 0 12px;
+    font-size: 13px;
+  }
+
+  .login-btn {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .password-toggle {
+    width: 45px;
+  }
+
+  .remember-me span,
+  .forgot-btn {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   TABLET LANDSCAPE FIX (1024px)
+========================================================= */
+@media (max-width: 1199.98px) and (min-width: 1024px) {
+  .branding-section {
+    padding: 50px;
+  }
+
+  .login-section {
+    padding: 50px 60px;
+  }
+
+  .logo-card {
+    width: min(100%, 340px);
+  }
+
+  .brand-subtitle {
+    font-size: 16px;
+    letter-spacing: 3.5px;
+  }
+
+  .description {
+    font-size: 15px;
+    line-height: 28px;
+  }
+}
+
+/* =========================================================
+   FIX INPUT OVERFLOW ON SMALL SCREENS
+========================================================= */
+@media (max-width: 575.98px) {
+  .input-group {
+    max-width: 100%;
+  }
+
+  .form-control-custom {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .password-toggle {
+    right: 5px;
+    width: 45px;
+  }
+}
+
+/* =========================================================
+   PREVENT TEXT WRAP ISSUES
+========================================================= */
+@media (max-width: 420px) {
+  .welcome-content h2 {
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .brand-subtitle {
+    letter-spacing: 2px;
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 13px;
+    line-height: 24px;
+  }
+}
+
+/* =========================================================
+   MOBILE / TABLET SELECT DROPDOWN FIX
+   Existing HTML only - No HTML/TS changes
+========================================================= */
+
+.input-group {
+  position: relative !important;
+  width: 100% !important;
+}
+
+select.form-control-custom {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  box-sizing: border-box !important;
+
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+  .login-section {
+    width: 100% !important;
+    padding: 30px 25px !important;
+    box-sizing: border-box !important;
+  }
+
+  .login-wrapper {
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+  }
+
+  .login-card {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 28px !important;
+    box-sizing: border-box !important;
+  }
+
+  .input-group {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  select.form-control-custom {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 52px !important;
+
+    font-size: 13px !important;
+
+    padding-left: 14px !important;
+    padding-right: 45px !important;
+
+    border-radius: 14px !important;
+  }
+
+  .input-group>i {
+    right: 15px !important;
+    font-size: 18px !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .login-section {
+    width: 100% !important;
+    min-height: 100vh !important;
+    height: auto !important;
+
+    padding: 20px 15px !important;
+
+    box-sizing: border-box !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  .login-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin: 0 auto !important;
+  }
+
+  .login-card {
+    width: 100% !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    padding: 22px 18px !important;
+
+    box-sizing: border-box !important;
+
+    border-radius: 18px !important;
+  }
+
+  .form-group {
+    width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+/* =========================================================
+   CUSTOM ROLE DROPDOWN
+========================================================= */
+
+.role-input-group {
+  position: relative !important;
+  width: 100% !important;
+}
+
+.custom-role-select {
+  position: relative !important;
+  width: 100% !important;
+}
+
+
+/* ---------- Trigger ---------- */
+
+.role-select-trigger {
+  width: 100% !important;
+  height: 58px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  padding: 0 48px 0 18px !important;
+
+  border: 1px solid #e4d8cf !important;
+  border-radius: 16px !important;
+
+  background: #f8f5f2 !important;
+  color: #333333 !important;
+
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+
+  text-align: left !important;
+
+  cursor: pointer !important;
+
+  outline: none !important;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease !important;
+
+  box-sizing: border-box !important;
+}
+
+
+.role-select-trigger:hover {
+  background: #ffffff !important;
+}
+
+
+.custom-role-select.open .role-select-trigger {
+  border-color: #a63d22 !important;
+  background: #ffffff !important;
+
+  box-shadow:
+    0 0 0 4px rgba(166, 61, 34, 0.10) !important;
+}
+
+
+/* Placeholder */
+
+.role-select-trigger .placeholder {
+  color: #999999 !important;
+}
+
+
+/* Arrow */
+
+.role-select-trigger>i {
+  position: absolute !important;
+
+  right: 17px !important;
+  top: 50% !important;
+
+  transform: translateY(-50%) !important;
+
+  font-size: 20px !important;
+  color: #777777 !important;
+
+  transition: transform 0.2s ease !important;
+}
+
+
+.custom-role-select.open .role-select-trigger>i {
+  transform:
+    translateY(-50%) rotate(180deg) !important;
+
+  color: #a63d22 !important;
+}
+
+
+/* Main user icon */
+
+.role-input-group>.role-main-icon {
+  position: absolute !important;
+
+  right: 18px !important;
+  top: 50% !important;
+
+  transform: translateY(-50%) !important;
+
+  display: none !important;
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.role-dropdown {
+  position: absolute !important;
+
+  top: calc(100% + 6px) !important;
+  left: 0 !important;
+  right: 0 !important;
+
+  width: 100% !important;
+
+  padding: 6px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #e4d8cf !important;
+  border-radius: 12px !important;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.14) !important;
+
+  z-index: 99999 !important;
+
+  box-sizing: border-box !important;
+
+  overflow: hidden !important;
+}
+
+
+/* Dropdown options */
+
+.role-option {
+  width: 100% !important;
+
+  min-height: 44px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  padding: 10px 12px !important;
+
+  border: none !important;
+  border-radius: 8px !important;
+
+  background: transparent !important;
+
+  color: #333333 !important;
+
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+
+  text-align: left !important;
+
+  cursor: pointer !important;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease !important;
+
+  box-sizing: border-box !important;
+}
+
+
+.role-option:hover {
+  background: #f8eee9 !important;
+  color: #a63d22 !important;
+}
+
+
+.role-option:active {
+  background: #f2e2da !important;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+  .role-select-trigger {
+    height: 52px !important;
+    font-size: 13px !important;
+    border-radius: 14px !important;
+  }
+
+  .role-dropdown {
+    max-height: 210px !important;
+    overflow-y: auto !important;
+  }
+
+  .role-option {
+    min-height: 42px !important;
+    font-size: 13px !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .role-select-trigger {
+    width: 100% !important;
+    height: 50px !important;
+
+    padding: 0 42px 0 14px !important;
+
+    border-radius: 13px !important;
+
+    font-size: 12px !important;
+  }
+
+  .role-select-trigger>i {
+    right: 13px !important;
+    font-size: 18px !important;
+  }
+
+  .role-dropdown {
+    top: calc(100% + 5px) !important;
+
+    width: 100% !important;
+
+    padding: 5px !important;
+
+    border-radius: 10px !important;
+
+    max-height: 190px !important;
+
+    overflow-y: auto !important;
+
+    box-shadow:
+      0 10px 25px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .role-option {
+    width: 100% !important;
+
+    min-height: 40px !important;
+
+    padding: 8px 10px !important;
+
+    font-size: 11px !important;
+
+    border-radius: 7px !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 389px) {
+
+  .role-select-trigger {
+    height: 46px !important;
+
+    padding-left: 12px !important;
+
+    font-size: 11px !important;
+  }
+
+  .role-dropdown {
+    max-height: 175px !important;
+  }
+
+  .role-option {
+    min-height: 38px !important;
+
+    font-size: 10px !important;
+  }
 }

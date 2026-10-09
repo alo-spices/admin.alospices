@@ -92,37 +92,36 @@
               <label>
                 Login As
               </label>
+              <div class="input-group role-input-group">
 
-              <div class="input-group">
+                <div class="custom-role-select" [class.open]="showRoleDropdown">
 
-                <select [(ngModel)]="loginData.role" class="form-control-custom">
+                  <button type="button" class="role-select-trigger" (click)="toggleRoleDropdown()">
 
-                  <option value="" disabled>
-                    Select Role
-                  </option>
+                    <span [class.placeholder]="!loginData.role">
+                      {{ getRoleLabel(loginData.role) }}
+                    </span>
 
-                  <option value="Admin">
-                    Admin
-                  </option>
+                    <i class="ri-arrow-down-s-line"></i>
 
-                  <!-- <option value="SubAdmin">
-                    Sub Admin
-                  </option> -->
+                  </button>
 
-                  <option value="WarehouseManager">
-                    Warehouse Manager
-                  </option>
+                  <div class="role-dropdown" *ngIf="showRoleDropdown">
 
-                  <option value="Distributor">
-                    Distributor
-                  </option>
+                    <button type="button" class="role-option" *ngFor="let role of roleOptions"
+                      (click)="selectRole(role.value)">
 
-                </select>
+                      {{ role.label }}
 
-                <i class="ri-user-settings-line"></i>
+                    </button>
+
+                  </div>
+
+                </div>
+
+                <i class="ri-user-settings-line role-main-icon"></i>
 
               </div>
-
             </div>
 
 

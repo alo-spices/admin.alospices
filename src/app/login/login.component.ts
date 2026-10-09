@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommomPopupService } from '../Services/commom-popup.service';
 import { LoginService } from '../Services/login.service';
 import { AuthService } from '../Services/auth.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,23 @@ import { AuthService } from '../Services/auth.service';
 })
 export class LoginComponent implements OnInit {
   showPassword: boolean = false;
+  showRoleDropdown = false;
+
+  roleOptions = [
+    {
+      value: 'Admin',
+      label: 'Admin'
+    },
+    {
+      value: 'WarehouseManager',
+      label: 'Warehouse Manager'
+    },
+    {
+      value: 'Distributor',
+      label: 'Distributor'
+    }
+  ];
+
   // ==========================================
   // Login Data
   // ==========================================
@@ -551,5 +569,33 @@ export class LoginComponent implements OnInit {
   }
   togglePassword(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  toggleRoleDropdown(): void {
+    this.showRoleDropdown = !this.showRoleDropdown;
+  }
+
+  selectRole(role: string): void {
+    this.loginData.role = role;
+    this.showRoleDropdown = false;
+  }
+
+  getRoleLabel(role: string): string {
+    const selectedRole = this.roleOptions.find(
+      item => item.value === role
+    );
+
+    return selectedRole ? selectedRole.label : 'Select Role';
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+
+    const target = event.target as HTMLElement;
+
+    if (!target.closest('.custom-role-select')) {
+      this.showRoleDropdown = false;
+    }
   }
 }
