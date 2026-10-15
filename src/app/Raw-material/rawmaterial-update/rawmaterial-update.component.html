@@ -1,1 +1,287 @@
-<p>rawmaterial-update works!</p>
+<div class="container-fluid category-container">
+
+    <div class="category-card">
+
+        <!-- Header -->
+
+        <div class="card-header">
+
+            <h3>
+
+                Update Raw Material
+
+            </h3>
+
+
+        </div>
+
+        <!-- Form -->
+
+        <form [formGroup]="rawMaterialForm" (ngSubmit)="updateRawMaterial()">
+
+            <div class="row">
+
+                <!-- ==========================
+                     Raw Material Name
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Raw Material Name
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="rawMaterialName"
+                        placeholder="Enter Raw Material Name">
+
+                </div>
+
+                <!-- ==========================
+                     Raw Material Code
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Raw Material Code
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="rawMaterialCode"
+                        placeholder="Enter Raw Material Code">
+
+                </div>
+                <!-- ==========================
+                     Brand
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Brand
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <select class="form-select" formControlName="brand">
+
+                        <option value="">
+
+                            Select Brand
+
+                        </option>
+
+                        <option *ngFor="let item of brandList" [value]="item._id">
+
+                            {{item.brandName}}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ==========================
+                     Category
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Category
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <select class="form-select" formControlName="category">
+
+                        <option value="">
+
+                            Select Category
+
+                        </option>
+
+                        <option *ngFor="let item of categoryList" [value]="item._id">
+
+                            {{item.categoryName}}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ==========================
+                     HSN Code
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        HSN Code
+
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="hsnCode" placeholder="Enter HSN Code">
+
+                </div>
+
+
+                <!-- ==========================
+                     GST %
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        GST %
+
+                    </label>
+
+                    <input type="number" class="form-control" formControlName="gstPercentage"
+                        placeholder="Enter GST Percentage">
+
+                </div>
+                <!-- ==========================
+                     Unit
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Unit
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <select class="form-select" formControlName="unit">
+
+                        <option value="">
+
+                            Select Unit
+
+                        </option>
+
+                        <option value="KG">
+
+                            KG
+
+                        </option>
+
+                        <option value="GRAM">
+
+                            GRAM
+
+                        </option>
+
+                        <option value="BAG">
+
+                            BAG
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ==========================
+                     Status
+                =========================== -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Status
+
+                    </label>
+
+                    <select class="form-select" formControlName="status">
+
+                        <option value="Active">
+
+                            Active
+
+                        </option>
+
+                        <option value="Inactive">
+
+                            Inactive
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ==========================
+                     Description
+                =========================== -->
+
+                <div class="col-md-12 mb-3">
+
+                    <label>
+
+                        Description
+
+                    </label>
+
+                    <textarea rows="4" class="form-control" formControlName="description"
+                        placeholder="Enter Description">
+
+                    </textarea>
+
+                </div>
+
+            </div>
+
+            <!-- ==========================
+                 Buttons
+            =========================== -->
+
+            <div class="button-group">
+
+                <button type="submit" class="btn-save">
+
+                    <i class="fa fa-save me-2"></i>
+
+                    Update Raw Material
+
+                </button>
+                <button type="button" class="btn-back" (click)="goBack()">Back</button>
+
+
+                <button type="button" class="btn-reset" (click)="resetForm()">
+
+                    <i class="fa fa-refresh me-2"></i>
+
+                    Reset
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

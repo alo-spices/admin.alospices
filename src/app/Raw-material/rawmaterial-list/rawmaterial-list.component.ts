@@ -79,161 +79,161 @@ export class RawmaterialListComponent implements OnInit {
 
   }
   // ==========================================
-// GET ALL RAW MATERIALS
-// ==========================================
+  // GET ALL RAW MATERIALS
+  // ==========================================
 
-getAllRawMaterials() {
+  getAllRawMaterials() {
 
-  this.loading = true;
+    this.loading = true;
 
-  this.rawMaterialService
-    .getAllRawMaterials()
-    .subscribe({
+    this.rawMaterialService
+      .getAllRawMaterials()
+      .subscribe({
 
-      next: (res: any) => {
+        next: (res: any) => {
 
-        this.loading = false;
+          this.loading = false;
 
-        if (res.success) {
+          if (res.success) {
 
-          this.rawMaterialList = res.data;
+            this.rawMaterialList = res.data;
 
-          this.dataSource.data = this.rawMaterialList;
+            this.dataSource.data = this.rawMaterialList;
 
-          this.dataSource.paginator = this.paginator;
+            this.dataSource.paginator = this.paginator;
 
-          this.dataSource.sort = this.sort;
+            this.dataSource.sort = this.sort;
+
+          }
+
+        },
+
+        error: (err: any) => {
+
+          this.loading = false;
+
+          console.log(err);
+
+          this.popup.error(
+
+            err.error?.message ||
+
+            "Failed to load Raw Materials."
+
+          );
 
         }
 
-      },
+      });
 
-      error: (err: any) => {
+  }
 
-        this.loading = false;
+  // ==========================================
+  // SEARCH FILTER
+  // ==========================================
 
-        console.log(err);
+  applyFilter(event: Event) {
 
-        this.popup.error(
+    const filterValue =
 
-          err.error?.message ||
+      (event.target as HTMLInputElement).value;
 
-          "Failed to load Raw Materials."
+    this.dataSource.filter =
 
-        );
+      filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+
+      this.dataSource.paginator.firstPage();
+
+    }
+
+  }
+  // ==========================================
+  // VIEW RAW MATERIAL
+  // ==========================================
+
+  viewRawMaterial(rawMaterial: any): void {
+
+    this.dialog.open(
+
+      RawMeterialComponent,
+
+      {
+
+        width: '750px',
+
+        disableClose: true,
+
+        data: rawMaterial
+
+      }
+
+    );
+
+  }
+
+  // ==========================================
+  // EDIT RAW MATERIAL
+  // ==========================================
+
+  editRawMaterial(rawMaterial: any) {
+
+    this.router.navigate(
+
+      ['/admin/rawmaterial-update', rawMaterial._id]
+
+    );
+
+  }
+
+  // ==========================================
+  // DELETE RAW MATERIAL
+  // ==========================================
+
+  deleteRawMaterial(rawMaterial: any) {
+
+    this.popup.confirmDelete().then((result: any) => {
+
+      if (result.isConfirmed) {
+
+        this.rawMaterialService
+
+          .deleteRawMaterial(rawMaterial._id)
+
+          .subscribe({
+
+            next: (res: any) => {
+
+              if (res.success) {
+
+                this.popup.success(res.message);
+
+                this.getAllRawMaterials();
+
+              }
+
+            },
+
+            error: (err: any) => {
+
+              console.log(err);
+
+              this.popup.error(
+
+                err.error?.message ||
+
+                "Failed to delete Raw Material."
+
+              );
+
+            }
+
+          });
 
       }
 
     });
 
-}
-
-// ==========================================
-// SEARCH FILTER
-// ==========================================
-
-applyFilter(event: Event) {
-
-  const filterValue =
-
-    (event.target as HTMLInputElement).value;
-
-  this.dataSource.filter =
-
-    filterValue.trim().toLowerCase();
-
-  if (this.dataSource.paginator) {
-
-    this.dataSource.paginator.firstPage();
-
   }
-
-}
-// ==========================================
-// VIEW RAW MATERIAL
-// ==========================================
-
-viewRawMaterial(rawMaterial: any): void {
-
-  this.dialog.open(
-
-    RawMeterialComponent,
-
-    {
-
-      width: '750px',
-
-      disableClose: true,
-
-      data: rawMaterial
-
-    }
-
-  );
-
-}
-
-// ==========================================
-// EDIT RAW MATERIAL
-// ==========================================
-
-editRawMaterial(rawMaterial: any) {
-
-  this.router.navigate(
-
-    ['/update-raw-material', rawMaterial._id]
-
-  );
-
-}
-
-// ==========================================
-// DELETE RAW MATERIAL
-// ==========================================
-
-deleteRawMaterial(rawMaterial: any) {
-
-  this.popup.confirmDelete().then((result: any) => {
-
-    if (result.isConfirmed) {
-
-      this.rawMaterialService
-
-        .deleteRawMaterial(rawMaterial._id)
-
-        .subscribe({
-
-          next: (res: any) => {
-
-            if (res.success) {
-
-              this.popup.success(res.message);
-
-              this.getAllRawMaterials();
-
-            }
-
-          },
-
-          error: (err: any) => {
-
-            console.log(err);
-
-            this.popup.error(
-
-              err.error?.message ||
-
-              "Failed to delete Raw Material."
-
-            );
-
-          }
-
-        });
-
-    }
-
-  });
-
-}
 }
