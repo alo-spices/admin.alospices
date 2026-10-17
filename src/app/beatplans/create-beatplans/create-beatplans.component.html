@@ -1,0 +1,453 @@
+<div class="beat-plan-container">
+
+  <!-- ============================
+       HEADER
+  ============================= -->
+
+  <div class="form-header">
+
+    <div>
+      <h2>Create Beat Plan kjn</h2>
+
+      <p>
+        Create a new salesman beat plan
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- ============================
+       SUCCESS MESSAGE
+  ============================= -->
+
+  <div
+    class="success-message"
+    *ngIf="successMessage"
+  >
+
+    {{ successMessage }}
+
+  </div>
+
+
+  <!-- ============================
+       ERROR MESSAGE
+  ============================= -->
+
+  <div
+    class="error-message"
+    *ngIf="errorMessage"
+  >
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- ============================
+       FORM
+  ============================= -->
+
+  <form
+    [formGroup]="beatPlanForm"
+    (ngSubmit)="createBeatPlan()"
+  >
+
+    <div class="form-card">
+
+
+      <!-- ============================
+           BEAT NAME
+      ============================= -->
+
+      <div class="form-group">
+
+        <label>
+          Beat Name
+          <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          formControlName="beatName"
+          placeholder="Enter beat name"
+        />
+
+        <small
+          class="validation-error"
+          *ngIf="
+            f['beatName'].touched &&
+            f['beatName'].invalid
+          "
+        >
+          Beat Name is required
+        </small>
+
+      </div>
+
+
+      <!-- ============================
+           DESCRIPTION
+      ============================= -->
+
+      <div class="form-group">
+
+        <label>
+          Description
+        </label>
+
+        <textarea
+          formControlName="description"
+          rows="3"
+          placeholder="Enter description"
+        ></textarea>
+
+      </div>
+
+
+      <!-- ============================
+           AREA
+      ============================= -->
+
+      <!-- AREA -->
+
+<div class="form-group">
+
+  <label>
+    Area
+    <span>*</span>
+  </label>
+
+  <select
+    formControlName="area"
+    (change)="onAreaChange($event)"
+  >
+
+    <option value="">
+      Select Area
+    </option>
+
+    <option
+      *ngFor="let area of areas"
+      [value]="area._id"
+    >
+
+      {{ area.areaName }}
+
+    </option>
+
+  </select>
+
+
+  <div
+    class="loading-text"
+    *ngIf="areaLoading"
+  >
+    Loading areas...
+  </div>
+
+
+  <small
+    class="validation-error"
+    *ngIf="
+      f['area'].touched &&
+      f['area'].invalid
+    "
+  >
+    Area is required
+  </small>
+
+</div>
+
+
+      <!-- ============================
+           ROUTE
+      ============================= -->
+
+     <!-- ROUTE -->
+
+<div class="form-group">
+
+  <label>
+    Route
+    <span>*</span>
+  </label>
+
+
+ <select
+  formControlName="route"
+  [disabled]="!beatPlanForm.get('area')?.value || routeLoading"
+  (change)="onRouteChange($event)"
+>
+
+    <option value="">
+      {{
+        routeLoading
+          ? 'Loading routes...'
+          : 'Select Route'
+      }}
+    </option>
+
+
+    <option
+      *ngFor="let route of routes"
+      [value]="route._id"
+    >
+
+      {{ route.routeName }}
+
+    </option>
+
+  </select>
+
+
+  <small
+    class="no-route"
+    *ngIf="
+      beatPlanForm.get('area')?.value &&
+      !routeLoading &&
+      routes.length === 0
+    "
+  >
+    No active routes available for this area
+  </small>
+
+
+  <small
+    class="validation-error"
+    *ngIf="
+      f['route'].touched &&
+      f['route'].invalid
+    "
+  >
+    Route is required
+  </small>
+
+</div>
+
+
+<!-- ============================
+     ROUTE-WISE SHOPS
+============================= -->
+
+<div class="shops-section">
+
+  <label class="form-label">
+    Assigned Shops
+  </label>
+
+
+  <!-- Select Route Message -->
+
+  <div
+    class="no-route"
+    *ngIf="
+      !beatPlanForm.get('route')?.value
+    "
+  >
+    Please select a route to view shops
+  </div>
+
+
+  <!-- No Shops -->
+
+  <div
+    class="no-route"
+    *ngIf="
+      beatPlanForm.get('route')?.value &&
+      shops.length === 0
+    "
+  >
+    No active shops available for this route
+  </div>
+
+
+  <!-- Shops -->
+
+  <div
+    class="shops-list"
+    *ngIf="shops.length > 0"
+  >
+
+    <div
+      class="shop-item"
+      *ngFor="let shop of shops"
+    >
+
+      <label>
+
+        <input
+          type="checkbox"
+          [value]="shop._id"
+          [checked]="selectedShopIds.includes(shop._id)"
+          (change)="onShopChange($event, shop._id)"
+        />
+
+        <span>
+          {{ shop.shopName || shop.partyName }}
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+</div>
+
+      <!-- ============================
+           SALESMAN
+      ============================= -->
+
+      <div class="form-group">
+
+        <label class="form-label">
+    Assigned Salesman
+    <span class="required">*</span>
+  </label>
+
+  <select
+    class="form-control"
+    formControlName="assignedSalesman"
+  >
+
+    <option value="">
+      {{
+        salesmanLoading
+          ? 'Loading Salesmen...'
+          : 'Select Salesman'
+      }}
+    </option>
+
+    <option
+      *ngFor="let salesman of salesmen"
+      [value]="salesman._id"
+    >
+      {{
+        salesman.fullName ||
+        (
+          (salesman.firstName || '') +
+          ' ' +
+          (salesman.lastName || '')
+        ).trim()
+      }}
+    </option>
+
+  </select>
+  
+
+  <small
+    class="error-text"
+    *ngIf="
+      beatPlanForm.get('assignedSalesman')?.touched &&
+      beatPlanForm.get('assignedSalesman')?.invalid
+    "
+  >
+    Assigned salesman is required
+  </small>
+
+      </div>
+
+
+      <!-- ============================
+           DAY
+      ============================= -->
+
+      <div class="form-group">
+
+        <label>
+          Day
+          <span>*</span>
+        </label>
+
+        <select
+          formControlName="day"
+        >
+
+          <option value="">
+            Select Day
+          </option>
+
+          <option value="Monday">
+            Monday
+          </option>
+
+          <option value="Tuesday">
+            Tuesday
+          </option>
+
+          <option value="Wednesday">
+            Wednesday
+          </option>
+
+          <option value="Thursday">
+            Thursday
+          </option>
+
+          <option value="Friday">
+            Friday
+          </option>
+
+          <option value="Saturday">
+            Saturday
+          </option>
+
+          <option value="Sunday">
+            Sunday
+          </option>
+
+        </select>
+
+        <small
+          class="validation-error"
+          *ngIf="
+            f['day'].touched &&
+            f['day'].invalid
+          "
+        >
+          Day is required
+        </small>
+
+      </div>
+
+
+      <!-- ============================
+           BUTTONS
+      ============================= -->
+
+      <div class="button-group">
+
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="resetForm()"
+          [disabled]="loading"
+        >
+          CANCEL
+        </button>
+
+
+        <button
+          type="submit"
+          class="btn-create"
+          [disabled]="loading"
+        >
+
+          <span *ngIf="!loading">
+            CREATE BEAT PLAN
+          </span>
+
+          <span *ngIf="loading">
+            Creating...
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

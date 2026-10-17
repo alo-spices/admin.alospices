@@ -133,15 +133,19 @@ export class BrandListComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/admin/update-brand', brand._id]);
   }
 
+
   // ==================================
   // View
   // ==================================
   viewBrand(brand: Brand): void {
+    console.log(brand);
     this.dialog.open(ViewBrandComponent, {
       width: '600px',
       data: brand
     });
   }
+
+
 
   // ==================================
   // Delete (Soft Delete)

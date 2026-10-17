@@ -1,0 +1,238 @@
+<div class="inquiry-details-dialog">
+
+  <!-- ================= HEADER ================= -->
+
+  <div class="dialog-header">
+
+    <div class="header-left">
+
+      <div class="header-icon">
+
+        <i class="fa fa-user"></i>
+
+      </div>
+
+      <div>
+
+        <h2>
+          Distributor Details
+        </h2>
+
+        <p>
+          Inquiry information
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="close-btn"
+      (click)="close()"
+    >
+
+      <i class="fa fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ================= LOADING ================= -->
+
+  <div
+    class="loading-section"
+    *ngIf="isLoading"
+  >
+
+    <div class="spinner-border"></div>
+
+    <p>
+      Loading distributor details...
+    </p>
+
+  </div>
+
+
+  <!-- ================= DETAILS ================= -->
+
+  <div
+    class="details-body"
+    *ngIf="!isLoading && inquiry"
+  >
+
+    <!-- Full Name -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+        <i class="fa fa-user"></i>
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Full Name
+        </span>
+
+        <span class="detail-value">
+          {{ inquiry.fullName }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Phone -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+        <i class="fa fa-phone"></i>
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Phone Number
+        </span>
+
+        <span class="detail-value">
+          {{ inquiry.phoneNumber }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Location -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+        <i class="fa fa-map-marker"></i>
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Location
+        </span>
+
+        <span class="detail-value">
+          {{ inquiry.location }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Status -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+        <i class="fa fa-info-circle"></i>
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Status
+        </span>
+
+        <span
+          class="status-badge"
+          [ngClass]="
+            getStatusClass(inquiry.status)
+          "
+        >
+
+          {{ inquiry.status }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Message -->
+
+    <div class="detail-row message-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-comment"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Message
+        </span>
+
+        <p class="message-text">
+          {{ inquiry.message }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Submitted Date -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-calendar"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Submitted On
+        </span>
+
+        <span class="detail-value">
+
+          {{
+            inquiry.createdAt
+              | date:'dd-MM-yyyy, hh:mm a'
+          }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <div class="dialog-footer">
+
+    <button
+      type="button"
+      class="close-button"
+      (click)="close()"
+    >
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

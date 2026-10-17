@@ -176,16 +176,14 @@ export class ProductCreateComponent implements OnInit {
         '',
         Validators.required
       ],
-
+      stock: [0],
       skuCode: [
         '',
         Validators.required
       ],
 
-      mrp: [
-        0
-      ],
-
+     mrp: [null, [Validators.required, Validators.min(0)]],
+      weightInGrams: [5],
       gstPercentage: [
         5
       ],

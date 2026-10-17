@@ -90,6 +90,11 @@
                     </label>
 
                     <input type="date" class="form-control" formControlName="transferDate">
+                    <small class="text-danger"
+       *ngIf="transferForm.get('transferDate')?.touched &&
+              transferForm.get('transferDate')?.hasError('required')">
+  Transfer Date is required.
+</small>
 
                 </div>
 
@@ -184,6 +189,11 @@
                         </option>
 
                     </select>
+                    <small class="text-danger"
+       *ngIf="transferForm.get('destinationType')?.touched &&
+              transferForm.get('destinationType')?.hasError('required')">
+  Please select Destination Type.
+</small>
 
                 </div>
 
@@ -318,6 +328,11 @@
                                 </option>
 
                             </select>
+                            <small class="text-danger"
+       *ngIf="item.get('product')?.touched &&
+              item.get('product')?.hasError('required')">
+  Please select a Product.
+</small>
 
                         </div>
 
@@ -350,6 +365,11 @@
                                 </option>
 
                             </select>
+                            <small class="text-danger"
+       *ngIf="item.get('variantId')?.touched &&
+              item.get('variantId')?.hasError('required')">
+  Please select a Variant.
+</small>
 
                         </div>
 
@@ -381,6 +401,11 @@
 
                             <input type="text" class="form-control" formControlName="batchNo"
                                 placeholder="Enter batch number">
+                                <small class="text-danger"
+       *ngIf="item.get('batchNo')?.touched &&
+              item.get('batchNo')?.hasError('required')">
+  Batch Number is required.
+</small>
 
                         </div>
 
@@ -397,6 +422,17 @@
 
                             <input type="number" min="1" class="form-control" formControlName="quantity"
                                 placeholder="Enter quantity">
+                                <small class="text-danger"
+       *ngIf="item.get('quantity')?.touched &&
+              item.get('quantity')?.hasError('required')">
+  Quantity is required.
+</small>
+
+<small class="text-danger"
+       *ngIf="item.get('quantity')?.touched &&
+              item.get('quantity')?.hasError('min')">
+  Quantity must be at least 1.
+</small>
 
                         </div>
 

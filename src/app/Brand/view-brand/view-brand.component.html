@@ -1,1 +1,151 @@
-<p>view-brand works!</p>
+<div class="view-brand-container">
+
+    <!-- Header -->
+    <div class="dialog-header">
+        <div class="header-icon">
+            <mat-icon>storefront</mat-icon>
+        </div>
+
+        <div class="header-content">
+            <h2>Brand Details</h2>
+            <p>View brand information and contact details</p>
+        </div>
+
+        <button type="button" class="close-btn" mat-icon-button mat-dialog-close aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <!-- Brand Profile -->
+    <div class="brand-profile">
+        <div class="brand-logo">
+            <img *ngIf="data.logo; else logoPlaceholder" [src]="data.logo" [alt]="data.brandName + ' logo'">
+
+            <ng-template #logoPlaceholder>
+                <mat-icon>store</mat-icon>
+            </ng-template>
+        </div>
+
+        <div class="brand-profile-info">
+            <h3>{{ data.brandName || 'N/A' }}</h3>
+            <p>{{ data.brandCode || 'N/A' }}</p>
+
+            <span class="status-badge" [class.active]="data.status === 'Active'"
+                [class.inactive]="data.status !== 'Active'">
+                <span class="status-dot"></span>
+                {{ data.status || 'Unknown' }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Brand Information -->
+    <div class="details-section">
+        <h4 class="section-title">
+            <mat-icon>info</mat-icon>
+            General Information
+        </h4>
+
+        <div class="details-grid">
+
+            <div class="detail-item">
+                <span class="detail-label">Brand Name</span>
+                <span class="detail-value">{{ data.brandName || 'N/A' }}</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Brand Code</span>
+                <span class="detail-value">{{ data.brandCode || 'N/A' }}</span>
+            </div>
+
+            <div class="detail-item full-width">
+                <span class="detail-label">Description</span>
+                <span class="detail-value description">
+                    {{ data.description || 'No description available' }}
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Website</span>
+                <a *ngIf="data.website" class="detail-link" [href]="getWebsiteUrl(data.website)" target="_blank"
+                    rel="noopener noreferrer">
+                    {{ data.website }}
+                    <mat-icon>open_in_new</mat-icon>
+                </a>
+
+                <span *ngIf="!data.website" class="detail-value">
+                    N/A
+                </span>
+
+                <ng-template #noWebsite>
+                    <span class="detail-value">N/A</span>
+                </ng-template>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Email Address</span>
+                <a *ngIf="data.email; else noEmail" class="detail-link" [href]="'mailto:' + data.email">
+                    {{ data.email }}
+                </a>
+
+                <ng-template #noEmail>
+                    <span class="detail-value">N/A</span>
+                </ng-template>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Phone Number</span>
+                <a *ngIf="data.phone; else noPhone" class="detail-link" [href]="'tel:' + data.phone">
+                    {{ data.phone }}
+                </a>
+
+                <ng-template #noPhone>
+                    <span class="detail-value">N/A</span>
+                </ng-template>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Deleted</span>
+                <span class="detail-value">
+                    {{ data.isDeleted ? 'Yes' : 'No' }}
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Timestamps -->
+    <div class="details-section">
+        <h4 class="section-title">
+            <mat-icon>schedule</mat-icon>
+            Record Information
+        </h4>
+
+        <div class="details-grid">
+
+            <!-- <div class="detail-item">
+                <span class="detail-label">Created At</span>
+                <span class="detail-value">
+                    {{ data.createdAt ? (data.createdAt | date:'dd MMM yyyy, hh:mm a') : 'N/A' }}
+                </span>
+            </div> -->
+
+            <!-- <div class="detail-item">
+                <span class="detail-label">Last Updated</span>
+                <span class="detail-value">
+                    {{ data.updatedAt ? (data.updatedAt | date:'dd MMM yyyy, hh:mm a') : 'N/A' }}
+                </span>
+            </div> -->
+
+
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="dialog-footer">
+        <button type="button" class="close-footer-btn" mat-button mat-dialog-close>
+            Close
+        </button>
+    </div>
+
+</div>

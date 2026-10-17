@@ -78,6 +78,11 @@
                                     </label>
 
                                     <input type="text" formControlName="beatName" placeholder="Enter beat name">
+                                    <small class="text-danger"
+  *ngIf="beatPlanForm.get('beatName')?.touched &&
+         beatPlanForm.get('beatName')?.hasError('required')">
+  Beat Name is required.
+</small>
 
                                 </div>
 
@@ -109,6 +114,11 @@
                                         </option>
 
                                     </select>
+                                    <small class="text-danger"
+  *ngIf="beatPlanForm.get('area')?.touched &&
+         beatPlanForm.get('area')?.hasError('required')">
+  Area is required.
+</small>
 
                                 </div>
 
@@ -142,6 +152,11 @@
                                         </option>
 
                                     </select>
+                                    <small class="text-danger"
+  *ngIf="beatPlanForm.get('route')?.touched &&
+         beatPlanForm.get('route')?.hasError('required')">
+  Route is required.
+</small>
 
                                 </div>
 
@@ -193,6 +208,11 @@
                                         </option>
 
                                     </select>
+                                    <small class="text-danger"
+  *ngIf="beatPlanForm.get('salesman')?.touched &&
+         beatPlanForm.get('salesman')?.hasError('required')">
+  Salesman is required.
+</small>
 
                                 </div>
 
@@ -249,6 +269,11 @@
                                         </option>
 
                                     </select>
+                                    <small class="text-danger"
+  *ngIf="beatPlanForm.get('day')?.touched &&
+         beatPlanForm.get('day')?.hasError('required')">
+  Day is required.
+</small>
 
                                 </div>
                                 <!-- ================================= -->

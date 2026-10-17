@@ -142,44 +142,68 @@ export class WarehouseListComponent implements OnInit {
   // DELETE
   // ===========================================
 
-  deleteWarehouse(element: Warehouse): void {
 
-    this.popup.confirmDelete().then((result) => {
+deleteWarehouse(element: Warehouse): void {
 
-      if (result.isConfirmed) {
+  console.log('Delete clicked:', element);
+  console.log('Warehouse ID:', element._id);
 
-        this.warehouseService.deleteWarehouse(element._id!).subscribe({
+  this.popup.confirmDelete().then((result: any) => {
 
-          next: (res: any) => {
+    console.log('Confirmation result:', result);
 
-            if (res.success) {
+    const isConfirmed =
+      result === true || result?.isConfirmed === true;
 
-              this.popup.success(res.message);
+    if (!isConfirmed) {
+      console.log('Delete cancelled');
+      return;
+    }
 
-              this.getAllWarehouses();
+    console.log('Sending delete request...');
 
-            }
+    this.warehouseService.deleteWarehouse(element._id!).subscribe({
 
-          },
+      next: (res: any) => {
 
-          error: (err) => {
+        console.log('Delete response:', res);
 
-            this.popup.error(
+        if (res.success) {
 
-              err?.error?.message ||
+          this.popup.success(res.message);
+          this.getAllWarehouses();
 
-              'Unable to delete warehouse.'
+        } else {
 
-            );
+          this.popup.error(
+            res.message || 'Unable to delete warehouse.'
+          );
 
-          }
+        }
 
-        });
+      },
+
+      error: (err: any) => {
+
+        console.error('Delete error:', err);
+        console.error('Status:', err.status);
+        console.error('Response:', err.error);
+
+        this.popup.error(
+          err?.error?.message || 'Unable to delete warehouse.'
+        );
 
       }
 
     });
 
-  }
+  }).catch((error: any) => {
+
+    console.error('Confirmation popup error:', error);
+
+  });
+
+}
+
 
 } 

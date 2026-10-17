@@ -190,6 +190,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
       {
 
         width: '900px',
+        
 
         data: product
 

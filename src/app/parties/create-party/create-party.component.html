@@ -1,0 +1,749 @@
+<div class="category-container">
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>Create Party</h2>
+
+            <p>
+                Add a new shop or party here
+            </p>
+
+        </div>
+
+        <div class="button-section">
+
+            <button type="button" class="btn-back" (click)="cancel()">
+                <i class="fa fa-arrow-left me-2"></i>
+                Back
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- FORM -->
+    <!-- ========================= -->
+
+    <form [formGroup]="partyForm" (ngSubmit)="createParty()">
+
+        <!-- ========================= -->
+        <!-- BASIC DETAILS -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+                <h4>Basic Details</h4>
+                <p>Enter party and shop information</p>
+            </div>
+
+            <div class="row g-3">
+
+                <!-- PARTY TYPE -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Party Type
+                        <span class="required">*</span>
+                    </label>
+
+                    <select class="form-control" formControlName="partyType">
+
+                        <option value="">
+                            Select Party Type
+                        </option>
+
+                        <option *ngFor="let type of partyTypes" [value]="type">
+                            {{ type }}
+                        </option>
+
+                    </select>
+
+                    <small class="error-text" *ngIf="
+              partyForm.get('partyType')?.touched &&
+              partyForm.get('partyType')?.invalid
+            ">
+                        Party type is required
+                    </small>
+
+                </div>
+
+
+                <!-- PARTY CODE -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Party Code
+                        <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="partyCode"
+                        placeholder="Enter party code" />
+
+                    <small class="error-text" *ngIf="
+              partyForm.get('partyCode')?.touched &&
+              partyForm.get('partyCode')?.invalid
+            ">
+                        Party code is required
+                    </small>
+
+                </div>
+
+
+                <!-- PARTY NAME -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Party Name
+                        <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="partyName"
+                        placeholder="Enter party name" />
+
+                    <small class="error-text" *ngIf="
+              partyForm.get('partyName')?.touched &&
+              partyForm.get('partyName')?.invalid
+            ">
+                        Party name is required
+                    </small>
+
+                </div>
+
+
+                <!-- SHOP NAME -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Shop Name
+                        <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="shopName" placeholder="Enter shop name" />
+
+                    <small class="error-text" *ngIf="
+              partyForm.get('shopName')?.touched &&
+              partyForm.get('shopName')?.invalid
+            ">
+                        Shop name is required
+                    </small>
+
+                </div>
+
+
+                <!-- OWNER -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Owner Name
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="ownerName"
+                        placeholder="Enter owner name" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- CONTACT DETAILS -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <h4>Contact Details</h4>
+
+                <p>
+                    Enter shop contact information
+                </p>
+
+            </div>
+
+            <div class="row g-3">
+
+                <!-- MOBILE -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Mobile Number
+                        <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="mobile" maxlength="10"
+                        placeholder="Enter mobile number" />
+
+                    <small class="error-text" *ngIf="
+              partyForm.get('mobile')?.touched &&
+              partyForm.get('mobile')?.invalid
+            ">
+                        Enter valid 10 digit mobile number
+                    </small>
+
+                </div>
+
+
+                <!-- ALTERNATE MOBILE -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Alternate Mobile
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="alternateMobile" maxlength="10"
+                        placeholder="Enter alternate number" />
+
+                </div>
+
+
+                <!-- WHATSAPP -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        WhatsApp Number
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="whatsappNumber" maxlength="10"
+                        placeholder="Enter WhatsApp number" />
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Email
+                    </label>
+
+                    <input type="email" class="form-control" formControlName="email"
+                        placeholder="Enter email address" />
+
+                    <small class="error-text" *ngIf="
+              partyForm.get('email')?.touched &&
+              partyForm.get('email')?.invalid
+            ">
+                        Enter valid email address
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- BUSINESS DETAILS -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <h4>Business Details</h4>
+
+                <p>
+                    Enter business registration details
+                </p>
+
+            </div>
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        GST Number
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="gstNumber"
+                        placeholder="Enter GST number" />
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        PAN Number
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="panNumber"
+                        placeholder="Enter PAN number" />
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        License Number
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="licenseNumber"
+                        placeholder="Enter license number" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- AREA & ROUTE -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <h4>Area & Route</h4>
+
+                <p>
+                    Assign shop to area, route and salesman
+                </p>
+
+            </div>
+
+            <div class="row g-3">
+
+                <!-- AREA -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Area
+                        <span class="required">*</span>
+                    </label>
+
+                    <select class="form-control" formControlName="area" (change)="onAreaChange($event)">
+
+                        <option value="">
+                            {{ areaLoading
+                            ? 'Loading Areas...'
+                            : 'Select Area' }}
+                        </option>
+
+                        <option *ngFor="let area of areas" [value]="area._id">
+                            {{ area.areaName }}
+                        </option>
+
+                    </select>
+
+                    <small class="error-text" *ngIf="
+              partyForm.get('area')?.touched &&
+              partyForm.get('area')?.invalid
+            ">
+                        Area is required
+                    </small>
+
+                </div>
+
+
+                <!-- ROUTE -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Route
+                        <span class="required">*</span>
+                    </label>
+
+                    <select class="form-control" formControlName="route">
+
+                        <option value="">
+                            {{ routeLoading
+                            ? 'Loading Routes...'
+                            : 'Select Route' }}
+                        </option>
+
+                        <option *ngFor="let route of routes" [value]="route._id">
+                            {{ route.routeName }}
+                        </option>
+
+                    </select>
+
+                    <small class="error-text" *ngIf="
+              partyForm.get('route')?.touched &&
+              partyForm.get('route')?.invalid
+            ">
+                        Route is required
+                    </small>
+
+                </div>
+
+
+                <!-- SALESMAN -->
+
+               <div class="col-md-4">
+
+  <label class="form-label">
+    Assigned Salesman
+    <span class="required">*</span>
+  </label>
+
+  <select
+    class="form-control"
+    formControlName="assignedSalesman"
+  >
+
+    <option value="">
+      {{
+        salesmanLoading
+          ? 'Loading Salesmen...'
+          : 'Select Salesman'
+      }}
+    </option>
+
+    <option
+      *ngFor="let salesman of salesmen"
+      [value]="salesman._id"
+    >
+      {{
+        salesman.fullName ||
+        (
+          (salesman.firstName || '') +
+          ' ' +
+          (salesman.lastName || '')
+        ).trim()
+      }}
+    </option>
+
+  </select>
+
+  <small
+    class="error-text"
+    *ngIf="
+      partyForm.get('assignedSalesman')?.touched &&
+      partyForm.get('assignedSalesman')?.invalid
+    "
+  >
+    Assigned salesman is required
+  </small>
+
+</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- ADDRESS -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <h4>Address</h4>
+
+                <p>
+                    Enter shop location details
+                </p>
+
+            </div>
+
+            <div class="row g-3">
+
+                <div class="col-md-12">
+
+                    <label class="form-label">
+                        Address
+                    </label>
+
+                    <textarea class="form-control" rows="3" formControlName="address"
+                        placeholder="Enter complete address"></textarea>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        City
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="city" placeholder="Enter city" />
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        District
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="district" placeholder="Enter district" />
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        State
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="state" placeholder="Enter state" />
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Pincode
+                    </label>
+
+                    <input type="text" class="form-control" formControlName="pincode" maxlength="6"
+                        placeholder="Enter pincode" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- LOCATION -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <h4>Location</h4>
+
+                <p>
+                    Enter shop GPS coordinates
+                </p>
+
+            </div>
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Latitude
+                    </label>
+
+                    <input type="number" class="form-control" formControlName="latitude" placeholder="Enter latitude" />
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Longitude
+                    </label>
+
+                    <input type="number" class="form-control" formControlName="longitude"
+                        placeholder="Enter longitude" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- CREDIT SETTINGS -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <h4>Credit Settings</h4>
+
+                <p>
+                    Configure customer credit information
+                </p>
+
+            </div>
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Credit Limit
+                    </label>
+
+                    <input type="number" class="form-control" formControlName="creditLimit" min="0"
+                        placeholder="Enter credit limit" />
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Credit Days
+                    </label>
+
+                    <input type="number" class="form-control" formControlName="creditDays" min="0"
+                        placeholder="Enter credit days" />
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Opening Balance
+                    </label>
+
+                    <input type="number" class="form-control" formControlName="openingBalance" min="0"
+                        placeholder="Enter opening balance" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- SHOP IMAGE -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <h4>Shop Image</h4>
+
+                <p>
+                    Upload shop image
+                </p>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <input type="file" class="form-control" accept="image/*" (change)="onImageSelected($event)" />
+
+                </div>
+
+
+                <div class="col-md-6" *ngIf="imagePreview">
+
+                    <div class="image-preview">
+
+                        <img [src]="imagePreview" alt="Shop Preview" />
+
+                        <button type="button" class="remove-image" (click)="removeImage()">
+                            <i class="fa fa-times"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- STATUS -->
+        <!-- ========================= -->
+
+        <div class="form-section">
+
+            <div class="section-title">
+
+                <h4>Status</h4>
+
+                <p>
+                    Set party status
+                </p>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Status
+                    </label>
+
+                    <select class="form-control" formControlName="status">
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Inactive">
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- BUTTONS -->
+        <!-- ========================= -->
+
+        <div class="form-actions">
+
+            <button type="button" class="btn-back" (click)="cancel()" [disabled]="loading">
+                CANCEL
+            </button>
+
+            <button type="submit" class="btn-create" [disabled]="loading">
+
+                <i *ngIf="loading" class="fa fa-spinner fa-spin me-2"></i>
+
+                <i *ngIf="!loading" class="fa fa-plus me-2"></i>
+
+                {{ loading
+                ? 'CREATING...'
+                : 'CREATE PARTY' }}
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>

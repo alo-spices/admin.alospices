@@ -78,67 +78,77 @@ export class WarehouseCreateComponent implements OnInit {
   // CREATE WAREHOUSE
   // ==========================================
 
-  createWarehouse(): void {
+ 
+createWarehouse(): void {
 
-    this.submitted = true;
+  this.submitted = true;
+  this.warehouseForm.markAllAsTouched();
 
-    if (this.warehouseForm.invalid) {
+  if (this.warehouseForm.invalid) {
 
-      this.popup.validation("Please fill all required fields.");
+    this.isSubmitting = false;
 
-      return;
+    this.popup.validation("Please fill all required fields.");
 
-    }
+    return;
 
-    this.isSubmitting = true;
+  }
 
-    this.warehouseService.createWarehouse(this.warehouseForm.value)
+  // Prevent duplicate submissions
+  if (this.isSubmitting) {
+    return;
+  }
 
-      .subscribe({
+  this.isSubmitting = true;
 
-        next: (res: any) => {
+  this.warehouseService.createWarehouse(this.warehouseForm.value)
 
-          this.isSubmitting = false;
+    .subscribe({
 
-          if (res.success) {
+      next: (res: any) => {
 
-            this.popup.success(res.message).then(() => {
+        this.isSubmitting = false;
 
-              this.warehouseForm.reset({
+        if (res.success) {
 
-                warehouseType: 'BOTH',
+          this.popup.success(res.message).then(() => {
 
-                isActive: true
+            this.warehouseForm.reset({
 
-              });
+              warehouseType: 'BOTH',
 
-              this.submitted = false;
-
-              this.router.navigate(['/admin/warehouse-list']);
+              isActive: true
 
             });
 
-          }
+            this.submitted = false;
 
-        },
+            this.router.navigate(['/admin/warehouse-list']);
 
-        error: (err) => {
-
-          this.isSubmitting = false;
-
-          this.popup.error(
-
-            err?.error?.message ||
-
-            'Failed to create warehouse.'
-
-          );
+          });
 
         }
 
-      });
+      },
 
-  }
+      error: (err) => {
+
+        this.isSubmitting = false;
+
+        this.popup.error(
+
+          err?.error?.message ||
+
+          'Failed to create warehouse.'
+
+        );
+
+      }
+
+    });
+
+}
+
 
   // ==========================================
   // RESET FORM

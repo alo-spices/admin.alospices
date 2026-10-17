@@ -37,13 +37,10 @@
                         formControlName="warehouseCode"
                         placeholder="Enter Warehouse Code">
 
-                    <small
-                        class="text-danger"
-                        *ngIf="submitted && warehouseForm.controls['warehouseCode'].errors">
-
-                        Warehouse Code is required
-
-                    </small>
+                   <small class="text-danger"
+  *ngIf="submitted && warehouseForm.controls['warehouseCode'].hasError('required')">
+  Warehouse Code is required.
+</small>
 
                 </div>
 
@@ -64,13 +61,10 @@
                         formControlName="warehouseName"
                         placeholder="Enter Warehouse Name">
 
-                    <small
-                        class="text-danger"
-                        *ngIf="submitted && warehouseForm.controls['warehouseName'].errors">
-
-                        Warehouse Name is required
-
-                    </small>
+                    <small class="text-danger"
+  *ngIf="submitted && warehouseForm.controls['warehouseName'].hasError('required')">
+  Warehouse Name is required.
+</small>
 
                 </div>
 
@@ -296,15 +290,25 @@
 
                 </button>
 
-                <button
-                    type="submit"
-                    class="btn btn-save">
+               
+<button
+  type="submit"
+  class="btn btn-save"
+  [disabled]="isSubmitting">
 
-                    <i class="fa fa-save me-2"></i>
+  <span
+    *ngIf="isSubmitting"
+    class="spinner-border spinner-border-sm me-2"
+    role="status"
+    aria-hidden="true">
+  </span>
 
-                    Save Warehouse
+  <i *ngIf="!isSubmitting" class="fa fa-save me-2"></i>
 
-                </button>
+  {{ isSubmitting ? 'Saving...' : 'Save Warehouse' }}
+
+</button>
+
 
             </div>
             

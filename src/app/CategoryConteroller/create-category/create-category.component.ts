@@ -12,6 +12,7 @@ import { CommomPopupService } from 'src/app/Services/commom-popup.service';
   styleUrls: ['./create-category.component.css']
 })
 export class CreateCategoryComponent implements OnInit {
+  isSaving: boolean = false;
 
   categoryForm!: FormGroup;
 
@@ -148,88 +149,100 @@ export class CreateCategoryComponent implements OnInit {
   // Submit
   // ==========================================
 
-  onSubmit(): void {
+ 
+onSubmit(): void {
 
-    this.isSubmitted = true;
+  this.isSubmitted = true;
+  this.categoryForm.markAllAsTouched();
 
-    if (this.categoryForm.invalid) {
+  if (this.categoryForm.invalid) {
+    this.isSaving = false;
 
-      this.alertService.validation(
-        'Please fill all required fields'
-      );
-
-      return;
-
-    }
-
-    const formData = new FormData();
-
-    formData.append(
-      'categoryName',
-      this.categoryForm.value.categoryName
+    this.alertService.validation(
+      'Please fill all required fields'
     );
 
-    formData.append(
-      'categoryCode',
-      this.categoryForm.value.categoryCode
-    );
-
-    formData.append(
-      'description',
-      this.categoryForm.value.description
-    );
-
-    formData.append(
-      'brand',
-      this.categoryForm.value.brand
-    );
-
-    formData.append(
-      'displayOrder',
-      this.categoryForm.value.displayOrder
-    );
-
-    formData.append(
-      'status',
-      this.categoryForm.value.status
-    );
-
-    if (this.selectedFile) {
-
-      formData.append(
-        'image',
-        this.selectedFile
-      );
-
-    }
-
-    this.categoryService.createCategory(formData).subscribe({
-
-      next: (response: any) => {
-
-        this.alertService.success(
-          response.message || 'Category Created Successfully'
-        );
-
-        this.router.navigate([
-          '/admin/category'
-        ]);
-
-      },
-
-      error: (error) => {
-
-        console.log(error);
-
-        this.alertService.error(
-          error.error?.message || 'Something went wrong'
-        );
-
-      }
-
-    });
-
+    return;
   }
+
+  // Prevent duplicate submissions
+  if (this.isSaving) {
+    return;
+  }
+
+  this.isSaving = true;
+
+  const formData = new FormData();
+
+  formData.append(
+    'categoryName',
+    this.categoryForm.value.categoryName
+  );
+
+  formData.append(
+    'categoryCode',
+    this.categoryForm.value.categoryCode
+  );
+
+  formData.append(
+    'description',
+    this.categoryForm.value.description
+  );
+
+  formData.append(
+    'brand',
+    this.categoryForm.value.brand
+  );
+
+  formData.append(
+    'displayOrder',
+    this.categoryForm.value.displayOrder
+  );
+
+  formData.append(
+    'status',
+    this.categoryForm.value.status
+  );
+
+  if (this.selectedFile) {
+    formData.append(
+      'image',
+      this.selectedFile
+    );
+  }
+
+  this.categoryService.createCategory(formData).subscribe({
+
+    next: (response: any) => {
+
+      this.isSaving = false;
+
+      this.alertService.success(
+        response.message || 'Category Created Successfully'
+      );
+
+      this.router.navigate([
+        '/admin/category'
+      ]);
+
+    },
+
+    error: (error) => {
+
+      this.isSaving = false;
+
+      console.log(error);
+
+      this.alertService.error(
+        error.error?.message || 'Something went wrong'
+      );
+
+    }
+
+  });
+
+}
+
 
   // ==========================================
   // Back

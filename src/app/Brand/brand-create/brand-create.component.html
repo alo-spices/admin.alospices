@@ -17,12 +17,22 @@
                                 <div class="form-group">
                                     <label>Brand Name</label>
                                     <input type="text" formControlName="brandName" placeholder="Enter brand name" />
+                                    <div class="text-danger mt-1"
+    *ngIf="brandForm.get('brandName')?.touched &&
+           brandForm.get('brandName')?.hasError('required')">
+    Brand Name is required.
+</div>
                                 </div>
 
                                 <!-- Brand Code -->
                                 <div class="form-group">
                                     <label>Brand Code</label>
                                     <input type="text" formControlName="brandCode" placeholder="Enter brand code" />
+                                    <div class="text-danger mt-1"
+    *ngIf="brandForm.get('brandCode')?.touched &&
+           brandForm.get('brandCode')?.hasError('required')">
+    Brand Code is required.
+</div>
                                 </div>
 
                                 <!-- Website -->
@@ -39,9 +49,22 @@
 
                                 <!-- Phone -->
                                 <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text" formControlName="phone" placeholder="Enter phone number" />
-                                </div>
+    <label>Phone</label>
+    <input
+        type="text"
+        formControlName="phone"
+        placeholder="Enter phone number"
+        maxlength="10"
+        inputmode="numeric"
+        (input)="onPhoneInput($event)"
+    />
+
+    <div class="text-danger mt-1"
+        *ngIf="brandForm.get('phone')?.touched &&
+               brandForm.get('phone')?.hasError('pattern')">
+        Please enter a valid 10-digit phone number.
+    </div>
+</div>
 
                                 <!-- Description -->
                                 <div class="form-group full-width">
@@ -78,8 +101,16 @@
                         </div>
 
                         <div class="button-group">
-                            <button type="submit" class="btn-create">Save</button>
-                            <button type="button" class="btn-back" (click)="goBack()">Back</button>
+<button type="submit" class="btn-create" [disabled]="isSaving">
+  <span
+    *ngIf="isSaving"
+    class="spinner-border spinner-border-sm me-2"
+    role="status"
+    aria-hidden="true">
+  </span>
+
+  {{ isSaving ? 'Saving...' : 'Save' }}
+</button>                            <button type="button" class="btn-back" (click)="goBack()">Back</button>
                         </div>
                     </form>
                 </div>

@@ -10,8 +10,10 @@ import { SupplierService } from 'src/app/Services/supplier.service';
   styleUrls: ['./supplier-create.component.css']
 })
 export class SupplierCreateComponent implements OnInit {
+  isSaving: boolean = false;
 
   supplierForm!: FormGroup;
+
 
   isSubmitted = false;
 
@@ -50,10 +52,10 @@ export class SupplierCreateComponent implements OnInit {
         ''
       ],
 
-      mobileNumber: [
-        '',
-        Validators.required
-      ],
+     mobileNumber: ['', [
+  Validators.required,
+  Validators.pattern(/^[0-9]{10}$/)
+]],
 
       alternateMobileNumber: [
         ''
@@ -135,16 +137,27 @@ export class SupplierCreateComponent implements OnInit {
   createSupplier(): void {
 
     this.isSubmitted = true;
+     this.supplierForm.markAllAsTouched();
+
 
     if (this.supplierForm.invalid) {
+       this.isSaving = false;
 
       this.alertService.validation(
         'Please fill all required fields'
       );
 
       return;
+      
 
     }
+     // Prevent duplicate submissions
+  if (this.isSaving) {
+    return;
+  }
+
+  this.isSaving = true;
+
 
     this.supplierService.createSupplier(
       this.supplierForm.value
@@ -167,6 +180,7 @@ export class SupplierCreateComponent implements OnInit {
       },
 
       error: (error) => {
+         this.isSaving = false;
 
         console.log(error);
 
@@ -215,5 +229,18 @@ export class SupplierCreateComponent implements OnInit {
     ]);
 
   }
+  
+onMobileInput(event: Event): void {
+  const input = event.target as HTMLInputElement;
+
+  const value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+
+  input.value = value;
+
+  this.supplierForm.get('mobileNumber')?.setValue(value, {
+    emitEvent: false
+  });
+}
+
 
 }

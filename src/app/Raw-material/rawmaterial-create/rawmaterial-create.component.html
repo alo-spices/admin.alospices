@@ -53,6 +53,11 @@
                         formControlName="rawMaterialName"
 
                         placeholder="Enter Raw Material Name">
+                        <div class="text-danger"
+     *ngIf="rawMaterialForm.get('rawMaterialName')?.touched &&
+            rawMaterialForm.get('rawMaterialName')?.hasError('required')">
+  Raw Material Name is required.
+</div>
 
                 </div>
 
@@ -79,6 +84,11 @@
                         formControlName="rawMaterialCode"
 
                         placeholder="Enter Raw Material Code">
+                        <div class="text-danger"
+     *ngIf="rawMaterialForm.get('rawMaterialCode')?.touched &&
+            rawMaterialForm.get('rawMaterialCode')?.hasError('required')">
+  Raw Material Code is required.
+</div>
 
                 </div>
                                 <!-- ==========================
@@ -118,6 +128,11 @@
                         </option>
 
                     </select>
+                    <div class="text-danger"
+     *ngIf="rawMaterialForm.get('brand')?.touched &&
+            rawMaterialForm.get('brand')?.hasError('required')">
+  Please select a Brand.
+</div>
 
                 </div>
 
@@ -159,6 +174,11 @@
                         </option>
 
                     </select>
+                    <div class="text-danger"
+     *ngIf="rawMaterialForm.get('category')?.touched &&
+            rawMaterialForm.get('category')?.hasError('required')">
+  Please select a Category.
+</div>
 
                 </div>
 
@@ -329,17 +349,26 @@
 
             <div class="button-group">
 
-                <button
+               <button
+  type="submit"
+  class="btn-save"
+  [disabled]="loading">
 
-                    type="submit"
+  <span
+    *ngIf="loading"
+    class="spinner-border spinner-border-sm me-2"
+    role="status"
+    aria-hidden="true">
+  </span>
 
-                    class="btn-save">
+  <i
+    *ngIf="!loading"
+    class="fa fa-save me-2">
+  </i>
 
-                    <i class="fa fa-save me-2"></i>
+  {{ loading ? 'Saving...' : 'Save Raw Material' }}
 
-                    Save Raw Material
-
-                </button>
+</button>
                               <button type="button" class="btn-back" (click)="goBack()">Back</button>
 
 

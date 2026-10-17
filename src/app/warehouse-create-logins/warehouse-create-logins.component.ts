@@ -13,6 +13,7 @@ import { AreasService } from '../Services/areas.service';
   styleUrls: ['./warehouse-create-logins.component.css']
 })
 export class WarehouseCreateLoginsComponent implements OnInit {
+  
   // ==========================================
   // FORM
   // ==========================================
@@ -357,6 +358,10 @@ export class WarehouseCreateLoginsComponent implements OnInit {
   // ==========================================
 
   onSubmit(): void {
+      if (this.isLoading) {
+    return;
+  }
+
 
     this.isSubmitted = true;
 

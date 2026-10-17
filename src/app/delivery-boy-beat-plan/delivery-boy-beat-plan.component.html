@@ -41,6 +41,15 @@
                                         </option>
 
                                     </select>
+                                    <small
+  class="validation-error"
+  *ngIf="
+    beatPlanForm.get('deliveryBoy')?.touched &&
+    beatPlanForm.get('deliveryBoy')?.hasError('required')
+  "
+>
+  Delivery Boy is required
+</small>
                                 </div>
 
 
@@ -69,6 +78,7 @@
                                                     (change)="toggleBeatPlan(beat)">
 
                                             </div>
+                                            
 
 
                                             <!-- Beat Plan Information -->
@@ -107,6 +117,7 @@
                                                 </div>
 
                                             </label>
+                                            
 
                                         </div>
 
@@ -122,6 +133,15 @@
                                             </p>
 
                                         </div>
+                                        <small
+  class="validation-error"
+  *ngIf="
+    isSubmitted &&
+    selectedBeatPlans.length === 0
+  "
+>
+  Please select at least one Beat Plan
+</small>
 
                                     </div>
 

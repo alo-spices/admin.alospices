@@ -117,6 +117,11 @@
                                         </option> -->
 
                                     </select>
+                                    <div class="text-danger mt-1"
+     *ngIf="userForm.get('role')?.touched &&
+            userForm.get('role')?.hasError('required')">
+  Please select a Role.
+</div>
 
                                 </div>
 
@@ -181,6 +186,11 @@
                                             </option>
 
                                         </select>
+                                        <div class="text-danger mt-1"
+     *ngIf="userForm.get('warehouse')?.touched &&
+            userForm.get('warehouse')?.hasError('required')">
+  Please select a Warehouse.
+</div>
 
                                     </div>
 
@@ -423,6 +433,11 @@
 
                                                 <input type="text" formControlName="firstName"
                                                     placeholder="Enter first name">
+                                                    <div class="text-danger mt-1"
+     *ngIf="userForm.get('firstName')?.touched &&
+            userForm.get('firstName')?.hasError('required')">
+  First Name is required.
+</div>
 
                                             </div>
 
@@ -522,6 +537,17 @@
 
                                                 <input type="text" formControlName="mobile" maxlength="10"
                                                     placeholder="Enter mobile number">
+                                                    <div class="text-danger mt-1"
+     *ngIf="userForm.get('mobile')?.touched &&
+            userForm.get('mobile')?.hasError('required')">
+  Mobile Number is required.
+</div>
+
+<div class="text-danger mt-1"
+     *ngIf="userForm.get('mobile')?.touched &&
+            userForm.get('mobile')?.hasError('pattern')">
+  Please enter a valid 10-digit mobile number.
+</div>
 
                                             </div>
 
@@ -705,6 +731,12 @@
 
                                                     <input type="text" formControlName="distributorName"
                                                         placeholder="Enter distributor name">
+                                                        <div class="text-danger mt-1"
+     *ngIf="isDistributorRole &&
+            userForm.get('distributorName')?.touched &&
+            userForm.get('distributorName')?.hasError('required')">
+  Distributor Name is required.
+</div>
 
                                                 </div>
                                             </div>
@@ -725,6 +757,12 @@
 
                                                     <input type="text" formControlName="shopName"
                                                         placeholder="Enter shop name">
+                                                        <div class="text-danger mt-1"
+     *ngIf="isDistributorRole &&
+            userForm.get('shopName')?.touched &&
+            userForm.get('shopName')?.hasError('required')">
+  Shop Name is required.
+</div>
 
                                                 </div>
 
@@ -891,6 +929,17 @@
                                                     togglePassword()
                                                 ">
                                         </i>
+                                        <div class="text-danger mt-1"
+     *ngIf="userForm.get('password')?.touched &&
+            userForm.get('password')?.hasError('required')">
+  Password is required.
+</div>
+
+<div class="text-danger mt-1"
+     *ngIf="userForm.get('password')?.touched &&
+            userForm.get('password')?.hasError('minlength')">
+  Password must be at least 6 characters.
+</div>
 
                                     </div>
 
@@ -1058,25 +1107,21 @@
 
                         <div class="button-group">
 
-                            <button type="submit" class="btn-create" [disabled]="isLoading">
+                          <button
+  type="submit"
+  class="btn-create"
+  [disabled]="isLoading">
 
-                                <span *ngIf="!isLoading">
+  <span *ngIf="!isLoading">
+    Save User
+  </span>
 
-                                    Save User
+  <span *ngIf="isLoading">
+    <i class="fa fa-spinner fa-spin me-2"></i>
+    Creating...
+  </span>
 
-                                </span>
-
-
-                                <span *ngIf="isLoading">
-
-                                    <i class="fa fa-spinner fa-spin me-2">
-                                    </i>
-
-                                    Creating...
-
-                                </span>
-
-                            </button>
+</button>
 
 
                             <button type="button" class="btn-back" (click)="goBack()">

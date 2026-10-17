@@ -103,6 +103,10 @@
                                         </option>
 
                                     </select>
+                                    <div class="text-danger"
+     *ngIf="routeForm.get('area')?.touched && routeForm.get('area')?.hasError('required')">
+  Area is required.
+</div>
 
                                 </div>
                                 <div class="form-group">
@@ -119,6 +123,10 @@
 
 
                                     <input type="text" formControlName="routeName" placeholder="Enter route name">
+                                    <div class="text-danger"
+     *ngIf="routeForm.get('routeName')?.touched && routeForm.get('routeName')?.hasError('required')">
+  Route name is required.
+</div>
 
                                 </div>
 
@@ -139,6 +147,10 @@
 
 
                                     <input type="text" formControlName="routeCode" placeholder="Enter route code">
+                                    <div class="text-danger"
+     *ngIf="routeForm.get('routeCode')?.touched && routeForm.get('routeCode')?.hasError('required')">
+  Route code is required.
+</div>
 
                                 </div>
 

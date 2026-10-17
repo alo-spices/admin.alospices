@@ -188,65 +188,72 @@ editStockReceive(element: any) {
 // DELETE STOCK RECEIVE
 // ==========================================
 
-deleteStockReceive(element: any) {
+
+ // ==========================================
+ // DELETE STOCK RECEIVE
+ // ==========================================
+
+deleteStockReceive(element: any): void {
 
   this.popup
-
     .confirmDelete()
-
     .then((result: any) => {
 
-      if (result.isConfirmed) {
+      const isConfirmed =
+        result === true || result?.isConfirmed === true;
 
-        this.stockReceiveService
+      if (!isConfirmed) {
+        return;
+      }
 
-          .deleteStockReceive(
+      this.stockReceiveService
+        .deleteStockReceive(element._id)
+        .subscribe({
 
-            element._id
+          next: (res: any) => {
 
-          )
+            if (res.success) {
 
-          .subscribe({
+              this.popup.success(
+                res.message
+              ).then(() => {
 
-            next: (res: any) => {
+                this.getAllStockReceives();
 
-              if (res.success) {
+              });
 
-                this.popup.success(
-
-                  res.message
-
-                ).then(() => {
-
-                  this.getAllStockReceives();
-
-                });
-
-              }
-
-            },
-
-            error: (err: any) => {
-
-              console.log(err);
+            } else {
 
               this.popup.error(
-
-                err.error?.message ||
-
-                'Failed to delete Stock Receive.'
-
+                res.message || 'Failed to delete Stock Receive.'
               );
 
             }
 
-          });
+          },
 
-      }
+          error: (err: any) => {
+
+            console.log(err);
+
+            this.popup.error(
+              err.error?.message ||
+              'Failed to delete Stock Receive.'
+            );
+
+          }
+
+        });
+
+    })
+    .catch((err: any) => {
+
+      console.log('Delete confirmation error:', err);
 
     });
 
 }
+
 ngOnInit(): void {
 
   this.dataSource.filterPredicate = (

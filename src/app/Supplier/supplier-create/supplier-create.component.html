@@ -25,6 +25,11 @@
           <label>Supplier Name <span>*</span></label>
 
           <input type="text" class="form-control" formControlName="supplierName" placeholder="Enter Supplier Name">
+          <div class="text-danger mt-1"
+  *ngIf="supplierForm.get('supplierName')?.touched &&
+         supplierForm.get('supplierName')?.hasError('required')">
+  Supplier Name is required.
+</div>
 
         </div>
 
@@ -35,6 +40,11 @@
           <label>Supplier Code <span>*</span></label>
 
           <input type="text" class="form-control" formControlName="supplierCode" placeholder="Enter Supplier Code">
+          <div class="text-danger mt-1"
+  *ngIf="supplierForm.get('supplierCode')?.touched &&
+         supplierForm.get('supplierCode')?.hasError('required')">
+  Supplier Code is required.
+</div>
 
         </div>
 
@@ -54,7 +64,29 @@
 
           <label>Mobile Number <span>*</span></label>
 
-          <input type="text" class="form-control" formControlName="mobileNumber" placeholder="Enter Mobile Number">
+         
+<input
+  type="text"
+  class="form-control"
+  formControlName="mobileNumber"
+  placeholder="Enter Mobile Number"
+  maxlength="10"
+  inputmode="numeric"
+  (input)="onMobileInput($event)"
+>
+
+<div class="text-danger mt-1"
+  *ngIf="supplierForm.get('mobileNumber')?.touched &&
+         supplierForm.get('mobileNumber')?.hasError('required')">
+  Mobile Number is required.
+</div>
+
+<div class="text-danger mt-1"
+  *ngIf="supplierForm.get('mobileNumber')?.touched &&
+         supplierForm.get('mobileNumber')?.hasError('pattern')">
+  Mobile Number must contain exactly 10 digits.
+</div>
+
 
         </div>
 
@@ -251,13 +283,22 @@
 
         </button>
 
-        <button type="submit" class="btn btn-primary">
+       
+<button type="submit" class="btn btn-primary" [disabled]="isSaving">
 
-          <i class="fa fa-save me-2"></i>
+  <span
+    *ngIf="isSaving"
+    class="spinner-border spinner-border-sm me-2"
+    role="status"
+    aria-hidden="true">
+  </span>
 
-          Save Supplier
+  <i *ngIf="!isSaving" class="fa fa-save me-2"></i>
 
-        </button>
+  {{ isSaving ? 'Saving...' : 'Save Supplier' }}
+
+</button>
+
 
       </div>
 

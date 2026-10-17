@@ -15,11 +15,21 @@
                 <div class="form-group">
                   <label>Category Name</label>
                   <input type="text" formControlName="categoryName" placeholder="Enter category name">
+                  <div class="text-danger mt-1"
+  *ngIf="categoryForm.get('categoryName')?.touched &&
+         categoryForm.get('categoryName')?.hasError('required')">
+  Category Name is required.
+</div>
                 </div>
 
                 <div class="form-group">
                   <label>Category Code</label>
                   <input type="text" formControlName="categoryCode" placeholder="Enter category code">
+                  <div class="text-danger mt-1"
+  *ngIf="categoryForm.get('categoryCode')?.touched &&
+         categoryForm.get('categoryCode')?.hasError('required')">
+  Category Code is required.
+</div>
                 </div>
 
                 <div class="form-group">
@@ -30,6 +40,11 @@
                       {{ item.brandName }}
                     </option>
                   </select>
+                  <div class="text-danger mt-1"
+  *ngIf="categoryForm.get('brand')?.touched &&
+         categoryForm.get('brand')?.hasError('required')">
+  Please select a Brand.
+</div>
                 </div>
 
                 <div class="form-group full-width">
@@ -68,7 +83,17 @@
             </div>
 
             <div class="button-group">
-              <button type="submit" class="btn-create">Save</button>
+
+<button type="submit" class="btn-create" [disabled]="isSaving">
+  <span
+    *ngIf="isSaving"
+    class="spinner-border spinner-border-sm me-2"
+    role="status"
+    aria-hidden="true">
+  </span>
+
+  {{ isSaving ? 'Saving...' : 'Save' }}
+</button>
               <button type="button" class="btn-back" (click)="goBack()">Back</button>
             </div>
           </form>

@@ -190,50 +190,61 @@ export class RawmaterialListComponent implements OnInit {
   // ==========================================
   // DELETE RAW MATERIAL
   // ==========================================
+// ==========================================
+// DELETE RAW MATERIAL
+// ==========================================
 
-  deleteRawMaterial(rawMaterial: any) {
+deleteRawMaterial(rawMaterial: any): void {
 
-    this.popup.confirmDelete().then((result: any) => {
+  this.popup.confirmDelete().then((result: any) => {
 
-      if (result.isConfirmed) {
+    const isConfirmed =
+      result === true || result?.isConfirmed === true;
 
-        this.rawMaterialService
+    if (!isConfirmed) {
+      return;
+    }
 
-          .deleteRawMaterial(rawMaterial._id)
+    this.rawMaterialService
+      .deleteRawMaterial(rawMaterial._id)
+      .subscribe({
 
-          .subscribe({
+        next: (res: any) => {
 
-            next: (res: any) => {
+          if (res.success) {
 
-              if (res.success) {
+            this.popup.success(res.message);
 
-                this.popup.success(res.message);
+            this.getAllRawMaterials();
 
-                this.getAllRawMaterials();
+          } else {
 
-              }
+            this.popup.error(
+              res.message || "Failed to delete Raw Material."
+            );
 
-            },
+          }
 
-            error: (err: any) => {
+        },
 
-              console.log(err);
+        error: (err: any) => {
 
-              this.popup.error(
+          console.log(err);
 
-                err.error?.message ||
+          this.popup.error(
+            err.error?.message ||
+            "Failed to delete Raw Material."
+          );
 
-                "Failed to delete Raw Material."
+        }
 
-              );
+      });
 
-            }
+  }).catch((err: any) => {
 
-          });
+    console.log('Delete confirmation error:', err);
 
-      }
+  });
 
-    });
-
-  }
+}
 }

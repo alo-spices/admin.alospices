@@ -1,0 +1,681 @@
+
+<div class="beat-dialog">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+  <div class="dialog-header">
+
+    <div class="header-left">
+
+      <div class="header-icon">
+        <i class="fa fa-map-marker"></i>
+      </div>
+
+      <div class="header-text">
+        <h2>Beat Plan Details</h2>
+        <p>Complete beat plan information</p>
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="close-button"
+      title="Close"
+      (click)="close()"
+    >
+      <i class="fa fa-times"></i>
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       CONTENT
+       ===================================================== -->
+  <div mat-dialog-content class="dialog-content">
+
+    <!-- Loading -->
+    <div
+      *ngIf="loading"
+      class="state-container"
+    >
+
+      <div class="loader"></div>
+
+      <p>Loading Beat Plan details...</p>
+
+    </div>
+
+
+    <!-- Error -->
+    <div
+      *ngIf="!loading && errorMessage"
+      class="state-container error-state"
+    >
+
+      <div class="state-icon">
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+
+      <h3>Unable to load details</h3>
+
+      <p>{{ errorMessage }}</p>
+
+    </div>
+
+
+    <!-- =====================================================
+         BEAT PLAN DETAILS
+         ===================================================== -->
+    <div
+      *ngIf="!loading && beatPlan"
+      class="details-wrapper"
+    >
+
+
+      <!-- ===================================================
+           BASIC INFORMATION
+           =================================================== -->
+      <div class="section-card">
+
+        <div class="section-header">
+
+          <div class="section-title">
+            <i class="fa fa-info-circle"></i>
+            <span>Basic Information</span>
+          </div>
+
+          <span
+            class="status-badge"
+            [class.active]="beatPlan.status === 'Active'"
+            [class.inactive]="beatPlan.status !== 'Active'"
+          >
+            <span class="status-dot"></span>
+            {{ beatPlan.status || '-' }}
+          </span>
+
+        </div>
+
+
+        <div class="details-grid">
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              Beat Name
+            </span>
+
+            <span class="detail-value highlight">
+              {{ beatPlan.beatName || '-' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              Day
+            </span>
+
+            <span class="detail-value">
+              <span class="day-badge">
+                {{ beatPlan.day || '-' }}
+              </span>
+            </span>
+
+          </div>
+
+
+          <div class="detail-box full-width">
+
+            <span class="detail-label">
+              Description
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.description || '-' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           AREA INFORMATION
+           =================================================== -->
+      <div class="section-card">
+
+        <div class="section-header">
+
+          <div class="section-title">
+            <i class="fa fa-map-marker"></i>
+            <span>Area Information</span>
+          </div>
+
+        </div>
+
+
+        <div class="area-card">
+
+          <div class="area-icon">
+            <i class="fa fa-map-marker"></i>
+          </div>
+
+          <div class="area-main">
+
+            <div class="area-name">
+              {{ beatPlan.area?.areaName || '-' }}
+            </div>
+
+            <div class="area-code">
+              Area Code:
+              <strong>
+                {{ beatPlan.area?.areaCode || '-' }}
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="details-grid area-grid">
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              City
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.area?.city || '-' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              District
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.area?.district || '-' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              State
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.area?.state || '-' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              Pincode
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.area?.pincode || '-' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           ROUTE INFORMATION
+           =================================================== -->
+      <div class="section-card">
+
+        <div class="section-header">
+
+          <div class="section-title">
+            <i class="fa fa-road"></i>
+            <span>Route Information</span>
+          </div>
+
+        </div>
+
+
+        <div class="route-display">
+
+          <div class="route-icon">
+            <i class="fa fa-road"></i>
+          </div>
+
+          <div>
+
+            <span class="detail-label">
+              Assigned Route
+            </span>
+
+            <span class="route-name">
+              {{ beatPlan.route?.routeName || 'Route not assigned' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           SALESMAN INFORMATION
+           =================================================== -->
+      <div class="section-card">
+
+        <div class="section-header">
+
+          <div class="section-title">
+            <i class="fa fa-user"></i>
+            <span>Salesman Information</span>
+          </div>
+
+        </div>
+
+
+        <div class="salesman-card">
+
+          <div class="salesman-avatar">
+
+            <img
+              *ngIf="beatPlan.salesman?.profileImage"
+              [src]="beatPlan.salesman.profileImage"
+              [alt]="beatPlan.salesman.fullName"
+            />
+
+            <i
+              *ngIf="!beatPlan.salesman?.profileImage"
+              class="fa fa-user"
+            ></i>
+
+          </div>
+
+
+          <div class="salesman-details">
+
+            <span class="salesman-name">
+              {{ beatPlan.salesman?.fullName || '-' }}
+            </span>
+
+            <span class="salesman-code">
+              Employee Code:
+              <strong>
+                {{ beatPlan.salesman?.employeeCode || '-' }}
+              </strong>
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="details-grid">
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              Mobile
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.salesman?.mobile || '-' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              Email
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.salesman?.email || '-' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              Role
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.salesman?.role || '-' }}
+            </span>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              Assignment Type
+            </span>
+
+            <span class="detail-value">
+              {{ beatPlan.salesman?.assignmentType || '-' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           STATUS & PROGRESS
+           =================================================== -->
+      <div class="section-card">
+
+        <div class="section-header">
+
+          <div class="section-title">
+            <i class="fa fa-bar-chart"></i>
+            <span>Beat Progress</span>
+          </div>
+
+        </div>
+
+
+        <div class="progress-grid">
+
+
+          <!-- Started -->
+          <div class="progress-item">
+
+            <span class="detail-label">
+              Beat Started
+            </span>
+
+            <span
+              class="boolean-value"
+              [class.yes]="beatPlan.isStarted"
+              [class.no]="!beatPlan.isStarted"
+            >
+
+              <i
+                class="fa"
+                [class.fa-check]="beatPlan.isStarted"
+                [class.fa-minus]="!beatPlan.isStarted"
+              ></i>
+
+              {{ beatPlan.isStarted ? 'Yes' : 'No' }}
+
+            </span>
+
+          </div>
+
+
+          <!-- Completed -->
+          <div class="progress-item">
+
+            <span class="detail-label">
+              Beat Completed
+            </span>
+
+            <span
+              class="boolean-value"
+              [class.yes]="beatPlan.isCompleted"
+              [class.no]="!beatPlan.isCompleted"
+            >
+
+              <i
+                class="fa"
+                [class.fa-check]="beatPlan.isCompleted"
+                [class.fa-minus]="!beatPlan.isCompleted"
+              ></i>
+
+              {{ beatPlan.isCompleted ? 'Yes' : 'No' }}
+
+            </span>
+
+          </div>
+
+
+          <!-- Total Shops -->
+          <div class="progress-item">
+
+            <span class="detail-label">
+              Total Shops
+            </span>
+
+            <span class="count-value">
+              {{ beatPlan.shops?.length || 0 }}
+            </span>
+
+          </div>
+
+
+          <!-- Completed Shops -->
+          <div class="progress-item">
+
+            <span class="detail-label">
+              Completed Shops
+            </span>
+
+            <span class="count-value">
+              {{ beatPlan.completedShops?.length || 0 }}
+            </span>
+
+          </div>
+
+
+          <!-- Pending Shops -->
+          <div class="progress-item">
+
+            <span class="detail-label">
+              Pending Shops
+            </span>
+
+            <span class="count-value">
+              {{ beatPlan.pendingShops?.length || 0 }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           ASSIGNED SHOPS
+           =================================================== -->
+      <div class="section-card">
+
+        <div class="section-header">
+
+          <div class="section-title">
+
+            <i class="fa fa-building"></i>
+
+            <span>Assigned Shops</span>
+
+          </div>
+
+
+          <span class="shop-count-badge">
+
+            {{ beatPlan.shops?.length || 0 }}
+
+            {{ beatPlan.shops?.length === 1 ? 'Shop' : 'Shops' }}
+
+          </span>
+
+        </div>
+
+
+        <!-- Shops -->
+        <div
+          *ngIf="beatPlan.shops?.length"
+          class="shop-list"
+        >
+
+          <div
+            *ngFor="
+              let shop of beatPlan.shops;
+              let i = index
+            "
+            class="shop-card"
+          >
+
+            <!-- Number -->
+            <div class="shop-number">
+              {{ i + 1 }}
+            </div>
+
+
+            <!-- Shop Details -->
+            <div class="shop-main">
+
+              <div class="shop-title-row">
+
+                <span class="shop-title">
+                  {{ shop.shopName || shop.partyName || '-' }}
+                </span>
+
+                <span
+                  class="shop-status"
+                  [class.shop-active]="shop.status === 'Active'"
+                  [class.shop-inactive]="shop.status !== 'Active'"
+                >
+                  {{ shop.status || '-' }}
+                </span>
+
+              </div>
+
+
+              <div class="shop-meta">
+
+                <span>
+                  <i class="fa fa-id-card-o"></i>
+                  {{ shop.partyCode || '-' }}
+                </span>
+
+                <span>
+                  <i class="fa fa-user"></i>
+                  {{ shop.ownerName || '-' }}
+                </span>
+
+                <span>
+                  <i class="fa fa-phone"></i>
+                  {{ shop.mobile || '-' }}
+                </span>
+
+              </div>
+
+
+              <div class="shop-location">
+
+                <i class="fa fa-map-marker"></i>
+
+                <span>
+                  {{ shop.address || '-' }}
+                  <span *ngIf="shop.city">
+                    , {{ shop.city }}
+                  </span>
+                  <span *ngIf="shop.pincode">
+                    - {{ shop.pincode }}
+                  </span>
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- Party Type -->
+            <div class="shop-type">
+
+              <span class="type-label">
+                Party Type
+              </span>
+
+              <span class="type-value">
+                {{ shop.partyType || '-' }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- No Shops -->
+        <div
+          *ngIf="!beatPlan.shops?.length"
+          class="empty-shops"
+        >
+
+          <i class="fa fa-building-o"></i>
+
+          <div>
+            <strong>No shops assigned</strong>
+            <span>
+              No shops are currently assigned to this Beat Plan.
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <div
+    mat-dialog-actions
+    class="dialog-footer"
+  >
+
+    <button
+      type="button"
+      class="close-footer-btn"
+      (click)="close()"
+    >
+
+      <i class="fa fa-times"></i>
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>
+

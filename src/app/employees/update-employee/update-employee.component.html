@@ -1,0 +1,328 @@
+<div class="category-container">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- ============================= -->
+            <!-- Title -->
+            <!-- ============================= -->
+
+            <div class="col-md-12">
+
+                <div class="title-section">
+
+                    <h2>Update Employee</h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- Employee Card -->
+            <!-- ============================= -->
+
+            <div class="col-md-12">
+
+                <div class="category-card">
+
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+
+                        <div class="category-grid">
+
+
+                            <!-- ============================= -->
+                            <!-- Form Area -->
+                            <!-- ============================= -->
+
+                            <div class="form-area">
+
+
+                                <!-- First Name -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        First Name
+                                    </label>
+
+                                    <input type="text" formControlName="firstName" placeholder="Enter first name">
+
+                                </div>
+
+
+                                <!-- Last Name -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Last Name
+                                    </label>
+
+                                    <input type="text" formControlName="lastName" placeholder="Enter last name">
+
+                                </div>
+
+
+                                <!-- Mobile -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Mobile Number
+                                    </label>
+
+                                    <input type="text" formControlName="mobile" placeholder="Enter mobile number"
+                                        maxlength="10">
+
+                                </div>
+
+                                <!-- Profile Image -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Profile Image
+                                    </label>
+
+                                    <input type="file" accept="image/*" (change)="onFileChange($event)">
+
+                                </div>
+                                <!-- Email -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Email
+                                    </label>
+
+                                    <input type="email" formControlName="email" placeholder="Enter email address">
+
+                                </div>
+
+
+                                <!-- Password -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Password
+                                    </label>
+
+                                    <input type="password" formControlName="password" placeholder="Enter password">
+
+                                </div>
+
+
+                                <!-- Role -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Role
+                                    </label>
+
+                                    <select formControlName="role">
+
+                                        <option value="">
+                                            Select Role
+                                        </option>
+
+                                        <option value="SalesManager">
+                                            Sales Manager
+                                        </option>
+
+                                        <option value="Salesman">
+                                            Salesman
+                                        </option>
+
+                                        <option value="Accountant">
+                                            Accountant
+                                        </option>
+
+                                        <option value="DeliveryBoy">
+                                            Delivery Boy
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Gender -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Gender
+                                    </label>
+
+                                    <select formControlName="gender">
+
+                                        <option value="Male">
+                                            Male
+                                        </option>
+
+                                        <option value="Female">
+                                            Female
+                                        </option>
+
+                                        <option value="Other">
+                                            Other
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Date Of Birth -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Date of Birth
+                                    </label>
+
+                                    <input type="date" formControlName="dateOfBirth">
+
+                                </div>
+
+
+                                <!-- Alternate Mobile -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Alternate Mobile
+                                    </label>
+
+                                    <input type="text" formControlName="alternateMobile"
+                                        placeholder="Enter alternate mobile">
+
+                                </div>
+
+
+                                <!-- Address -->
+
+                                <div class="form-group full-width">
+
+                                    <label>
+                                        Address
+                                    </label>
+
+                                    <textarea rows="3" formControlName="addressLine1" placeholder="Enter address">
+                  </textarea>
+
+                                </div>
+
+
+                                <!-- City -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        City
+                                    </label>
+
+                                    <input type="text" formControlName="city" placeholder="Enter city">
+
+                                </div>
+
+
+                                <!-- State -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        State
+                                    </label>
+
+                                    <input type="text" formControlName="state" placeholder="Enter state">
+
+                                </div>
+
+
+                                <!-- Pincode -->
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Pincode
+                                    </label>
+
+                                    <input type="text" formControlName="pincode" placeholder="Enter pincode"
+                                        maxlength="6">
+
+                                </div>
+
+
+
+
+                            </div>
+
+
+                            <!-- ============================= -->
+                            <!-- Image Preview -->
+                            <!-- ============================= -->
+
+                            <div class="preview-area">
+
+                                <div class="preview-box">
+
+                                    <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Preview">
+
+
+                                    <div *ngIf="!imagePreview" class="preview-empty">
+
+                                        <i class="fa fa-user"></i>
+
+                                        <p>
+                                            Profile Preview
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- ============================= -->
+                        <!-- Buttons -->
+                        <!-- ============================= -->
+
+                        <div class="button-group">
+
+                            <button type="submit" class="btn-create">
+
+                                Save Employee
+
+                            </button>
+
+
+                            <button type="button" class="btn-back" (click)="goBack()">
+
+                                Back
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

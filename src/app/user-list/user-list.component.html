@@ -1,0 +1,192 @@
+<div class="category-container">
+
+  <!-- Top Row -->
+  <div class="top-row">
+
+    <div class="title-section">
+      <h2>
+        User Management
+      </h2>
+      <p>
+        Total Users:
+        {{ totalUsers }}
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Search -->
+  <div class="search-row">
+
+    <mat-form-field
+      appearance="outline"
+      class="w-100">
+
+      <mat-label>
+        Search User
+      </mat-label>
+
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Enter user name">
+
+    </mat-form-field>
+
+  </div>
+
+  <!-- Table -->
+  <div class="table-row">
+
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="mat-elevation-z8">
+
+      <!-- S.No -->
+      <ng-container
+        matColumnDef="sno">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          S.No
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="
+            let element;
+            let i = index
+          ">
+          {{ i + 1 }}
+        </td>
+
+      </ng-container>
+
+      <!-- Name -->
+      <ng-container
+        matColumnDef="name">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          Name
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+          {{ element.name }}
+        </td>
+
+      </ng-container>
+
+      <!-- Phone -->
+      <ng-container
+        matColumnDef="phone">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          Phone
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+          {{ element.phone }}
+        </td>
+
+      </ng-container>
+
+      <!-- Email -->
+      <ng-container
+        matColumnDef="email">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          Email
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+          {{ element.email }}
+        </td>
+
+      </ng-container>
+
+      <!-- Verified -->
+      <ng-container
+        matColumnDef="isVerified">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          Verified
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+          {{
+            element.isVerified
+            ? 'Yes'
+            : 'No'
+          }}
+        </td>
+
+      </ng-container>
+
+      <!-- Created Date -->
+      <ng-container
+        matColumnDef="createdAt">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          Created At
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let element">
+          {{
+            element.createdAt
+            | date:'short'
+          }}
+        </td>
+
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="
+          displayedColumns
+        ">
+      </tr>
+
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns:
+          displayedColumns;
+        ">
+      </tr>
+
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="
+        [5,10,20,50]
+      "
+      showFirstLastButtons>
+    </mat-paginator>
+
+  </div>
+
+</div>

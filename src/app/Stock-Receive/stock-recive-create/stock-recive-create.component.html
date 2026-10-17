@@ -53,6 +53,11 @@
                         formControlName="receiveNo"
 
                         placeholder="Enter Receive Number">
+                        <div class="text-danger"
+     *ngIf="stockReceiveForm.get('receiveNo')?.touched &&
+            stockReceiveForm.get('receiveNo')?.hasError('required')">
+  Receive Number is required.
+</div>
 
                 </div>
 
@@ -93,6 +98,11 @@
                         </option>
 
                     </select>
+                    <div class="text-danger"
+     *ngIf="stockReceiveForm.get('supplier')?.touched &&
+            stockReceiveForm.get('supplier')?.hasError('required')">
+  Please select a Supplier.
+</div>
 
                 </div>
 
@@ -133,6 +143,11 @@
                         </option>
 
                     </select>
+                    <div class="text-danger"
+     *ngIf="stockReceiveForm.get('warehouse')?.touched &&
+            stockReceiveForm.get('warehouse')?.hasError('required')">
+  Please select a Warehouse.
+</div>
 
                 </div>
 
@@ -159,6 +174,11 @@
                         formControlName="invoiceNo"
 
                         placeholder="Enter Invoice Number">
+                        <div class="text-danger"
+     *ngIf="stockReceiveForm.get('invoiceNo')?.touched &&
+            stockReceiveForm.get('invoiceNo')?.hasError('required')">
+  Invoice Number is required.
+</div>
 
                 </div>
 
@@ -183,6 +203,11 @@
                         class="form-control"
 
                         formControlName="invoiceDate">
+                        <div class="text-danger"
+     *ngIf="stockReceiveForm.get('invoiceDate')?.touched &&
+            stockReceiveForm.get('invoiceDate')?.hasError('required')">
+  Invoice Date is required.
+</div>
 
                 </div>
 
@@ -252,6 +277,11 @@
                 </option>
 
             </select>
+            <div class="text-danger"
+     *ngIf="item.get('rawMaterial')?.touched &&
+            item.get('rawMaterial')?.hasError('required')">
+  Please select a Raw Material.
+</div>
 
         </div>
 
@@ -276,6 +306,11 @@
                 formControlName="batchNo"
 
                 placeholder="Batch">
+                <div class="text-danger"
+     *ngIf="item.get('batchNo')?.touched &&
+            item.get('batchNo')?.hasError('required')">
+  Batch Number is required.
+</div>
 
         </div>
 
@@ -300,6 +335,17 @@
                 formControlName="noOfBags"
 
                 placeholder="0">
+                <div class="text-danger"
+     *ngIf="item.get('noOfBags')?.touched &&
+            item.get('noOfBags')?.hasError('required')">
+  Number of Bags is required.
+</div>
+
+<div class="text-danger"
+     *ngIf="item.get('noOfBags')?.touched &&
+            item.get('noOfBags')?.hasError('min')">
+  Number of Bags must be at least 1.
+</div>
 
         </div>
 
@@ -324,6 +370,17 @@
                 formControlName="bagWeightKg"
 
                 placeholder="0">
+                <div class="text-danger"
+     *ngIf="item.get('bagWeightKg')?.touched &&
+            item.get('bagWeightKg')?.hasError('required')">
+  Bag Weight is required.
+</div>
+
+<div class="text-danger"
+     *ngIf="item.get('bagWeightKg')?.touched &&
+            item.get('bagWeightKg')?.hasError('min')">
+  Bag Weight cannot be negative.
+</div>
 
         </div>
 
@@ -348,6 +405,17 @@
                 formControlName="rate"
 
                 placeholder="0">
+                <div class="text-danger"
+     *ngIf="item.get('rate')?.touched &&
+            item.get('rate')?.hasError('required')">
+  Rate is required.
+</div>
+
+<div class="text-danger"
+     *ngIf="item.get('rate')?.touched &&
+            item.get('rate')?.hasError('min')">
+  Rate cannot be negative.
+</div>
 
         </div>
 
@@ -428,18 +496,25 @@
 <div class="button-group">
 
     <button
+    type="submit"
+    class="btn-save"
+    [disabled]="loading">
 
-        type="submit"
+    <span
+        *ngIf="loading"
+        class="spinner-border spinner-border-sm me-2"
+        role="status"
+        aria-hidden="true">
+    </span>
 
-        class="btn-save"
+    <i
+        *ngIf="!loading"
+        class="fa fa-save me-2">
+    </i>
 
-        [disabled]="loading">
+    {{ loading ? 'Saving...' : 'Save Stock Receive' }}
 
-        <i class="fa fa-save me-2"></i>
-
-        Save Stock Receive
-
-    </button>
+</button>
     
               <button type="button" class="btn-back" (click)="goBack()">Back</button>
           

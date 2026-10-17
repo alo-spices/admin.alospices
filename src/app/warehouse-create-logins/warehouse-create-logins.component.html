@@ -95,6 +95,11 @@
                                         </option>
 
                                     </select>
+                                    <div class="text-danger mt-1"
+     *ngIf="userForm.get('warehouse')?.touched &&
+            userForm.get('warehouse')?.hasError('required')">
+  Please select a Warehouse.
+</div>
 
                                 </div>
 
@@ -127,6 +132,11 @@
                                         </option>
 
                                     </select>
+                                    <div class="text-danger mt-1"
+     *ngIf="userForm.get('area')?.touched &&
+            userForm.get('area')?.hasError('required')">
+  Please select an Area.
+</div>
 
                                 </div>
                                 <!-- ================================= -->
@@ -308,6 +318,17 @@
                                     <small>
                                         Create password for warehouse login
                                     </small>
+                                    <div class="text-danger mt-1"
+     *ngIf="userForm.get('password')?.touched &&
+            userForm.get('password')?.hasError('required')">
+  Password is required.
+</div>
+
+<div class="text-danger mt-1"
+     *ngIf="userForm.get('password')?.touched &&
+            userForm.get('password')?.hasError('minlength')">
+  Password must be at least 6 characters.
+</div>
 
                                 </div>
 

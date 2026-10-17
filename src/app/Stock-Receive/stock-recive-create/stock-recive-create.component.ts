@@ -128,28 +128,28 @@ createItem(): FormGroup {
 
     ],
 
-    noOfBags: [
-
+      noOfBags: [
       1,
-
-      Validators.required
-
+      [
+        Validators.required,
+        Validators.min(1)
+      ]
     ],
 
     bagWeightKg: [
-
       0,
-
-      Validators.required
-
+      [
+        Validators.required,
+        Validators.min(0)
+      ]
     ],
 
-    rate: [
-
+     rate: [
       0,
-
-      Validators.required
-
+      [
+        Validators.required,
+        Validators.min(0)
+      ]
     ]
 
   });
@@ -345,6 +345,7 @@ createStockReceive() {
   if (this.stockReceiveForm.invalid) {
 
     this.stockReceiveForm.markAllAsTouched();
+       this.loading = false;
 
     this.popup.validation(
 

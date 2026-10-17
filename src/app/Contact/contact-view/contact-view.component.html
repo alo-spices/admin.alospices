@@ -1,0 +1,273 @@
+<div class="contact-details-dialog">
+
+
+  <!-- ================= HEADER ================= -->
+
+  <div class="dialog-header">
+
+    <div class="header-left">
+
+      <div class="header-icon">
+
+        <i class="fa fa-envelope"></i>
+
+      </div>
+
+      <div>
+
+        <h2>
+          Contact Details
+        </h2>
+
+        <p>
+          Contact message information
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="close-btn"
+      (click)="close()"
+    >
+
+      <i class="fa fa-times"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ================= LOADING ================= -->
+
+  <div
+    class="loading-section"
+    *ngIf="isLoading"
+  >
+
+    <div class="spinner-border"></div>
+
+    <p>
+      Loading contact details...
+    </p>
+
+  </div>
+
+
+  <!-- ================= DETAILS ================= -->
+
+  <div
+    class="details-body"
+    *ngIf="!isLoading && contact"
+  >
+
+
+    <!-- FULL NAME -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-user"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Full Name
+        </span>
+
+        <span class="detail-value">
+          {{ contact.fullName }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- PHONE -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-phone"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Phone Number
+        </span>
+
+        <span class="detail-value">
+          {{ contact.phoneNumber }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- EMAIL -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-envelope"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Email Address
+        </span>
+
+        <span class="detail-value">
+          {{ contact.email }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- SUBJECT -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-tag"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Subject
+        </span>
+
+        <span class="detail-value">
+          {{ contact.subject }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-info-circle"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Status
+        </span>
+
+        <span
+          class="status-badge"
+          [ngClass]="
+            getStatusClass(contact.status)
+          "
+        >
+
+          {{ contact.status }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div class="detail-row message-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-comment"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Message
+        </span>
+
+        <p class="message-text">
+          {{ contact.message }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- CREATED DATE -->
+
+    <div class="detail-row">
+
+      <div class="detail-icon">
+
+        <i class="fa fa-calendar"></i>
+
+      </div>
+
+      <div class="detail-content">
+
+        <span class="detail-label">
+          Submitted On
+        </span>
+
+        <span class="detail-value">
+
+          {{
+            contact.createdAt
+              | date:'dd-MM-yyyy, hh:mm a'
+          }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <div class="dialog-footer">
+
+    <button
+      type="button"
+      class="close-button"
+      (click)="close()"
+    >
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

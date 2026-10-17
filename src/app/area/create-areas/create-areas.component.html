@@ -78,6 +78,11 @@
 
 
                                     <input type="text" formControlName="areaName" placeholder="Enter area name">
+                                    <small class="text-danger"
+       *ngIf="areaForm.get('areaName')?.touched &&
+              areaForm.get('areaName')?.hasError('required')">
+  Area Name is required.
+</small>
 
                                 </div>
 
@@ -100,6 +105,11 @@
 
 
                                     <input type="text" formControlName="areaCode" placeholder="Enter area code">
+                                    <small class="text-danger"
+       *ngIf="areaForm.get('areaCode')?.touched &&
+              areaForm.get('areaCode')?.hasError('required')">
+  Area Code is required.
+</small>
 
                                 </div>
 
@@ -122,6 +132,11 @@
 
 
                                     <input type="text" formControlName="city" placeholder="Enter city">
+                                    <small class="text-danger"
+       *ngIf="areaForm.get('city')?.touched &&
+              areaForm.get('city')?.hasError('required')">
+  City is required.
+</small>
 
                                 </div>
 
@@ -171,6 +186,11 @@
 
                                     <input type="text" formControlName="pincode" maxlength="6"
                                         placeholder="Enter pincode">
+                                        <small class="text-danger"
+       *ngIf="areaForm.get('pincode')?.touched &&
+              areaForm.get('pincode')?.hasError('pattern')">
+  Pincode must contain exactly 6 digits.
+</small>
 
                                 </div>
 

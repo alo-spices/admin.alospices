@@ -10,6 +10,7 @@ import { CommomPopupService } from 'src/app/Services/commom-popup.service';
   styleUrls: ['./brand-create.component.css']
 })
 export class BrandCreateComponent implements OnInit {
+isSaving: boolean = false;
 
   brandForm!: FormGroup;
 
@@ -42,8 +43,7 @@ export class BrandCreateComponent implements OnInit {
       description: [''],
       website: [''],
       email: ['', [Validators.email]],
-      phone: ['']
-      // Add more fields here if needed
+phone: ['', [Validators.pattern(/^[0-9]{10}$/)]],      // Add more fields here if needed
     });
   }
 
@@ -80,49 +80,63 @@ export class BrandCreateComponent implements OnInit {
   // ==========================================
   // Submit
   // ==========================================
-  onSubmit(): void {
-    this.isSubmitted = true;
 
-    if (this.brandForm.invalid) {
-      this.alertService.validation('Please fill all required fields');
-      return;
-    }
+onSubmit(): void {
+  this.brandForm.markAllAsTouched();
 
-    const formData = new FormData();
-
-    formData.append('brandName', this.brandForm.value.brandName);
-    formData.append('brandCode', this.brandForm.value.brandCode);
-    formData.append('description', this.brandForm.value.description || '');
-    formData.append('website', this.brandForm.value.website || '');
-    formData.append('email', this.brandForm.value.email || '');
-    formData.append('phone', this.brandForm.value.phone || '');
-
-    // Backend expects:
-    // upload.fields([{ name: "logo", maxCount: 1 }, { name: "bannerImage", maxCount: 1 }])
-    if (this.selectedLogoFile) {
-      formData.append('logo', this.selectedLogoFile);
-    }
-
-    if (this.selectedBannerFile) {
-      formData.append('bannerImage', this.selectedBannerFile);
-    }
-
-    this.brandService.createBrand(formData).subscribe({
-      next: (response: any) => {
-        this.alertService.success(
-          response.message || 'Brand Created Successfully'
-        );
-        // Adjust navigation path as per your routing
-        this.router.navigate(['/admin/brand']);
-      },
-      error: (error) => {
-        console.log(error);
-        this.alertService.error(
-          error.error?.message || 'Something went wrong'
-        );
-      }
-    });
+  // Required fields / validation check
+  if (this.brandForm.invalid) {
+    this.isSaving = false;
+    this.alertService.validation('Please fill all required fields');
+    return;
   }
+
+  // Prevent multiple submissions
+  if (this.isSaving) {
+    return;
+  }
+
+  this.isSaving = true;
+
+  const formData = new FormData();
+
+  formData.append('brandName', this.brandForm.value.brandName);
+  formData.append('brandCode', this.brandForm.value.brandCode);
+  formData.append('description', this.brandForm.value.description || '');
+  formData.append('website', this.brandForm.value.website || '');
+  formData.append('email', this.brandForm.value.email || '');
+  formData.append('phone', this.brandForm.value.phone || '');
+
+  if (this.selectedLogoFile) {
+    formData.append('logo', this.selectedLogoFile);
+  }
+
+  if (this.selectedBannerFile) {
+    formData.append('bannerImage', this.selectedBannerFile);
+  }
+
+  this.brandService.createBrand(formData).subscribe({
+    next: (response: any) => {
+      this.isSaving = false;
+
+      this.alertService.success(
+        response.message || 'Brand Created Successfully'
+      );
+
+      this.router.navigate(['/admin/brand-list']);
+    },
+    error: (error) => {
+      this.isSaving = false;
+
+      console.log(error);
+
+      this.alertService.error(
+        error.error?.message || 'Something went wrong'
+      );
+    }
+  });
+}
+
 
   // ==========================================
   // Back
@@ -131,5 +145,16 @@ export class BrandCreateComponent implements OnInit {
     // Adjust navigation path as per your routing
     this.router.navigate(['/admin/brand-list']);
   }
+  onPhoneInput(event: Event): void {
+  const input = event.target as HTMLInputElement;
+
+  const value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+
+  input.value = value;
+
+  this.brandForm.get('phone')?.setValue(value, {
+    emitEvent: false
+  });
+}
 
 }
