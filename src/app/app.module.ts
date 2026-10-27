@@ -158,6 +158,11 @@ import { CollectionsComponent } from './collections/collections.component';
 import { CollectionViewComponent } from './collection-view/collection-view.component';
 import { OutstandingComponent } from './outstanding/outstanding.component';
 import { OutstandingViewComponent } from './outstanding-view/outstanding-view.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { UpdateProductionStatusPopupComponent } from './update-production-status-popup/update-production-status-popup.component';
+import { WarehouseCompleteProductionListComponent } from './warehouse-complete-production-list/warehouse-complete-production-list.component';
+import { WarehouseCompleteProductionViewDataComponent } from './warehouse-complete-production-view-data/warehouse-complete-production-view-data.component';
+import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
 
 
 @NgModule({
@@ -301,6 +306,10 @@ import { OutstandingViewComponent } from './outstanding-view/outstanding-view.co
     CollectionViewComponent,
     OutstandingComponent,
     OutstandingViewComponent,
+    UpdateProductionStatusPopupComponent,
+    WarehouseCompleteProductionListComponent,
+    WarehouseCompleteProductionViewDataComponent,
+    PendingOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -317,7 +326,8 @@ import { OutstandingViewComponent } from './outstanding-view/outstanding-view.co
     MatSortModule, MatSnackBarModule,
     MatDialogModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
 
 
   ],

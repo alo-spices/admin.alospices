@@ -387,9 +387,7 @@ export class LoginComponent implements OnInit {
           // Navigate Based On Backend Role
           // ==================================
 
-          this.navigateByRole(
-            response?.user?.role
-          );
+          this.navigateByRole();
 
         },
 
@@ -422,127 +420,50 @@ export class LoginComponent implements OnInit {
   // ==========================================
   // Role Based Navigation
   // ==========================================
+  private navigateByRole(): void {
 
-  navigateByRole(
-    role: string
-  ): void {
+    const storedUser = localStorage.getItem('user');
 
+    if (!storedUser) {
+      this.alertService.error('User details not found in localStorage');
+      return;
+    }
 
-    console.log(
-      'Logged-in User Role:',
-      role
-    );
+    let user: any;
 
+    try {
+      user = JSON.parse(storedUser);
+    } catch (error) {
+      this.alertService.error('Invalid user details');
+      return;
+    }
+
+    const role = user?.role;
+
+    console.log('Logged-in User:', user);
+    console.log('Logged-in Role:', role);
 
     switch (role) {
 
-
-      // ======================================
-      // ADMIN
-      // ======================================
-
       case 'Admin':
-
-        this.alertService
-          .success(
-            'Admin Login Successful'
-          )
-          .then(() => {
-
-            this.router.navigate([
-              '/admin/dashboard'
-            ]);
-
-          });
-
+        this.router.navigate(['/admin/dashboard']);
         break;
-
-
-      // ======================================
-      // SUB ADMIN
-      // ======================================
-
-      case 'SubAdmin':
-
-        this.alertService
-          .success(
-            'SubAdmin Login Successful'
-          )
-          .then(() => {
-
-            this.router.navigate([
-              '/admin/subadmin-dashboard'
-            ]);
-
-          });
-
-        break;
-
-
-      // ======================================
-      // WAREHOUSE MANAGER
-      // ======================================
 
       case 'WarehouseManager':
-
-        this.alertService
-          .success(
-            'Warehouse Manager Login Successful'
-          )
-          .then(() => {
-
-            this.router.navigate([
-              '/admin/warehouse-dashboard'
-            ]);
-
-          });
-
+        this.router.navigate(['/admin/warehouse-dashboard']);
         break;
-
-
-      // ======================================
-      // DISTRIBUTOR
-      // ======================================
 
       case 'Distributor':
-
-        this.alertService
-          .success(
-            'Distributor Login Successful'
-          )
-          .then(() => {
-
-            this.router.navigate([
-              '/admin/distributor-dashboard'
-            ]);
-
-          });
-
+        this.router.navigate(['/admin/distributor-dashboard']);
         break;
-
-
-      // ======================================
-      // INVALID ROLE
-      // ======================================
 
       default:
-
-        console.error(
-          'Invalid user role:',
-          role
-        );
-
-
         this.alertService.error(
-          'Invalid user role'
+          `Invalid user role: ${role || 'Not found'}`
         );
-
         break;
-
     }
-
   }
-
 
   // ==========================================
   // Remember Me

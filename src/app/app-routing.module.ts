@@ -107,6 +107,8 @@ import { OutstandingComponent } from './outstanding/outstanding.component';
 import { OutstandingViewComponent } from './outstanding-view/outstanding-view.component';
 import { DistributorCollectionsComponent } from './distributor/distributor-collections/distributor-collections.component';
 import { DistributorOutstandingsComponent } from './distributor/distributor-outstandings/distributor-outstandings.component';
+import { WarehouseCompleteProductionListComponent } from './warehouse-complete-production-list/warehouse-complete-production-list.component';
+import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
 
 
 const routes: Routes = [
@@ -406,7 +408,7 @@ const routes: Routes = [
 
         data: {
           roles: [
-            'Admin'
+            'Admin', 'WarehouseManager'
           ]
         }
       },
@@ -586,7 +588,22 @@ const routes: Routes = [
           roles: [
             'Admin',
             'SubAdmin',
-            'Distributor'
+            'Distributor',
+            'WarehouseManager'
+          ]
+        }
+      },
+      {
+        path: 'pending-orders',
+        component: PendingOrdersComponent,
+        canActivate: [AuthGuard],
+
+        data: {
+          roles: [
+            'Admin',
+            'SubAdmin',
+            'Distributor',
+            'WarehouseManager'
           ]
         }
       },
@@ -1209,6 +1226,18 @@ const routes: Routes = [
       {
         path: 'warehouse-production-assigned',
         component: AssignedProductionListComponent,
+        canActivate: [AuthGuard],
+
+        data: {
+          roles: [
+            'Admin',
+            'WarehouseManager'
+          ]
+        }
+      },
+      {
+        path: 'warehouse-production-complete-list',
+        component: WarehouseCompleteProductionListComponent,
         canActivate: [AuthGuard],
 
         data: {

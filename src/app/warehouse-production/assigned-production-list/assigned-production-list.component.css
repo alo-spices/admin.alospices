@@ -539,3 +539,54 @@ mat-paginator {
     transform: translateY(-1px);
     background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
 }
+
+.accept-btn {
+
+    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #16a34a;
+    background-color: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.accept-btn i {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.accept-btn:hover {
+    color: #ffffff;
+    background-color: #16a34a;
+    border-color: #16a34a;
+}
+
+.accept-btn:active {
+    background-color: #15803d;
+    border-color: #15803d;
+}
+
+.accept-btn:focus-visible {
+    outline: 2px solid #16a34a;
+    outline-offset: 3px;
+}
+
+.clickable-status {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s ease;
+}
+
+.clickable-status:hover {
+    transform: translateY(-1px);
+    filter: brightness(0.95);
+}

@@ -22,8 +22,7 @@
 
         <div class="button-section">
 
-            <button
-               routerLink="/admin/rawmaterial-create">
+            <button routerLink="/admin/rawmaterial-create">
 
                 <i class="fa fa-plus me-2"></i>
 
@@ -39,9 +38,7 @@
 
     <div class="search-row">
 
-        <mat-form-field
-            appearance="outline"
-            class="w-100">
+        <mat-form-field appearance="outline" class="w-100">
 
             <mat-label>
 
@@ -49,13 +46,7 @@
 
             </mat-label>
 
-            <input
-
-                matInput
-
-                placeholder="Search by Raw Material Name / Code"
-
-                (keyup)="applyFilter($event)">
+            <input matInput placeholder="Search by Raw Material Name / Code" (keyup)="applyFilter($event)">
 
         </mat-form-field>
 
@@ -65,309 +56,264 @@
 
     <div class="table-row">
 
-        <table
-            mat-table
-            [dataSource]="dataSource"
-            matSort>
-                    <!-- ===========================
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- ===========================
              S.No
         ============================ -->
 
-        <ng-container matColumnDef="sno">
+            <ng-container matColumnDef="sno">
 
-            <th mat-header-cell *matHeaderCellDef>
+                <th mat-header-cell *matHeaderCellDef>
 
-                S.No
+                    S.No
 
-            </th>
+                </th>
 
-            <td mat-cell *matCellDef="let element; let i = index">
+                <td mat-cell *matCellDef="let element; let i = index">
 
-                {{ i + 1 }}
+                    {{ i + 1 }}
 
-            </td>
+                </td>
 
-        </ng-container>
+            </ng-container>
 
 
-        <!-- ===========================
+            <!-- ===========================
              Raw Material
         ============================ -->
 
-        <ng-container matColumnDef="rawMaterial">
+            <ng-container matColumnDef="rawMaterial">
 
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
 
-                Raw Material
+                    Raw Material
 
-            </th>
+                </th>
 
-            <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element">
 
-                <div class="category-info">
+                    <div class="category-info">
 
-                    <h6>
+                        <h6>
 
-                        {{element.rawMaterialName}}
+                            {{element.rawMaterialName}}
 
-                    </h6>
+                        </h6>
 
-                    <small>
+                        <small>
 
-                        {{element.rawMaterialCode}}
+                            {{element.rawMaterialCode}}
 
-                    </small>
+                        </small>
 
-                </div>
+                    </div>
 
-            </td>
+                </td>
 
-        </ng-container>
+            </ng-container>
 
 
-        <!-- ===========================
+            <!-- ===========================
              Brand
         ============================ -->
 
-        <ng-container matColumnDef="brand">
+            <ng-container matColumnDef="brand">
 
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
 
-                Brand
+                    Brand
 
-            </th>
+                </th>
 
-            <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element">
 
-                {{element.brand?.brandName}}
+                    {{element.brand?.brandName}}
 
-            </td>
+                </td>
 
-        </ng-container>
+            </ng-container>
 
 
-        <!-- ===========================
+            <!-- ===========================
              Category
         ============================ -->
 
-        <ng-container matColumnDef="category">
+            <ng-container matColumnDef="category">
 
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
 
-                Category
+                    Category
 
-            </th>
+                </th>
 
-            <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element">
 
-                {{element.category?.categoryName}}
+                    {{element.category?.categoryName}}
 
-            </td>
+                </td>
 
-        </ng-container>
-                <!-- ===========================
+            </ng-container>
+            <!-- ===========================
              Unit
         ============================ -->
 
-        <ng-container matColumnDef="unit">
+            <ng-container matColumnDef="unit">
 
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
 
-                Unit
+                    Unit
 
-            </th>
+                </th>
 
-            <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element">
 
-                <span class="unit-badge">
+                    <span class="unit-badge">
 
-                    {{element.unit}}
+                        {{element.unit}}
 
-                </span>
+                    </span>
 
-            </td>
+                </td>
 
-        </ng-container>
+            </ng-container>
 
 
-        <!-- ===========================
+            <!-- ===========================
              GST
         ============================ -->
 
-        <ng-container matColumnDef="gst">
+            <ng-container matColumnDef="gst">
 
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
 
-                GST
+                    GST
 
-            </th>
+                </th>
 
-            <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element">
 
-                {{element.gstPercentage}} %
+                    {{element.gstPercentage}} %
 
-            </td>
+                </td>
 
-        </ng-container>
+            </ng-container>
 
 
-        <!-- ===========================
+            <!-- ===========================
              Status
         ============================ -->
 
-        <ng-container matColumnDef="status">
+            <ng-container matColumnDef="status">
 
-            <th mat-header-cell *matHeaderCellDef>
+                <th mat-header-cell *matHeaderCellDef>
 
-                Status
+                    Status
 
-            </th>
+                </th>
 
-            <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element">
 
-                <span
-
-                    class="status-badge"
-
-                    [ngClass]="element.status == 'Active'
+                    <span class="status-badge" [ngClass]="element.status == 'Active'
                         ? 'active'
                         : 'inactive'">
 
-                    {{element.status}}
+                        {{element.status}}
 
-                </span>
+                    </span>
 
-            </td>
+                </td>
 
-        </ng-container>
-                <!-- ===========================
+            </ng-container>
+            <!-- ===========================
              Actions
         ============================ -->
 
-        <ng-container matColumnDef="actions">
+            <ng-container matColumnDef="actions">
 
-            <th mat-header-cell *matHeaderCellDef>
+                <th mat-header-cell *matHeaderCellDef>
 
-                Actions
+                    Actions
 
-            </th>
+                </th>
 
-            <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element">
 
-                <div class="action-buttons">
+                    <div class="action-buttons">
 
-                    <!-- View -->
+                        <!-- View -->
 
-                    <button
-                        mat-icon-button
-                        class="view-btn"
-                        (click)="viewRawMaterial(element)">
+                        <button mat-icon-button class="view-btn" (click)="viewRawMaterial(element)">
 
-                        <i class="fa fa-eye"></i>
+                            <i class="fa fa-eye"></i>
 
-                    </button>
+                        </button>
 
-                    <!-- Edit -->
+                        <!-- Edit -->
 
-                    <button
-                        mat-icon-button
-                        class="edit-btn"
-                        (click)="editRawMaterial(element)">
+                        <button mat-icon-button class="edit-btn" (click)="editRawMaterial(element)">
 
-                        <i class="fa fa-pencil"></i>
+                            <i class="fa fa-pencil"></i>
 
-                    </button>
+                        </button>
 
-                    <!-- Delete -->
+                        <!-- Delete -->
 
-                    <!-- <button
-                        mat-icon-button
-                        class="delete-btn"
-                        (click)="deleteRawMaterial(element)">
+                        <button mat-icon-button class="delete-btn" (click)="deleteRawMaterial(element)">
 
-                        <i class="fa fa-trash"></i>
+                            <i class="fa fa-trash"></i>
 
-                    </button> -->
+                        </button>
 
-                </div>
+                    </div>
 
-            </td>
+                </td>
 
-        </ng-container>
+            </ng-container>
 
 
-        <!-- ===========================
+            <!-- ===========================
              Header Row
         ============================ -->
 
-        <tr
-            mat-header-row
-            *matHeaderRowDef="displayedColumns">
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
 
-        </tr>
+            </tr>
 
 
-        <!-- ===========================
+            <!-- ===========================
              Data Rows
         ============================ -->
 
-        <tr
-            mat-row
-            *matRowDef="let row; columns: displayedColumns;">
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
 
-        </tr>
+            </tr>
 
 
-        <!-- ===========================
+            <!-- ===========================
              No Data
         ============================ -->
 
-        <tr
-            class="mat-row"
-            *matNoDataRow>
+            <tr class="mat-row" *matNoDataRow>
 
-            <td
-                class="mat-cell text-center"
-                colspan="8">
+                <td class="mat-cell text-center" colspan="8">
 
-                No Raw Materials Found
+                    No Raw Materials Found
 
-            </td>
+                </td>
 
-        </tr>
+            </tr>
 
-    </table>
+        </table>
 
 
-    <!-- ===========================
+        <!-- ===========================
          Paginator
     ============================ -->
 
-    <mat-paginator
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons>
 
-        [pageSize]="5"
+        </mat-paginator>
 
-        [pageSizeOptions]="[5,10,20,50]"
-
-        showFirstLastButtons>
-
-    </mat-paginator>
-
-</div>
+    </div>
 
 </div>

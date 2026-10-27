@@ -24,15 +24,15 @@ export class WarehouseRawMaterialStockComponent implements OnInit, AfterViewInit
 
     'rawMaterial',
 
-    'receiveNo',
+    // 'receiveNo', 
 
-    'receivedDate',
+    // 'receivedDate',
 
     'supplier',
 
-    'batchNo',
+    // 'batchNo',
 
-    'noOfBags',
+    // 'noOfBags',  
 
     'totalWeightKg',
 
@@ -40,7 +40,7 @@ export class WarehouseRawMaterialStockComponent implements OnInit, AfterViewInit
 
     'usedWeightKg',
 
-    'rate',
+    // 'rate',
 
     'amount',
 

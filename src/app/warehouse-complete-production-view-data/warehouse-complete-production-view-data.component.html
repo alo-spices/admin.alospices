@@ -1,0 +1,300 @@
+<div class="production-popup" role="dialog" aria-modal="true" aria-labelledby="production-popup-title"
+    (click)="$event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="popup-header">
+        <div class="popup-title-section">
+            <div class="popup-icon">
+                <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+
+            <div>
+                <h2 id="production-popup-title">Production Details</h2>
+                <p>Production record and material breakdown</p>
+            </div>
+        </div>
+
+        <button type="button" class="close-btn" aria-label="Close popup" mat-dialog-close (click)="closePopup()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <!-- Loading -->
+    <div class="popup-loading" *ngIf="loading">
+        <div class="spinner"></div>
+        <p>Loading production details...</p>
+    </div>
+
+    <!-- Error -->
+    <div class="popup-error" *ngIf="!loading && errorMessage">
+        <i class="bi bi-exclamation-circle"></i>
+        <p>{{ errorMessage }}</p>
+
+        <button type="button" class="retry-btn" (click)="loadProductionDetails(data.productionId)">
+            Retry
+        </button>
+    </div>
+
+    <!-- Production details -->
+    <div class="popup-body" *ngIf="!loading && production as p">
+
+        <!-- Production overview -->
+        <section class="detail-section">
+            <div class="section-heading">
+                <div>
+                    <h3>Production Overview</h3>
+                    <p>Basic production information</p>
+                </div>
+
+                <span class="status-badge" [ngClass]="getStatusClass(p.status)">
+                    {{ p.status || 'Unknown' }}
+                </span>
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+                    <span class="detail-label">Production Number</span>
+                    <strong>{{ p.productionNo || '-' }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Production Date</span>
+                    <strong>{{ formatDate(p.productionDate) }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Warehouse Code</span>
+                    <strong>{{ p.warehouse?.warehouseCode || '-' }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Warehouse Name</span>
+                    <strong>{{ p.warehouse?.warehouseName || '-' }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Created At</span>
+                    <strong>{{ formatDate(p.createdAt) }}</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Last Updated</span>
+                    <strong>{{ formatDate(p.updatedAt) }}</strong>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section class="summary-grid">
+
+            <div class="summary-card raw-card">
+                <div class="summary-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+                <div>
+                    <span>Raw Weight Used</span>
+                    <h3>{{ formatNumber(p.rawWeightUsedKg) }} <small>KG</small></h3>
+                </div>
+            </div>
+
+            <div class="summary-card produced-card">
+                <div class="summary-icon">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </div>
+                <div>
+                    <span>Produced Weight</span>
+                    <h3>{{ formatNumber(p.totalProducedWeightKg) }} <small>KG</small></h3>
+                </div>
+            </div>
+
+            <div class="summary-card waste-card">
+                <div class="summary-icon">
+                    <i class="fa-solid fa-recycle"></i>
+                </div>
+                <div>
+                    <span>Waste Weight</span>
+                    <h3>{{ formatNumber(p.wasteKg) }} <small>KG</small></h3>
+                </div>
+            </div>
+
+            <div class="summary-card packs-card">
+                <div class="summary-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <span>Total Packs</span>
+                    <h3>
+                        {{ getTotalPacks(p.productionItems) }}
+                    </h3>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Raw materials -->
+        <section class="detail-section">
+            <div class="section-heading">
+                <div>
+                    <h3>Raw Materials</h3>
+                    <p>Materials consumed during production</p>
+                </div>
+
+                <span class="count-badge">
+                    {{ p.rawMaterials?.length || 0 }} Items
+                </span>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="details-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Receive No.</th>
+                            <th>Material</th>
+                            <th>Code</th>
+                            <th>Batch No.</th>
+                            <th>Available (KG)</th>
+                            <th>Used (KG)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let item of p.rawMaterials; let i = index; trackBy: trackByIndex">
+                            <td>{{ i + 1 }}</td>
+
+                            <td>
+                                {{ item.stockReceive?.receiveNo || '-' }}
+                            </td>
+
+                            <td class="primary-cell">
+                                {{ item.rawMaterial?.rawMaterialName || '-' }}
+                            </td>
+
+                            <td>
+                                {{ item.rawMaterial?.rawMaterialCode || '-' }}
+                            </td>
+
+                            <td>{{ item.batchNo || '-' }}</td>
+
+                            <td>{{ formatNumber(item.availableWeightKg) }}</td>
+
+                            <td class="weight-cell">
+                                {{ formatNumber(item.weightUsedKg) }}
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="!p.rawMaterials?.length">
+                            <td colspan="7" class="empty-cell">
+                                No raw materials found.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Finished goods -->
+        <section class="detail-section">
+            <div class="section-heading">
+                <div>
+                    <h3>Finished Goods</h3>
+                    <p>Variants and packing details</p>
+                </div>
+
+                <span class="count-badge">
+                    {{ p.productionItems?.length || 0 }} Variants
+                </span>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="details-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Variant</th>
+                            <th>SKU Code</th>
+                            <th>Batch No.</th>
+                            <th>Pack Size</th>
+                            <th>Weight / Pack</th>
+                            <th>Produced</th>
+                            <th>Rejected</th>
+                            <th>Total Weight (KG)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let item of p.productionItems; let i = index; trackBy: trackByIndex">
+                            <td>{{ i + 1 }}</td>
+
+                            <td class="primary-cell">
+                                {{ item.variantName || '-' }}
+                            </td>
+
+                            <td>{{ item.skuCode || '-' }}</td>
+
+                            <td>{{ item.batchNo || '-' }}</td>
+
+                            <td>{{ item.packSize || '-' }}</td>
+
+                            <td>{{ formatNumber(item.weightInGrams) }} g</td>
+
+                            <td class="weight-cell">
+                                {{ formatNumber(item.packsProduced) }}
+                            </td>
+
+                            <td>
+                                <span class="rejected-count">
+                                    {{ formatNumber(item.rejectedPacks) }}
+                                </span>
+                            </td>
+
+                            <td class="weight-cell">
+                                {{ formatNumber(item.totalWeightUsedKg) }}
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="!p.productionItems?.length">
+                            <td colspan="9" class="empty-cell">
+                                No finished goods found.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="production-note">
+                <i class="bi bi-info-circle"></i>
+                <span>
+                    Produced packs and rejected packs are shown separately.
+                    Produced weight is taken from the production record.
+                </span>
+            </div>
+        </section>
+
+        <!-- Remarks -->
+        <section class="detail-section remarks-section">
+            <h3>Remarks</h3>
+            <p class="remarks-text" *ngIf="p.remarks; else noRemarks">
+                {{ p.remarks }}
+            </p>
+
+            <ng-template #noRemarks>
+                <p class="remarks-empty">No remarks added.</p>
+            </ng-template>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="popup-footer" *ngIf="!loading && production">
+        <span class="footer-record">
+            Production ID: {{ production._id }}
+        </span>
+        <button type="button" class="footer-close-btn" mat-dialog-close (click)="closePopup()">
+            Close
+        </button>
+    </div>
+
+</div>

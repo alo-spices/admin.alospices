@@ -9,6 +9,7 @@ import { CommomPopupService } from 'src/app/Services/commom-popup.service';
 import { ProductionInstructionService } from 'src/app/Services/production-instruction.service';
 import { WarehouseProductionService } from 'src/app/Services/warehouse-production.service';
 import { WarehouseService } from 'src/app/Services/warehouse.service';
+import { UpdateProductionStatusPopupComponent } from 'src/app/update-production-status-popup/update-production-status-popup.component';
 
 @Component({
   selector: 'app-assigned-production-list',
@@ -17,6 +18,10 @@ import { WarehouseService } from 'src/app/Services/warehouse.service';
 })
 export class AssignedProductionListComponent implements OnInit, AfterViewInit {
   instruction: any = null;
+
+  isAdmin = false;
+  isWarehouseManager = false;
+  currentUser: any = null;
 
   // ==========================================
   // Table Columns
@@ -117,142 +122,45 @@ export class AssignedProductionListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.getAllWarehouses();
+    this.loadCurrentUser();
 
-
-    // ========================================
-    // Search Filter
-    // ========================================
-
+    // Existing search filter
     this.dataSource.filterPredicate = (
-
       data: any,
-
       filter: string
-
     ) => {
+      const instructionNo = data.instructionNo || '';
+      const instructionDate = data.instructionDate || '';
+      const warehouseName = data.warehouse?.warehouseName || '';
+      const warehouseCode = data.warehouse?.warehouseCode || '';
+      const status = data.status || '';
+      const remarks = data.remarks || '';
 
-      const instructionNo =
-        data.instructionNo || '';
+      const itemSearch = Array.isArray(data.items)
+        ? data.items.map((item: any) =>
+          [
+            item.rawMaterial?.rawMaterialName || '',
+            item.rawMaterial?.rawMaterialCode || '',
+            item.stockReceive?.receiveNo || '',
+            item.batchNo || '',
+            item.variantName || '',
+            item.skuCode || '',
+            item.packSize || ''
+          ].join(' ')
+        ).join(' ')
+        : '';
 
-
-      const instructionDate =
-        data.instructionDate || '';
-
-
-      const warehouseName =
-        data.warehouse?.warehouseName || '';
-
-
-      const warehouseCode =
-        data.warehouse?.warehouseCode || '';
-
-
-      const status =
-        data.status || '';
-
-
-      const remarks =
-        data.remarks || '';
-
-
-      // ========================================
-      // Items Search
-      // ========================================
-
-      let itemSearch = '';
-
-
-      if (
-        Array.isArray(
-          data.items
-        )
-      ) {
-
-        itemSearch =
-          data.items
-            .map(
-              (item: any) => {
-
-                return (
-
-                  (item.rawMaterial
-                    ?.rawMaterialName || '') +
-
-                  ' ' +
-
-                  (item.rawMaterial
-                    ?.rawMaterialCode || '') +
-
-                  ' ' +
-
-                  (item.stockReceive
-                    ?.receiveNo || '') +
-
-                  ' ' +
-
-                  (item.batchNo || '') +
-
-                  ' ' +
-
-                  (item.variantName || '') +
-
-                  ' ' +
-
-                  (item.skuCode || '') +
-
-                  ' ' +
-
-                  (item.packSize || '')
-
-                );
-
-              }
-            )
-            .join(' ');
-
-      }
-
-
-      // ========================================
-      // Final Search String
-      // ========================================
-
-      const search = (
-
-        instructionNo +
-
-        ' ' +
-
-        instructionDate +
-
-        ' ' +
-
-        warehouseName +
-
-        ' ' +
-
-        warehouseCode +
-
-        ' ' +
-
-        itemSearch +
-
-        ' ' +
-
-        status +
-
-        ' ' +
-
+      const search = [
+        instructionNo,
+        instructionDate,
+        warehouseName,
+        warehouseCode,
+        itemSearch,
+        status,
         remarks
+      ].join(' ').toLowerCase();
 
-      ).toLowerCase();
-
-
-      return search.includes(
-        filter
-      );
-
+      return search.includes(filter);
     };
 
   }
@@ -272,71 +180,161 @@ export class AssignedProductionListComponent implements OnInit, AfterViewInit {
 
   }
 
+  loadCurrentUser(): void {
+    this.currentUser = this.getStoredUser();
 
+    if (!this.currentUser) {
+      console.error('Logged-in user not found in localStorage.');
+      return;
+    }
+
+    const role = this.currentUser.role;
+
+    this.isAdmin = role === 'Admin';
+    this.isWarehouseManager = role === 'WarehouseManager';
+
+    if (this.isWarehouseManager) {
+      this.loadAssignedWarehouse();
+    } else if (this.isAdmin) {
+      this.getAllWarehouses();
+    } else {
+      this.warehouseList = [];
+      this.instructionList = [];
+      this.dataSource.data = [];
+      console.error('Unauthorized role:', role);
+    }
+  }
+
+  /**
+   * Reads the stored user object.
+   * If your application uses a known localStorage key,
+   * you can replace this helper with that exact key.
+   */
+  private getStoredUser(): any {
+    const possibleKeys = [
+      'user',
+      'currentUser',
+      'loggedInUser',
+      'currentUserData'
+    ];
+
+    for (const key of possibleKeys) {
+      const value = localStorage.getItem(key);
+
+      if (!value) continue;
+
+      try {
+        const parsed = JSON.parse(value);
+
+        if (parsed?.role) {
+          return parsed;
+        }
+
+        // Handles storage values wrapped inside { user: {...} }
+        if (parsed?.user?.role) {
+          return parsed.user;
+        }
+      } catch {
+        // Continue checking other known keys.
+      }
+    }
+
+    // Fallback: find the stored object containing the logged-in role.
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+
+      if (!key) continue;
+
+      try {
+        const parsed = JSON.parse(localStorage.getItem(key) || '');
+
+        if (parsed?.role === 'Admin' ||
+          parsed?.role === 'WarehouseManager') {
+          return parsed;
+        }
+
+        if (parsed?.user?.role === 'Admin' ||
+          parsed?.user?.role === 'WarehouseManager') {
+          return parsed.user;
+        }
+      } catch {
+        // Ignore non-JSON localStorage values.
+      }
+    }
+
+    return null;
+  }
+
+  loadAssignedWarehouse(): void {
+    const warehouse = this.currentUser?.warehouse;
+
+    const warehouseId =
+      typeof warehouse === 'string'
+        ? warehouse
+        : warehouse?._id || warehouse?.id;
+
+    if (!warehouseId) {
+      this.warehouseList = [];
+      this.selectedWarehouse = null;
+      this.selectedWarehouseId = '';
+      this.instructionList = [];
+      this.dataSource.data = [];
+
+      console.error('Warehouse ID not found for WarehouseManager.');
+      return;
+    }
+
+    // WarehouseManager gets only their assigned warehouse in the UI.
+    this.selectedWarehouseId = warehouseId;
+
+    this.selectedWarehouse =
+      typeof warehouse === 'object'
+        ? warehouse
+        : {
+          _id: warehouseId,
+          warehouseName: 'Assigned Warehouse',
+          warehouseCode: ''
+        };
+
+    this.warehouseList = [this.selectedWarehouse];
+
+    this.getProductionInstructionsByWarehouse(warehouseId);
+  }
   // ==========================================
   // Get All Warehouses
   // ==========================================
 
   getAllWarehouses(): void {
+    if (!this.isAdmin) {
+      return;
+    }
 
-    this.warehouseService
-      .getAllWarehouses()
-      .subscribe({
+    this.warehouseService.getAllWarehouses().subscribe({
+      next: (response: any) => {
+        this.warehouseList = response?.data || [];
 
-        next: (response: any) => {
+        if (this.warehouseList.length > 0) {
+          this.selectedWarehouseId = this.warehouseList[0]._id;
+          this.selectedWarehouse = this.warehouseList[0];
 
-          console.log(
-            'Warehouse Response:',
-            response
+          this.getProductionInstructionsByWarehouse(
+            this.selectedWarehouseId
           );
-
-
-          this.warehouseList =
-            response?.data || [];
-
-
-          // ========================================
-          // Select First Warehouse
-          // ========================================
-
-          if (
-            this.warehouseList.length > 0
-          ) {
-
-            this.selectedWarehouseId =
-              this.warehouseList[0]._id;
-
-
-            this.selectedWarehouse =
-              this.warehouseList[0];
-
-
-            // ======================================
-            // Load Instructions
-            // ======================================
-
-            this.getProductionInstructionsByWarehouse(
-              this.selectedWarehouseId
-            );
-
-          }
-
-        },
-
-        error: (error: any) => {
-
-          console.log(
-            'Warehouse Error:',
-            error
-          );
-
-
-          this.warehouseList = [];
-
+        } else {
+          this.selectedWarehouseId = '';
+          this.selectedWarehouse = null;
+          this.instructionList = [];
+          this.dataSource.data = [];
         }
-
-      });
-
+      },
+      error: (error: any) => {
+        console.error('Warehouse Error:', error);
+        this.warehouseList = [];
+        this.selectedWarehouse = null;
+        this.instructionList = [];
+        this.dataSource.data = [];
+      }
+    });
   }
 
 
@@ -344,71 +342,41 @@ export class AssignedProductionListComponent implements OnInit, AfterViewInit {
   // Warehouse Change
   // ==========================================
 
-  onWarehouseChange(
-    warehouseId: string
-  ): void {
+  onWarehouseChange(warehouseId: string): void {
+    if (this.isWarehouseManager) {
+      const assignedWarehouse = this.currentUser?.warehouse;
 
+      const assignedWarehouseId =
+        typeof assignedWarehouse === 'string'
+          ? assignedWarehouse
+          : assignedWarehouse?._id || assignedWarehouse?.id;
 
-    // ==========================================
-    // Clear Previous Data
-    // ==========================================
+      if (warehouseId !== assignedWarehouseId) {
+        return;
+      }
+    }
 
     this.instructionList = [];
-
     this.dataSource.data = [];
 
-
-    if (
-      this.dataSource.paginator
-    ) {
-
-      this.dataSource
-        .paginator
-        .firstPage();
-
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-
-
-    // ==========================================
-    // No Warehouse
-    // ==========================================
 
     if (!warehouseId) {
-
       this.selectedWarehouse = null;
-
+      this.selectedWarehouseId = '';
       return;
-
     }
 
+    this.selectedWarehouseId = warehouseId;
 
-    // ==========================================
-    // Selected Warehouse
-    // ==========================================
-
-    this.selectedWarehouseId =
-      warehouseId;
-
-
-    this.selectedWarehouse =
-      this.warehouseList.find(
-
-        warehouse =>
-          warehouse._id === warehouseId
-
-      );
-
-
-    // ==========================================
-    // Get Instructions
-    // ==========================================
-
-    this.getProductionInstructionsByWarehouse(
-      warehouseId
+    this.selectedWarehouse = this.warehouseList.find(
+      warehouse => warehouse._id === warehouseId
     );
 
+    this.getProductionInstructionsByWarehouse(warehouseId);
   }
-
 
   // ==========================================
   // Get Instructions By Warehouse
@@ -831,23 +799,126 @@ export class AssignedProductionListComponent implements OnInit, AfterViewInit {
 
   }
 
-  goToProductionEntry(
-    instruction: any
-  ): void {
+
+  goToProductionEntry(instruction: any): void {
 
     if (!instruction?._id) {
-
       return;
+    }
 
+    // Prevent opening production entry after completion
+    if (instruction.status === 'Completed') {
+      this.alertService.warning(
+        'Production is already completed.'
+      );
+      return;
+    }
+
+    // Allow entry only for Accepted or In Progress
+    if (
+      instruction.status !== 'Accepted' &&
+      instruction.status !== 'In Progress'
+    ) {
+      this.alertService.warning(
+        'Production instruction must be Accepted before production entry.'
+      );
+      return;
     }
 
     this.router.navigate([
-
       '/admin/warehouse-production-entry',
-
       instruction._id
-
     ]);
+  }
+  openStatusPopup(instruction: any): void {
 
+    if (!instruction?._id) {
+      return;
+    }
+
+    if (
+      instruction.status === 'Completed' ||
+      instruction.status === 'Rejected' ||
+      instruction.status === 'Cancelled'
+    ) {
+      this.alertService.warning(
+        'This production instruction can no longer be changed.'
+      );
+      return;
+    }
+
+    const dialogRef = this.dialog.open(
+      UpdateProductionStatusPopupComponent,
+      {
+        width: '480px',
+        maxWidth: '95vw',
+        panelClass: 'accept-production-dialog',
+        disableClose: true,
+        data: {
+          instructionId: instruction._id,
+          instructionNo: instruction.instructionNo,
+          currentStatus: instruction.status
+        }
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(
+      (selectedStatus: string | undefined) => {
+
+        if (
+          !selectedStatus ||
+          selectedStatus === instruction.status
+        ) {
+          return;
+        }
+
+        // Production must exist before completing.
+        if (
+          selectedStatus === 'Completed' &&
+          !instruction.production
+        ) {
+          this.alertService.warning(
+            'Please complete the production entry before marking this instruction as Completed.'
+          );
+          return;
+        }
+
+        this.productionInstructionService
+          .updateProductionInstructionStatus(
+            instruction._id,
+            selectedStatus
+          )
+          .subscribe({
+
+            next: (response: any) => {
+
+              this.alertService.success(
+                response?.message ||
+                'Production status updated successfully'
+              ).then(() => {
+
+                if (this.selectedWarehouseId) {
+                  this.getProductionInstructionsByWarehouse(
+                    this.selectedWarehouseId
+                  );
+                }
+
+              });
+
+            },
+
+            error: (error: any) => {
+
+              this.alertService.error(
+                error?.error?.message ||
+                'Failed to update production status'
+              );
+
+            }
+
+          });
+
+      }
+    );
   }
 }

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DeleteConfirmationComponent } from 'src/app/delete-confirmation/delete-confirmation.component';
 import { Supplier } from 'src/app/Models/Supplier';
 import { CommomPopupService } from 'src/app/Services/commom-popup.service';
 import { SupplierService } from 'src/app/Services/supplier.service';
@@ -40,7 +41,7 @@ export class SupplierListComponent implements OnInit {
     private supplierService: SupplierService,
     private router: Router,
     private alertService: CommomPopupService,
-     private dialog: MatDialog
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -105,31 +106,31 @@ export class SupplierListComponent implements OnInit {
   // View
   //========================================
 
- // =====================================
-// VIEW SUPPLIER
-// =====================================
+  // =====================================
+  // VIEW SUPPLIER
+  // =====================================
 
-viewSupplier(supplier: any): void {
+  viewSupplier(supplier: any): void {
 
-  this.dialog.open(
+    this.dialog.open(
 
-    ViewSupplierComponent,
+      ViewSupplierComponent,
 
-    {
+      {
 
-      width: '950px',
+        width: '950px',
 
-      maxWidth: '95vw',
+        maxWidth: '95vw',
 
-      maxHeight: '90vh',
+        maxHeight: '90vh',
 
-      data: supplier
+        data: supplier
 
-    }
+      }
 
-  );
+    );
 
-}
+  }
 
   //========================================
   // Edit
@@ -148,43 +149,46 @@ viewSupplier(supplier: any): void {
   // Delete
   //========================================
 
+
   deleteSupplier(row: any): void {
 
-    if (!confirm(`Delete ${row.supplierName}?`)) {
+    const dialogRef = this.dialog.open(
 
-      return;
+      DeleteConfirmationComponent,
 
-    }
+      {
 
-    this.supplierService.deleteSupplier(row._id).subscribe({
-
-      next: (response: any) => {
-
-        this.alertService.success(
-
-          response.message ||
-
-          'Supplier Deleted Successfully'
-
-        );
-
-        this.getAllSuppliers();
-
-      },
-
-      error: (error) => {
-
-        console.log(error);
-
-        this.alertService.error(
-
-          error.error?.message ||
-
-          'Delete Failed'
-
-        );
+        width: '400px'
 
       }
+
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (!result) return;
+
+      this.supplierService
+        .deleteSupplier(row._id)
+        .subscribe({
+
+          next: (res: any) => {
+
+            alert(res.message);
+
+            this.getAllSuppliers();
+
+          },
+
+          error: (err: any) => {
+
+            console.log(err);
+
+            alert(err.error.message);
+
+          }
+
+        });
 
     });
 

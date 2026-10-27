@@ -36,4 +36,14 @@ export class OrdersService {
     );
 
   }
+
+  getPendingOrders(): Observable<any> {
+
+    return this.http.get(
+      `${this.apiUrl}/get-pending-orders`
+    );
+
+  }
+
+
 }

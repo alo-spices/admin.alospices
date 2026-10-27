@@ -30,9 +30,7 @@
 
     <div class="search-row">
 
-        <mat-form-field
-            appearance="outline"
-            class="w-100">
+        <mat-form-field appearance="outline" class="w-100">
 
             <mat-label>
 
@@ -40,10 +38,7 @@
 
             </mat-label>
 
-            <input
-                matInput
-                placeholder="Search Product Name / Product Code"
-                (keyup)="applyFilter($event)">
+            <input matInput placeholder="Search Product Name / Product Code" (keyup)="applyFilter($event)">
 
         </mat-form-field>
 
@@ -53,10 +48,7 @@
 
     <div class="table-row">
 
-        <table
-            mat-table
-            [dataSource]="dataSource"
-            matSort>
+        <table mat-table [dataSource]="dataSource" matSort>
 
             <!-- S.No -->
 
@@ -80,10 +72,7 @@
 
             <ng-container matColumnDef="product">
 
-                <th
-                    mat-header-cell
-                    *matHeaderCellDef
-                    mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
 
                     Product
 
@@ -181,9 +170,7 @@
 
                 <td mat-cell *matCellDef="let element">
 
-                    <span
-                        class="status-badge"
-                        [ngClass]="element.status=='Active' ? 'active':'inactive'">
+                    <span class="status-badge" [ngClass]="element.status=='Active' ? 'active':'inactive'">
 
                         {{element.status}}
 
@@ -209,10 +196,7 @@
 
                         <!-- View -->
 
-                        <button
-                            mat-icon-button
-                            class="view-btn"
-                            (click)="viewProduct(element)">
+                        <button mat-icon-button class="view-btn" (click)="viewProduct(element)">
 
                             <i class="fa fa-eye"></i>
 
@@ -220,10 +204,7 @@
 
                         <!-- Edit -->
 
-                        <button
-                            mat-icon-button
-                            class="edit-btn"
-                            (click)="editProduct(element)">
+                        <button mat-icon-button class="edit-btn" (click)="editProduct(element)">
 
                             <i class="fa fa-pencil"></i>
 
@@ -231,14 +212,11 @@
 
                         <!-- Delete -->
 
-                        <!-- <button
-                            mat-icon-button
-                            class="delete-btn"
-                            (click)="deleteProduct(element)">
+                        <button mat-icon-button class="delete-btn" (click)="deleteProduct(element)">
 
                             <i class="fa fa-trash"></i>
 
-                        </button> -->
+                        </button>
 
                     </div>
 
@@ -248,27 +226,19 @@
 
             <!-- Header -->
 
-            <tr
-                mat-header-row
-                *matHeaderRowDef="displayedColumns">
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
             </tr>
 
             <!-- Rows -->
 
-            <tr
-                mat-row
-                *matRowDef="let row; columns: displayedColumns;">
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
             </tr>
 
             <!-- No Data -->
 
-            <tr
-                class="mat-row"
-                *matNoDataRow>
+            <tr class="mat-row" *matNoDataRow>
 
-                <td
-                    class="mat-cell text-center"
-                    colspan="7">
+                <td class="mat-cell text-center" colspan="7">
 
                     No Products Found
 
@@ -278,10 +248,7 @@
 
         </table>
 
-        <mat-paginator
-            [pageSize]="5"
-            [pageSizeOptions]="[5,10,20,50]"
-            showFirstLastButtons>
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons>
 
         </mat-paginator>
 

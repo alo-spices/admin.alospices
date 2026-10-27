@@ -115,4 +115,14 @@ export class ProductionInstructionService {
     );
 
   }
+
+  updateProductionInstructionStatus(
+    instructionId: string,
+    status: string
+  ) {
+    return this.http.put(
+      `${this.apiUrl}/updateProductionInstructionStatus/${instructionId}`,
+      { status }
+    );
+  }
 }

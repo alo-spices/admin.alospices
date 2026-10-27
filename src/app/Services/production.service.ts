@@ -151,6 +151,12 @@ export class ProductionService {
 
   }
 
+
+  getWarehouseCompletedProductions() {
+    return this.http.get<any>(
+      `${this.apiUrl}/warehouse/completed-productions`
+    );
+  }
 }
 
 

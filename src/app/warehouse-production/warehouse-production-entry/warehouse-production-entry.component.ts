@@ -825,7 +825,7 @@ export class WarehouseProductionEntryComponent implements OnInit {
         this.instruction
           .warehouse
           ?._id,
-
+      productionInstructionId: this.instructionId,
 
       rawMaterials:
 
@@ -885,7 +885,7 @@ export class WarehouseProductionEntryComponent implements OnInit {
 
               this.router.navigate([
 
-                '/admin/production'
+                '/admin/warehouse-production-assigned'
 
               ]);
 

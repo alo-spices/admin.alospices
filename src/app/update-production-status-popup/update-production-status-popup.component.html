@@ -1,0 +1,80 @@
+<div class="accept-popup-card">
+
+    <!-- Close -->
+    <button type="button" class="close-btn" (click)="cancel()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- Icon -->
+    <div class="icon-wrapper">
+        <div class="icon-circle accept">
+            <i class="fa-solid fa-arrows-rotate"></i>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="popup-content">
+
+        <h2>Update Production Status</h2>
+
+        <p>
+            Update the status of this production instruction.
+        </p>
+
+        <div class="instruction-info" *ngIf="data?.instructionNo">
+            <strong>Instruction No:</strong>
+            <span>{{ data.instructionNo }}</span>
+        </div>
+
+        <div class="instruction-info">
+            <strong>Current Status:</strong>
+            <span>{{ data?.currentStatus }}</span>
+        </div>
+
+        <div class="status-select-wrapper">
+            <label for="productionStatus">New Status</label>
+
+            <select id="productionStatus" class="form-select" [(ngModel)]="selectedStatus">
+
+                <option *ngFor="let status of statusOptions" [value]="status">
+                    {{ status }}
+                </option>
+
+            </select>
+        </div>
+
+        <p class="warning-text">
+            Status will change to
+            <strong>{{ selectedStatus }}</strong>
+            after confirmation.
+        </p>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="popup-footer">
+
+        <button type="button" class="popup-action-btn secondary" (click)="cancel()">
+            Cancel
+        </button>
+
+        <button type="button" class="popup-action-btn accept" [disabled]="
+                !selectedStatus ||
+                selectedStatus === data?.currentStatus ||
+                isSubmitting
+            " (click)="confirm()">
+
+            <i class="fa-solid fa-check me-1"></i>
+
+            {{ isSubmitting ? 'Updating...' : 'Update Status' }}
+
+        </button>
+
+    </div>
+
+    <!-- Bottom Line -->
+    <div class="popup-bottom-line">
+        <div class="popup-bottom-progress accept"></div>
+    </div>
+
+</div>

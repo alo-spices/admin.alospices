@@ -1,0 +1,363 @@
+<div class="category-container">
+
+    <!-- Header -->
+
+    <div class="top-row">
+
+        <div class="title-section">
+
+            <h2>Order Management</h2>
+
+            <p>Manage all orders here</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>
+                Search Orders
+            </mat-label>
+
+            <input matInput placeholder="Search by Order / Party / Salesman" (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+
+    <!-- Table -->
+
+    <div class="table-row">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <!-- ================================= -->
+            <!-- S.NO -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    S.No
+
+                </th>
+
+                <td mat-cell *matCellDef="let element; let i=index">
+
+                    {{
+                    (paginator.pageIndex * paginator.pageSize)
+                    + i + 1
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- ORDER -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="order">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Order
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{ element.orderNumber }}
+
+                        </h6>
+
+                        <small>
+
+                            {{ element.partyType }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- PARTY -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="party">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Party
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{
+                            element.party?.shopName ||
+                            '-'
+                            }}
+
+                        </h6>
+
+                        <small>
+
+                            {{
+                            element.party?.mobile ||
+                            '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- SALESMAN -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="salesman">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Salesman
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>
+
+                            {{
+                            element.employee?.fullName ||
+                            '-'
+                            }}
+
+                        </h6>
+
+                        <small>
+
+                            {{
+                            element.employee?.employeeCode ||
+                            '-'
+                            }}
+
+                        </small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- AMOUNT -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="amount">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Amount
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    ₹{{ element.grandTotal || 0 }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- ORDER STATUS -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="orderStatus">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Order Status
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="
+              getOrderStatusClass(
+                element.orderStatus
+              )
+            ">
+
+                        {{ element.orderStatus }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- PAYMENT STATUS -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="paymentStatus">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Payment
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="
+              getPaymentStatusClass(
+                element.paymentStatus
+              )
+            ">
+
+                        {{ element.paymentStatus }}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- ORDER DATE -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="orderDate">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                    Order Date
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    {{
+                    element.orderDate
+                    | date:'dd-MM-yyyy'
+                    }}
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- ACTIONS -->
+            <!-- ================================= -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>
+
+                    Actions
+
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="action-buttons">
+
+                        <!-- View -->
+
+                        <button mat-icon-button class="view-btn" (click)="viewOrder(element)">
+
+                            <i class="fa fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+
+            <!-- ================================= -->
+            <!-- HEADER -->
+            <!-- ================================= -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns">
+            </tr>
+
+
+            <!-- ================================= -->
+            <!-- ROWS -->
+            <!-- ================================= -->
+
+            <tr mat-row *matRowDef="
+          let row;
+          columns: displayedColumns;
+        ">
+            </tr>
+
+
+            <!-- ================================= -->
+            <!-- NO DATA -->
+            <!-- ================================= -->
+
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length">
+
+                    No Orders Found
+
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <!-- ================================= -->
+        <!-- PAGINATOR -->
+        <!-- ================================= -->
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons>
+
+        </mat-paginator>
+
+    </div>
+
+</div>

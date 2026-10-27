@@ -1,1 +1,560 @@
-<p>warehouse-dashboard works!</p>
+<div class="dashboard-page">
+
+    <!-- Loading -->
+    <div class="dashboard-loading" *ngIf="loading">
+        <div class="spinner-border"></div>
+        <h4>Loading Warehouse Dashboard...</h4>
+        <p>Please wait while we load your warehouse details.</p>
+    </div>
+
+    <ng-container *ngIf="!loading && dashboardData">
+
+        <!-- Header -->
+        <div class="dashboard-header">
+            <div>
+                <h1>{{ dashboardTitle }}</h1>
+                <p>{{ dashboardSubtitle }}</p>
+            </div>
+
+            <button class="action-btn" (click)="loadDashboard()">
+                <i class="fas fa-sync-alt me-2"></i>Refresh
+            </button>
+        </div>
+
+        <!-- Assigned Warehouse -->
+        <div class="warehouse-banner" *ngIf="warehouse">
+            <div class="warehouse-banner-icon">
+
+            </div>
+
+            <div>
+                <span> <i class="fas fa-warehouse"></i> Assigned Warehouse</span>
+                <h2>{{ warehouse.warehouseName }}</h2>
+                <span>
+                    {{ warehouse.warehouseCode }} ·
+                    {{ warehouse.warehouseType }}
+                </span>
+            </div>
+
+            <div class="warehouse-role">
+                <span>Logged in as </span>
+                <strong>{{ currentRole }}</strong>
+            </div>
+        </div>
+
+        <!-- Main Statistics -->
+        <div class="stats-grid">
+
+            <div class="stats-card">
+                <div class="stats-icon orange">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <div>
+                    <h2>{{ summary.finishedGoodsPacks || 0 }}</h2>
+                    <p>Finished Goods Packs</p>
+                    <span>Rejected: {{ finishedGoods.rejectedPacks || 0 }}</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon green">
+                    <i class="fas fa-weight-hanging"></i>
+                </div>
+                <div>
+                    <h2>{{ formatNumber(summary.finishedGoodsWeightKg) }} KG</h2>
+                    <p>Finished Goods Weight</p>
+                    <span>{{ finishedGoods.skuCount || 0 }} SKUs</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon gold">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <div>
+                    <h2>
+                        {{ formatNumber(rawMaterialStock.rawMaterialAvailableWeightKg) }}
+                        KG
+                    </h2>
+                    <p>Raw Material Stock</p>
+                    <span>{{ rawMaterialStock.totalReceives || 0 }} Receives</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon red">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <div>
+                    <h2>{{ production.totalProductions || 0 }}</h2>
+                    <p>Completed Productions</p>
+                    <span>{{ production.totalProducedPacks || 0 }} Packs Produced</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Today's Activity -->
+        <div class="section-heading mt-4">
+            <div>
+                <h3><i class="fas fa-calendar-day me-2"></i>Today's Activity</h3>
+                <p>Daily warehouse operations summary</p>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stats-card">
+                <div class="stats-icon orange">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div>
+                    <h2>{{ today.orders || 0 }}</h2>
+                    <p>Today's Orders</p>
+                    <span>Sales: ₹{{ formatNumber(today.sales) }}</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon green">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div>
+                    <h2>{{ today.deliveries || 0 }}</h2>
+                    <p>Today's Deliveries</p>
+                    <span>Delivered: {{ today.delivered || 0 }}</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon gold">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div>
+                    <h2>₹{{ formatNumber(today.collections) }}</h2>
+                    <p>Today's Collections</p>
+                    <span>Payment Received</span>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon red">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div>
+                    <h2>₹{{ formatNumber(summary.outstanding) }}</h2>
+                    <p>Total Outstanding</p>
+                    <span>Pending Amount</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Finished Goods Stock -->
+        <div class="section-heading mt-4">
+            <div>
+                <h3><i class="fas fa-boxes me-2"></i>Finished Goods Stock</h3>
+                <p>SKU-wise production summary for your warehouse</p>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>SKU Code</th>
+                            <th>Variant</th>
+                            <th>Pack Size</th>
+                            <th>Weight</th>
+                            <th>Packs Produced</th>
+                            <th>Total Weight</th>
+                            <th>Rejected Packs</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let item of finishedGoodsList; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td><strong>{{ item.skuCode }}</strong></td>
+                            <td>{{ item.variantName || '-' }}</td>
+                            <td>{{ item.packSize || '-' }}</td>
+                            <td>{{ item.weightInGrams }} g</td>
+                            <td>{{ item.packsProduced || 0 }}</td>
+                            <td>{{ formatNumber(item.totalWeightKg) }} KG</td>
+                            <td>{{ item.rejectedPacks || 0 }}</td>
+                        </tr>
+
+                        <tr *ngIf="finishedGoodsList.length === 0">
+                            <td colspan="8" class="text-center py-4">
+                                No finished goods available.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Production & Instructions -->
+        <div class="row g-4 mt-2">
+
+            <div class="col-md-6">
+                <div class="chart-card">
+                    <h4><i class="fas fa-industry me-2"></i>Production Overview</h4>
+
+                    <div class="status-row">
+                        <span>Total Productions</span>
+                        <strong>{{ production.totalProductions || 0 }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Total Packs Produced</span>
+                        <strong>{{ production.totalProducedPacks || 0 }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Produced Weight</span>
+                        <strong>{{ formatNumber(production.totalProducedWeightKg) }} KG</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Waste</span>
+                        <strong>{{ formatNumber(production.totalWasteKg) }} KG</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="chart-card">
+                    <h4><i class="fas fa-clipboard-list me-2"></i>Production Instructions</h4>
+
+                    <div class="status-row">
+                        <span>Total Instructions</span>
+                        <strong>{{ productionInstructions.total || 0 }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Pending</span>
+                        <strong>{{ productionInstructions.pending || 0 }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Accepted</span>
+                        <strong>{{ productionInstructions.accepted || 0 }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>In Progress</span>
+                        <strong>{{ productionInstructions.inProgress || 0 }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Completed</span>
+                        <strong>{{ productionInstructions.completed || 0 }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Rejected</span>
+                        <strong>{{ productionInstructions.rejected || 0 }}</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Stock Transfers -->
+        <div class="section-heading mt-4">
+            <div>
+                <h3><i class="fas fa-exchange-alt me-2"></i>Stock Transfers</h3>
+                <p>Warehouse stock transfer status</p>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stats-card">
+                <div class="stats-icon orange">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div>
+                    <h2>{{ stockTransfers.totalTransfers || 0 }}</h2>
+                    <p>Total Transfers</p>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon gold">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                    <h2>{{ stockTransfers.pending || 0 }}</h2>
+                    <p>Pending</p>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon orange">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <div>
+                    <h2>{{ stockTransfers.inTransit || 0 }}</h2>
+                    <p>In Transit</p>
+                </div>
+            </div>
+
+            <div class="stats-card">
+                <div class="stats-icon green">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div>
+                    <h2>{{ stockTransfers.received || 0 }}</h2>
+                    <p>Received</p>
+                    <span>Approved: {{ stockTransfers.approved || 0 }}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Order, Delivery and Collection Status -->
+        <div class="row g-4 mt-2">
+
+            <div class="col-md-4">
+                <div class="chart-card">
+                    <h4>Order Status</h4>
+
+                    <div class="status-row">
+                        <span>Total Orders</span>
+                        <strong>{{ orders.totalOrders || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Pending</span>
+                        <strong>{{ orders.pendingOrders || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Approved</span>
+                        <strong>{{ orders.approvedOrders || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Processing</span>
+                        <strong>{{ orders.processingOrders || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Delivered</span>
+                        <strong>{{ orders.deliveredOrders || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Cancelled</span>
+                        <strong>{{ orders.cancelledOrders || 0 }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="chart-card">
+                    <h4>Delivery Status</h4>
+
+                    <div class="status-row">
+                        <span>Total Deliveries</span>
+                        <strong>{{ deliveries.totalDeliveries || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Pending</span>
+                        <strong>{{ deliveries.pending || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Assigned</span>
+                        <strong>{{ deliveries.assigned || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Dispatched</span>
+                        <strong>{{ deliveries.dispatched || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Delivered</span>
+                        <strong>{{ deliveries.delivered || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Failed</span>
+                        <strong>{{ deliveries.failed || 0 }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="chart-card">
+                    <h4>Collection Summary</h4>
+
+                    <div class="status-row">
+                        <span>Total Collections</span>
+                        <strong>{{ collections.totalCollections || 0 }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Cash</span>
+                        <strong>₹{{ formatNumber(collections.cash) }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>UPI</span>
+                        <strong>₹{{ formatNumber(collections.upi) }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Bank Transfer</span>
+                        <strong>₹{{ formatNumber(collections.bankTransfer) }}</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>Cheque</span>
+                        <strong>₹{{ formatNumber(collections.cheque) }}</strong>
+                    </div>
+                    <div class="status-row total-row">
+                        <span>Total Collected</span>
+                        <strong>₹{{ formatNumber(collections.totalCollected) }}</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="table-card mt-4">
+            <div class="card-header">
+                <div>
+                    <h3>Recent Orders</h3>
+                    <p>Latest orders available in the dashboard</p>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order No</th>
+                            <th>Party</th>
+                            <th>Employee</th>
+                            <th>Amount</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let order of recentOrders">
+                            <td><strong>{{ order.orderNumber }}</strong></td>
+                            <td>{{ order.party?.shopName || order.party?.partyName || 'N/A' }}</td>
+                            <td>{{ order.employee?.fullName || 'N/A' }}</td>
+                            <td>₹{{ formatNumber(order.grandTotal) }}</td>
+                            <td>
+                                <span class="status" [ngClass]="getPaymentStatusClass(order.paymentStatus)">
+                                    {{ order.paymentStatus || 'N/A' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status" [ngClass]="getOrderStatusClass(order.orderStatus)">
+                                    {{ order.orderStatus || 'N/A' }}
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="recentOrders.length === 0">
+                            <td colspan="6" class="text-center py-4">No orders found.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recent Deliveries -->
+        <div class="table-card mt-4">
+            <div class="card-header">
+                <div>
+                    <h3>Recent Deliveries</h3>
+                    <p>Latest delivery activities</p>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Delivery No</th>
+                            <th>Order</th>
+                            <th>Party</th>
+                            <th>Delivery Boy</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let delivery of recentDeliveries">
+                            <td><strong>{{ delivery.deliveryNumber }}</strong></td>
+                            <td>{{ delivery.order?.orderNumber || 'N/A' }}</td>
+                            <td>{{ delivery.party?.shopName || delivery.party?.partyName || 'N/A' }}</td>
+                            <td>{{ delivery.deliveryBoy?.fullName || 'Not Assigned' }}</td>
+                            <td>{{ delivery.deliveryDate | date:'dd-MM-yyyy' }}</td>
+                            <td>
+                                <span class="status" [ngClass]="getDeliveryStatusClass(delivery.deliveryStatus)">
+                                    {{ delivery.deliveryStatus || 'N/A' }}
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="recentDeliveries.length === 0">
+                            <td colspan="6" class="text-center py-4">No deliveries found.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recent Collections -->
+        <div class="table-card mt-4">
+            <div class="card-header">
+                <div>
+                    <h3>Recent Collections</h3>
+                    <p>Latest payment collection activities</p>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Collection No</th>
+                            <th>Party</th>
+                            <th>Order</th>
+                            <th>Amount</th>
+                            <th>Payment Mode</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let collection of recentCollections">
+                            <td><strong>{{ collection.collectionNumber }}</strong></td>
+                            <td>{{ collection.party?.shopName || collection.party?.partyName || 'N/A' }}</td>
+                            <td>{{ collection.order?.orderNumber || 'N/A' }}</td>
+                            <td>₹{{ formatNumber(collection.collectedAmount) }}</td>
+                            <td>{{ collection.paymentMode || 'N/A' }}</td>
+                            <td>{{ collection.collectionDate | date:'dd-MM-yyyy' }}</td>
+                        </tr>
+
+                        <tr *ngIf="recentCollections.length === 0">
+                            <td colspan="6" class="text-center py-4">No collections found.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </ng-container>
+
+    <!-- Error -->
+    <div class="dashboard-error" *ngIf="!loading && !dashboardData">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h4>Dashboard data could not be loaded</h4>
+        <button class="action-btn" (click)="loadDashboard()">
+            <i class="fas fa-sync-alt me-2"></i>Try Again
+        </button>
+    </div>
+
+</div>

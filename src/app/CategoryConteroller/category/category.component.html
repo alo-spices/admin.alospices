@@ -24,10 +24,7 @@
 
       <mat-label>Search Category</mat-label>
 
-      <input
-        matInput
-        placeholder="Search by Category Name / Code"
-        (keyup)="applyFilter($event)">
+      <input matInput placeholder="Search by Category Name / Code" (keyup)="applyFilter($event)">
 
     </mat-form-field>
 
@@ -37,10 +34,7 @@
 
   <div class="table-row">
 
-    <table
-      mat-table
-      [dataSource]="dataSource"
-      matSort>
+    <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- S.No -->
 
@@ -64,10 +58,7 @@
 
       <ng-container matColumnDef="name">
 
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
 
           Category
 
@@ -107,9 +98,7 @@
 
         <td mat-cell *matCellDef="let element">
 
-          <img
-            [src]="element.image || 'assets/images/no-image.png'"
-            class="category-image">
+          <img [src]="element.image || 'assets/images/no-image.png'" class="category-image">
 
         </td>
 
@@ -127,9 +116,7 @@
 
         <td mat-cell *matCellDef="let element">
 
-          <span
-            class="status-badge"
-            [ngClass]="element.status=='Active' ? 'active' : 'inactive'">
+          <span class="status-badge" [ngClass]="element.status=='Active' ? 'active' : 'inactive'">
 
             {{element.status}}
 
@@ -155,10 +142,7 @@
 
             <!-- View -->
 
-            <button
-              mat-icon-button
-              class="view-btn"
-              (click)="viewCategory(element)">
+            <button mat-icon-button class="view-btn" (click)="viewCategory(element)">
 
               <i class="fa fa-eye"></i>
 
@@ -166,10 +150,7 @@
 
             <!-- Edit -->
 
-            <button
-              mat-icon-button
-              class="edit-btn"
-              (click)="editCategory(element)">
+            <button mat-icon-button class="edit-btn" (click)="editCategory(element)">
 
               <i class="fa fa-pencil"></i>
 
@@ -177,14 +158,11 @@
 
             <!-- Delete (Soft Delete) -->
 
-            <!-- <button
-              mat-icon-button
-              class="delete-btn"
-              (click)="deleteCategory(element)">
+            <button mat-icon-button class="delete-btn" (click)="deleteCategory(element)">
 
               <i class="fa fa-trash"></i>
 
-            </button> -->
+            </button>
 
           </div>
 
@@ -194,27 +172,19 @@
 
       <!-- Header -->
 
-      <tr
-        mat-header-row
-        *matHeaderRowDef="displayedColumns">
+      <tr mat-header-row *matHeaderRowDef="displayedColumns">
       </tr>
 
       <!-- Rows -->
 
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns;">
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
       </tr>
 
       <!-- No Data -->
 
-      <tr
-        class="mat-row"
-        *matNoDataRow>
+      <tr class="mat-row" *matNoDataRow>
 
-        <td
-          class="mat-cell text-center"
-          colspan="5">
+        <td class="mat-cell text-center" colspan="5">
 
           No Categories Found
 
@@ -224,10 +194,7 @@
 
     </table>
 
-    <mat-paginator
-      [pageSize]="5"
-      [pageSizeOptions]="[5,10,20,50]"
-      showFirstLastButtons>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons>
 
     </mat-paginator>
 

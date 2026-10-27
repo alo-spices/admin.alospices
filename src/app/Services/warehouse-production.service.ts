@@ -95,4 +95,16 @@ export class WarehouseProductionService {
     );
 
   }
+
+
+  getWarehouseCompletedProductions() {
+    return this.http.get<any>(
+      `${this.apiUrl}/warehouse/completed-productions`
+    );
+  }
+  getProductionById(id: string) {
+    return this.http.get<any>(
+      `${this.apiUrl}/getProductionById/${id}`
+    );
+  }
 }

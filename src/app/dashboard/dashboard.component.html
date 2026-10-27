@@ -478,7 +478,7 @@
 
                 <!-- Assigned Production -->
 
-                <a class="menu-item submenu-item" routerLink="/admin/warehouse-production-assigned"
+                <!-- <a class="menu-item submenu-item" routerLink="/admin/warehouse-production-assigned"
                     routerLinkActive="active">
 
                     <i class="fas fa-clipboard-check"></i>
@@ -487,7 +487,7 @@
                         Assigned Production
                     </span>
 
-                </a>
+                </a> -->
 
             </details>
 
@@ -1269,7 +1269,7 @@
 
                 <!-- Production Entry -->
 
-                <a class="menu-item submenu-item" routerLink="/warehouse/production-entry" routerLinkActive="active">
+                <!-- <a class="menu-item submenu-item" routerLink="/warehouse/production-entry" routerLinkActive="active">
 
                     <i class="fas fa-industry"></i>
 
@@ -1277,12 +1277,13 @@
                         Production Entry
                     </span>
 
-                </a>
+                </a> -->
 
 
                 <!-- Production History -->
 
-                <a class="menu-item submenu-item" routerLink="/warehouse/production-history" routerLinkActive="active">
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-production-complete-list"
+                    routerLinkActive="active">
 
                     <i class="fas fa-history"></i>
 
@@ -1336,7 +1337,7 @@
 
                 <!-- Finished Goods Stock -->
 
-                <a class="menu-item submenu-item" routerLink="/admin/warehouse-finished-goods-stock"
+                <!-- <a class="menu-item submenu-item" routerLink="/admin/warehouse-finished-goods-stock"
                     routerLinkActive="active">
 
                     <i class="fas fa-boxes"></i>
@@ -1345,7 +1346,7 @@
                         Finished Goods Stock
                     </span>
 
-                </a>
+                </a> -->
 
             </details>
 
@@ -1375,7 +1376,7 @@
                 </summary>
 
 
-                <a class="menu-item submenu-item" routerLink="/warehouse/orders" routerLinkActive="active">
+                <a class="menu-item submenu-item" routerLink="/admin/orders" routerLinkActive="active">
 
                     <i class="fas fa-shopping-bag"></i>
 
@@ -1386,7 +1387,7 @@
                 </a>
 
 
-                <a class="menu-item submenu-item" routerLink="/warehouse/pending-orders" routerLinkActive="active">
+                <a class="menu-item submenu-item" routerLink="/admin/pending-orders" routerLinkActive="active">
 
                     <i class="fas fa-clock"></i>
 
@@ -1628,7 +1629,7 @@
                 <!-- ADMIN GUIDANCE -->
                 <!-- ========================================= -->
 
-                <a routerLink="/admin/admin-guidence-file" class="guidance-btn">
+                <a routerLink="/admin/admin-guidence-file" class="guidance-btn" *ngIf="currentRole === 'Admin'">
 
                     <i class="fas fa-book-open"></i>
 
