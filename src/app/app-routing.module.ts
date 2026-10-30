@@ -1619,7 +1619,7 @@ const routes: Routes = [
       // Distributor Role Paths
       {
         path: 'distributor-incoming-stock',
-        component: DistributorIncomingStockComponent,
+      component: DistributorIncomingStockComponent,
         canActivate: [AuthGuard],
 
         data: {

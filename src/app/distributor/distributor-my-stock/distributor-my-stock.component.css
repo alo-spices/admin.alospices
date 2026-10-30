@@ -30,7 +30,7 @@
 
 }
 
-.title-section h2 {
+.page-header h2 {
 
     margin: 0;
 
@@ -39,10 +39,11 @@
     font-weight: 700;
 
     color: var(--primary-color);
+    
 
 }
 
-.title-section p {
+.page-header p {
 
     margin-top: 5px;
 
