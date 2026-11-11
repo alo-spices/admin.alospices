@@ -91,4 +91,10 @@ export class UserService {
     );
 
   }
+
+  getDistributorsByWarehouse(): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}/warehouse/distributors`
+    );
+  }
 }

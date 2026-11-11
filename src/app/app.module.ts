@@ -163,6 +163,8 @@ import { UpdateProductionStatusPopupComponent } from './update-production-status
 import { WarehouseCompleteProductionListComponent } from './warehouse-complete-production-list/warehouse-complete-production-list.component';
 import { WarehouseCompleteProductionViewDataComponent } from './warehouse-complete-production-view-data/warehouse-complete-production-view-data.component';
 import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
+import { ViewEmployeeOrderComponent } from './view-employee-order/view-employee-order.component';
+import { WarehouseAssingedDistributoresListComponent } from './warehouse-assinged-distributores-list/warehouse-assinged-distributores-list.component';
 
 
 @NgModule({
@@ -310,6 +312,8 @@ import { PendingOrdersComponent } from './pending-orders/pending-orders.componen
     WarehouseCompleteProductionListComponent,
     WarehouseCompleteProductionViewDataComponent,
     PendingOrdersComponent,
+    ViewEmployeeOrderComponent,
+    WarehouseAssingedDistributoresListComponent,
   ],
   imports: [
     BrowserModule,

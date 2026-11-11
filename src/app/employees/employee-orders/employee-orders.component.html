@@ -1,58 +1,55 @@
 <div class="orders-page">
-     <button
-            type="button"
-            class="close-btn"
-            (click)="goBack()">
+    <button type="button" class="close-btn" (click)="goBack()">
 
-            <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark"></i>
 
-        </button>
+    </button>
 
-   
 
-   <!-- =====================================
+
+    <!-- =====================================
      PAGE HEADER
 ====================================== -->
 
-<div class="page-header">
+    <div class="page-header">
 
-    <div class="header-left">
+        <div class="header-left">
 
-       
 
-        <div>
 
-            <h2>
-                Employee Orders
-            </h2>
+            <div>
 
-            <p *ngIf="employee">
-                {{ employee?.fullName }}
-                -
-                {{ employee?.employeeCode }}
-            </p>
+                <h2>
+                    Employee Orders
+                </h2>
+
+                <p *ngIf="employee">
+                    {{ employee?.fullName }}
+                    -
+                    {{ employee?.employeeCode }}
+                </p>
+
+            </div>
 
         </div>
 
+
+        <div class="order-count">
+
+            <span>
+                Total Orders
+            </span>
+
+            <strong>
+                {{ orders.length }}
+            </strong>
+
+
+        </div>
+
+
+
     </div>
-
-
-    <div class="order-count">
-
-        <span>
-            Total Orders
-        </span>
-
-        <strong>
-            {{ orders.length }}
-        </strong>
-        
-
-    </div>
-    
-    
-
-</div>
 
 
 
@@ -60,19 +57,13 @@
          EMPLOYEE INFO
     ====================================== -->
 
-    <div
-        class="employee-card"
-        *ngIf="employee">
+    <div class="employee-card" *ngIf="employee">
 
         <div class="employee-avatar">
 
-            <img
-                *ngIf="employee?.profileImage"
-                [src]="employee.profileImage"
-                [alt]="employee.fullName">
+            <img *ngIf="employee?.profileImage" [src]="employee.profileImage" [alt]="employee.fullName">
 
-            <span
-                *ngIf="!employee?.profileImage">
+            <span *ngIf="!employee?.profileImage">
 
                 {{ employee?.firstName?.charAt(0) }}
 
@@ -100,9 +91,7 @@
          LOADING
     ====================================== -->
 
-    <div
-        class="loading-box"
-        *ngIf="isLoading">
+    <div class="loading-box" *ngIf="isLoading">
 
         <div class="spinner-border"></div>
 
@@ -117,9 +106,7 @@
          ORDERS TABLE
     ====================================== -->
 
-    <div
-        class="orders-table-wrapper"
-        *ngIf="
+    <div class="orders-table-wrapper" *ngIf="
             !isLoading &&
             orders.length > 0
         ">
@@ -177,6 +164,7 @@
                     <th>
                         Balance
                     </th>
+                    <th>Actions</th>
 
                 </tr>
 
@@ -185,8 +173,7 @@
 
             <tbody>
 
-                <tr
-                    *ngFor="
+                <tr *ngFor="
                         let order of orders;
                         let i = index
                     ">
@@ -204,8 +191,8 @@
                     <td>
 
                         {{
-                            order?.orderDate
-                            | date:'dd MMM yyyy'
+                        order?.orderDate
+                        | date:'dd MMM yyyy'
                         }}
 
                     </td>
@@ -261,7 +248,11 @@
                     <td>
                         ₹{{ order?.balanceAmount || 0 }}
                     </td>
-
+                    <td>
+                        <button type="button" class="view-btn" title="View Order" (click)="viewOrder(order)">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </td>
                 </tr>
 
             </tbody>
@@ -275,9 +266,7 @@
          NO ORDERS
     ====================================== -->
 
-    <div
-        class="no-data"
-        *ngIf="
+    <div class="no-data" *ngIf="
             !isLoading &&
             orders.length === 0
         ">

@@ -109,6 +109,7 @@ import { DistributorCollectionsComponent } from './distributor/distributor-colle
 import { DistributorOutstandingsComponent } from './distributor/distributor-outstandings/distributor-outstandings.component';
 import { WarehouseCompleteProductionListComponent } from './warehouse-complete-production-list/warehouse-complete-production-list.component';
 import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
+import { WarehouseAssingedDistributoresListComponent } from './warehouse-assinged-distributores-list/warehouse-assinged-distributores-list.component';
 
 
 const routes: Routes = [
@@ -1517,7 +1518,20 @@ const routes: Routes = [
         data: {
           roles: [
             'Admin',
-            'SubAdmin'
+            'SubAdmin',
+            'WarehouseManager'
+          ]
+        }
+      },
+      {
+        path: 'warehouse-assigned-distributors',
+        component: WarehouseAssingedDistributoresListComponent,
+        canActivate: [AuthGuard],
+
+        data: {
+          roles: [
+
+            'WarehouseManager'
           ]
         }
       },
@@ -1619,7 +1633,7 @@ const routes: Routes = [
       // Distributor Role Paths
       {
         path: 'distributor-incoming-stock',
-      component: DistributorIncomingStockComponent,
+        component: DistributorIncomingStockComponent,
         canActivate: [AuthGuard],
 
         data: {

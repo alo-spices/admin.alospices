@@ -30,11 +30,9 @@ export class OrdersService {
   // ==========================================
 
   getOrderById(orderId: string): Observable<any> {
-
     return this.http.get(
       `${this.apiUrl}/getbyid-orders/${orderId}`
     );
-
   }
 
   getPendingOrders(): Observable<any> {

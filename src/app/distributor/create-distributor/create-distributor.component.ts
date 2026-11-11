@@ -12,7 +12,7 @@ import { WarehouseService } from 'src/app/Services/warehouse.service';
 })
 export class CreateDistributorComponent implements OnInit {
 
-
+  warehouses: any[] = [];
   // ==========================================
   // Form
   // ==========================================
@@ -52,7 +52,8 @@ export class CreateDistributorComponent implements OnInit {
       EmployeeService,
 
     private alertService:
-      CommomPopupService
+      CommomPopupService,
+    private warehouseService: WarehouseService
 
   ) { }
 
@@ -64,6 +65,7 @@ export class CreateDistributorComponent implements OnInit {
   ngOnInit(): void {
 
     this.initializeForm();
+    this.loadWarehouses();
 
   }
 
@@ -177,7 +179,10 @@ export class CreateDistributorComponent implements OnInit {
           Validators.required
 
         ],
-
+        warehouse: [
+          '',
+          Validators.required
+        ],
 
         // ====================================
         // DISTRIBUTOR DETAILS
@@ -265,7 +270,16 @@ export class CreateDistributorComponent implements OnInit {
 
   }
 
-
+  loadWarehouses(): void {
+    this.warehouseService.getAllWarehouses().subscribe({
+      next: (res: any) => {
+        this.warehouses = res.data || [];
+      },
+      error: (err: any) => {
+        console.error('Warehouse Fetch Error:', err);
+      }
+    });
+  }
   // ==========================================
   // Toggle Password
   // ==========================================
@@ -555,7 +569,15 @@ export class CreateDistributorComponent implements OnInit {
       'Distributor'
 
     );
+    formData.append(
+      'assignmentType',
+      'WAREHOUSE'
+    );
 
+    formData.append(
+      'warehouse',
+      value.warehouse
+    );
 
     // ========================================
     // Distributor Details

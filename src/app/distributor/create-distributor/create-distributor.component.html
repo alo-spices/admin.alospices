@@ -59,7 +59,7 @@
                                 </div>
 
 
-                                <div class="form-group full-width">
+                                <div class="form-group">
 
                                     <label>
                                         Role
@@ -68,7 +68,26 @@
                                     <input type="text" value="Distributor" readonly disabled>
 
                                 </div>
+                                <div class="form-group">
+                                    <label>Assign Warehouse <span>*</span></label>
 
+                                    <select formControlName="warehouse" class="form-control">
+                                        <option value="">Select Warehouse</option>
+
+                                        <option *ngFor="let warehouse of warehouses" [value]="warehouse._id">
+
+                                            {{ warehouse.warehouseName }}
+
+                                        </option>
+                                    </select>
+
+                                    <small class="text-danger" *ngIf="userForm.get('warehouse')?.touched &&
+           userForm.get('warehouse')?.invalid">
+
+                                        Warehouse is required
+
+                                    </small>
+                                </div>
 
                                 <!-- ================================= -->
                                 <!-- BASIC INFORMATION -->
@@ -104,11 +123,10 @@
 
                                             <input type="text" formControlName="firstName"
                                                 placeholder="Enter first name">
-                                                <div class="text-danger mt-1"
-     *ngIf="userForm.get('firstName')?.touched &&
+                                            <div class="text-danger mt-1" *ngIf="userForm.get('firstName')?.touched &&
             userForm.get('firstName')?.hasError('required')">
-  First Name is required.
-</div>
+                                                First Name is required.
+                                            </div>
 
                                         </div>
 
@@ -174,11 +192,10 @@
                                             </label>
 
                                             <input type="date" formControlName="dateOfBirth">
-                                            <div class="text-danger mt-1"
-     *ngIf="userForm.get('distributorName')?.touched &&
+                                            <div class="text-danger mt-1" *ngIf="userForm.get('distributorName')?.touched &&
             userForm.get('distributorName')?.hasError('required')">
-  Distributor Name is required.
-</div>
+                                                Distributor Name is required.
+                                            </div>
 
                                         </div>
 
@@ -248,11 +265,10 @@
                                             </label>
 
                                             <input type="text" formControlName="shopName" placeholder="Enter shop name">
-                                            <div class="text-danger mt-1"
-     *ngIf="userForm.get('shopName')?.touched &&
+                                            <div class="text-danger mt-1" *ngIf="userForm.get('shopName')?.touched &&
             userForm.get('shopName')?.hasError('required')">
-  Shop Name is required.
-</div>
+                                                Shop Name is required.
+                                            </div>
 
                                         </div>
 
@@ -331,17 +347,15 @@
 
                                             <input type="text" formControlName="mobile" maxlength="10"
                                                 placeholder="Enter mobile number">
-                                                <div class="text-danger mt-1"
-     *ngIf="userForm.get('mobile')?.touched &&
+                                            <div class="text-danger mt-1" *ngIf="userForm.get('mobile')?.touched &&
             userForm.get('mobile')?.hasError('required')">
-  Mobile Number is required.
-</div>
+                                                Mobile Number is required.
+                                            </div>
 
-<div class="text-danger mt-1"
-     *ngIf="userForm.get('mobile')?.touched &&
+                                            <div class="text-danger mt-1" *ngIf="userForm.get('mobile')?.touched &&
             userForm.get('mobile')?.hasError('pattern')">
-  Enter a valid 10-digit mobile number.
-</div>
+                                                Enter a valid 10-digit mobile number.
+                                            </div>
 
                                         </div>
 
@@ -550,17 +564,15 @@
                                                     : 'fa-eye'
                                             " (click)="togglePassword()">
                                         </i>
-                                        <div class="text-danger mt-1"
-     *ngIf="userForm.get('password')?.touched &&
+                                        <div class="text-danger mt-1" *ngIf="userForm.get('password')?.touched &&
             userForm.get('password')?.hasError('required')">
-  Password is required.
-</div>
+                                            Password is required.
+                                        </div>
 
-<div class="text-danger mt-1"
-     *ngIf="userForm.get('password')?.touched &&
+                                        <div class="text-danger mt-1" *ngIf="userForm.get('password')?.touched &&
             userForm.get('password')?.hasError('minlength')">
-  Password must be at least 6 characters.
-</div>
+                                            Password must be at least 6 characters.
+                                        </div>
 
                                     </div>
 

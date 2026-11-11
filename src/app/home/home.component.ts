@@ -7,6 +7,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { WarehouseStockViewComponent } from '../View-dialog-Controllers/warehouse-stock-view/warehouse-stock-view.component';
 import { LoginService } from '../Services/login.service';
 import { finalize } from 'rxjs';
+import { EmployeeService } from '../Services/employee.service';
+import { OrdersService } from '../Services/orders.service';
+import { ViewEmployeeOrderComponent } from '../view-employee-order/view-employee-order.component';
+import { CollectionViewComponent } from '../collection-view/collection-view.component';
+import { CollectionsService } from '../Services/collections.service';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +19,19 @@ import { finalize } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements AfterViewInit {
-
+  Math = Math;
+  toDay: Date = new Date();
   // =========================================================
   // LOADING / ERROR
   // =========================================================
+  currentPage: number = 1;
+  pageSize: number = 5;
 
+  deliveryCurrentPage: number = 1;
+  deliveryPageSize: number = 5;
+
+  collectionCurrentPage: number = 1;
+  collectionPageSize: number = 5;
   loading = false;
   errorMessage = '';
 
@@ -239,7 +252,10 @@ export class HomeComponent implements AfterViewInit {
 
   constructor(
     private dashboardService: LoginService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private employeeService: OrdersService,
+    private collectionService: CollectionsService
   ) { }
   ngAfterViewInit(): void {
     throw new Error('Method not implemented.');
@@ -550,11 +566,18 @@ export class HomeComponent implements AfterViewInit {
     this.recentOrders =
       dashboard?.recent?.orders || [];
 
+    this.currentPage = 1;
+
     this.recentDeliveries =
       dashboard?.recent?.deliveries || [];
 
+    this.deliveryCurrentPage = 1;
+
+
     this.recentCollections =
       dashboard?.recent?.collections || [];
+
+    this.collectionCurrentPage = 1;
 
     // ---------------------------------------------------------
     // AUTO SELECT WAREHOUSE
@@ -1232,5 +1255,208 @@ export class HomeComponent implements AfterViewInit {
 
   outstandingsManagement() {
     this.router.navigate(["/admin/outstandings"]);
+  }
+
+
+  get totalPages(): number {
+    return Math.ceil(this.recentOrders.length / this.pageSize);
+  }
+
+  get paginatedRecentOrders(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+
+    return this.recentOrders.slice(
+      startIndex,
+      startIndex + this.pageSize
+    );
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+
+  get deliveryTotalPages(): number {
+    return Math.ceil(this.recentDeliveries.length / this.deliveryPageSize);
+  }
+
+  get paginatedRecentDeliveries(): any[] {
+    const startIndex =
+      (this.deliveryCurrentPage - 1) * this.deliveryPageSize;
+
+    return this.recentDeliveries.slice(
+      startIndex,
+      startIndex + this.deliveryPageSize
+    );
+  }
+
+  previousDeliveryPage(): void {
+    if (this.deliveryCurrentPage > 1) {
+      this.deliveryCurrentPage--;
+    }
+  }
+
+  nextDeliveryPage(): void {
+    if (this.deliveryCurrentPage < this.deliveryTotalPages) {
+      this.deliveryCurrentPage++;
+    }
+  }
+
+  get collectionTotalPages(): number {
+    return Math.ceil(
+      this.recentCollections.length / this.collectionPageSize
+    );
+  }
+
+  get paginatedRecentCollections(): any[] {
+    const startIndex =
+      (this.collectionCurrentPage - 1) * this.collectionPageSize;
+
+    return this.recentCollections.slice(
+      startIndex,
+      startIndex + this.collectionPageSize
+    );
+  }
+
+  previousCollectionPage(): void {
+    if (this.collectionCurrentPage > 1) {
+      this.collectionCurrentPage--;
+    }
+  }
+
+  nextCollectionPage(): void {
+    if (this.collectionCurrentPage < this.collectionTotalPages) {
+      this.collectionCurrentPage++;
+    }
+  }
+
+
+  // ==========================================
+  // VIEW EMPLOYEE ORDER
+  // ==========================================
+
+  viewOrder(order: any): void {
+
+    if (!order?.orderId) {
+      console.error('Order ID not found');
+      return;
+    }
+
+    this.employeeService
+      .getOrderById(order.orderId)
+      .subscribe({
+
+        next: (response: any) => {
+
+          console.log('Order Details:', response);
+
+          if (response?.success && response?.data) {
+
+            this.dialog.open(ViewEmployeeOrderComponent, {
+
+              width: '950px',
+
+              maxWidth: '95vw',
+
+              maxHeight: '90vh',
+
+              data: response.data,
+
+              panelClass: 'view-employee-order-dialog'
+
+            });
+
+          }
+
+        },
+
+        error: (error: any) => {
+
+          console.error(
+            'Get Order Details Error:',
+            error
+          );
+
+        }
+
+      });
+
+  }
+
+  // ==================================
+  // View Collection
+  // ==================================
+
+  viewCollection(
+    collection: any
+  ): void {
+
+    if (!collection?._id) {
+
+      return;
+
+    }
+
+
+    this.collectionService
+      .getCollectionById(collection._id)
+      .subscribe({
+
+        next: (res: any) => {
+
+          console.log(
+            'Collection Details:',
+            res
+          );
+
+
+          if (
+            res?.success &&
+            res?.data
+          ) {
+
+            this.dialog.open(
+              CollectionViewComponent,
+              {
+
+                width: '950px',
+
+                maxWidth: '95vw',
+
+                maxHeight: '90vh',
+
+                data: res.data,
+
+                panelClass:
+                  'view-collection-dialog'
+
+              }
+
+            );
+
+          }
+
+        },
+
+
+        error: (err: any) => {
+
+          console.log(
+            'Get Collection By ID Error:',
+            err
+          );
+
+        }
+
+      });
+
   }
 }

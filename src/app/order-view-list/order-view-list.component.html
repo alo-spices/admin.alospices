@@ -562,6 +562,109 @@
         </div>
 
 
+        <!-- Order Items Section -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa fa-cubes"></i>
+                <h3>Order Items & Product Details</h3>
+            </div>
+
+            <div class="items-table-wrapper" *ngIf="data?.items?.length; else noItems">
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Product Details</th>
+                            <th>Variant Details</th>
+                            <th>Price</th>
+                            <th>Discount</th>
+                            <th>GST</th>
+                            <th>Qty</th>
+                            <th>Line Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let item of data.items; let i = index">
+                            <td>{{ i + 1 }}</td>
+
+                            <!-- Product Details -->
+                            <td>
+                                <div class="product-info">
+                                    <img *ngIf="item?.variant?.image" [src]="item.variant.image" alt="Product"
+                                        class="product-image" />
+
+                                    <div>
+                                        <strong>{{ item?.product?.productName || '-' }}</strong>
+                                        <span>Code: {{ item?.product?.productCode || '-' }}</span>
+                                        <span>HSN: {{ item?.product?.hsnCode || '-' }}</span>
+                                        <span>
+                                            Brand: {{ item?.product?.brand?.brandName || '-' }}
+                                        </span>
+                                        <span>
+                                            Category: {{ item?.product?.category?.categoryName || '-' }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <!-- Variant Details -->
+                            <td>
+                                <div class="variant-info" *ngIf="item?.variant; else variantMissing">
+                                    <strong>{{ item.variant.packSize || '-' }}</strong>
+                                    <span>SKU: {{ item.variant.skuCode || '-' }}</span>
+                                    <span>Weight: {{ item.variant.weightInGrams || 0 }} GM</span>
+                                    <span>
+                                        MRP: ₹{{ (item.variant.mrp || 0) | number:'1.2-2' }}
+                                    </span>
+                                    <span>Stock: {{ item.variant.stock || 0 }}</span>
+                                    <span>Status: {{ item.variant.status || '-' }}</span>
+                                </div>
+
+                                <ng-template #variantMissing>
+                                    <span class="no-items">Variant not found</span>
+                                </ng-template>
+                            </td>
+
+                            <td>
+                                ₹{{ (item?.price || 0) | number:'1.2-2' }}
+                            </td>
+
+                            <td>
+                                ₹{{ (item?.discountAmount || 0) | number:'1.2-2' }}
+                            </td>
+
+                            <td>{{ item?.gstPercentage || 0 }}%</td>
+
+                            <td>{{ item?.quantity || 0 }}</td>
+
+                            <td>
+                                <strong>
+                                    ₹{{ (item?.lineTotal || 0) | number:'1.2-2' }}
+                                </strong>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="6"><strong>Total</strong></td>
+                            <td><strong>{{ data?.totalQuantity || 0 }}</strong></td>
+                            <td>
+                                <strong>
+                                    ₹{{ (data?.subTotal || 0) | number:'1.2-2' }}
+                                </strong>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <ng-template #noItems>
+                <div class="no-items">No order items available</div>
+            </ng-template>
+        </div>
+
         <!-- ========================================
          AMOUNT DETAILS
     ========================================= -->

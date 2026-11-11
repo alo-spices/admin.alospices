@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from 'src/app/Services/employee.service';
+import { OrdersService } from 'src/app/Services/orders.service';
+import { ViewEmployeeOrderComponent } from 'src/app/view-employee-order/view-employee-order.component';
 
 @Component({
   selector: 'app-employee-orders',
@@ -22,6 +25,8 @@ export class EmployeeOrdersComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private employeeService: EmployeeService,
+    private orderService: OrdersService,
+    private dialog: MatDialog,
   ) { }
 
 
@@ -145,5 +150,55 @@ export class EmployeeOrdersComponent implements OnInit {
       '/admin/employee-view-details',
       this.employeeId
     ]);
+  }
+  // ==========================================
+  // VIEW EMPLOYEE ORDER
+  // ==========================================
+
+  viewOrder(order: any): void {
+
+    if (!order?._id) {
+      console.error('Order ID not found');
+      return;
+    }
+
+    this.orderService.getOrderById(order._id)
+      .subscribe({
+
+        next: (response: any) => {
+
+          console.log('Order Details:', response);
+
+          if (response?.success && response?.data) {
+
+            this.dialog.open(ViewEmployeeOrderComponent, {
+
+              width: '950px',
+
+              maxWidth: '95vw',
+
+              maxHeight: '90vh',
+
+              data: response.data,
+
+              panelClass: 'view-employee-order-dialog'
+
+            });
+
+          }
+
+        },
+
+        error: (error: any) => {
+
+          console.error(
+            'Get Order Details Error:',
+            error
+          );
+
+        }
+
+      });
+
   }
 }

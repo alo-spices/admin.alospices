@@ -1,0 +1,162 @@
+<div class="category-container">
+
+    <!-- Header -->
+    <div class="top-row">
+
+        <div class="title-section">
+            <h2>My Distributors</h2>
+            <p>View distributors assigned to your warehouse</p>
+        </div>
+
+    </div>
+
+    <!-- Search -->
+    <div class="search-row">
+
+        <mat-form-field appearance="outline" class="w-100">
+
+            <mat-label>Search Distributor</mat-label>
+
+            <input matInput placeholder="Search by Name / Shop / Mobile / Code" (keyup)="applyFilter($event)">
+
+        </mat-form-field>
+
+    </div>
+
+    <!-- Table -->
+    <div class="table-row">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- S.No -->
+            <ng-container matColumnDef="sno">
+
+                <th mat-header-cell *matHeaderCellDef>S.No</th>
+
+                <td mat-cell *matCellDef="let element; let i=index">
+                    {{ (paginator?.pageIndex || 0) * (paginator?.pageSize || 5) + i + 1 }}
+                </td>
+
+            </ng-container>
+
+            <!-- Distributor -->
+            <ng-container matColumnDef="distributorName">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Distributor
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>{{ element.distributorName || element.fullName || '-' }}</h6>
+
+                        <small>{{ element.employeeCode || '-' }}</small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+            <!-- Shop -->
+            <ng-container matColumnDef="shopName">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Shop Name
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+                    {{ element.shopName || '-' }}
+                </td>
+
+            </ng-container>
+
+            <!-- Mobile -->
+            <ng-container matColumnDef="mobile">
+
+                <th mat-header-cell *matHeaderCellDef>
+                    Mobile
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+                    {{ element.mobile || '-' }}
+                </td>
+
+            </ng-container>
+
+            <!-- Email -->
+            <ng-container matColumnDef="email">
+
+                <th mat-header-cell *matHeaderCellDef>
+                    Email
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+                    {{ element.email || '-' }}
+                </td>
+
+            </ng-container>
+
+            <!-- Warehouse -->
+            <ng-container matColumnDef="warehouse">
+
+                <th mat-header-cell *matHeaderCellDef>
+                    Warehouse
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <div class="category-info">
+
+                        <h6>{{ element.warehouse?.warehouseName || '-' }}</h6>
+
+                        <small>{{ element.warehouse?.warehouseCode || '-' }}</small>
+
+                    </div>
+
+                </td>
+
+            </ng-container>
+
+            <!-- Status -->
+            <ng-container matColumnDef="status">
+
+                <th mat-header-cell *matHeaderCellDef>
+                    Status
+                </th>
+
+                <td mat-cell *matCellDef="let element">
+
+                    <span class="status-badge" [ngClass]="element.status === 'Active' ? 'active' : 'inactive'">
+                        {{ element.status || 'Pending' }}
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+            <!-- Header -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+            <!-- Rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- No Data -->
+            <tr class="mat-row" *matNoDataRow>
+
+                <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length">
+                    No Distributors Found
+                </td>
+
+            </tr>
+
+        </table>
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons>
+        </mat-paginator>
+
+    </div>
+
+</div>

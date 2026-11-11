@@ -37,13 +37,19 @@
         <nav class="sidebar-menu">
 
 
-            <!-- ================================================= -->
-            <!-- DASHBOARD -->
-            <!-- ADMIN / WAREHOUSE / DISTRIBUTOR -->
-            <!-- ================================================= -->
 
             <a class="menu-item" routerLink="/admin/dashboard" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">
+                [routerLinkActiveOptions]="{ exact: true }" *ngIf="hasRole('Admin')">
+
+                <i class="fas fa-home"></i>
+
+                <span *ngIf="!sidebarCollapsed || isSidebarHovered">
+                    Dashboard
+                </span>
+
+            </a>
+            <a class="menu-item" routerLink="/admin/warehouse-dashboard" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" *ngIf="hasRole('WarehouseManager')">
 
                 <i class="fas fa-home"></i>
 
@@ -1398,6 +1404,45 @@
                 </a>
 
             </details>
+            <details class="sidebar-group" *ngIf="hasRole('WarehouseManager')">
+
+                <summary class="group-header">
+
+                    <div class="group-left">
+
+                        <i class="fas fa-user-tie"></i>
+
+                        <span>
+                            Distributor Management
+                        </span>
+
+                    </div>
+
+                    <i class="fas fa-chevron-right group-arrow"></i>
+
+                </summary>
+
+
+                <!-- Distributor List -->
+
+                <a class="menu-item submenu-item" routerLink="/admin/warehouse-assigned-distributors"
+                    routerLinkActive="active">
+
+                    <i class="fas fa-users"></i>
+
+                    <span>
+                        Distributors
+                    </span>
+
+                </a>
+
+
+
+                <!-- Stock Transfer -->
+
+
+
+            </details>
 
             <!-- ================================================= -->
             <!-- DISTRIBUTOR INVENTORY -->
@@ -1765,13 +1810,13 @@
 
                         <!-- Divider -->
 
-                        <div class="dropdown-divider"></div>
+                        <!-- <div class="dropdown-divider"></div> -->
 
 
 
                         <!-- Profile -->
 
-                        <button type="button" class="profile-menu-item">
+                        <!-- <button type="button" class="profile-menu-item">
 
                             <span class="profile-menu-icon">
                                 <i class="fas fa-user"></i>
@@ -1783,7 +1828,7 @@
 
                             <i class="fas fa-chevron-right"></i>
 
-                        </button>
+                        </button> -->
 
 
 
